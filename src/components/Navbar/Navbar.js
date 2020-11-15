@@ -3,6 +3,8 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
 import Dropdown from './Dropdown';
+import { makeStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
 
 function Navbar(){
     const [click, setClick] = useState(false);
@@ -35,7 +37,7 @@ return(
                 SM
             </Link>
             <div className='menu-icon' onClick={handleClick}>
-                <i className={click ? 'fas fa-times' : 'fa-bars'} />
+                <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
             </div>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li className='nav-item'>
@@ -54,8 +56,10 @@ return(
                     </Link>
                 </li>
                
-                <li className='nav-item'>
-                    <input type="text" id="fname" name="fname"></input>
+                <li className='searcher'>
+                    <form className="searcher" noValidate autoComplete="off">  
+                    <Input placeholder="Placeholder" inputProps={{ 'aria-label': 'description', 'color':'red' }} />
+                    </form>
                 </li>
                 <li className='nav-item'>
                     <Link to='/#' className='nav-links' onClick={closeMobileMenu}>
@@ -84,7 +88,7 @@ return(
                     {dropdown && <Dropdown/>}
                 </li>
             </ul>
-            
+     
         </nav>
     </>
         );
