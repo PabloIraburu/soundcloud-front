@@ -1,0 +1,22 @@
+.cover {
+  position: relative;
+  bottom: 0px;
+  text-decoration: none;
+  background-color: brown;
+  display: flex;
+}
+
+.cover p {
+  display: block;
+  position: relative;
+  flex-direction: column;
+}
+.cover .numbers p {
+  display: inline-block;
+  padding: 5px;
+}
+.cover img {
+  display: block;
+  position: relative;
+  width: 10vw;
+}

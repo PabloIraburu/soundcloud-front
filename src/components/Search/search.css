@@ -1,0 +1,19 @@
+.searchBar {
+  color: black;
+}
+
+.searchBar li {
+  display: inline;
+  padding-right: 3.5rem;
+  color: black;
+  /* display: none; */
+}
+
+.searchBar input {
+  margin-left: 2rem;
+}
+
+.searchBar label {
+  font-weight: 700;
+  font-size: xx-large;
+}
