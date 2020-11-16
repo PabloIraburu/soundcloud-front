@@ -19,6 +19,7 @@ function Search() {
     const results =
       mockSearch &&
       mockSearch.filter((art) => art.toLowerCase().includes(searchItem));
+    console.log(results);
     setSearchResults(results);
   }, [searchItem]);
 
