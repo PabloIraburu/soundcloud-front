@@ -3,14 +3,17 @@ import React, { useState } from "react";
 import Carousel from "../../components/Carousel";
 import Search from "../../components/Search";
 import logo from "../../img/Logo.jpg";
+import CoverInfo from "../../components/Cover/CoverInfo";
 import Navbar from "./Navbar";
 import { ModalLogin } from "../../components/modalLogin/ModalLogin";
+import "./homeStyles.css";
 
 const Home = () => {
   const [showModalLogin, setShowModalLogin] = useState(false);
   const closeModalLoginHandler = () => setShowModalLogin(false);
   return (
     <div className='App'>
+
       <Navbar />
       <a className='logotext' href='/home'>
         <img className='logo' src={logo} alt='logo' />
@@ -33,6 +36,7 @@ const Home = () => {
       <button className="btn-login" onClick={() => setShowModalLogin(true)}>just passing by</button>
       <Carousel />
       <Search />
+      <CoverInfo />
     </div>
   );
 };

@@ -1,41 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.sliderimg {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-}
-
-.App {
-  color: rgb(255, 255, 255);
-}
-
-.newUser {
-  background-color: orangered;
-}
-
-.logo {
-  height: 6rem;
-  width: 6rem;
-  position: absolute;
-  z-index: -1;
-  float: inline-start;
-}
-.logotext {
-  position: absolute;
-  z-index: 3;
-  float: inline-start;
-}
-.carousel {
-  background-color: white;
-  position: absolute;
-  width: 100%;
-  margin-top: 0;
-}
-
 .newUser:link,
 .newUser:visited {
   background-color: #5f36f4;
@@ -89,22 +51,15 @@
   background-color: #4326ac;
 }
 
-.searchBar {
-  position: fixed;
-  bottom: 10px;
-  margin-left: 6rem;
+.logo {
+  height: 6rem;
+  width: 6rem;
+  position: absolute;
+  z-index: -1;
+  float: inline-start;
 }
-
-.searchBar li {
-  display: inline;
-  padding-right: 3.5rem;
-}
-
-.searchBar input {
-  margin-left: 2rem;
-}
-
-.searchBar label {
-  font-weight: 700;
-  font-size: xx-large;
+.logotext {
+  position: absolute;
+  z-index: 3;
+  float: inline-start;
 }
