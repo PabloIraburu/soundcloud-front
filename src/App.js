@@ -4,13 +4,15 @@ import Home from "./pages/home";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import Discover from "./pages/discover";
+
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Switch>
+          
           <Route exact path='/'>
-            <Home />
+             <Home/>
           </Route>
           <Route exact path='/register'>
             <Register />
@@ -21,6 +23,8 @@ function App() {
           <Route exact path='/Discover'>
             <Discover />
           </Route>
+         
+           
         </Switch>
       </BrowserRouter>
     </div>
