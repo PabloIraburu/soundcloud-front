@@ -1,22 +1,29 @@
 .cover {
   position: relative;
-  bottom: 0px;
+  bottom: 0;
   text-decoration: none;
-  background-color: brown;
+  background-color: #a52a2a;
   display: flex;
+  width: 15vw;
+  height:25vh;
 }
 
 .cover p {
-  display: block;
+  display: flex;
   position: relative;
   flex-direction: column;
 }
 .cover .numbers p {
-  display: inline-block;
   padding: 5px;
+  display: flex;
 }
 .cover img {
-  display: block;
+  display: flex;
   position: relative;
   width: 10vw;
+  height: auto;
+}
+
+.songName{
+  display: flex;
 }
