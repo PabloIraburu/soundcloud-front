@@ -1,22 +1,21 @@
-.cover {
-  position: relative;
-  bottom: 0px;
-  text-decoration: none;
-  background-color: brown;
-  display: flex;
+.entity{
+  vertical-align: top;
+  display: inline-block;
 }
 
-.cover p {
-  display: block;
-  position: relative;
-  flex-direction: column;
+.p{
+  background-color: #79f7ff;
 }
-.cover .numbers p {
-  display: inline-block;
-  padding: 5px;
+
+.footer{
+ display: inline;
+  background-color: #5cabff;
 }
-.cover img {
-  display: block;
-  position: relative;
-  width: 10vw;
+
+.a{
+    background-color: #5cabff;
+}
+.image{
+  width:400px;
+  height: auto;
 }
