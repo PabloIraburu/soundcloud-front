@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { propTypes } from "react-bootstrap/esm/Image";
+import TextField from '@material-ui/core/TextField';
+import "./search.css"
 
 const mockSearch = [
   "Robert Glasper",
@@ -26,12 +27,11 @@ function Search() {
   return (
     <div className='searchBar'>
       <label htmlFor='search'>Search Artist</label>
-      <input
-        type='text'
-        placeholder='Search'
-        value={searchItem}
-        onChange={handleChange}
-      />
+        <TextField id="outlined-basic" label="Search" variant="outlined" type='text'
+                   ClassName='input'
+                   placeholder='Search'
+                   value={searchItem}
+                   onChange={handleChange} />
       <ul>
         {searchResults.map((res) => (
           <li>{res}</li>
