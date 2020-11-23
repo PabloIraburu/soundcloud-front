@@ -3,9 +3,9 @@ import React from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
-import Modal from 'react-bootstrap/Modal'
 import RegisterForm from "../../components/Forms/RegisterForm";
-import { AppBar, Toolbar,  } from "@material-ui/core"
+import { AppBar, Toolbar, } from "@material-ui/core"
+import RegisterModal from "../../components/Modals/RegisterModal";
 
 
 const navLinks = [
@@ -17,15 +17,15 @@ const Home = () => {
   return (
     <div className='App'>
       <div>
-        <AppBar position="static">
+        {/* <AppBar position="static">
           <Toolbar>
 
           </Toolbar>
-        </AppBar>
-        <Carousel />
-        <Modal>
-          <RegisterForm />
-        </Modal>
+        </AppBar> */}
+        {/* <Carousel /> */}
+        <RegisterModal />
+
+
       </div>
       <div className='searchBar'>
         <Search />
