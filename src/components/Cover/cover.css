@@ -1,29 +1,21 @@
-.cover {
-  position: relative;
-  bottom: 0;
-  text-decoration: none;
-  background-color: #a52a2a;
-  display: flex;
-  width: 15vw;
-  height:25vh;
+.entity{
+  vertical-align: top;
+  display: inline-block;
 }
 
-.cover p {
-  display: flex;
-  position: relative;
-  flex-direction: column;
+.p{
+  background-color: #79f7ff;
 }
-.cover .numbers p {
-  padding: 5px;
-  display: flex;
+
+.footer{
+ display: inline;
+  background-color: #5cabff;
 }
-.cover img {
-  display: flex;
-  position: relative;
-  width: 10vw;
+
+.a{
+    background-color: #5cabff;
+}
+.image{
+  width:400px;
   height: auto;
-}
-
-.songName{
-  display: flex;
 }
