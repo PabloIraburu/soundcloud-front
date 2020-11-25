@@ -1,22 +1,54 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, {useState} from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch ,Link} from "react-router-dom";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Discover from "./pages/discover";
+import Navbar from "./components/Navbar/Navbar";
+import Stream from "./pages/stream/stream"
+import Biblioteca from "./pages/biblioteca/biblioteca"
+import MejorarLaCuenta from "./pages/mejorarLaCuenta/mejorarLaCuenta";
+
+
+
 
 function App() {
+
+  //*
+  const [isLogged, setIsLogged] = useState(true);
+  
   return (
-    <div>
-      <BrowserRouter>
+    <Router>
+      <div>
+        {isLogged && <Navbar />}
+      
+
         <Switch>
+
           <Route exact path='/'>
              <LandingPage/>
           </Route>
+
+          <Route path="/stream">
+            <Stream />
+          </Route>
+
+          <Route path="/biblioteca">
+            <Biblioteca />
+          </Route>
+
+          <Route path="/mejorarLaCuenta">
+            <MejorarLaCuenta />
+          </Route>
+        
           <Route exact path='/discover'>
             <Discover />
           </Route>
+
+     
+
         </Switch>
-      </BrowserRouter>
-    </div>
+      </div>
+    </Router>
   );
 }
 
