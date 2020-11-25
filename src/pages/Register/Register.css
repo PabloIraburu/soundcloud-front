@@ -1,0 +1,58 @@
+/* body {
+    background: #feffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+} */
+
+.Register {
+    font-family: 'Raleway', sans-serif;
+}
+
+.Register h1 {
+    line-height: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.Register p {
+    line-height: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.Register input {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    margin: 10px auto;
+    font-family: 'Raleway', sans-serif;
+    padding: 10px;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: rgb(223, 223, 223);
+}
+
+.Register input:focus {
+    border-color: green
+}
+
+.Register button {
+    width: 50%;
+    margin-top: 20px;
+    height: 40px;
+    font-family: 'Raleway', sans-serif;
+    border: none;
+    background-color: orange;
+    border-radius: 4px;
+    color: white;
+}
+
+.Register button:hover {
+    width: 50%;
+    margin-top: 20px;
+    height: 40px;
+    font-family: 'Raleway', sans-serif;
+    border: 2px solid orange;
+    border-radius: 4px;
+    color: orange;
+    background-color: white;
+}
