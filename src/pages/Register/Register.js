@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
-import "./RegisterForm.css";
+import "./Register.css";
 
-const RegisterForm = () => {
+export const Register = () => {
 
     const [newUser, setNewUser] = useState({});
     const { register } = useForm();
@@ -31,21 +31,20 @@ const RegisterForm = () => {
                 setTimeout(() => {
                     history.push("/");
                 }, 2000);
-                console.log('El nuevo usuario se ha creado en la bbdd', newUser);
-
             })
             .catch((response) => console.log(response.error))
     };
 
     return (
-        <>
+        <div className="Register">
+            <h1>Súmate a la mejor plataforma de música</h1>
+            <p>Accede a millones de canciones, de todos los estilos, en todos tus dispositivos. Solo te llevará 30 segundos.</p>
             <input type="text" name="name" onChange={handleInput} ref={register({ required: true, maxLength: 8 })} placeholder="Name" />
             <input type="email" name="email" onChange={handleInput} ref={register({ required: true })} placeholder="Email" />
             <input type="password" name="password" onChange={handleInput} ref={register({ pattern: /^[A-Za-z0-9]+$/i })} placeholder="Password" />
             <button onClick={handleSubmit}>Registrarse</button>
-        </>
+        </div>
     );
 }
 
-export default RegisterForm;
 
