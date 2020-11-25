@@ -4,7 +4,7 @@ import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
 import Modal from 'react-bootstrap/Modal'
-import RegisterForm from "../../components/Forms/RegisterForm";
+import RegisterForm from "../../components/Forms/Register/RegisterForm";
 import { AppBar, Toolbar,  } from "@material-ui/core"
 
 

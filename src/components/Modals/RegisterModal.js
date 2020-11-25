@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import RegisterForm from '../Forms/RegisterForm';
+import RegisterForm from '../Forms/Register/RegisterForm';
 
 
 
