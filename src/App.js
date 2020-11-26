@@ -1,14 +1,12 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import LandingPage from "./pages/LandingPage/LandingPage";
-import Discover from "./pages/discover";
-import {HOME} from "./routes/routes";
-import {DISCOVER} from "./routes/routes";
-import {PROFILE} from "./routes/routes";
+import { LandingPage } from "./pages/LandingPage/LandingPage";
+import { HOME } from "./routes/routes";
+import { DISCOVER } from "./routes/routes";
+import { PROFILE } from "./routes/routes";
 import { Profile } from "./pages/Profile/Profile";
-
-
+import { Discover } from "./pages/Discover/Discover";
 
 function App() {
   return (

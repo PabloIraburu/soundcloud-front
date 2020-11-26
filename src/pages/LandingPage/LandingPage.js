@@ -1,24 +1,19 @@
 import React, { useState } from "react";
-//importar modal y formulario
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
 import { AppBar, Toolbar, } from "@material-ui/core"
-// import RegisterForm from "../../components/Forms/RegisterForm";
-// import RegisterModal from "../../components/Modals/RegisterModal";
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
 import Container from "../../components/Container/Container";
-
-
 
 const navLinks = [
   { title: `Sign in`, path: `/` },
   { title: `Create Account`, path: `/` }
 ]
 
-const Home = () => {
+export const LandingPage = () => {
   //Gestión modal registro
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
