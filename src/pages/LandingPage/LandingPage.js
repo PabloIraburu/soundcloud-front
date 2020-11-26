@@ -8,6 +8,7 @@ import { AppBar, Toolbar, } from "@material-ui/core"
 // import RegisterModal from "../../components/Modals/RegisterModal";
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
+import { Login } from "../../pages/Login/Login";
 import Container from "../../components/Container/Container";
 
 
@@ -18,13 +19,22 @@ const navLinks = [
 ]
 
 const Home = () => {
-
+  //Gestión modal registro
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
   const handleCloseRegister = (e) => {
     const { className: el } = e.target;
     if (el !== 'backdrop' && el !== 'fas fa-times') return;
     setOpenModalRegister(!openModalRegister);
+  }
+
+  //Gestión modal login
+  const [openModalLogin, setOpenModalLogin] = useState(false);
+  const handleOpenLogin = () => setOpenModalLogin(!openModalLogin);
+  const handleCloseLogin = (e) => {
+    const { className: el } = e.target;
+    if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    setOpenModalLogin(!openModalLogin);
   }
 
   return (
@@ -41,6 +51,12 @@ const Home = () => {
         {openModalRegister &&
           <Modal handleClose={handleCloseRegister}>
             <Register />
+          </Modal>
+        }
+        <button type="button" onClick={handleOpenLogin} className="button-register">Accede</button>
+        {openModalLogin &&
+          <Modal handleClose={handleCloseLogin}>
+            <Login />
           </Modal>
         }
 
