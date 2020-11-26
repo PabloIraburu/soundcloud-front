@@ -27,3 +27,10 @@
 .newUser {
   background-color: orangered;
 }
+
+.signin {
+  margin-left: auto;
+  margin-top: 10em;
+  /*align-items: right;
+  margin-right: auto;*/
+}

@@ -5,23 +5,22 @@ import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
 import Modal from 'react-bootstrap/Modal'
 import RegisterForm from "../../components/Forms/RegisterForm";
-import { AppBar, Toolbar,  } from "@material-ui/core"
+import { Toolbar } from "@material-ui/core"
+import Button from '@material-ui/core/Button';
 
-
-const navLinks = [
-  { title: `Sign in`, path: `/` },
-  { title: `Create Account`, path: `/` }
-]
 
 const Home = () => {
   return (
     <div className='App'>
       <div>
-        <AppBar position="static">
           <Toolbar>
-
+            <Button variant="contained" color="primary" href="#contained-buttons" className="signin">
+            Sign In
+            </Button>
+            <Button variant="contained" color="primary" href="#contained-buttons" className="createaccount">
+            Create Account
+            </Button>
           </Toolbar>
-        </AppBar>
         <Carousel />
         <Modal>
           <RegisterForm />
