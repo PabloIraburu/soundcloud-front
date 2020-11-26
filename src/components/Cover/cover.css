@@ -2,12 +2,14 @@
   vertical-align: top;
   display: inline-block;
   padding-right: 20px;
-  width: 17%;
-  float: left;
+  width: 20%;
+  float: end;
+    text-align: center;
 }
 
 .p{
   background-color: #79f7ff;
+    margin: auto;
 }
 
 .footer{
@@ -15,9 +17,6 @@
   background-color: #5cabff;
 }
 
-.a{
-    background-color: #5cabff;
-}
 .image {
     width: 100%;
     height: 100%;
