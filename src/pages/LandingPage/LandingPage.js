@@ -48,7 +48,7 @@ export const LandingPage = () => {
             <Register />
           </Modal>
         }
-        <button type="button" onClick={handleOpenLogin} className="button-register">Accede</button>
+        <button type="button" onClick={handleOpenLogin} className="button-login">Accede</button>
         {openModalLogin &&
           <Modal handleClose={handleCloseLogin}>
             <Login />
@@ -64,4 +64,4 @@ export const LandingPage = () => {
   );
 };
 
-export default Home;
+
