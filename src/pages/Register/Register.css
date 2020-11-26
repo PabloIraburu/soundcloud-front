@@ -18,7 +18,12 @@
   height: 40px;
   font-family: "Raleway", sans-serif;
   border: none;
-  background-color: orange;
+  /* background-color: orange; */
+  background: linear-gradient(
+    44deg,
+    rgba(233, 70, 138, 1) 0%,
+    rgba(249, 184, 76, 1) 100%
+  );
   border-radius: 4px;
   color: white;
 }
@@ -31,7 +36,7 @@
   border: 2px solid orange;
   border-radius: 4px;
   color: orange;
-  background-color: white;
+  background: white;
 }
 
 /* .Register input {
