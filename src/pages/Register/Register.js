@@ -43,9 +43,6 @@ export const Register = () => {
             <Input type={"text"} name={"name"} onChange={handleInput} placeholder={"Name"}/>
             <Input type={"email"} name={"email"} onChange={handleInput} placeholder={"E-mail"}/>
             <Input type={"password"} name={"password"} onChange={handleInput} placeholder={"Password"}/>
-            {/* <input type="text" name="name" onChange={handleInput} ref={register({ required: true, maxLength: 8 })} placeholder="Name" /> */}
-            {/* <input type="email" name="email" onChange={handleInput} ref={register({ required: true })} placeholder="Email" /> */}
-            {/*<input type="password" name="password" onChange={handleInput} ref={register({ pattern: /^[A-Za-z0-9]+$/i })} placeholder="Password" /> */}
             <button onClick={handleSubmit}>Registrarse</button>
         </div>
     );
