@@ -7,7 +7,7 @@ const songFeeder= [
   {'Name': 'Para Mexer', 'Artist': 'Animals as Leaders', 'URL':'https://dummyimage.com/400x400/000/fff', 'likes': '88.000', 'plays': '1M'},
   {'Name': 'Street Fighter Mas', 'Artist': 'Kamasi Washington', 'URL':'https://avatarfiles.alphacoders.com/782/78200.png', 'likes': '88.000', 'plays': '1M'},
   {'Name': 'Gone', 'Artist': 'Anderson Paak', 'URL':'https://www.fetchdvm360.com/wp-content/uploads/2018/11/veterinary-behavior-block-400x400.jpg', 'likes': '88.000', 'plays': '1M'},
-  {'Name': 'Moments', 'Artist': 'Kenneth Whalum', 'URL':'https://lh3.googleusercontent.com/proxy/jLP3XEX3PE9Fg57-OoZa9aUxHuCjix8dRXWs-GMEngPT7NWODwKFQVLgGvYVOulidl1uWlRetUqfGIO6Eu8_-k7mGGy-AOy3XC3MaJpGQzbtEQg-yquJ0s2c3o1XMsLZ', 'likes': '88.000', 'plays': '1M'},
+  {'Name': 'Moments', 'Artist': 'Kenneth Whalum', 'URL':'https://i.pinimg.com/originals/54/6d/41/546d41d7edb34085b69b7c29de441232.jpg', 'likes': '88.000', 'plays': '1M'},
   {'Name': 'Esentielles', 'Artist': 'Ibrahim Maalouf', 'URL':'https://pbs.twimg.com/profile_images/446356636710363136/OYIaJ1KK_400x400.png', 'likes': '88.000', 'plays': '1M'},
   {'Name': 'Nakamarra', 'Artist': 'Hiatus Kaiyote', 'URL':'https://gradle.org/images/gradle-400x400.png', 'likes': '88.000', 'plays': '1M'},
   {'Name': 'Drunk', 'Artist': 'Sungazer', 'URL':'https://jethromanagement.biz/wp-content/uploads/2017/10/instagram-logo-vector-download-400x400.jpg', 'likes': '88.000', 'plays': '1M'},

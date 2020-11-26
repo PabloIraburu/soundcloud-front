@@ -8,6 +8,8 @@ import { AppBar, Toolbar, } from "@material-ui/core"
 // import RegisterModal from "../../components/Modals/RegisterModal";
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
+import Container from "../../components/Container/Container";
+
 
 
 const navLinks = [
@@ -46,6 +48,7 @@ const Home = () => {
       <div className='searchBar'>
         <Search />
       </div>
+        <Container/>
     </div>
   );
 };
