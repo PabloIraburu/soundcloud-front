@@ -1,0 +1,32 @@
+.Input-wrap {
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  margin: 10px auto;
+  padding: 10px 10px 10px 5px;
+  border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.Input-wrap:hover {
+  border-bottom: orange;
+  box-shadow: 0 4px 2px -2px rgba(255, 166, 0, 0.651);
+}
+
+/* .Input-wrap:hover {
+  border-bottom: #63ad37;
+  box-shadow: 0 4px 2px -2px #62ad3796;
+} */
+
+.Input-wrap input {
+  font-family: "Raleway", sans-serif;
+  outline: none;
+  outline-width: 0;
+  box-shadow: none;
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.Input-wrap input::placeholder {
+  color: rgb(175, 175, 175);
+}
