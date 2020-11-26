@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.App{
+  background-color: #fdedd9;
+}
+
 .searchBar {
   width: 100%;
   display: flex;
@@ -28,9 +32,14 @@
   background-color: orangered;
 }
 
+<<<<<<< HEAD
 .signin {
   margin-left: auto;
   margin-top: 10em;
   /*align-items: right;
   margin-right: auto;*/
+=======
+.button-register {
+  
+>>>>>>> 0e00e474850dd8e4b642d193cd387af074cd0917
 }
