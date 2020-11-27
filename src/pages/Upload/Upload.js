@@ -1,11 +1,9 @@
 import React from 'react'
 
-const mejorarLaCuenta = () => {
+export const Upload = () => {
     return (
         <div>
             <h1>SUBIR</h1>
         </div>
     )
-}
-
-export default mejorarLaCuenta;
+};

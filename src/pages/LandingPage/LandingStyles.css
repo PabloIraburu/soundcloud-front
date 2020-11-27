@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
+}
+
+.App {
+  background-color: #fdedd9;
 }
 
 .searchBar {
@@ -26,8 +31,4 @@
 
 .newUser {
   background-color: orangered;
-}
-
-.button-register {
-  
 }

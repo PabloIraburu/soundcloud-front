@@ -1,11 +1,10 @@
 import React from 'react'
+import './Library.css';
 
-const biblioteca = () => {
+export const Library = () => {
     return (
         <div>
             <h1>BIBLIOTECA</h1>
         </div>
     )
 }
-
-export default biblioteca
