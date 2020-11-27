@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
+import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
+// import RegisterForm from "../../components/Forms/RegisterForm";
+// import RegisterModal from "../../components/Modals/RegisterModal";
 import { AppBar, Toolbar, } from "@material-ui/core"
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
 import Container from "../../components/Container/Container";
+
+
+
+const Home = () => {
 
 const navLinks = [
   { title: `Sign in`, path: `/` },
@@ -35,14 +42,19 @@ export const LandingPage = () => {
   return (
     <div className='App'>
       <div>
-        <AppBar position="static">
           <Toolbar>
-
+          <img src="soundcloud.png" className={classes.soundcloud} />
+          <Grid container justify="flex-end">
+            <Button variant="contained" color="primary" href="#contained-buttons" className="button-signin">
+              Sign In
+            </Button>
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
+              Crear cuenta
+            </Button>
+          </Grid>
           </Toolbar>
-        </AppBar>
         <Carousel />
         {/* <RegisterModal /> */}
-        <button type="button" onClick={handleOpenRegister} className="button-register">Crear cuenta</button>
         {openModalRegister &&
           <Modal handleClose={handleCloseRegister}>
             <Register />

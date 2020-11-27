@@ -32,3 +32,22 @@
 .newUser {
   background-color: orangered;
 }
+
+.button-signin {
+  display: flex;
+  position: relative;
+  justify-content: end;
+  flex-direction: row;
+  justify-content: flex-end;
+  float: right;
+}
+
+.button-register {
+  display: flex;
+  position: relative;
+  justify-content: end;
+  flex-direction: row;
+  justify-content: flex-end;
+  float: right;
+}
+
