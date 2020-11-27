@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Stream from "./pages/stream/stream"
 import Biblioteca from "./pages/biblioteca/biblioteca"
 import Subir from "./pages/subir/subir";
+import Img from "./img/soundcloud.png"
 
 
 
@@ -30,6 +31,10 @@ function App() {
              <LandingPage/>
           </Route>
 
+          <Route path="/img">
+            <Img />
+          </Route>
+
           <Route path="/stream">
             <Stream />
           </Route>
@@ -42,6 +47,7 @@ function App() {
             <Subir />
           </Route>
         
+
           <Route exact path='/discover'>
             <Discover />
           </Route>

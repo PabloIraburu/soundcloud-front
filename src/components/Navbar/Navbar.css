@@ -69,3 +69,12 @@
 position: -ms-page;
 
 }
+
+.link-ul{
+  width: 100%;
+}
+
+.button-link{
+  background-color: black;
+  display: block;
+}
