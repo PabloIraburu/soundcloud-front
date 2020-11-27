@@ -3,7 +3,7 @@ import React from 'react'
 const mejorarLaCuenta = () => {
     return (
         <div>
-            <h1>gfhghghgffhhg</h1>
+            <h1>SUBIR</h1>
         </div>
     )
 }

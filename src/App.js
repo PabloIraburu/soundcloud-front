@@ -6,7 +6,8 @@ import Discover from "./pages/discover";
 import Navbar from "./components/Navbar/Navbar";
 import Stream from "./pages/stream/stream"
 import Biblioteca from "./pages/biblioteca/biblioteca"
-import MejorarLaCuenta from "./pages/mejorarLaCuenta/mejorarLaCuenta";
+import Subir from "./pages/subir/subir";
+
 
 
 
@@ -24,6 +25,7 @@ function App() {
 
         <Switch>
 
+
           <Route exact path='/'>
              <LandingPage/>
           </Route>
@@ -36,8 +38,8 @@ function App() {
             <Biblioteca />
           </Route>
 
-          <Route path="/mejorarLaCuenta">
-            <MejorarLaCuenta />
+          <Route path="/subir">
+            <Subir />
           </Route>
         
           <Route exact path='/discover'>

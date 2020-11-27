@@ -3,7 +3,7 @@ import React from 'react'
 const biblioteca = () => {
     return (
         <div>
-            <p>hola</p>
+            <h1>BIBLIOTECA</h1>
         </div>
     )
 }

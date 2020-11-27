@@ -10,7 +10,10 @@ const Navbar = () => {
         <nav className="nav">
           <ul className="link-ul">
             <li>
-              <Link className="link" to="/">inicio</Link>
+            
+              </li>
+            <li>
+              <Link className="link" to="/discover">inicio</Link>
             </li>
             <li>
               <Link className="link" to="/Stream">Stream</Link>
@@ -22,7 +25,7 @@ const Navbar = () => {
               <input  type="search" placeholder="Buscar"></input>
             </li>
             <li>
-              <Link className="link-stream" to="/mejorarLaCuenta">Mejorar la cuenta</Link>
+              <Link className="link" to="/subir">subir</Link>
             </li>
           </ul>
         </nav>
