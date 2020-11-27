@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-// import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
-import "./Register.css";
+import { PROFILE } from '../../routes/routes';
+import "./Login.css";
 
-export const Register = () => {
+export const Login = () => {
 
-    const [newUser, setNewUser] = useState({});
-    // const { register } = useForm();
+    const [loginUser, setLoginUser] = useState({});
 
     //redirect page with history
     const history = useHistory();
@@ -17,7 +16,7 @@ export const Register = () => {
     //Introduce los datos de los inputs en el objeto newUser
     const handleInput = (event) => {
         const { value, name } = event.target;
-        setNewUser((prevValue) => ({
+        setLoginUser((prevValue) => ({
             ...prevValue,
             [name]: value,
         }));
@@ -25,25 +24,24 @@ export const Register = () => {
 
     const handleSubmit = () => {
         //Petición al servidor de tipo POST - fetch localhost:3000/register
-        ServerRequest("register", "POST", newUser)
+        ServerRequest("login", "POST", loginUser)
             .then((response) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
                 setTimeout(() => {
-                    history.push("/");
+                    history.push(PROFILE);
                 }, 2000);
             })
             .catch((response) => console.log(response.error))
     };
 
     return (
-        <div className="Register">
-            <h1>Súmate a la mejor plataforma de música</h1>
-            <p>Accede a millones de canciones, de todos los estilos, en todos tus dispositivos. Solo te llevará 30 segundos.</p>
-            <Input type={"text"} name={"name"} onChange={handleInput} placeholder={"Name"}/>
+        <div className="Login">
+            <h1>¡Hola de nuevo!</h1>
+            <p>Te echábamos de menos, nos alegra verte de vuelta.</p>
             <Input type={"email"} name={"email"} onChange={handleInput} placeholder={"E-mail"}/>
             <Input type={"password"} name={"password"} onChange={handleInput} placeholder={"Password"}/>
-            <button onClick={handleSubmit}>Registrarse</button>
+            <button onClick={handleSubmit}>Acceder</button>
         </div>
     );
 }

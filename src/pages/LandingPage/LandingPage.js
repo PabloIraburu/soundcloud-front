@@ -1,25 +1,48 @@
 import React, { useState } from "react";
-//importar modal y formulario
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
+<<<<<<< HEAD
 import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
 // import RegisterForm from "../../components/Forms/RegisterForm";
 // import RegisterModal from "../../components/Modals/RegisterModal";
+=======
+import { AppBar, Toolbar, } from "@material-ui/core"
+>>>>>>> 3264ad6ac2d5cceb6b55b0e8cd08f66078a04d7c
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
+import { Login } from "../../pages/Login/Login";
 import Container from "../../components/Container/Container";
 
+<<<<<<< HEAD
 
 
 const Home = () => {
 
+=======
+const navLinks = [
+  { title: `Sign in`, path: `/` },
+  { title: `Create Account`, path: `/` }
+]
+
+export const LandingPage = () => {
+  //Gestión modal registro
+>>>>>>> 3264ad6ac2d5cceb6b55b0e8cd08f66078a04d7c
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
   const handleCloseRegister = (e) => {
     const { className: el } = e.target;
     if (el !== 'backdrop' && el !== 'fas fa-times') return;
     setOpenModalRegister(!openModalRegister);
+  }
+
+  //Gestión modal login
+  const [openModalLogin, setOpenModalLogin] = useState(false);
+  const handleOpenLogin = () => setOpenModalLogin(!openModalLogin);
+  const handleCloseLogin = (e) => {
+    const { className: el } = e.target;
+    if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    setOpenModalLogin(!openModalLogin);
   }
 
   return (
@@ -43,6 +66,12 @@ const Home = () => {
             <Register />
           </Modal>
         }
+        <button type="button" onClick={handleOpenLogin} className="button-login">Accede</button>
+        {openModalLogin &&
+          <Modal handleClose={handleCloseLogin}>
+            <Login />
+          </Modal>
+        }
 
       </div>
       <div className='searchBar'>
@@ -53,4 +82,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+

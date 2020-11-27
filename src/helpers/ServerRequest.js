@@ -2,7 +2,7 @@ import { getToken } from "../utils/LocalStorage.utils";
 
 export const ServerRequest = (routes, method, body) => {
     const token = getToken();
-    const url = `http://localhost:3000/${routes}`;
+    const url = `http://localhost:3300/${routes}`;
     const JSONBody = JSON.stringify(body);
     const options = {
         method: method,

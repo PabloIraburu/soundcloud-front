@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 
-const Discover = () => {
+export const Discover = () => {
   return (
     <div className='App'>
       <Navbar />
@@ -9,5 +9,3 @@ const Discover = () => {
     </div>
   );
 };
-
-export default Discover;
