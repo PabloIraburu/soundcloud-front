@@ -3,20 +3,13 @@ import React, { useState } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
-<<<<<<< HEAD
-import Modal from 'react-bootstrap/Modal'
-import RegisterForm from "../../components/Forms/RegisterForm";
-import { Toolbar } from "@material-ui/core"
-import Button from '@material-ui/core/Button';
-=======
-import { AppBar, Toolbar, } from "@material-ui/core"
+import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
 // import RegisterForm from "../../components/Forms/RegisterForm";
 // import RegisterModal from "../../components/Modals/RegisterModal";
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
 import Container from "../../components/Container/Container";
 
->>>>>>> 0e00e474850dd8e4b642d193cd387af074cd0917
 
 
 const Home = () => {
@@ -33,16 +26,18 @@ const Home = () => {
     <div className='App'>
       <div>
           <Toolbar>
-            <Button variant="contained" color="primary" href="#contained-buttons" className="signin">
-            Sign In
+          <img src="soundcloud.png" className={classes.soundcloud} />
+          <Grid container justify="flex-end">
+            <Button variant="contained" color="primary" href="#contained-buttons" className="button-signin">
+              Sign In
             </Button>
-            <Button variant="contained" color="primary" href="#contained-buttons" className="createaccount">
-            Create Account
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
+              Crear cuenta
             </Button>
+          </Grid>
           </Toolbar>
         <Carousel />
         {/* <RegisterModal /> */}
-        <button type="button" onClick={handleOpenRegister} className="button-register">Crear cuenta</button>
         {openModalRegister &&
           <Modal handleClose={handleCloseRegister}>
             <Register />

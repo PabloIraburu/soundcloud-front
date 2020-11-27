@@ -15,4 +15,3 @@ export const Modal = ({ handleClose, children }) => {
 
   )
 }
-
