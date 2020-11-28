@@ -29,10 +29,6 @@
   color: black;
 }
 
-.newUser {
-  background-color: orangered;
-}
-
 .button-signin {
   display: flex;
   position: relative;

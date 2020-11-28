@@ -42,11 +42,16 @@ export default function LandingPage () {
     <div className='App'>
       <div>
           <Toolbar>
-          <img src="soundcloud.png" className={classes.soundcloud} />
+          <img src="soundcloud.png" className='soundcloud' />
           <Grid container justify="flex-end">
-            <Button variant="contained" color="primary" href="#contained-buttons" className="button-signin">
+            <Button variant="contained" color="primary" href="#contained-buttons"  onClick={handleOpenLogin} className="button-signin">
               Sign In
             </Button>
+              {openModalLogin &&
+              <Modal handleClose={handleCloseLogin}>
+                  <Login />
+              </Modal>
+              }
             <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
               Crear cuenta
             </Button>
@@ -59,7 +64,6 @@ export default function LandingPage () {
             <Register />
           </Modal>
         }
-        <button type="button" onClick={handleOpenLogin} className="button-login">Accede</button>
         {openModalLogin &&
           <Modal handleClose={handleCloseLogin}>
             <Login />
