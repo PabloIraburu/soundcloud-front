@@ -1,6 +1,7 @@
 import CoverInfo from "../Cover/CoverInfo";
 import React from "react";
 import "./container.css"
+import {Button} from "@material-ui/core";
 
 
 export default function Container () {
@@ -24,7 +25,9 @@ export default function Container () {
                 <CoverInfo/>
             </div>
             <div className="buttonHolder">
-                <button>Explore the trending page</button>
+                <Button variant="contained" color="primary" href="#contained-buttons"  className="button-register">
+                    Explore Trending
+                </Button>
             </div>
         </div>
 
