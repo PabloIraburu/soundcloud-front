@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { setJWT } from "../../utils/LocalStorage.utils";
+import { setJWT } from "../../Utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
 import "./Register.css";
 

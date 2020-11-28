@@ -42,9 +42,29 @@ export default function Landing () {
                     <div className="header">
                         <h2>Weekly Top Track</h2>
                     </div>
-                    <div className="slider"></div>
+                    <div className="slider">
+                        <div className="display">
+                            <div className="text">
+                                <h2>SLOWING DANCING IN THE DARK</h2>
+                            </div>
+                               
+                            <div className="images">
+                                <img src="https://www.ismorbo.com/wp-content/uploads/2018/10/40550719_1376357265830478_8906633344016595746_n.jpg" alt=""/>
+                                <img src="https://lab.fm/wp-content/uploads/2020/03/030420-Joji-Run-Tonight-Show-Jimmy-Fallon-YouTube.jpg" alt=""/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="bottomFrame"></div>
+                <div className="bottomFrame">
+                    <div className="recomended">
+                        <div className="title"></div>
+                        <div className="gallery">
+
+                        </div>
+                    </div>
+                    <div className="player"></div>
+                    <div className="playlist"></div>
+                </div>
             </div>
         </div>
     )
