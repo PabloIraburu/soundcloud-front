@@ -32,3 +32,9 @@
 .newUser {
   background-color: orangered;
 }
+
+.button-register{
+  position: fixed;
+  top: 0px;
+  horiz-align: right;
+}
