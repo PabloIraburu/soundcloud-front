@@ -1,0 +1,32 @@
+
+
+.dropdown-href{
+    text-decoration: none;
+    display: block;
+    color: rgb(10, 10, 10);
+    padding: 3px 20px;
+}
+
+.dropdown-href:hover {
+    background-color: red;
+}
+.dropdown-title {
+    padding-bottom: 17px;
+}
+.dropdown{
+    text-align: right;
+        
+}
+
+.dropdown-content {
+    background-color: white;
+    z-index: 1;
+    border: 1px solid black;
+    /* box-shadow: 1px 1px 1px #666; */
+    padding-bottom: 10px;
+    padding-top: 5px;
+    
+    position: absolute;
+    width: 150px;
+    right: 15px;
+}
