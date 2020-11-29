@@ -25,7 +25,7 @@ export default function Landing () {
                     <div className="favourites"><i className="fab fa-galactic-republic"></i><h2>Favourites</h2></div>
                 </div>
                 <div className="addTrack">
-                    <a href="">Add Track</a>
+                    <a className='button' href="">Add Track</a>
                 </div>
             </div>
             <div className='rightBar'>

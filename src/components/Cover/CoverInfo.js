@@ -22,7 +22,7 @@ export default function CoverInfo() {
 
   return (
     <div className='entity'>
-      <a href='#'>
+      <a href='#' className='coverEntity'>
         <img
             className='image'
           src={songFeeder[rand].URL}

@@ -65,11 +65,12 @@
     width: 50%;
     display: flex;
     justify-content: space-evenly;
+    opacity: 85%;
 }
 
 .mainFrame .slider .display .images img{
     max-width: 100%;
-    opacity: 80%;
+    opacity: 90%;
     max-height: 100%;
 }
 
@@ -152,7 +153,7 @@ h2{
     width: 18vw;
 }
 
-a:link, a:visited {
+.button:link, .button:visited {
     background-color: var(--clr-highlightText);
     color: var(--clr-lightText);
     padding: 14px 25px;
@@ -164,7 +165,7 @@ a:link, a:visited {
     border-radius: 18px;
 }
 
-a:hover, a:active {
+.button:hover, .button:active {
     background-color: var(--clr-inactiveField);
 }
 
@@ -178,6 +179,24 @@ a:hover, a:active {
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
+}
+
+
+/*Navbar local styling*/
+
+
+.search input{
+    width: 30vw;
+    height: auto;
+    padding:20px;
+    border-radius: 14px;
+    color: var(--clr-highlightText);
+    background-color: var(--clr-lightBackground);
+    border: none;
+
+}
+ul{
+    display: none;
 }
 
 @media (max-width: 800px){
