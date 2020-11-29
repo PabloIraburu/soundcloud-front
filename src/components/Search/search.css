@@ -1,5 +1,5 @@
 .searchBar {
-  margin: 1vw;
+  margin: vw;
   color: black;
   width: 100%;
 }
@@ -23,5 +23,5 @@
 
 .searchBar label {
   font-weight: 700;
-  font-size: xx-large;
+  font-size: medium;
 }
