@@ -1,0 +1,30 @@
+.userCard  img {
+    width: 100px;
+    height: auto;
+    border-radius: 14px;
+    margin-right: 10px;
+}
+
+.userCard{
+    background-color: var(--clr-inactiveField);
+    color: white;
+    width: 18vw;
+    margin-top: 6rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    padding:  2rem;
+    display: flex;
+    border-radius: 18px;
+}
+.userCard i{
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+.userCard .numbers{
+    color: var(--clr-dimText);
+}
+
+.text .identity{
+    display: inline-flex;
+}

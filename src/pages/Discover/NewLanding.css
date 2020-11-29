@@ -169,11 +169,6 @@ h2{
     background-color: var(--clr-inactiveField);
 }
 
-.search{
-    z-index: 2;
-    margin-left: 2.5rem;
-    padding-top: 3rem;
-}
 
 .headRight{
     width: 100%;
