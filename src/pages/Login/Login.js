@@ -4,13 +4,13 @@ import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
 import { PROFILE } from '../../routes/routes';
+import { Modal } from "../../components/Modal/Modal";
+import { Register } from "../../pages/Register/Register";
 import "./Login.css";
 
 export const Login = () => {
 
     const [loginUser, setLoginUser] = useState({});
-
-    //redirect page with history
     const history = useHistory();
 
     //Introduce los datos de los inputs en el objeto newUser
@@ -35,13 +35,33 @@ export const Login = () => {
             .catch((response) => console.log(response.error))
     };
 
+    //Gestión modal registro
+    const [openModalRegister, setOpenModalRegister] = useState(false);
+    const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
+    const handleCloseRegister = (e) => {
+        const { className: el } = e.target;
+        if (el !== 'backdrop' && el !== 'fas fa-times') return;
+        setOpenModalRegister(!openModalRegister);
+    }
+
     return (
         <div className="Login">
             <h1>¡Hola de nuevo!</h1>
             <p>Te echábamos de menos, nos alegra verte de vuelta.</p>
-            <Input type={"email"} name={"email"} onChange={handleInput} placeholder={"E-mail"}/>
-            <Input type={"password"} name={"password"} onChange={handleInput} placeholder={"Password"}/>
-            <button onClick={handleSubmit}>Acceder</button>
+            <Input type={"email"} name={"email"} onChange={handleInput} placeholder={"E-mail"} />
+            <Input type={"password"} name={"password"} onChange={handleInput} placeholder={"Password"} />
+            <div className="GoToRegister-wrap">
+                <div className="GoToRegister-text">
+                    <p>¿Aún no tienes cuenta?</p>
+                    <p onClick={handleOpenRegister} className="GoToRegister-link">Regíster</p>
+                </div>
+                <button onClick={handleSubmit}>Acceder</button>
+            </div>
+            {openModalRegister &&
+                <Modal handleClose={handleCloseRegister}>
+                    <Register />
+                </Modal>
+            }
         </div>
     );
 }
