@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { LandingPage } from "./pages/LandingPage/LandingPage";
+import  LandingPage  from "./pages/LandingPage/LandingPage";
 import { DISCOVER, PROFILE, HOME, LIBRARY, UPLOAD } from "./routes/routes";
 import { Profile } from "./pages/Profile/Profile";
 import { Discover } from "./pages/Discover/Discover";
