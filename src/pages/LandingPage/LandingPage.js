@@ -19,7 +19,7 @@ export default function LandingPage() {
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
   const handleCloseRegister = (e) => {
     const { className: el } = e.target;
-    if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    if (el !== 'backdrop' && el !== 'fas fa-times' && el !== 'GoToLogin-link') return;
     setOpenModalRegister(!openModalRegister);
   }
 
@@ -28,44 +28,13 @@ export default function LandingPage() {
   const handleOpenLogin = () => setOpenModalLogin(!openModalLogin);
   const handleCloseLogin = (e) => {
     const { className: el } = e.target;
-    if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    if (el !== 'backdrop' && el !== 'fas fa-times' && el !== 'GoToRegister-link') return;
     setOpenModalLogin(!openModalLogin);
   }
 
   return (
     <div className='App'>
       <div>
-<<<<<<< HEAD
-        {/* <Toolbar>
-          <img src="soundcloud.png" className='soundcloud' />
-          <Grid container justify="flex-end">
-          </Grid>
-          </Toolbar> */}
-        <Carousel />
-        <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenLogin} className="button-signin">
-          Sign In
-            </Button>
-        {openModalLogin &&
-          <Modal handleClose={handleCloseLogin}>
-            <Login />
-          </Modal>
-        }
-        <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
-          Crear cuenta
-            </Button>
-        {/* <RegisterModal /> */}
-        {openModalRegister &&
-          <Modal handleClose={handleCloseRegister}>
-            <Register />
-          </Modal>
-        }
-        {openModalLogin &&
-          <Modal handleClose={handleCloseLogin}>
-            <Login />
-          </Modal>
-        }
-
-=======
         <Toolbar>
           <img src="soundcloud.png" className='soundcloud' />
           <Grid container justify="flex-end">
@@ -79,25 +48,22 @@ export default function LandingPage() {
           </Grid>
         </Toolbar>
         <Carousel />
->>>>>>> ec063d612064cb787703cf430c83b2099bc675cc
       </div>
       <div className='searchBar'>
         <Search />
       </div>
       <Container />
-<<<<<<< HEAD
-=======
+
       {openModalRegister &&
         <Modal handleClose={handleCloseRegister}>
-          <Register />
+          <Register handleCloseRegister={handleCloseRegister} openLogin={handleOpenLogin} />
         </Modal>
       }
       {openModalLogin &&
         <Modal handleClose={handleCloseLogin}>
-          <Login />
+          <Login handleCloseLogin={handleCloseLogin} openRegister={handleOpenRegister} />
         </Modal>
       }
->>>>>>> ec063d612064cb787703cf430c83b2099bc675cc
     </div>
   );
 }
