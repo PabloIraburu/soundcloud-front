@@ -26,7 +26,6 @@ function Search() {
 
   return (
     <div className='searchBar'>
-      <label htmlFor='search'>Search Artist</label>
         <TextField id="outlined-basic" label="Search" variant="outlined" type='text'
                    ClassName='input'
                    placeholder='Search'

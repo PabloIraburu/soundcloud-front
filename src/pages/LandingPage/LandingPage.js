@@ -49,6 +49,7 @@ export default function LandingPage() {
         <Carousel/>
       </div>
       <div className='searchBar'>
+        <h2>Search Artist</h2>
         <Search />
       </div>
       <Container />

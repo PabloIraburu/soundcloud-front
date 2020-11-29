@@ -27,7 +27,7 @@
 }
 .notif{
     margin-right: 25px;
-    margin-top: 59px;
+    margin-top: 40px;
     padding-top: 2px;
 }
 
@@ -180,16 +180,22 @@ h2{
 /*Searchbar local styling*/
 
 
-.search input{
+.search input {
     width: 30vw;
     height: auto;
-    padding:20px;
+    padding: 20px;
     border-radius: 14px;
     color: var(--clr-highlightText);
     background-color: var(--clr-lightBackground);
     border: none;
-
+    margin-left: 2.5rem;
+    margin-top: 2rem;
 }
+.search MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
+    display: none;
+}
+
+
 .search ul{
     display: none;
 }
