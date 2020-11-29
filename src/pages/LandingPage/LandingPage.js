@@ -41,13 +41,12 @@ export default function LandingPage() {
             <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenLogin} className="button-signin">
               Sign In
             </Button>
-
             <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
               Crear cuenta
             </Button>
           </Grid>
         </Toolbar>
-        <Carousel />
+        <Carousel/>
       </div>
       <div className='searchBar'>
         <Search />

@@ -177,7 +177,7 @@ h2{
 }
 
 
-/*Navbar local styling*/
+/*Searchbar local styling*/
 
 
 .search input{
@@ -190,7 +190,7 @@ h2{
     border: none;
 
 }
-ul{
+.search ul{
     display: none;
 }
 
