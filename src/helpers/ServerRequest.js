@@ -9,12 +9,13 @@ export const ServerRequest = (routes, method, body) => {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer' + JSON.parse(token)
+            'Authorization': 'Bearer ' + JSON.parse(token)
         },
         body: JSONBody
     }
 
-    let response
+    let response;
+
     return fetch(url, options)
         .catch(error => (error))
         .then(res => {

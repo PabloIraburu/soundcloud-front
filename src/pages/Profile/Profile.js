@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getToken } from "../../utils/LocalStorage.utils";
+import { DecodeToken } from "../../utils/DecodeToken";
+import { ServerRequest } from '../../helpers/ServerRequest';
 import './Profile.css';
 
 export const Profile = () => {
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const token = getToken();
+    const decodedToken = DecodeToken(token);
+    const userId = decodedToken.id;
+
+    ServerRequest(`data/user/${userId}`, "GET")
+      .then((response) => {
+        setUser(response);
+      })
+      .catch(console.log);
+  }, []);
+
   return (
     <div className="Profile-wrap">
       <div className="Lateral-menu">
@@ -9,26 +27,19 @@ export const Profile = () => {
       </div>
 
       <div className="Profile-content">
-      <h3>My name</h3>
-      <p> Hodor, hodor. Hodor. Hodor. Hodor... Hodor hodor. Hodor... Hodor hodor. Hodor? Hodor hodor. Hodor! Hodor hodor. Hodor hodor HODOR! Hodor. HODOR? Hodor hodor! Hodor... Hodor hodor. HODOR hodor, hodor.
-
-HODOR hodor, hodor. Hodor, hodor. Hodor. Hodor? Hodor! Hodor hodor. Hodor hodor!
-
-Hodor hodor! Hodor! Hodor hodor. Hodor, hodor. Hodor. Hodor? Hodor, hodor. Hodor. Hodor, hodor, hodor hodor. Hodor! Hodor hodor. HODOR hodor, hodor. Hodor hodor! Hodor hodor HODOR! Hodor. Hodor? HODOR? HODOR? Hodor, hodor. Hodor. Hodor. Hodor, hodor. Hodor. Hodor.
-
-HODOR? Hodor hodor HODOR! Hodor. Hodor! Hodor hodor. HODOR hodor, hodor. HODOR hodor, hodor. Hodor hodor! Hodor hodor! HODOR HODOR! Hodor? Hodor! Hodor hodor. Hodor, hodor. Hodor. Hodor! Hodor hodor. HODOR hodor, hodor. HODOR hodor, hodor. Hodor, hodor, hodor hodor.
-
-Hodor, hodor, hodor hodor. HODOR hodor, hodor. HODOR hodor, hodor. HODOR? Hodor... Hodor hodor. Hodor, hodor. Hodor. Hodor. Hodor hodor HODOR! Hodor. Hodor hodor. Hodor hodor. Hodor hodor HODOR! Hodor. Hodor, hodor. Hodor.
-
-Hodor! Hodor hodor. HODOR? HODOR? Hodor, hodor. Hodor. Hodor. Hodor, hodor. Hodor.
-
-
-Hodor hodor! Hodor! Hodor hodor. Hodor, hodor, hodor hodor. Hodor, hodor. Hodor. Hodor. HODOR? HODOR? HODOR hodor, hodor. Hodor, hodor. Hodor. Hodor, hodor. Hodor. Hodor? Hodor! Hodor hodor. HODOR hodor, hodor.
-
-Hodor hodor HODOR! Hodor. Hodor... Hodor hodor. Hodor, hodor, hodor hodor. Hodor? Hodor... Hodor hodor. HODOR? Hodor, hodor, hodor hodor. HODOR HODOR! Hodor, hodor, hodor hodor.
-
-</p>
+        <h3>My name</h3>
+        <span className="">
+          <p>Name</p>
+          <p>{user.name}</p>
+        </span>
+        <hr className="hr" />
+        <span className="">
+          <p>E-mail</p>
+          <p>{user.email}</p>
+        </span>
+        <button>Edit profile</button>
       </div>
-    </div>
+    </div >
   )
 }
+
