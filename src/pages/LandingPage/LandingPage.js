@@ -19,7 +19,7 @@ const navLinks = [
   { title: `Create Account`, path: `/` }
 ]
 
-export default function LandingPage () {
+export default function LandingPage() {
   //Gestión modal registro
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
@@ -41,23 +41,23 @@ export default function LandingPage () {
   return (
     <div className='App'>
       <div>
-          <Toolbar>
+        {/* <Toolbar>
           <img src="soundcloud.png" className='soundcloud' />
           <Grid container justify="flex-end">
-            <Button variant="contained" color="primary" href="#contained-buttons"  onClick={handleOpenLogin} className="button-signin">
-              Sign In
-            </Button>
-              {openModalLogin &&
-              <Modal handleClose={handleCloseLogin}>
-                  <Login />
-              </Modal>
-              }
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
-              Crear cuenta
-            </Button>
           </Grid>
-          </Toolbar>
+          </Toolbar> */}
         <Carousel />
+        <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenLogin} className="button-signin">
+          Sign In
+            </Button>
+        {openModalLogin &&
+          <Modal handleClose={handleCloseLogin}>
+            <Login />
+          </Modal>
+        }
+        <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
+          Crear cuenta
+            </Button>
         {/* <RegisterModal /> */}
         {openModalRegister &&
           <Modal handleClose={handleCloseRegister}>
@@ -74,7 +74,7 @@ export default function LandingPage () {
       <div className='searchBar'>
         <Search />
       </div>
-        <Container/>
+      <Container />
     </div>
   );
 }
