@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { setJWT } from "../../Utils/LocalStorage.utils";
+import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
 import { PROFILE } from '../../routes/routes';
 import "./Login.css";
