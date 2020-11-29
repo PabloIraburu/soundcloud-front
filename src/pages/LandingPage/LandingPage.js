@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
-import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
+import { Toolbar, Button, Grid } from "@material-ui/core"
 // import RegisterForm from "../../components/Forms/RegisterForm";
 // import RegisterModal from "../../components/Modals/RegisterModal";
 import { Modal } from "../../components/Modal/Modal";

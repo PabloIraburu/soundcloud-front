@@ -1,7 +1,8 @@
 .searchBar {
-  margin: vw;
+  margin: 2vw;
   color: black;
   width: 100%;
+  flex-direction: column;
 }
 
 .searchBar ul{
@@ -13,6 +14,7 @@
   padding-left: 2rem;
   color: black;
   /* display: none; */
+  margin-top: 2rem;
 }
 
 .searchBar input {
