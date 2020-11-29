@@ -41,8 +41,6 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
         handleCloseLogin(e);
     }
 
-
-
     return (
         <div className="Login">
             <h1>¡Hola de nuevo!</h1>

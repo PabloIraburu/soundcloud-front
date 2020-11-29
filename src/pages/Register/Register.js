@@ -6,6 +6,7 @@ import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
 import { Modal } from "../../components/Modal/Modal";
 import { Login } from "../../pages/Login/Login";
+import { DISCOVER } from '../../routes/routes';
 import "./Register.css";
 
 export const Register = ({ handleCloseRegister, openLogin }) => {
@@ -29,7 +30,7 @@ export const Register = ({ handleCloseRegister, openLogin }) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
                 setTimeout(() => {
-                    history.push("/");
+                    history.push(DISCOVER);
                 }, 2000);
             })
             .catch((response) => console.log(response.error))

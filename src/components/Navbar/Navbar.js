@@ -9,56 +9,56 @@ import Dropdown from '../Dropdown/Dropdown';
 
 const Navbar = () => {
 
-/*   useEffect(() => {
-      ServerRequest
-    
-  }, [input]) */
+  /*   useEffect(() => {
+        ServerRequest
+      
+    }, [input]) */
 
 
 
 
-  
+
   return (
-      <div className="Navbar-link">
-        
-        <nav className="nav">
-       
-          <ul className="link-ul">
-          
-            
-            <li>
-              <Link className="link" to="/discover">inicio</Link>
-           
-            </li>
-            <li>
-              <Link className="link" to="/Stream">Stream</Link>
-            </li>
-            <li>
-              <Link className="link" to="/biblioteca">biblioteca</Link>
-              <ul>
-             
-                </ul>
-            </li>
-            <li>
-              <input  type="search" placeholder="Buscar"></input>
-            </li>
-            <li>
-              <Link className="link" to="/subir">subir</Link>
-            </li>
-            <li>
-              <Dropdown title="username" options={[
-                {text: 'Perfil', href: 'perfil'},
-                {text: 'Editar', href:"editarPerfil"},
-                {text: 'Cerrar sesión', href:"cerrarSesion"},
-              ]} />
-            </li>
-          </ul>
-        </nav>
-       </div> 
+    <div className="Navbar-link">
+
+      <nav className="nav">
+
+        <ul className="link-ul">
+
+
+          <li>
+            <Link className="link" to="/discover">inicio</Link>
+
+          </li>
+          <li>
+            <Link className="link" to="/Stream">Stream</Link>
+          </li>
+          <li>
+            <Link className="link" to="/biblioteca">biblioteca</Link>
+            <ul>
+
+            </ul>
+          </li>
+          <li>
+            <input type="search" placeholder="Buscar"></input>
+          </li>
+          <li>
+            <Link className="link" to="/subir">subir</Link>
+          </li>
+          <li>
+            <Dropdown title="username" options={[
+              { text: 'Perfil', href: 'profile' },
+              { text: 'Editar', href: "editarPerfil" },
+              { text: 'Cerrar sesión', href: "cerrarSesion" },
+            ]} />
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 };
 
-export default Navbar ;
+export default Navbar;
 
 
 
