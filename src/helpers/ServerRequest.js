@@ -1,4 +1,4 @@
-import { getToken } from "../utils/LocalStorage.utils";
+import { getToken } from "../Utils/LocalStorage.utils";
 
 export const ServerRequest = (routes, method, body) => {
     const token = getToken();
