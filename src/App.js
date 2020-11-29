@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import { DISCOVER, PROFILE, HOME, LIBRARY, UPLOAD } from "./routes/routes";
 import { Profile } from "./pages/Profile/Profile";
-import { Discover } from "./pages/Discover/Discover";
+import  Discover from "./pages/Discover/NewLanding";
 import { Library } from "./pages/Library/Library"
 import { Upload } from "./pages/Upload/Upload";
 import Navbar from './components/Navbar/Navbar';

@@ -4,7 +4,7 @@ import './NewLanding.css'
 import Search from "../../components/Search/Search";
 import UserInfo from "../../components/UserInfo/UserInfo";
 
-export default function Landing () {
+export default function Discover () {
 
     return(
         <div className='landing'>
