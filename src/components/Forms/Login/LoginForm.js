@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../Helpers/ServerRequest";
-import { setJWT } from "../../Utils/LocalStorage.utils";
+import { setJWT } from "../../utils/LocalStorage.utils";
 import "./LoginForm.css";
 
 const LoginForm = () => {
