@@ -26,10 +26,10 @@ function Search() {
 
   return (
     <div className='searchBar'>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-        <input id="outlined-basic" label="Search any music you want" type='text'
-                   placeholder=" Search"
+      <label htmlFor='search'>Search Artist</label>
+        <TextField id="outlined-basic" label="Search" variant="outlined" type='text'
                    ClassName='input'
+                   placeholder='Search'
                    value={searchItem}
                    onChange={handleChange} />
       <ul>
