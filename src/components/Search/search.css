@@ -1,13 +1,31 @@
+.searchBar {
+  margin: 2vw;
+  color: black;
+  width: 100%;
+  flex-direction: column;
+}
 
-input{
-  width: 30vw;
-  height: auto;
-  padding:20px;
-  border-radius: 14px;
-  color: var(--clr-highlightText);
-  background-color: var(--clr-lightBackground);
-  border: none;
+.searchBar ul{
+  display: flex;
+}
 
+.searchBar li {
+  display: flex;
+  padding-left: 2rem;
+  color: black;
+  /* display: none; */
+  margin-top: 2rem;
+}
+
+.searchBar input {
+  margin-left: 2rem;
+  width:45vw;
+  height: 2vh;
+}
+
+.searchBar label {
+  font-weight: 700;
+  font-size: medium;
 }
 ul{
   display: none;

@@ -1,24 +1,19 @@
 import React, { useState } from "react";
-//importar modal y formulario
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
-import { AppBar, Toolbar, } from "@material-ui/core"
-// import RegisterForm from "../../components/Forms/RegisterForm";
-// import RegisterModal from "../../components/Modals/RegisterModal";
+import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
 import Container from "../../components/Container/Container";
-
-
 
 const navLinks = [
   { title: `Sign in`, path: `/` },
   { title: `Create Account`, path: `/` }
 ]
 
-const Home = () => {
+export default function LandingPage() {
   //Gestión modal registro
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
@@ -40,33 +35,36 @@ const Home = () => {
   return (
     <div className='App'>
       <div>
-        <AppBar position="static">
-          <Toolbar>
+        <Toolbar>
+          <img src="soundcloud.png" className='soundcloud' />
+          <Grid container justify="flex-end">
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenLogin} className="button-signin">
+              Sign In
+            </Button>
 
-          </Toolbar>
-        </AppBar>
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
+              Crear cuenta
+            </Button>
+          </Grid>
+        </Toolbar>
         <Carousel />
-        {/* <RegisterModal /> */}
-        <button type="button" onClick={handleOpenRegister} className="button-register">Crear cuenta</button>
-        {openModalRegister &&
-          <Modal handleClose={handleCloseRegister}>
-            <Register />
-          </Modal>
-        }
-        <button type="button" onClick={handleOpenLogin} className="button-login">Accede</button>
-        {openModalLogin &&
-          <Modal handleClose={handleCloseLogin}>
-            <Login />
-          </Modal>
-        }
-
       </div>
       <div className='searchBar'>
         <Search />
       </div>
-        <Container/>
+      <Container />
+      {openModalRegister &&
+        <Modal handleClose={handleCloseRegister}>
+          <Register />
+        </Modal>
+      }
+      {openModalLogin &&
+        <Modal handleClose={handleCloseLogin}>
+          <Login />
+        </Modal>
+      }
     </div>
   );
-};
+}
 
-export default Home;
+

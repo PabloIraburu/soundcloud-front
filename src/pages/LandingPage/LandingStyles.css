@@ -5,8 +5,9 @@
   text-decoration: none;
 }
 
-.App{
-  background-color: #fdedd9;
+.App {
+  background-color: #fff5eb;
+  margin: 0 15vw ;
 }
 
 .searchBar {
@@ -29,12 +30,23 @@
   color: black;
 }
 
-.newUser {
-  background-color: orangered;
+.button-signin {
+  display: flex;
+  position: relative;
+  justify-content: end;
+  flex-direction: row;
+  justify-content: flex-end;
+  float: right;
 }
 
-.button-register{
-  position: fixed;
-  top: 0px;
-  horiz-align: right;
+.button-register {
+  display: flex;
+  position: relative;
+  justify-content: end;
+  flex-direction: row;
+  justify-content: flex-end;
+  float: right;
 }
+
+
+

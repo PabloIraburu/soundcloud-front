@@ -1,0 +1,48 @@
+/* Color oscuro de fondo: #273341 */
+/* 
+Colores logo:
+rosa: #e9468a
+naranja: #f9b84c
+*/
+
+/* 
+Degradado
+background: rgb(233,70,138);
+background: linear-gradient(44deg, rgba(233,70,138,1) 0%, rgba(249,184,76,1) 100%);
+ */
+
+.Profile-wrap {
+  /* display: flex;
+  font-display: row; */
+  background-color: #141424;
+  width: 100% vw;
+  height: 100% vh;
+  color: white;
+}
+
+.Lateral-menu {
+  width: 25%;
+  height: 100%;
+  background-color: #212231;
+  padding: 60px;
+  position: fixed;
+  display: flex;
+  font-display: column;
+}
+
+.Profile-content {
+  background-color: #141424;
+  background-size: auto;
+  width: cover;
+  height: cover;
+  color: white;
+  padding-left: 30%;
+  padding-top: 60px;
+  padding-right: 60px;
+  padding-bottom: 470px;
+}
+
+.Profile-content p {
+  line-height: 3.5rem;
+  padding: 50px auto 150px;
+}

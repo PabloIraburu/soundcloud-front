@@ -14,22 +14,61 @@
 
 .Login button {
   width: 50%;
-  margin-top: 20px;
   height: 40px;
   font-family: "Raleway", sans-serif;
   border: none;
-  background-color: orange;
-  border-radius: 4px;
+  background: linear-gradient(
+    44deg,
+    rgba(233, 70, 138, 1) 0%,
+    rgba(249, 184, 76, 1) 100%
+  );
+  border-radius: 40px;
   color: white;
 }
 
 .Login button:hover {
   width: 50%;
-  margin-top: 20px;
   height: 40px;
   font-family: "Raleway", sans-serif;
-  border: 2px solid orange;
-  border-radius: 4px;
+  border: 2px solid transparent; 
+  border-image: linear-gradient(44deg, rgba(233,70,138,1) 0%, rgba(249,184,76,1) 100%) 1; 
+  border-radius: 40px;
+  -moz-border-radius: 40px;
+  -webkit-border-radius: 40px;
   color: orange;
-  background-color: white;
+  background: white;
+}
+
+.GoToRegister-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 0.7rem;
+  width: 100%;
+}
+
+.GoToRegister-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+  width: 50%;
+}
+
+.GoToRegister-text p {
+  margin: 0;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.GoToRegister-link {
+  font-size: 0.7rem;
+  color: #f9b84c;
+  text-decoration: underline;
+}
+
+.GoToRegister-link:hover {
+  font-size: 0.7rem;
+  color: #e9468a;
+  text-decoration: underline;
 }
