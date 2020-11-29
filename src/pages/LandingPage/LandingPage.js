@@ -19,7 +19,7 @@ export default function LandingPage() {
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
   const handleCloseRegister = (e) => {
     const { className: el } = e.target;
-    if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    if (el !== 'backdrop' && el !== 'fas fa-times' && el !== 'GoToLogin-link') return;
     setOpenModalRegister(!openModalRegister);
   }
 
@@ -28,7 +28,7 @@ export default function LandingPage() {
   const handleOpenLogin = () => setOpenModalLogin(!openModalLogin);
   const handleCloseLogin = (e) => {
     const { className: el } = e.target;
-    if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    if (el !== 'backdrop' && el !== 'fas fa-times' && el !== 'GoToRegister-link') return;
     setOpenModalLogin(!openModalLogin);
   }
 
@@ -53,14 +53,15 @@ export default function LandingPage() {
         <Search />
       </div>
       <Container />
+
       {openModalRegister &&
         <Modal handleClose={handleCloseRegister}>
-          <Register />
+          <Register handleCloseRegister={handleCloseRegister} openLogin={handleOpenLogin} />
         </Modal>
       }
       {openModalLogin &&
         <Modal handleClose={handleCloseLogin}>
-          <Login />
+          <Login handleCloseLogin={handleCloseLogin} openRegister={handleOpenRegister} />
         </Modal>
       }
     </div>

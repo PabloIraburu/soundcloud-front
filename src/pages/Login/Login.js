@@ -8,7 +8,7 @@ import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
 import "./Login.css";
 
-export const Login = () => {
+export const Login = ({ handleCloseLogin, openRegister }) => {
 
     const [loginUser, setLoginUser] = useState({});
     const history = useHistory();
@@ -36,13 +36,12 @@ export const Login = () => {
     };
 
     //Gestión modal registro
-    const [openModalRegister, setOpenModalRegister] = useState(false);
-    const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
-    const handleCloseRegister = (e) => {
-        const { className: el } = e.target;
-        if (el !== 'backdrop' && el !== 'fas fa-times') return;
-        setOpenModalRegister(!openModalRegister);
+    const handleOpenRegister = (e) => {
+        openRegister()
+        handleCloseLogin(e);
     }
+
+
 
     return (
         <div className="Login">
@@ -53,15 +52,11 @@ export const Login = () => {
             <div className="GoToRegister-wrap">
                 <div className="GoToRegister-text">
                     <p>¿Aún no tienes cuenta?</p>
-                    <p onClick={handleOpenRegister} className="GoToRegister-link">Regíster</p>
+                    <p onClick={handleOpenRegister} className="GoToRegister-link">Register</p>
                 </div>
                 <button onClick={handleSubmit}>Acceder</button>
             </div>
-            {openModalRegister &&
-                <Modal handleClose={handleCloseRegister}>
-                    <Register />
-                </Modal>
-            }
+
         </div>
     );
 }
