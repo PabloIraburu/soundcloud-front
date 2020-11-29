@@ -2,7 +2,7 @@ import React from "react"
 import MenuIcon from '@material-ui/icons/Menu';
 import './NewLanding.css'
 import Search from "../../components/Search/Search";
-
+import UserInfo from "../../components/UserInfo/UserInfo";
 
 export default function Landing () {
 
@@ -16,7 +16,7 @@ export default function Landing () {
                     </div>
                 </div>
                 <div className="profile">
-                    <userProfile/>
+                    <UserInfo/>
                 </div>
                 <div className="categories">
                     <div className="songs"><i className="fas fa-meteor"></i><h2>Songs</h2></div>
@@ -47,7 +47,6 @@ export default function Landing () {
                             <div className="text">
                                 <h2>SLOWING DANCING IN THE DARK</h2>
                             </div>
-                               
                             <div className="images">
                                 <img src="https://www.ismorbo.com/wp-content/uploads/2018/10/40550719_1376357265830478_8906633344016595746_n.jpg" alt=""/>
                                 <img src="https://lab.fm/wp-content/uploads/2020/03/030420-Joji-Run-Tonight-Show-Jimmy-Fallon-YouTube.jpg" alt=""/>
