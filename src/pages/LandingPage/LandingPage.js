@@ -2,24 +2,18 @@ import React, { useState } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
-import { Toolbar, Button, Grid } from "@material-ui/core"
-// import RegisterForm from "../../components/Forms/RegisterForm";
-// import RegisterModal from "../../components/Modals/RegisterModal";
+import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
 import { Modal } from "../../components/Modal/Modal";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
 import Container from "../../components/Container/Container";
-
-
-
-
 
 const navLinks = [
   { title: `Sign in`, path: `/` },
   { title: `Create Account`, path: `/` }
 ]
 
-export default function LandingPage () {
+export default function LandingPage() {
   //Gestión modal registro
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const handleOpenRegister = () => setOpenModalRegister(!openModalRegister);
@@ -41,40 +35,34 @@ export default function LandingPage () {
   return (
     <div className='App'>
       <div>
-          <Toolbar>
+        <Toolbar>
           <img src="soundcloud.png" className='soundcloud' />
           <Grid container justify="flex-end">
-            <Button variant="contained" color="primary" href="#contained-buttons"  onClick={handleOpenLogin} className="button-signin">
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenLogin} className="button-signin">
               Sign In
             </Button>
-              {openModalLogin &&
-              <Modal handleClose={handleCloseLogin}>
-                  <Login />
-              </Modal>
-              }
+
             <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
               Crear cuenta
             </Button>
           </Grid>
-          </Toolbar>
+        </Toolbar>
         <Carousel />
-        {/* <RegisterModal /> */}
-        {openModalRegister &&
-          <Modal handleClose={handleCloseRegister}>
-            <Register />
-          </Modal>
-        }
-        {openModalLogin &&
-          <Modal handleClose={handleCloseLogin}>
-            <Login />
-          </Modal>
-        }
-
       </div>
       <div className='searchBar'>
         <Search />
       </div>
-        <Container/>
+      <Container />
+      {openModalRegister &&
+        <Modal handleClose={handleCloseRegister}>
+          <Register />
+        </Modal>
+      }
+      {openModalLogin &&
+        <Modal handleClose={handleCloseLogin}>
+          <Login />
+        </Modal>
+      }
     </div>
   );
 }
