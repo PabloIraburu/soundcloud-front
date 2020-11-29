@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
 import "./search.css"
 
-const mockSearch = [];
+const mockSearch = [
+  "Robert Glasper",
+  "Chris Dave",
+  "Hiatus kaiyote",
+  "Bantamweight",
+  "Funk yo mamma",
+];
 
 function Search() {
   const [searchItem, setSearchItem] = useState("");
