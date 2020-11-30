@@ -1,14 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
+.App {
+  background-color: #131325;
+  width: 100wh;
+  height: 100vh;
 }
 
-.App {
-  background-color: #fff5eb;
-  margin: 0 15vw ;
-}
 
 .searchBar {
   display: flex;
@@ -47,5 +42,10 @@
   flex-direction: row;
   justify-content: flex-end;
   float: right;
+}
+.MuiToolbar-root {
+  display: flex;
+  position: absolute;
+  align-items: center;
 }
 

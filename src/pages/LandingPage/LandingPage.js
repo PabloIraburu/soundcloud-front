@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Carousel from "../../components/Carousel/Carousel";
 import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
 import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
@@ -45,10 +44,10 @@ export default function LandingPage() {
 
   return (
     <div className='App'>
-      <div>
+      <div className="container">
         <Toolbar>
           <img src="soundcloud.png" className='soundcloud' />
-          <Grid container justify="flex-end">
+          {/* <Grid container justify="flex-end"> */}
             <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenLogin} className="button-signin">
               Sign In
             </Button>
@@ -61,34 +60,8 @@ export default function LandingPage() {
             <MyButton onClick={handleOpenUpload} variant="pink-or" size="100px">
               Pink Or
             </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="pink-sky" size="100px">
-            Pink Sky
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="blue-pink" size="20%">
-            Pink Blue
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="blue-sky" size="100px">
-            Blue Sky
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="darkBlue" size="100px">
-            Blue
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="sky" size="100px">
-            Sky
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="or" size="100px">
-            Or
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="pink" size="100px">
-            Pink
-            </MyButton>
-            <MyButton onClick={handleOpenUpload} variant="white" size="100px">
-            White
-            </MyButton>
 
-          </Grid>
         </Toolbar>
-        <Carousel/>
       </div>
       <div className='searchBar'>
         <h2>Search Artist</h2>
