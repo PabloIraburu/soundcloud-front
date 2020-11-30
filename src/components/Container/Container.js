@@ -1,7 +1,7 @@
 import CoverInfo from "../Cover/CoverInfo";
 import React from "react";
 import "./container.css"
-import {Button} from "@material-ui/core";
+import {MyButton} from "../MyButton/MyButton";
 
 
 export default function Container () {
@@ -25,9 +25,9 @@ export default function Container () {
                 <CoverInfo/>
             </div>
             <div className="buttonHolder">
-                <Button variant="contained" color="primary" href="#contained-buttons"  className="button-register">
+                <MyButton  variant="blue-sky" size="100px">
                     Explore Trending
-                </Button>
+                </MyButton>
             </div>
         </div>
 

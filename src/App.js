@@ -16,8 +16,6 @@ function App() {
   return (
     <Router>
       <div>
-        {isLogged && <Navbar />}
-
         <Switch>
           <Route exact path={HOME} component={LandingPage} />
           <Route exact path={DISCOVER} component={Discover} />

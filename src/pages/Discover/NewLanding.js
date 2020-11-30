@@ -1,11 +1,21 @@
-import React from "react"
+import React, {useState} from "react"
 import MenuIcon from '@material-ui/icons/Menu';
 import './NewLanding.css'
 import Search from "../../components/Search/Search";
 import UserInfo from "../../components/UserInfo/UserInfo";
+import {Modal} from "../../components/Modal/Modal";
+import {Register} from "../Register/Register";
 
 export default function Discover () {
-
+const [modalOpen,setModalOpen]= useState(false)
+const handleOpenModal= () =>{
+    setModalOpen(true)
+    }
+const handleCloseFav = (e) => {
+    const { className: el } = e.target;
+    if (el !== 'backdrop' && el !== 'fas fa-times' ) return;
+    setModalOpen(false);
+}
     return(
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
@@ -19,10 +29,10 @@ export default function Discover () {
                     <UserInfo/>
                 </div>
                 <div className="categories">
-                    <div className="songs"><i className="fas fa-meteor"></i><h2>Songs</h2></div>
-                    <div className="artists"><i className="fas fa-jedi"></i><h2>Artists</h2></div>
-                    <div className="styles"><i className="fas fa-user-astronaut"></i><h2>Styles</h2></div>
-                    <div className="favourites"><i className="fab fa-galactic-republic"></i><h2>Favourites</h2></div>
+                    <a className="songs" href='library'><i className="fas fa-meteor"></i><h2>Songs</h2></a>
+                    <a className="artists" href='artists'><i className="fas fa-jedi"></i><h2>Artists</h2></a>
+                    <a className="styles" href='styles'><i className="fas fa-user-astronaut"></i><h2>Styles</h2></a>
+                    <a className="favourites" onClick={handleOpenModal}><i className="fab fa-galactic-republic"></i><h2>Favourites</h2></a>
                 </div>
                 <div className="addTrack">
                     <a className='button' href="">Add Track</a>
@@ -65,6 +75,11 @@ export default function Discover () {
                     <div className="playlist"></div>
                 </div>
             </div>
+            {modalOpen &&
+            <Modal handleClose={handleCloseFav}>
+                <p>Hello</p>
+            </Modal>
+            }
         </div>
     )
 

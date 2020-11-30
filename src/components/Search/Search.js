@@ -31,7 +31,7 @@ function Search() {
                    value={searchItem}
                    onChange={handleChange} />
       <ul>
-        {searchResults.map((res, index) => (
+        {searchItem !== "" && searchResults.map((res, index) => (
           <li key={index}>{res}</li>
         ))}
       </ul>
