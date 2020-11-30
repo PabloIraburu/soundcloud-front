@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-// import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
-import { Modal } from "../../components/Modal/Modal";
-import { Login } from "../../pages/Login/Login";
 import { DISCOVER } from '../../routes/routes';
 import "./Register.css";
+import { MyButton } from '../../components/MyButton/MyButton';
 
 export const Register = ({ handleCloseRegister, openLogin }) => {
 
@@ -23,8 +21,9 @@ export const Register = ({ handleCloseRegister, openLogin }) => {
         }));
     }
 
+    //Envía datos del formulario al db
     const handleSubmit = () => {
-        //Petición al servidor de tipo POST - fetch localhost:3000/register
+        //Petición al servidor de tipo POST - fetch localhost:3300/register
         ServerRequest("register", "POST", newUser)
             .then((response) => {
                 setJWT(response.token);
@@ -36,13 +35,11 @@ export const Register = ({ handleCloseRegister, openLogin }) => {
             .catch((response) => console.log(response.error))
     };
 
-
+    //Gestiona funcionalidad modal
     const handleOpenLogin = (e) => {
-        // setOpenModalLogin(!openModalLogin);
         openLogin()
         handleCloseRegister(e);
     }
-
 
     return (
         <div className="Register">
@@ -56,9 +53,8 @@ export const Register = ({ handleCloseRegister, openLogin }) => {
                     <p>¿Ya tienes cuenta?</p>
                     <p onClick={handleOpenLogin} className="GoToLogin-link">Acceder</p>
                 </div>
-                <button onClick={handleSubmit}>Registrarse</button>
+                <MyButton onClick={handleSubmit} variant="pink-or" size="50%">Register</MyButton>
             </div>
-
         </div>
     );
 }
