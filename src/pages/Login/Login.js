@@ -3,9 +3,8 @@ import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
+import { MyButton } from '../../components/MyButton/MyButton';
 import { PROFILE } from '../../routes/routes';
-import { Modal } from "../../components/Modal/Modal";
-import { Register } from "../../pages/Register/Register";
 import "./Login.css";
 
 export const Login = ({ handleCloseLogin, openRegister }) => {
@@ -23,7 +22,7 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
     }
 
     const handleSubmit = () => {
-        //Petición al servidor de tipo POST - fetch localhost:3000/register
+        //Petición al servidor de tipo POST - fetch localhost:3300/register
         ServerRequest("login", "POST", loginUser)
             .then((response) => {
                 setJWT(response.token);
@@ -52,7 +51,7 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
                     <p>¿Aún no tienes cuenta?</p>
                     <p onClick={handleOpenRegister} className="GoToRegister-link">Register</p>
                 </div>
-                <button onClick={handleSubmit}>Acceder</button>
+                <MyButton onClick={handleSubmit} variant="pink-or" size="50%">Access</MyButton>
             </div>
 
         </div>

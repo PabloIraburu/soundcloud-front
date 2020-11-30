@@ -12,34 +12,6 @@
   margin-bottom: 10px;
 }
 
-.Login button {
-  width: 50%;
-  height: 40px;
-  font-family: "Raleway", sans-serif;
-  border: none;
-  background: linear-gradient(
-    44deg,
-    rgba(233, 70, 138, 1) 0%,
-    rgba(249, 184, 76, 1) 100%
-  );
-  border-radius: 40px;
-  color: white;
-}
-
-.Login button:hover {
-  width: 50%;
-  height: 40px;
-  font-family: "Raleway", sans-serif;
-  border: 2px solid transparent; 
-  /* border-image: linear-gradient(44deg, rgba(233,70,138,1) 0%, rgba(249,184,76,1) 100%) 1;  */
-  border-image: var(--gradient);
-  border-radius: 40px;
-  -moz-border-radius: 40px;
-  -webkit-border-radius: 40px;
-  color: orange;
-  background: white;
-}
-
 .GoToRegister-wrap {
   display: flex;
   flex-direction: row;

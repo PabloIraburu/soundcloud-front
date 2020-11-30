@@ -3,6 +3,7 @@ import { getToken } from "../../utils/LocalStorage.utils";
 import { DecodeToken } from "../../utils/DecodeToken";
 import { ServerRequest } from '../../helpers/ServerRequest';
 import './Profile.css';
+import { MyButton } from '../../components/MyButton/MyButton';
 
 export const Profile = () => {
 
@@ -19,6 +20,10 @@ export const Profile = () => {
       })
       .catch(console.log);
   }, []);
+
+  const handleSubmit = () => {
+
+  }
 
   return (
     <div className="Profile-wrap">
@@ -37,7 +42,7 @@ export const Profile = () => {
           <p>E-mail</p>
           <p>{user.email}</p>
         </span>
-        <button>Edit profile</button>
+        <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Edit Profile</MyButton>
       </div>
     </div >
   )

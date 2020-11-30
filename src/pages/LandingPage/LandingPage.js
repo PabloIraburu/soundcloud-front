@@ -4,8 +4,10 @@ import Search from "../../components/Search/Search";
 import "./LandingStyles.css";
 import { AppBar, Toolbar, Button, Grid } from "@material-ui/core"
 import { Modal } from "../../components/Modal/Modal";
+import { MyButton} from "../../components/MyButton/MyButton";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
+import { Upload } from "../Upload/Upload";
 import Container from "../../components/Container/Container";
 
 const navLinks = [
@@ -32,6 +34,15 @@ export default function LandingPage() {
     setOpenModalLogin(!openModalLogin);
   }
 
+  //Gestión modal upload
+  const [openModalUpload, setOpenModalUpload] = useState(false);
+  const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+  const handleCloseUpload = (e) => {
+    const { className: el } = e.target;
+    if (el !== 'backdrop' && el !== 'fas fa-times' && el !== 'GoToRegister-link') return;
+    setOpenModalUpload(!openModalUpload);
+  }
+
   return (
     <div className='App'>
       <div>
@@ -42,8 +53,39 @@ export default function LandingPage() {
               Sign In
             </Button>
             <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenRegister} className="button-register">
-              Crear cuenta
+              Create Account
             </Button>
+            <Button variant="contained" color="primary" href="#contained-buttons" onClick={handleOpenUpload} className="button-upload">
+              Upload Song
+            </Button>
+            <MyButton onClick={handleOpenUpload} variant="pink-or" size="100px">
+              Pink Or
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="pink-sky" size="100px">
+            Pink Sky
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="blue-pink" size="20%">
+            Pink Blue
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="blue-sky" size="100px">
+            Blue Sky
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="darkBlue" size="100px">
+            Blue
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="sky" size="100px">
+            Sky
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="or" size="100px">
+            Or
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="pink" size="100px">
+            Pink
+            </MyButton>
+            <MyButton onClick={handleOpenUpload} variant="white" size="100px">
+            White
+            </MyButton>
+
           </Grid>
         </Toolbar>
         <Carousel/>
@@ -62,6 +104,11 @@ export default function LandingPage() {
       {openModalLogin &&
         <Modal handleClose={handleCloseLogin}>
           <Login handleCloseLogin={handleCloseLogin} openRegister={handleOpenRegister} />
+        </Modal>
+      }
+      {openModalUpload &&
+        <Modal handleClose={handleCloseUpload}>
+          <Upload />
         </Modal>
       }
     </div>
