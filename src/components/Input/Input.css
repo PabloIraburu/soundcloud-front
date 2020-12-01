@@ -19,10 +19,12 @@
   border: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
+  width: 100%;
 }
 
 .Input-wrap input::placeholder {
-  color: rgb(175, 175, 175);
+  color: var(--lightGrey);
+  width: 100%;
 }
 
 .Input-wrap input[type="file"]::-webkit-file-upload-button {
@@ -37,7 +39,7 @@
   border-radius: 3px;
   padding: 5px 8px;
   outline: none;
-  white-space: nowrap;
+  white-space: nowrsap;
   -webkit-user-select: none;
   cursor: pointer;
   text-shadow: 1px 1px #fff;

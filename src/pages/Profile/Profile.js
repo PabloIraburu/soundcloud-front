@@ -4,6 +4,8 @@ import { DecodeToken } from "../../utils/DecodeToken";
 import { ServerRequest } from '../../helpers/ServerRequest';
 import './Profile.css';
 import { MyButton } from '../../components/MyButton/MyButton';
+import { Upload } from '../../components/Upload/Upload';
+import { Modal } from '../../components/Modal/Modal';
 
 export const Profile = () => {
 
@@ -20,6 +22,15 @@ export const Profile = () => {
       })
       .catch(console.log);
   }, []);
+
+  //Gestión modal upload
+  const [openModalUpload, setOpenModalUpload] = useState(false);
+  const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+  const handleCloseUpload = (e) => {
+    const { className: el } = e.target;
+    if (el !== 'backdrop' && el !== 'fas fa-times' && el !== 'GoToRegister-link') return;
+    setOpenModalUpload(!openModalUpload);
+  }
 
   const handleSubmit = () => {
 
@@ -43,7 +54,15 @@ export const Profile = () => {
           <p>{user.email}</p>
         </span>
         <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Edit Profile</MyButton>
+
+        <MyButton onClick={handleOpenUpload} variant="blue-sky" size="30%">Upload Song</MyButton>
       </div>
+
+      {openModalUpload &&
+        <Modal handleClose={handleCloseUpload}>
+          <Upload />
+        </Modal>
+      }
     </div >
   )
 }
