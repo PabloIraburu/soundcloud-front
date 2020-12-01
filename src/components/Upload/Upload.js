@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 // import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
+import { ServerRequestSong } from '../../helpers/ServerRequestSong';
 import { Input } from '../Input/Input';
 import { MyButton } from '../MyButton/MyButton';
 import { Selector } from '../Selector/Selector';
@@ -20,16 +21,21 @@ export const Upload = () => {
     }
 
     const handleSubmit = () => {
-        //Petición al servidor de tipo POST - fetch localhost:3300/register
-        ServerRequest("track/song", "POST", song)
+        // Petición al servidor de tipo POST - fetch localhost:3300/register
+        ServerRequest("data/song", "POST", song)
             .then((response) => console.log(response))
-            .catch((response) => console.log(response.error))
+            .catch((response) => console.log(response.error));
+        
+        ServerRequestSong("track", "POST", {filename: song.title, file: song.audio})
+            .then((response) => console.log(response))
+            .catch((response) => console.log(response.error));
     };
 
     return (
         <div>
             <h1>Upload file</h1>
             <Input type="text" name="title" onChange={handleInput} placeholder={"Song title"} required />
+            <Input type="text" name="artist" onChange={handleInput} placeholder={"Artist name"} required />
             <Input type="text" name="image" onChange={handleInput} placeholder={"Url song image"} required />
             <Selector name="category" id="category" onChange={handleInput} required>
                 <option value="reggae">Reggae</option>
