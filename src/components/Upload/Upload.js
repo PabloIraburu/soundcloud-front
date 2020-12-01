@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
 // import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { Input } from '../../components/Input/Input';
-import { MyButton } from '../../components/MyButton/MyButton';
+import { Input } from '../Input/Input';
+import { MyButton } from '../MyButton/MyButton';
 
 export const Upload = () => {
     const [song, setSong] = useState({});
@@ -19,7 +19,7 @@ export const Upload = () => {
 
     const handleSubmit = () => {
         //Petición al servidor de tipo POST - fetch localhost:3300/register
-        ServerRequest("uploadSong", "POST", song)
+        ServerRequest("track/song", "POST", song)
             .then((response) => console.log(response))
             .catch((response) => console.log(response.error))
     };
