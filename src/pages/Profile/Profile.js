@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getToken } from "../../utils/LocalStorage.utils";
 import { DecodeToken } from "../../utils/DecodeToken";
 import { ServerRequest } from '../../helpers/ServerRequest';
@@ -39,11 +40,11 @@ export const Profile = () => {
   return (
     <div className="Profile-wrap">
       <div className="Lateral-menu">
-        <h3>My name</h3>
+        <h3>{user.name}</h3>
       </div>
 
       <div className="Profile-content">
-        <h3>My name</h3>
+        <h3>My account</h3>
         <span className="">
           <p>Name</p>
           <p>{user.name}</p>
@@ -53,8 +54,15 @@ export const Profile = () => {
           <p>E-mail</p>
           <p>{user.email}</p>
         </span>
-        <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Edit Profile</MyButton>
 
+        <Link
+          to={{
+            pathname: "/editprofile",
+            state: { user },
+          }}
+        >
+          <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Edit Profile</MyButton>
+        </Link>
         <MyButton onClick={handleOpenUpload} variant="blue-sky" size="30%">Upload Song</MyButton>
       </div>
 

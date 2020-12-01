@@ -20,6 +20,8 @@
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   width: 100%;
+  background: transparent;
+
 }
 
 .Input-wrap input::placeholder {
