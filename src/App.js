@@ -6,7 +6,7 @@ import { DISCOVER, PROFILE, HOME, LIBRARY, UPLOAD } from "./routes/routes";
 import { Profile } from "./pages/Profile/Profile";
 import  Discover from "./pages/Discover/NewLanding";
 import { Library } from "./pages/Library/Library"
-import { Upload } from "./pages/Upload/Upload";
+import { Upload } from "./components/Upload/Upload";
 import Navbar from './components/Navbar/Navbar';
 
 

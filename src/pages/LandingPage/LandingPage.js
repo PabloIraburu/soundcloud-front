@@ -6,7 +6,7 @@ import { Modal } from "../../components/Modal/Modal";
 import { MyButton} from "../../components/MyButton/MyButton";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
-import { Upload } from "../Upload/Upload";
+import { Upload } from "../../components/Upload/Upload";
 import Container from "../../components/Container/Container";
 
 const navLinks = [

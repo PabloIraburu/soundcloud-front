@@ -1,0 +1,25 @@
+.Selector-wrap {
+  display: inline-block;
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px 10px 10px 5px;
+  border-bottom: 1px solid rgb(223, 223, 223);
+  font-family: "Raleway", sans-serif;
+}
+
+.Selector-wrap:hover {
+  border-bottom: var(--or);
+  box-shadow: 0 4px 2px -2px var(--or);
+}
+
+.Selector-wrap select {
+  outline: none;
+  outline-width: 0;
+  box-shadow: none;
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  width: 100%;
+  color: rgb(175, 175, 175);
+  font-family: "Raleway", sans-serif;
+}
