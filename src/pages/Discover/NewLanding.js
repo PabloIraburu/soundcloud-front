@@ -22,7 +22,7 @@ const handleCloseFav = (e) => {
             <div className='leftBar'>
                 <div className="header">
                     <div className="logo">
-                        <p>Sound</p><p>Mist</p>
+                        <p>Sound</p><p className='logoClear'>Mist</p>
                     </div>
                 </div>
                 <div className="profile">
@@ -35,7 +35,7 @@ const handleCloseFav = (e) => {
                     <a className="favourites" onClick={handleOpenModal}><i className="fab fa-galactic-republic"></i><h2>Favourites</h2></a>
                 </div>
                 <div className="addTrack">
-                    <a className='button' href="">Add Track</a>
+                    <a className='button' href="" onClick={handleOpenModal}>Add Track</a>
                 </div>
             </div>
             <div className='rightBar'>
@@ -68,7 +68,6 @@ const handleCloseFav = (e) => {
                     <div className="recomended">
                         <div className="title"></div>
                         <div className="gallery">
-
                         </div>
                     </div>
                     <div className="player"></div>

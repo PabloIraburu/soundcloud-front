@@ -21,6 +21,7 @@
     width: 30vw;
     z-index: 1;
 }
+
 .rightBar{
     width:100%;
     height: 100%;
@@ -47,6 +48,7 @@
     border-radius: 14px;
 }
 
+/*noinspection CssInvalidPropertyValue*/
 .mainFrame .slider .display{
     background-image: url("https://pbs.twimg.com/media/EQE6zpJU0AENl8E.jpg:large");
     background-size: auto;
@@ -54,6 +56,7 @@
     background-position-y: -150px;
     width: 100%;
     height: 100%;
+    max-height: -webkit-fill-available;
     color: white;
     padding: 1.5rem;
     display: inline-flex;
@@ -92,6 +95,10 @@ span{
     display: flex;
 }
 
+.logo .logoClear{
+    color: var(--clr-lightText)
+}
+
 .header{
     z-index: 2;
     margin-left: 2.5rem;
@@ -110,6 +117,17 @@ span{
     margin-left: 2.5rem;
     display: inline-block;
     color: var(--clr-highlightText);
+}
+
+
+.categories a{
+    text-decoration: none;
+    font-weight: bold;
+}
+.categories a:visited{
+    text-decoration: none;
+    color: var(--clr-lightText);
+    font-weight: lighter;
 }
 
 i{
@@ -161,7 +179,7 @@ h2{
     text-decoration: none;
     display: inline-block;
     margin-left: 2.5rem;
-    margin-top: 6vh;
+    /*margin-top: 6vh;*/
     border-radius: 18px;
 }
 
