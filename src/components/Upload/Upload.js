@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useRef } from 'react';
 // import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { ServerRequestSong } from '../../helpers/ServerRequestSong';
@@ -9,6 +9,7 @@ import "./Upload.css";
 
 export const Upload = () => {
     const [song, setSong] = useState({});
+    const [file, setFile] = useState({});
     // const history = useHistory();
 
     //Introduce los datos de los inputs en el objeto newUser
@@ -20,14 +21,22 @@ export const Upload = () => {
         }));
     }
 
-    const handleSubmit = () => {
+    const fileInput = useRef(null)
+    const handleFile = () => {
+        setFile(fileInput.current.files)
+        console.log(fileInput);
+        // uploadFile.current.file
+    }
+
+    const handleSubmit = (files) => {
         // Petición al servidor de tipo POST - fetch localhost:3300/register
         ServerRequest("data/song", "POST", song)
-            .then((response) => console.log(response))
-            .catch((response) => console.log(response.error));
-        
-        ServerRequestSong("track", "POST", {filename: song.title, file: song.audio})
-            .then((response) => console.log(response))
+            .then((response) => {
+                debugger;
+                ServerRequestSong("track", "POST", { filename: song.title, file: files[0], song_id: response._id })
+                    .then((response) => console.log(response))
+                    .catch((response) => console.log(response.error));
+            })
             .catch((response) => console.log(response.error));
     };
 
@@ -69,7 +78,7 @@ export const Upload = () => {
                 <option value="new-age">New Age</option>
                 <option value="bossa-nova">Bossa Nova</option>
             </Selector>
-            <Input type="file" name="audio" onChange={handleInput} className="custom-file-input"/>
+            <Input type="file" name="audio" onChange={handleFile} className="custom-file-input" ref={fileInput} />
             <MyButton onClick={handleSubmit} variant="pink-or" size="50%" className="button-custom">Upload file</MyButton>
         </div>
     )

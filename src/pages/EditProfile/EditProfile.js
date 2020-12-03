@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './EditProfile.css';
+import { useHistory } from "react-router-dom";
 import { setJWT } from "../../utils/LocalStorage.utils";
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
-import { HOME } from '../../routes/routes';
+import { HOME, PROFILE } from '../../routes/routes';
 
 export const EditProfile = (props) => {
+
+  const history = useHistory();
 
   const [user, setUser] = useState({});
   const [editedUser, setEditedUser] = useState({});
@@ -51,13 +54,19 @@ export const EditProfile = (props) => {
   // Cambiar datos usuario
   const handleSubmit = (e) => {
     ServerRequest(`data/user/${user._id}`, "PUT", editedUser)
-      .then((response) => setUser(response))
+      .then((response) => {
+        setUser(response);
+        //Manda al usuario a la home tras el registro completado
+        setTimeout(() => {
+          history.push(PROFILE);
+        }, 2000);
+      })
       .catch((response) => console.log);
   };
 
   // Cambiar contraseña
   const handleSubmitPassword = (e) => {
-    ServerRequest(`editprofile/${user._id}`, "PATCH", { password: newPass })
+    ServerRequest(`data/user/${user._id}`, "PATCH", { password: newPass })
       .then((response) => {
         setJWT(response.token)
         setOpenModalPass(!openModalPass)
