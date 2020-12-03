@@ -1,0 +1,103 @@
+.leftBar{
+    background-color: var(--clr-lightBackground);
+    height: 100vh;
+    width: 30vw;
+    z-index: 1;
+}
+
+
+.logo{
+    z-index: 2;
+    color: var(--clr-highlightText);
+    display: flex;
+}
+
+.logo .logoClear{
+    color: var(--clr-lightText)
+}
+
+.header{
+    z-index: 2;
+    margin-left: 2.5rem;
+    padding-top: 3rem;
+    height: min-content;
+}
+.header h2{
+    float: left;
+    color: white;
+}
+
+
+.songs{
+    display: flex;
+    background-color: var(--clr-darkBackground);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 3vh;
+    width: 18vw;
+}
+.artists{
+    display: flex;
+    background-color: var(--clr-darkBackground);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 3vh;
+    width: 18vw;
+}
+.styles{
+    display: flex;
+    background-color: var(--clr-darkBackground);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 3vh;
+    width: 18vw;
+}
+.favourites{
+    display: flex;
+    background-color: var(--clr-darkBackground);
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 3vh;
+    width: 18vw;
+}
+
+.button:link, .button:visited {
+    background-color: var(--clr-highlightText);
+    color: var(--clr-lightText);
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 2.5rem;
+    /*margin-top: 6vh;*/
+    border-radius: 18px;
+}
+
+.button:hover, .button:active {
+    background-color: var(--clr-inactiveField);
+}
+
+
+.headRight{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.categories{
+    padding-top: 3rem;
+    margin-left: 2.5rem;
+    display: inline-block;
+    color: var(--clr-highlightText);
+}
+
+
+.categories a{
+    text-decoration: none;
+    font-weight: bold;
+}
+.categories a:visited{
+    text-decoration: none;
+    color: var(--clr-lightText);
+    font-weight: lighter;
+}

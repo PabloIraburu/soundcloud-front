@@ -13,23 +13,13 @@
     height: 100vh;
     width: auto;
     display: flex;
-    overflow: auto;
 }
 
-.leftBar{
-    background-color: var(--clr-lightBackground);
-    height: fit-content;
-    width: 30vw;
-    z-index: 1;
-}
 
-.profile{
-    margin-left: 2.5rem;
-}
 
 .rightBar{
     width:100%;
-    height: fit-content;
+    height: 100%;
 }
 .notif{
     margin-right: 25px;
@@ -92,47 +82,6 @@ span{
     display: inline-flex;
     margin-right: 10px;
     color: var(--clr-lightText);
-
-}
-.brand{
-    z-index: 2;
-    color: var(--clr-highlightText);
-    display: flex;
-}
-
-.brand .logoClear{
-    color: var(--clr-lightText)
-}
-
-.header{
-    z-index: 2;
-    margin-left: 2.5rem;
-    padding-top: 3rem;
-    height: min-content;
-}
-.header h2{
-    float: left;
-    color: white;
-}
-
-
-
-.categories{
-    padding-top: 3rem;
-    margin-left: 2.5rem;
-    display: inline-block;
-    color: var(--clr-highlightText);
-}
-
-
-.categories a{
-    text-decoration: none;
-    font-weight: bold;
-}
-.categories a:visited{
-    text-decoration: none;
-    color: var(--clr-lightText);
-    font-weight: lighter;
 }
 
 i{
@@ -143,81 +92,24 @@ i{
 h2{
     padding-left: 14px;
 }
-.songs{
-    display: flex;
-    background-color: var(--clr-darkBackground);
-    padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 3vh;
-    width: 18vw;
-}
-.artists{
-    display: flex;
-    background-color: var(--clr-darkBackground);
-    padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 3vh;
-    width: 18vw;
-}
-.styles{
-    display: flex;
-    background-color: var(--clr-darkBackground);
-    padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 3vh;
-    width: 18vw;
-}
-.favourites{
-    display: flex;
-    background-color: var(--clr-darkBackground);
-    padding: 20px;
-    border-radius: 18px;
-    margin-bottom: 3vh;
-    width: 18vw;
-}
-
-.button:link, .button:visited {
-    background-color: var(--clr-highlightText);
-    color: var(--clr-lightText);
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin-left: 2.5rem;
-    /*margin-top: 6vh;*/
-    border-radius: 18px;
-}
-
-.button:hover, .button:active {
-    background-color: var(--clr-inactiveField);
-}
-
-
-.headRight{
-    width: 100%;
-    display: inline-flex;
-    justify-content: space-between;
-}
-
-
 /*Searchbar local styling*/
 
-.searchBar{
+.search{
     margin-left: 2.5rem;
     margin-top: 2rem;
 }
-
 .search input {
-    width: 100%;
+    width: 30vw;
     height: auto;
     padding: 20px;
     border-radius: 14px;
     color: var(--clr-highlightText);
     background-color: var(--clr-lightBackground);
     border: none;
-
 }
-
+.search MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
+    display: none;
+}
 
 
 .search ul{
