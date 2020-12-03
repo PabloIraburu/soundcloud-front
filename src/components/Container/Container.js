@@ -25,7 +25,7 @@ export default function Container () {
                 <CoverInfo/>
             </div>
             <div className="buttonHolder">
-                <MyButton  variant="blue-sky" size="100px">
+                <MyButton  variant="blue-sky" size="200px">
                     Explore Trending
                 </MyButton>
             </div>

@@ -20,7 +20,7 @@ export const CoverMd = ({ title, categories, author, img, description }) => {
       <div className={styles["CoverMd-text"]}>
         <Link className={styles["CoverMd-title"]} onClick={handleClick}>{title}</Link>
         <p className={styles["CoverMd-author"]}>{author}</p>
-        <p className={styles["CoverMd-duration"]}>{categories}</p>
+        <p className={styles["CoverMd-category"]}>{categories}</p>
         <p className={styles["CoverMd-description"]}>{description}</p>
       </div>
     </div >

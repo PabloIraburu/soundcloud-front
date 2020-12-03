@@ -47,12 +47,3 @@
   position: absolute;
   align-items: center;
 }
-
-.CoversMd-wrap {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 80px;
-  position: relative;
-}
