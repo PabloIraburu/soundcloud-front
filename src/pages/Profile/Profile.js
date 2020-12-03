@@ -8,6 +8,7 @@ import { MyButton } from '../../components/MyButton/MyButton';
 import { Upload } from '../../components/Upload/Upload';
 import { Modal } from '../../components/Modal/Modal';
 import { CoverMd } from '../../components/CoverMd/CoverMd';
+import { CoverSm } from '../../components/CoverSm/CoverSm';
 
 export const Profile = () => {
 
@@ -122,6 +123,18 @@ export const Profile = () => {
       {ListaSongsFake.map(song => 
         (
           <CoverMd
+          title={song.title}
+          categories={song.categories}
+          author={song.author}
+          img={song.img}
+        />
+      ))}
+    </div>
+
+    <div className="CoversMd-wrap">
+      {ListaSongsFake.map(song => 
+        (
+          <CoverSm
           title={song.title}
           categories={song.categories}
           author={song.author}
