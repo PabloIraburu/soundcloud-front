@@ -50,3 +50,12 @@
   border-style: inset;
   border-width: 1px;
 }
+
+.CoversMd-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  position: relative;
+}
