@@ -18,6 +18,10 @@
   background: transparent;
 }
 
+.pink-or:active {
+  border-radius: 40px;
+}
+
 .pink-sky {
   width: 50%;
   height: 40px;
