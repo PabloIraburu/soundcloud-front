@@ -27,9 +27,9 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
             .then((response) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
-                setTimeout(() => {
-                    history.push(PROFILE);
-                }, 2000);
+                // setTimeout(() => {
+                // }, 2000);
+                history.push(PROFILE);
             })
             .catch((response) => console.log(response.error))
     };

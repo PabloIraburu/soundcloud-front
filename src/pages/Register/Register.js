@@ -28,9 +28,10 @@ export const Register = ({ handleCloseRegister, openLogin }) => {
             .then((response) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
-                setTimeout(() => {
-                    history.push(DISCOVER);
-                }, 2000);
+                // setTimeout(() => {
+                //     history.push(DISCOVER);
+                // }, 2000);
+                history.push(DISCOVER);
             })
             .catch((response) => console.log(response.error))
     };
