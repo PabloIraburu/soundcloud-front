@@ -56,7 +56,7 @@ export const Landing = () => {
         <div className={styles["Landing-buttons-section"]}>
           <div className={styles["Landing-buttons"]}>
             <MyButton onClick={handleOpenLogin} variant="white" size="100px">
-              Sin In
+              Sign In
             </MyButton>
           </div>
 

@@ -8,6 +8,7 @@ import {
   HOME,
   LIBRARY,
   UPLOAD,
+  MYSONGS,
 } from "./routes/routes";
 import { Landing } from "./pages/LandingPage/Landing";
 import { Profile } from "./pages/Profile/Profile";
@@ -16,6 +17,7 @@ import Discover from "./pages/Discover/NewLanding";
 import { Library } from "./pages/Library/Library";
 import { Upload } from "./components/Upload/Upload";
 import Navbar from "./components/Navbar/Navbar";
+import {MySongs} from "./pages/MySongs/MySongs";
 
 function App() {
   const [isLogged, setIsLogged] = useState(true);
@@ -30,6 +32,7 @@ function App() {
           <Route exact path={EDITPROFILE} component={EditProfile} />
           <Route exact path={LIBRARY} component={Library} />
           <Route exact path={UPLOAD} component={Upload} />
+          <Route exact path={MYSONGS} component={MySongs} />
         </Switch>
       </div>
     </Router>
