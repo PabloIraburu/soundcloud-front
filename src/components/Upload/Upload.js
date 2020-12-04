@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { ServerRequestSong } from '../../helpers/ServerRequestSong';
-import { Input } from '../Input/Input';
-import { MyButton } from '../MyButton/MyButton';
-import { Selector } from '../Selector/Selector';
+import { ServerRequestSong } from "../../helpers/ServerRequestSong";
+import { Input } from "../Input/Input";
+import { MyButton } from "../MyButton/MyButton";
+import { Selector } from "../Selector/Selector";
 import "./Upload.css";
 
 export const Upload = () => {
-    const [song, setSong] = useState({});
-    const [file, setFile] = useState({});
-    // const history = useHistory();
+  const [song, setSong] = useState({});
+  const [file, setFile] = useState({});
+  // const history = useHistory();
 
-    //Introduce los datos de los inputs en el objeto newUser
-    const handleInput = (event) => {
-        const { value, name } = event.target;
-        setSong((prevValue) => ({
-            ...prevValue,
-            [name]: value,
-        }));
-    }
+  //Introduce los datos de los inputs en el objeto newUser
+  const handleInput = (event) => {
+    const { value, name } = event.target;
+    setSong((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }));
+  };
 
-    const handleFile = (event) => {
+  const handleFile = (event) => {
         let inputFile = event.target.files[0];
         // console.log(inputFile);
         const data = new FormData();
@@ -54,6 +54,7 @@ export const Upload = () => {
             <MyButton onClick={handleSubmit} variant="pink-or" size="50%" className="button-custom">Upload file</MyButton>
         </div>
     )
+
 };
 
 // Categorías musicales
