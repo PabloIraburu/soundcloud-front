@@ -1,0 +1,27 @@
+:root {
+  --gradientPinkOr: linear-gradient(
+    44deg,
+    rgba(233, 70, 138, 1) 0%,
+    rgba(249, 184, 76, 1) 100%
+  );
+  --gradientPinkSky: linear-gradient(
+    44deg,
+    rgba(233, 70, 138, 1) 0%,
+    rgba(76, 226, 249, 1) 100%
+  );
+  --gradientBlue: linear-gradient(
+    44deg,
+    rgba(11, 30, 69, 1) 36%,
+    rgba(76, 226, 249, 1) 100%
+  );
+  --gradientBluePink: linear-gradient(
+    44deg,
+    rgba(11, 30, 69, 1) 11%,
+    rgba(233, 70, 138, 1) 100%
+  );
+  --or: #f9b807;
+  --pink: #e9468a;
+  --sky: #4ce2f9;
+  --darkBlue: #0b1e45;
+  --lightGrey: rgb(175, 175, 175);
+}

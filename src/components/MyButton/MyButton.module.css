@@ -1,0 +1,174 @@
+.pink-or {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--gradientPinkOr);
+  border-radius: 40px;
+  color: white;
+}
+
+.pink-or:hover {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--or);
+  border-radius: 40px;
+  color: var(--or);
+  background: transparent;
+}
+
+.pink-or:active, .pink-or:focus{
+  outline: none;
+}
+
+
+.pink-sky {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--gradientPinkSky);
+  border-radius: 40px;
+  color: white;
+}
+
+.pink-sky:hover {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--sky);
+  border-radius: 40px;
+  color: var(--sky);
+  background: transparent;
+}
+
+.blue-pink {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--gradientBluePink);
+  border-radius: 40px;
+  color: white;
+}
+
+.blue-pink:hover {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--pink);
+  border-radius: 40px;
+  color: var(--pink);
+  background: transparent;
+}
+
+.blue-sky {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--gradientBlue);
+  border-radius: 40px;
+  color: white;
+}
+
+.blue-sky:hover {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--sky);
+  border-radius: 40px;
+  color: var(--sky);
+  background: transparent;
+}
+
+.or {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--or);
+  border-radius: 40px;
+  color: white;
+}
+
+.or:hover {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--or);
+  border-radius: 40px;
+  color: var(--or);
+  background: transparent;
+}
+
+.pink {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--pink);
+  border-radius: 40px;
+  color: white;
+}
+
+.pink:hover {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--pink);
+  border-radius: 40px;
+  color: var(--pink);
+  background: transparent;
+}
+
+.sky {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--sky);
+  border-radius: 40px;
+  color: white;
+}
+
+.sky:hover {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--sky);
+  border-radius: 40px;
+  color: var(--sky);
+  background: transparent;
+}
+
+.darkBlue {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--darkBlue);
+  border-radius: 40px;
+  color: white;
+}
+
+.darkBlue:hover {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid var(--darkBlue);
+  border-radius: 40px;
+  color: var(--darkBlue);
+  background: transparent;
+}
+
+.white {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid white;
+  background: transparent;
+  border-radius: 40px;
+  color: white;
+}
+
+.white:hover {
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: 2px solid white;
+  border-radius: 40px;
+  color: #333;
+  background: white;
+}

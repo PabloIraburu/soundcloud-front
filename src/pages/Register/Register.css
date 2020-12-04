@@ -1,0 +1,47 @@
+.Register {
+  font-family: "Raleway", sans-serif;
+}
+
+.Register h1 {
+  line-height: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.Register p {
+  line-height: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.GoToLogin-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 0.7rem;
+  width: 100%;
+}
+
+.GoToLogin-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+  width: 50%;
+}
+
+.GoToLogin-text p {
+  margin: 0;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.GoToLogin-link {
+  font-size: 0.7rem;
+  color: #f9b84c;
+  text-decoration: underline;
+}
+
+.GoToLogin-link:hover {
+  font-size: 0.7rem;
+  color: #e9468a;
+  text-decoration: underline;
+}

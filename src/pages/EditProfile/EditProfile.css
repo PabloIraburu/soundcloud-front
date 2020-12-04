@@ -1,0 +1,68 @@
+.Profile-wrap {
+  /* display: flex;
+  font-display: row; */
+  background-color: #141424;
+  width: 100% vw;
+  height: 100% vh;
+  color: white;
+}
+
+.Lateral-menu {
+  width: 25%;
+  height: 100%;
+  background-color: #212231;
+  padding: 60px;
+  position: fixed;
+  display: flex;
+  font-display: column;
+}
+
+.Profile-content {
+  background-color: #141424;
+  background-size: auto;
+  width: cover;
+  height: cover;
+  color: white;
+  padding-left: 40%;
+  padding-top: 60px;
+  padding-right: 60px;
+  padding-bottom: 330px;
+}
+
+.Profile-content h3 {
+  margin-bottom: 30px;
+}
+
+.Profile-content p {
+  line-height: 3.5rem;
+  padding: 50px auto;
+  color: var(--sky);
+  margin-right: 30px;
+}
+
+.Profile-content span {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.buttons-section {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.modal-h3 {
+  line-height: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.modal-p {
+  line-height: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.flag-pass {
+  font-size: 1rem;
+}
