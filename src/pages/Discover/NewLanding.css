@@ -13,18 +13,23 @@
     height: 100vh;
     width: auto;
     display: flex;
+    overflow: auto;
 }
 
 .leftBar{
     background-color: var(--clr-lightBackground);
-    height: 100vh;
+    height: fit-content;
     width: 30vw;
     z-index: 1;
 }
 
+.profile{
+    margin-left: 2.5rem;
+}
+
 .rightBar{
     width:100%;
-    height: 100%;
+    height: fit-content;
 }
 .notif{
     margin-right: 25px;
@@ -89,13 +94,13 @@ span{
     color: var(--clr-lightText);
 
 }
-.logo{
+.brand{
     z-index: 2;
     color: var(--clr-highlightText);
     display: flex;
 }
 
-.logo .logoClear{
+.brand .logoClear{
     color: var(--clr-lightText)
 }
 
@@ -197,21 +202,22 @@ h2{
 
 /*Searchbar local styling*/
 
+.searchBar{
+    margin-left: 2.5rem;
+    margin-top: 2rem;
+}
 
 .search input {
-    width: 30vw;
+    width: 100%;
     height: auto;
     padding: 20px;
     border-radius: 14px;
     color: var(--clr-highlightText);
     background-color: var(--clr-lightBackground);
     border: none;
-    margin-left: 2.5rem;
-    margin-top: 2rem;
+
 }
-.search MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
-    display: none;
-}
+
 
 
 .search ul{

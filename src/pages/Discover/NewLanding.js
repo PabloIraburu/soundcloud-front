@@ -21,7 +21,7 @@ const handleCloseFav = (e) => {
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
             <div className='leftBar'>
                 <div className="header">
-                    <div className="logo">
+                    <div className="brand">
                         <p>Sound</p><p className='logoClear'>Mist</p>
                     </div>
                 </div>
