@@ -39,7 +39,56 @@ export const Upload = () => {
             .catch((response) => console.log(response.error));
     };
     
-    const categories = ["Reggae", "Classic Music", "Opera", "Traditional Music", "Jazz", "Blues", "Rhythm", "Rock", "Pop", "Gospel", "Soul", "Metal", "Country", "Rap", "Electronic Music", "Hip-Hop", "Reggeaton", "Bachata", "Salsa", "Balada", "Punk", "Cumbia", "Disco", "Mambo", "Bolero", "Folk", "Swing", "New Age", "Bossa Nova"];
+    const categories = [
+        "Bachata",
+        "Baladas",
+        "Blues",
+        "Bolero",
+        "Bossa Nova",
+        "Celta",
+        "Clásica",
+        "Country",
+        "Criollo",
+        "Cumbia",
+        "Disco",
+        "Dubstep",
+        "Electrónica",
+        "Electro Pop",
+        "Flamenco",
+        "Folk",
+        "Funk",
+        "Garage Rock",
+        "Gospel",
+        "Heavy Metal",
+        "Hip Hop",
+        "Indie",
+        "Jazz​",
+        "Merengue",
+        "Polka",
+        "Pop",
+        "Punk",
+        "Ranchera",
+        "Rap",
+        "Rap Rock",
+        "Reggae",
+        "Reggaeton",
+        "Rock",
+        "Rock and Roll",
+        "Rumba",
+        "Rhythm and Blues",
+        "Salsa",
+        "Samba",
+        "Ska",
+        "Son",
+        "Soul",
+        "Swing",
+        "Tango",
+        "Trash metal",
+        "Trap",
+        "Trova",
+        "Vals",
+        "Vallenato"
+    ];
     
     return (
         <div>
