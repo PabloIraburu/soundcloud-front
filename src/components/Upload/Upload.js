@@ -22,99 +22,88 @@ export const Upload = () => {
   };
 
   const handleFile = (event) => {
-    const inputFile = new FormData();
-    inputFile.append("file", event.target.files[0]);
-    console.log(inputFile);
-    setFile(inputFile);
-  };
+        let inputFile = event.target.files[0];
+        // console.log(inputFile);
+        const data = new FormData();
+        data.append('file', inputFile);
+    }
 
-  const handleSubmit = () => {
-    // Petición al servidor de tipo POST - fetch localhost:3300/register
-    ServerRequest("data/song", "POST", song)
-      .then((response) => {
-        ServerRequestSong("track", "POST", {
-          filename: song.title,
-          file: file,
-          song_id: response._id,
-        })
-          .then((response) => console.log(response))
-          .catch((response) => console.log(response.error));
-      })
-      .catch((response) => console.log(response.error));
-  };
+    const handleSubmit = () => {
+        // Petición al servidor de tipo POST - fetch localhost:3300/register
+        ServerRequest("data/song", "POST", song)
+            .then((response) => {
+                ServerRequestSong("track", "POST", { filename: song.title, file: file, song_id: response._id })
+                    .then((response) => console.log(response))
+                    .catch((response) => console.log(response.error));
+            })
+            .catch((response) => console.log(response.error));
+    };
+    
+    const categories = [
+        "Bachata",
+        "Baladas",
+        "Blues",
+        "Bolero",
+        "Bossa Nova",
+        "Celta",
+        "Clásica",
+        "Country",
+        "Criollo",
+        "Cumbia",
+        "Disco",
+        "Dubstep",
+        "Electrónica",
+        "Electro Pop",
+        "Flamenco",
+        "Folk",
+        "Funk",
+        "Garage Rock",
+        "Gospel",
+        "Heavy Metal",
+        "Hip Hop",
+        "Indie",
+        "Jazz​",
+        "Merengue",
+        "Polka",
+        "Pop",
+        "Punk",
+        "Ranchera",
+        "Rap",
+        "Rap Rock",
+        "Reggae",
+        "Reggaeton",
+        "Rock",
+        "Rock and Roll",
+        "Rumba",
+        "Rhythm and Blues",
+        "Salsa",
+        "Samba",
+        "Ska",
+        "Son",
+        "Soul",
+        "Swing",
+        "Tango",
+        "Trash metal",
+        "Trap",
+        "Trova",
+        "Vals",
+        "Vallenato"
+    ];
+    
+    return (
+        <div>
+            <h1>Upload file</h1>
+            <Input type="text" name="title" onChange={handleInput} placeholder={"Song title"} required />
+            <Input type="text" name="artist" onChange={handleInput} placeholder={"Artist name"} required />
+            <Input type="text" name="image" onChange={handleInput} placeholder={"Url song image"} required />
+            <Selector name="category" id="category" onChange={handleInput} required>
+                {categories.map((category) => <option value={category} key={category}>{category}</option>)}
+            </Selector>
+            <Input type="file" name="audio" onChange={handleFile} className="custom-file-input" />
+            <MyButton onClick={handleSubmit} variant="pink-or" size="50%" className="button-custom">Upload file</MyButton>
+        </div>
+    )
 
-  return (
-    <div>
-      <h1>Upload file</h1>
-      <Input
-        type="text"
-        name="title"
-        onChange={handleInput}
-        placeholder={"Song title"}
-        required
-      />
-      <Input
-        type="text"
-        name="artist"
-        onChange={handleInput}
-        placeholder={"Artist name"}
-        required
-      />
-      <Input
-        type="text"
-        name="image"
-        onChange={handleInput}
-        placeholder={"Url song image"}
-        required
-      />
-      <Selector name="category" id="category" onChange={handleInput} required>
-        <option value="reggae">Reggae</option>
-        <option value="classic-music">Classic Music</option>
-        <option value="opera">Opera</option>
-        <option value="tradicional-music">Tradicional Music</option>
-        <option value="jazz">Jazz</option>
-        <option value="blues">Blues</option>
-        <option value="rhythm">Rhythm</option>
-        <option value="rock">Rock</option>
-        <option value="pop">Pop</option>
-        <option value="gospel">Gospel</option>
-        <option value="soul">Soul</option>
-        <option value="metal">Metal</option>
-        <option value="country">Country</option>
-        <option value="rap">Rap</option>
-        <option value="electronic-music">Electronic Music</option>
-        <option value="hip-hop">Hip-Hop</option>
-        <option value="reggaeton">Reggaeton</option>
-        <option value="bachata">Bachata</option>
-        <option value="balada">Balada</option>
-        <option value="salsa">Salsa</option>
-        <option value="punk">Punk</option>
-        <option value="cumbia">Cumbia</option>
-        <option value="disco">Disco</option>
-        <option value="mambo">Mambo</option>
-        <option value="bolero">Bolero</option>
-        <option value="folk">Folk</option>
-        <option value="swing">Swing</option>
-        <option value="trip-hop">Trip-Hop</option>
-        <option value="new-age">New Age</option>
-        <option value="bossa-nova">Bossa Nova</option>
-      </Selector>
-      <Input
-        type="file"
-        name="audio"
-        onChange={handleFile}
-        className="custom-file-input"
-      />
-      <MyButton
-        onClick={handleSubmit}
-        variant="pink-or"
-        size="50%"
-        className="button-custom"
-      >
-        Upload file
-      </MyButton>
-    </div>
-  );
 };
 
 // Categorías musicales
