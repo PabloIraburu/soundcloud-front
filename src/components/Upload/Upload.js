@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 // import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { ServerRequestSong } from "../../helpers/ServerRequestSong";
+// import { ServerRequestSong } from "../../helpers/ServerRequestSong";
 import { Input } from "../Input/Input";
 import { MyButton } from "../MyButton/MyButton";
 import { Selector } from "../Selector/Selector";
@@ -10,7 +10,7 @@ import { getToken } from "../../utils/LocalStorage.utils";
 
 export const Upload = () => {
   const [song, setSong] = useState({});
-  const [file, setFile] = useState({});
+  // const [file, setFile] = useState({});
   const fileInputEl = useRef(null);
   // const history = useHistory();
 
@@ -166,7 +166,7 @@ export const Upload = () => {
         id="fileupload"
         accept=".mp3,audio/*"
         ref={fileInputEl}
-        //onChange={() => handleFile(fileInputEl.current.files)}
+      //onChange={() => handleFile(fileInputEl.current.files)}
       />
       <MyButton
         onClick={() => handleSubmit(fileInputEl.current.files)}
