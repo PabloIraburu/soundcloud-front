@@ -18,6 +18,11 @@
   background: transparent;
 }
 
+.pink-or:active, .pink-or:focus{
+  outline: none;
+}
+
+
 .pink-sky {
   width: 50%;
   height: 40px;
