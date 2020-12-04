@@ -15,6 +15,12 @@
     padding:  1.5rem;
     display: flex;
     border-radius: 18px;
+    text-decoration: none;
+}
+
+.userCard:hover{
+    border-radius: 50px;
+    border: 5px solid var(--clr-highlightText);
 }
 .userCard i{
     position: relative;
