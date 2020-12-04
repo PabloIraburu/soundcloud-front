@@ -5,7 +5,7 @@ export default function UserInfo() {
 
 
     return(
-        <div className='userCard'>
+        <a className='userCard' href='/profile'>
             <img src="https://media-exp1.licdn.com/dms/image/C4D03AQHclFQplwf2dg/profile-displayphoto-shrink_400_400/0?e=1611792000&v=beta&t=d9rXAfR4Sa_hOVeEUqIHgJn2FQLNMtqCbahfzRZDBVs" alt="foto"/>
             <div className="text">
                 <div className="identity">
@@ -17,6 +17,6 @@ export default function UserInfo() {
                     <p className="tracks">Tracks</p>
                 </div>
             </div>
-        </div>
+        </a>
     )
 }
