@@ -1,0 +1,106 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1500&q=80");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+} */
+
+.Landing {
+  /* height: 100vh; */
+  /* width: 100vw; */
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-image: url("https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1500&q=80");
+  background-color: #333;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+}
+
+.Landing-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 40px;
+  padding-top: 30px;
+}
+
+.Landing-logo-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 30px; */
+}
+
+.Landing-logo {
+  width: 80px;
+  height: 80px;
+  /* display: inline; */
+  /* margin-left: 30px; */
+}
+
+.Landing-logo-text {
+  color: var(--or);
+  padding-left: 10px;
+  font-size: 1.5rem;
+}
+
+.Landing-buttons-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* margin-right: 30px; */
+}
+
+.Landing-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+  padding: 10px;
+}
+
+.Landing-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Landing-header h1 {
+  font-size: 5rem;
+  color: white;
+  padding-left: 200px;
+  z-index: 10;
+}
+
+.Landing-pic-wrap {
+  width: 400px;
+  height: 500px;
+  /* border-radius: 5px solid rgb(187, 187, 187); */
+  /* box-shadow: 2px 2px 6px rgba(128, 128, 128, 0.5); */
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  /* margin-bottom: 30px; */
+  overflow: hidden;
+  position: relative;
+}
+
+.Landing-pic {
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  /* transition: all 250ms ease; */
+}
