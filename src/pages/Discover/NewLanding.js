@@ -5,39 +5,14 @@ import Search from "../../components/Search/Search";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import {Modal} from "../../components/Modal/Modal";
 import {Register} from "../Register/Register";
+import LateralBar from "../../components/LateralBar/LateralBar";
 
 export default function Discover () {
-const [modalOpen,setModalOpen]= useState(false)
-const handleOpenModal= () =>{
-    setModalOpen(true)
-    }
-const handleCloseFav = (e) => {
-    const { className: el } = e.target;
-    if (el !== 'backdrop' && el !== 'fas fa-times' ) return;
-    setModalOpen(false);
-}
+
     return(
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
-            <div className='leftBar'>
-                <div className="header">
-                    <div className="brand">
-                        <p>Sound</p><p className='logoClear'>Mist</p>
-                    </div>
-                </div>
-                <div className="profile">
-                    <UserInfo/>
-                </div>
-                <div className="categories">
-                    <a className="songs" href='library'><i className="fas fa-meteor"></i><h2>Songs</h2></a>
-                    <a className="artists" href='artists'><i className="fas fa-jedi"></i><h2>Artists</h2></a>
-                    <a className="styles" href='styles'><i className="fas fa-user-astronaut"></i><h2>Styles</h2></a>
-                    <a className="favourites" onClick={handleOpenModal}><i className="fab fa-galactic-republic"></i><h2>Favourites</h2></a>
-                </div>
-                <div className="addTrack">
-                    <a className='button' href="" onClick={handleOpenModal}>Add Track</a>
-                </div>
-            </div>
+            <LateralBar/>
             <div className='rightBar'>
                 <div className="headRight">
                     <div className="search">
@@ -74,11 +49,6 @@ const handleCloseFav = (e) => {
                     <div className="playlist"></div>
                 </div>
             </div>
-            {modalOpen &&
-            <Modal handleClose={handleCloseFav}>
-                <p>Hello</p>
-            </Modal>
-            }
         </div>
     )
 

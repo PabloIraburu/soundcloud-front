@@ -16,7 +16,6 @@ import { EditProfile } from "./pages/EditProfile/EditProfile";
 import Discover from "./pages/Discover/NewLanding";
 import { Library } from "./pages/Library/Library";
 import { Upload } from "./components/Upload/Upload";
-import Navbar from "./components/Navbar/Navbar";
 import {MySongs} from "./pages/MySongs/MySongs";
 
 function App() {
