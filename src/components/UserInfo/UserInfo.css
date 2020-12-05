@@ -1,3 +1,14 @@
+.userCard{
+    background-color: var(--clr-inactiveField);
+    color: white;
+    /*width: 18vw;*/
+    margin-top: 2rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    padding:  1.5rem;
+    display: flex;
+    border-radius: 18px;
+}
 .userCard  img {
     width: 9vw;
     height: auto;
@@ -5,23 +16,6 @@
     margin-right: 10px;
 }
 
-.userCard{
-    background-color: var(--clr-inactiveField);
-    color: white;
-    width: 18vw;
-    /*margin-top: 5rem;*/
-    /*margin-left: 2.5rem;*/
-    /*margin-right: 2.5rem;*/
-    padding:  1.5rem;
-    display: flex;
-    border-radius: 18px;
-    text-decoration: none;
-}
-
-.userCard:hover{
-    border-radius: 50px;
-    border: 5px solid var(--clr-highlightText);
-}
 .userCard i{
     position: relative;
     top: 5px;
