@@ -1,30 +1,50 @@
 .userCard{
     background-color: var(--clr-inactiveField);
     color: white;
-    /*width: 18vw;*/
+    height: 50px;
+    width: 50px;
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    display: flex;
+    border-radius: 18px;
+    transition: var(--transition-speed);
+}
+.userCard:hover{
+    background-color: var(--clr-inactiveField);
+    color: white;
+    height: 60%;
+    width: auto;
     margin-top: 2rem;
     margin-left: 2.5rem;
     margin-right: 2.5rem;
     padding:  1.5rem;
     display: flex;
     border-radius: 18px;
+    border: 2px solid grey;
 }
 .userCard  img {
-    width: 9vw;
-    height: auto;
+    width: 3rem;
+    height: 50px;
     border-radius: 14px;
     margin-right: 10px;
+    transition: var(--transition-speed);
 }
 
-.userCard i{
-    position: relative;
-    top: 5px;
-    left: 5px;
-}
+
 .userCard .numbers{
     color: var(--clr-dimText);
 }
 
-.text .identity{
-    display: inline-flex;
+.userCard .text .numbers{
+    display: none;
 }
+.userCard:hover .text .numbers{
+    display: block;
+}
+
+.userCard h1{
+    width: 60rem;
+}
+
+
