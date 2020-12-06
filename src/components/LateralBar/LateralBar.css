@@ -24,10 +24,17 @@
 
 .nav-item {
     width: 100%;
+    justify-content: space-between;
+}
+
+.nav-item-card{
+    width: 100%;
+    margin-bottom: 2rem;
 }
 
 .nav-item:last-child {
     margin-top: auto;
+    margin-bottom: 3rem;
 }
 
 .nav-link {
@@ -116,6 +123,15 @@
 
     .nav-link {
         justify-content: center;
+    }
+
+    .nav-item-card{
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .nav-item-card .userCard .text{
+        display: none;
     }
 
     main {

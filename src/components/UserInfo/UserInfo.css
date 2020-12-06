@@ -8,6 +8,7 @@
     margin-right: 1.5rem;
     display: flex;
     border-radius: 18px;
+    text-decoration: none;
     transition: var(--transition-speed);
 }
 .userCard:hover{
@@ -22,6 +23,7 @@
     display: flex;
     border-radius: 18px;
     border: 2px solid grey;
+    text-decoration: none;
 }
 .userCard  img {
     width: 3rem;

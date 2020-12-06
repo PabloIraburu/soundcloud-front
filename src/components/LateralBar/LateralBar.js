@@ -44,7 +44,7 @@ export default function LateralBar (){
                             </svg>
                         </a>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item-card">
                         <UserInfo/>
                     </li>
                     <li className="nav-item">
