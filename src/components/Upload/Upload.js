@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
-// import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
-// import { ServerRequestSong } from "../../helpers/ServerRequestSong";
 import { Input } from "../Input/Input";
 import { MyButton } from "../MyButton/MyButton";
 import { Selector } from "../Selector/Selector";
@@ -10,7 +8,6 @@ import { getToken } from "../../utils/LocalStorage.utils";
 
 export const Upload = () => {
   const [song, setSong] = useState({});
-  // const [file, setFile] = useState({});
   const fileInputEl = useRef(null);
   // const history = useHistory();
 
@@ -23,13 +20,6 @@ export const Upload = () => {
     }));
   };
 
-  /*const handleFile = (files) => {
-    let inputFile = files[0];
-    console.log(inputFile);
-    
-    setFile(inputFile);
-  };*/
-
   const handleSubmit = (file) => {
     // Petición al servidor de tipo POST - fetch localhost:3300/register
     ServerRequest("data/song", "POST", song)
@@ -38,7 +28,7 @@ export const Upload = () => {
         const data = new FormData();
         data.append("file", file[0]);
         data.append("filename", song.title);
-        data.append("song_id", response._id);
+        // data.append("song_id", response._id);
 
         /*ServerRequestSong("track", "POST", data)
           .then((response) => console.log(response))
@@ -59,9 +49,7 @@ export const Upload = () => {
             }
             return Promise.reject(response.status);
           })
-          .then((payload) => {
-            console.log(`Saved song with id: ${payload}`);
-          })
+          .then((payload) => console.log(`Saved song with id: ${payload}`))
           .catch((error) => console.log(error));
       })
       .catch((response) => console.log(response.error));
@@ -120,7 +108,7 @@ export const Upload = () => {
 
   return (
     <div>
-      <h1>Upload file</h1>
+      <h1 className="title">Upload file</h1>
       <Input
         type="text"
         name="title"
@@ -149,24 +137,13 @@ export const Upload = () => {
           </option>
         ))}
       </Selector>
-      {/* < <Input
-        type="file"
-        name="audio"
-        onChange={handleFile}
-        className="custom-file-input"
-      />
-      Input
-        type="file"
-        name="audio"
-        onChange={handleFile}
-        className="custom-file-input"
-      /> */}
+
       <input
         type="file"
         id="fileupload"
         accept=".mp3,audio/*"
         ref={fileInputEl}
-      //onChange={() => handleFile(fileInputEl.current.files)}
+        className="input-upload"
       />
       <MyButton
         onClick={() => handleSubmit(fileInputEl.current.files)}

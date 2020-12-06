@@ -25,3 +25,8 @@
   --darkBlue: #0b1e45;
   --lightGrey: rgb(175, 175, 175);
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
