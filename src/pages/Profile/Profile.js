@@ -27,7 +27,7 @@ export const Profile = () => {
       author: "Autor 2",
       img:
         "https://images.unsplash.com/photo-1581375074612-d1fd0e661aeb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80",
-      _id: 2
+      _id: 2,
     },
     {
       title: "Soy el 3",
@@ -35,7 +35,7 @@ export const Profile = () => {
       author: "Autor 3",
       img:
         "https://images.unsplash.com/photo-1584168844383-3c3ee678981a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=682&q=80",
-      _id: 3
+      _id: 3,
     },
     {
       title: "Soy el 4",
@@ -43,7 +43,7 @@ export const Profile = () => {
       author: "Autor 4",
       img:
         "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      _id: 4
+      _id: 4,
     },
     {
       title: "Soy el 5",
@@ -51,7 +51,7 @@ export const Profile = () => {
       author: "Autor 5",
       img:
         "https://images.unsplash.com/photo-1607043832356-06c04346e9c5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
-      _id: 5
+      _id: 5,
     },
     {
       title: "Soy el 6",
@@ -59,7 +59,7 @@ export const Profile = () => {
       author: "Autor 6",
       img:
         "https://images.unsplash.com/photo-1607012104821-b10328a95078?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2763&q=80",
-      _id: 6
+      _id: 6,
     },
     {
       title: "Soy el 7",
@@ -67,7 +67,7 @@ export const Profile = () => {
       author: "Autor 7",
       img:
         "https://images.unsplash.com/photo-1607053117298-1e68e05881ca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
-      _id: 7
+      _id: 7,
     },
     {
       title: "Soy el 8",
@@ -75,7 +75,7 @@ export const Profile = () => {
       author: "Autor 8",
       img:
         "https://images.unsplash.com/photo-1550755375-73584cff528c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
-      _id: 8
+      _id: 8,
     },
   ];
 
@@ -107,7 +107,7 @@ export const Profile = () => {
     setOpenModalUpload(!openModalUpload);
   };
 
-  const handleSubmit = () => { };
+  const handleSubmit = () => {};
 
   return (
     <div className="Profile-wrap">

@@ -6,6 +6,9 @@ import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
 import { Upload } from "../../components/Upload/Upload";
 import logo from "../../img/logo.png";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import { ServerRequest } from "../../helpers/ServerRequest";
 
 export const Landing = () => {
   //Gestión modal registro
@@ -46,6 +49,31 @@ export const Landing = () => {
     setOpenModalUpload(!openModalUpload);
   };
 
+  //Get songs from DB
+  const [songList, setSongList] = useState([]);
+  const getSongs = () => {
+    ServerRequest("data/song", "GET")
+      .then((response) => setSongList(response))
+      .catch(console.log);
+  };
+  // getSongs();
+  console.log(songList.length);
+
+  const trackIds = ["5fc4d698c891ef40a7a07580", "5fc4e79bb0b05e5bc165ef9e"];
+  const [currentTrack, setCurrentTrack] = useState(0);
+
+  const handleClickNext = () => {
+    if (currentTrack < trackIds.length - 1) {
+      setCurrentTrack(currentTrack + 1);
+    }
+  };
+
+  const handleClickPrev = () => {
+    if (currentTrack > 0) {
+      setCurrentTrack(currentTrack - 1);
+    }
+  };
+
   return (
     <div className={styles["Landing"]}>
       <div className={styles["Landing-menu"]}>
@@ -82,6 +110,18 @@ export const Landing = () => {
             className={styles["Landing-pic"]}
           />
         </div> */}
+      </div>
+      <div className={styles["Landing-player"]}>
+        <AudioPlayer
+          // autoPlay
+          onClickNext={handleClickNext}
+          onClickPrevious={handleClickPrev}
+          showSkipControls={true}
+          showJumpControls={false}
+          src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"
+          // onPlay={(e) => console.log("onPlay")}
+          // other props here
+        />
       </div>
 
       {openModalRegister && (
