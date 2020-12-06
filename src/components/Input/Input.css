@@ -11,6 +11,11 @@
   box-shadow: 0 4px 2px -2px var(--or);
 }
 
+.Input-wrap p {
+  padding: 0;
+  margin: 0;
+}
+
 .Input-wrap input {
   font-family: "Raleway", sans-serif;
   outline: none;

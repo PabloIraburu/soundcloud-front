@@ -107,7 +107,8 @@ export const Profile = () => {
     setOpenModalUpload(!openModalUpload);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => { };
+  console.log(user);
 
   return (
     <div className="Profile-wrap">
@@ -126,20 +127,27 @@ export const Profile = () => {
           <p>E-mail</p>
           <p>{user.email}</p>
         </span>
+        <hr className="hr" />
+        <span className="">
+          <p>Account</p>
+          <p>Free</p>
+        </span>
 
-        <Link
-          to={{
-            pathname: "/editprofile",
-            state: { user },
-          }}
-        >
-          <MyButton onClick={handleSubmit} variant="pink-or" size="30%">
-            Edit Profile
+        <div className="Profile-buttons-section">
+          <Link
+            to={{
+              pathname: "/editprofile",
+              state: { user },
+            }}
+          >
+            <MyButton onClick={handleSubmit} variant="pink-or" size="200px">
+              Edit Profile
           </MyButton>
-        </Link>
-        <MyButton onClick={handleOpenUpload} variant="blue-sky" size="30%">
-          Upload Song
+          </Link>
+          <MyButton onClick={handleOpenUpload} variant="blue-sky" size="200px">
+            Upload Song
         </MyButton>
+        </div>
       </div>
 
       <div className="CoversBg-wrap-profile">
