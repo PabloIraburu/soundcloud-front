@@ -17,6 +17,24 @@
   font-display: column;
 }
 
+.EditProfile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.backToProfile {
+  font-size: 0.8rem;
+  text-align: right;
+  margin: 0;
+  padding-top: 5px;
+}
+
+.backToProfile:hover {
+  text-decoration: underline;
+  color: white;
+}
+
 .Profile-content {
   background-color: #141424;
   background-size: auto;
@@ -33,11 +51,12 @@
   margin-bottom: 30px;
 }
 
-.Profile-content p {
+.Profile-content span p {
   line-height: 3.5rem;
   padding: 50px auto;
   color: var(--sky);
   margin-right: 30px;
+  width: 100px;
 }
 
 .Profile-content span {
@@ -47,7 +66,7 @@
 }
 
 .buttons-section {
-  margin: 20px auto;
+  margin: 40px auto 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

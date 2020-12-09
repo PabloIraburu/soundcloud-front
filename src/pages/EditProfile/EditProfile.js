@@ -57,9 +57,7 @@ export const EditProfile = (props) => {
       .then((response) => {
         setUser(response);
         //Manda al usuario a la home tras el registro completado
-        setTimeout(() => {
-          history.push(PROFILE);
-        }, 2000);
+        history.push(PROFILE);
       })
       .catch((response) => console.log);
   };
@@ -78,12 +76,11 @@ export const EditProfile = (props) => {
   const handleDelete = (e) => {
     ServerRequest(`data/user/${user._id}`, "DELETE")
       .then(response => console.log)
-      .catch((response) => {
-        setTimeout(() => {
-          props.history.push(HOME);
-        }, 2000);
-      });
+      .catch((response) => props.history.push(HOME));
   };
+
+  // Volver a página perfil
+  const backToProfile = () => props.history.push(PROFILE);
 
   return (
     <div className="Profile-wrap">
@@ -92,19 +89,26 @@ export const EditProfile = (props) => {
       </div>
 
       <div className="Profile-content">
-        <h3>Edit my account</h3>
-        <span className="">
+        <div className="EditProfile-header">
+          <h3>Edit my account</h3>
+          <p onClick={backToProfile} className="backToProfile"> Back to profile ></p>
+        </div>
+        <span>
           <p>Name</p>
           <Input type={"text"} name={"name"} onChange={handleInput} placeholder={user.name} />
         </span>
-        <span className="">
+        <span>
           <p>Email</p>
           <Input type={"email"} name={"email"} onChange={handleInput} placeholder={user.email} />
         </span>
-        <span className="buttons-section">
+        <span>
+          <p>Picture</p>
+          <Input type={"text"} name={"image"} onChange={handleInput} placeholder="Url of profile picture" />
+        </span>
+        <div className="buttons-section">
           <MyButton onClick={handleOpenPass} variant="white" size="30%">Change Password</MyButton>
           <MyButton onClick={handleOpenDelete} variant="white" size="30%">Delete Account</MyButton>
-        </span>
+        </div>
         <br />
         <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Submit changes</MyButton>
       </div>

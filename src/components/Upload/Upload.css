@@ -1,4 +1,50 @@
+.title {
+  font-family: "Raleway", sans-serif;
+}
+
 .button-custom {
   margin-top: 20px;
   text-align: center;
+}
+
+.input-upload {
+  font-family: "Raleway", sans-serif;
+  outline: none;
+  outline-width: 0;
+  box-shadow: none;
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  width: 100%;
+  background: transparent;
+  display: inline-block;
+  width: 100%;
+  margin: 10px auto 20px;
+  padding: 10px 10px 10px 5px;
+  border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.input-upload:hover {
+  border-bottom: var(--or);
+  box-shadow: 0 4px 2px -2px var(--or);
+}
+
+.input-upload::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.input-upload::before {
+  content: "Select files";
+  display: inline-block;
+  background: linear-gradient(to bottom, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
 }
