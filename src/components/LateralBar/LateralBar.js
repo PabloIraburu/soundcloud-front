@@ -157,7 +157,7 @@ export default function LateralBar (){
                                     ></path>
                                 </g>
                             </svg>
-                            <span className="link-text">Favourites</span>
+                            <span className="link-text">Playlists</span>
                         </a>
                     </li>
 
@@ -243,7 +243,7 @@ export default function LateralBar (){
                 </ul>
             {modalOpen &&
             <Modal handleClose={handleCloseFav}>
-                <p>Hello</p>
+                <p>Playlist</p>
             </Modal>}
         </nav>
     )
