@@ -10,8 +10,22 @@ import { Modal } from "../../components/Modal/Modal";
 import { CoverBg } from "../../components/CoverBg/CoverBg";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
+import {deleteToken} from "../../utils/LocalStorage.utils"  
+import { useHistory } from "react-router-dom";
+import {HOME} from "../../routes/routes"
+
+
+
 
 export const Profile = () => {
+  const history = useHistory ()
+
+  const signOut= () =>{
+    
+     deleteToken  () ; 
+     history.push(HOME)  }
+
+
   const ListaSongsFake = [
     {
       title: "Soy el 1",
@@ -146,7 +160,12 @@ export const Profile = () => {
           </Link>
           <MyButton onClick={handleOpenUpload} variant="blue-sky" size="200px">
             Upload Song
-        </MyButton>
+          </MyButton>
+
+          <MyButton onClick={signOut } variant="pink-or" size="200px">
+            Sing Out
+          </MyButton>
+
         </div>
       </div>
 
