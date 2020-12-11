@@ -4,7 +4,7 @@ import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
 import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
-import { PROFILE } from '../../routes/routes';
+import { DISCOVER } from '../../routes/routes';
 import "./Login.css";
 
 export const Login = ({ handleCloseLogin, openRegister }) => {
@@ -27,9 +27,7 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
             .then((response) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
-                // setTimeout(() => {
-                // }, 2000);
-                history.push(PROFILE);
+                history.push(DISCOVER);
             })
             .catch((response) => console.log(response.error))
     };

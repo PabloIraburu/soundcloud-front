@@ -112,6 +112,8 @@ export const EditProfile = (props) => {
         <br />
         <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Submit changes</MyButton>
       </div>
+
+
       {openModalPass &&
         <Modal handleClose={handleClosePass}>
           <h3>Change password</h3>
@@ -129,7 +131,6 @@ export const EditProfile = (props) => {
             <MyButton onClick={handleDelete} variant="darkBlue" size="45%">Delete Account</MyButton>
             <MyButton onClick={handleOpenDelete} variant="pink-or" size="45%">Cancel</MyButton>
           </span>
-
         </Modal>
       }
     </div >
