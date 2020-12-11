@@ -1,12 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect } from "react";
 import {ServerRequest} from "../../helpers/ServerRequest";
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {setJWT} from "../../utils/LocalStorage.utils";
-import {DISCOVER} from "../../routes/routes";
 
 export default function List () {
     const useStyles = makeStyles((theme) => ({
@@ -44,20 +42,28 @@ export default function List () {
         );
     }
 
-    const [list, setList] = useState([])
+    const [list, setList] = useState()
 
-    ServerRequest(`data/${entity}` ,'GET')
-        .then((response) => {
-            debugger;
-            const list = response.filter((entity) => {
-
+    useEffect(()=>{
+        ServerRequest(`data/${entity}` ,'GET')
+            .then((response) => {
+                if (!response.message) {
+                    setList(response)
+                }
             })
+            .catch((response) => console.log(response.error))
+    },[entity])
 
-        })
-        .catch((response) => console.log(response.error))
+    console.log(list)
     return(
         <div>
             <SimpleSelect/>
+            <ul>
+                {list !== undefined && list.map((x) => (
+                    <li key={x._id}>{x.title}</li>
+                ))}
+            </ul>
+
         </div>
     )
 }
