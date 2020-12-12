@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import './List.css'
 
 export default function List () {
     const useStyles = makeStyles((theme) => ({
@@ -31,8 +32,8 @@ export default function List () {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={entity}
                         onChange={handleChange}
+                        value={entity}
                     >
                         <MenuItem value='song'>Songs</MenuItem>
                         <MenuItem value='playlist'>Playlists</MenuItem>
@@ -43,7 +44,13 @@ export default function List () {
     }
 
     const [list, setList] = useState()
-
+     const body ={}
+    const handleAddToFavourites = (x) =>{
+    let body = {
+           SongIds:x._id
+         }
+         ServerRequest(`data/${entity}` ,'PUT', body)
+    }
     useEffect(()=>{
         ServerRequest(`data/${entity}` ,'GET')
             .then((response) => {
@@ -54,16 +61,48 @@ export default function List () {
             .catch((response) => console.log(response.error))
     },[entity])
 
-    console.log(list)
+    const [playlist, setPlaylist] = useState()
+
+    useEffect(()=>{
+        ServerRequest(`data/playlist` ,'GET')
+            .then((response) => {
+                if (!response.message) {
+                    setPlaylist(response)
+                }
+            })
+            .catch((response) => console.log(response.error))
+    },[entity])
+    const [plist, setPlist] = useState('');
+
+        const handleChangePlaylist = (event) => {
+            setPlist(event.target.value);
+            console.log(plist)
+        }
+
     return(
         <div>
             <SimpleSelect/>
-            <ul>
-                {list !== undefined && list.map((x) => (
-                    <li key={x._id}>{x.title}</li>
+            <ul className='list'>
+                {list && list.map((x) => (
+                    <li key={x._id}>
+                        <a href="#">{x.title}</a>
+                        {entity === 'song' && (
+                            <>
+                                <InputLabel id="playlist-label-id">Playlist</InputLabel>
+                                <Select
+                                labelId="playlist-label-id"
+                                id="playlist"
+                                value={plist}
+                                onChange={handleChangePlaylist}
+                                >
+                                { playlist.map(p => (
+                                    <MenuItem value={plist.title} key={p._id}>{p.title}</MenuItem>
+                                ))}
+                            </Select>
+                            <button onClick={handleAddToFavourites}>Add to {plist}</button></>)}
+                    </li>
                 ))}
             </ul>
-
         </div>
     )
 }
