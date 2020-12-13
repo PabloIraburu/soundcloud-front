@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {createContext, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
@@ -37,7 +37,7 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
         openRegister()
         handleCloseLogin(e);
     }
-
+    const userContext= createContext(undefined)
     return (
         <div className="Login">
             <h1>¡Hola de nuevo!</h1>
