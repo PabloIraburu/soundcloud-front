@@ -8,6 +8,8 @@ import {Register} from "../Register/Register";
 import LateralBar from "../../components/LateralBar/LateralBar";
 import {MyButton} from "../../components/MyButton/MyButton";
 import {Upload} from "../../components/Upload/Upload";
+import FollowedUsers from "../../components/FollowedUsers/followedUsers";
+import List from "../../components/List/List";
 
 export default function Discover () {
 
@@ -30,8 +32,11 @@ export default function Discover () {
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
             <LateralBar/>
-            <div className='rightBar'>
-                <div className="headRight">
+            <div className="rightBar">
+                <FollowedUsers/>
+            </div>
+            <div className='middleBar'>
+                <div className="headMid">
                     <div className="search">
                         <Search/>
                     </div>
@@ -57,10 +62,13 @@ export default function Discover () {
                     </div>
                 </div>
                 <div className="bottomFrame">
-                    <div className="recomended">
-                        <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">
+                    <div className="recommended">
+                        <MyButton onClick={handleOpenUpload}  variant="pink-or" size="150px">
                             Upload Song
                         </MyButton>
+                        <div className="listComp">
+                            <List/>
+                        </div>
                         <div className="title"></div>
                         <div className="gallery">
                         </div>
