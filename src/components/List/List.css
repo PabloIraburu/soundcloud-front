@@ -1,4 +1,18 @@
+.list a{
+    align-self: center;
+}
+
+
 .list li{
     display: flex;
     justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+#demo-simple-select{
+    background-color: var(--clr-lightBackground);
+    color: var(--clr-lightText);
 }
