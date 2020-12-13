@@ -1,8 +1,7 @@
 .searchBar {
   color: black;
-  width: 100%;
+  /*width: 100%;*/
   flex-direction: column;
-  margin-left: 2rem;
   border: none;
 }
 
@@ -23,8 +22,8 @@
 }
 
 .searchBar input {
-  width:45vw;
-  height: 2vh;
+  width: 250px;
+  height: 10px;
 }
 
 .searchBar label {
