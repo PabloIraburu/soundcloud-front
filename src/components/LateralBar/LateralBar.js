@@ -48,7 +48,7 @@ export default function LateralBar (){
                         <UserInfo/>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link">
+                        <a href="/mysongs" className="nav-link">
                             <svg
                                 aria-hidden="true"
                                 focusable="false"
