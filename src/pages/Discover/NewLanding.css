@@ -57,6 +57,7 @@
 
 .header h2{
     margin-left: 2.5rem;
+    color: var(--clr-lightText);
 }
 
 /*noinspection CssInvalidPropertyValue*/
@@ -158,5 +159,8 @@ h2{
 @media (max-width: 800px){
     .middleBar{
         background-color: pink;
+    }
+    .rightBar {
+        display: none;
     }
 }
