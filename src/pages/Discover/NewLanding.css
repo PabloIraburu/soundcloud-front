@@ -15,17 +15,29 @@
     display: flex;
 }
 
-
-
 .rightBar{
+    position: absolute;
+    right: 0px;
+    width: 10%;
+    height: 100vh;
+    background-color: var(--clr-lightBackground);
+    color: var(--clr-lightText);
+}
+
+
+/*central component styling*/
+
+.middleBar{
+    margin-left:10%;
+    margin-right: 10%;
     width:100%;
     height: 100%;
 }
-.notif{
-    margin-right: 25px;
-    margin-top: 40px;
-    padding-top: 2px;
+.headMid{
+    display: inline-block;
 }
+
+
 
 .mainFrame{
     display: flex;
@@ -41,6 +53,11 @@
     padding:1.75rem;
     background-color: var(--clr-lightBackground);
     border-radius: 14px;
+}
+
+.header h2{
+    margin-left: 2.5rem;
+    color: var(--clr-lightText);
 }
 
 /*noinspection CssInvalidPropertyValue*/
@@ -64,6 +81,7 @@
     display: flex;
     justify-content: space-evenly;
     opacity: 85%;
+    overflow: hidden;
 }
 
 .mainFrame .slider .display .images img{
@@ -97,9 +115,10 @@ h2{
 .search{
     margin-left: 2.5rem;
     margin-top: 2rem;
+    display: inline-block;
 }
 .search input {
-    width: 30vw;
+    width: 20vw;
     height: auto;
     padding: 20px;
     border-radius: 14px;
@@ -116,8 +135,32 @@ h2{
     display: none;
 }
 
+.notif{
+    float: end;
+    margin-right: 25px;
+    margin-top: 40px;
+    padding-top: 2px;
+    display: inline-block;
+}
+
+.listComp {
+    margin: 0 2.5rem;
+}
+
+.recommended{
+    width:100%;
+}
+.recommended .MyButton_pink-or__3NnKl{
+    float: right;
+    margin-right: 2.5rem;
+    margin-top: 1.5rem;
+}
+
 @media (max-width: 800px){
-    .rightBar{
+    .middleBar{
         background-color: pink;
+    }
+    .rightBar {
+        display: none;
     }
 }

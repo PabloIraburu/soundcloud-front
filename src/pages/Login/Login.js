@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
@@ -6,16 +6,17 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { DISCOVER } from '../../routes/routes';
 import "./Login.css";
+import {UserContext} from "../../components/Context/contextProvider"
+
 
 export const Login = ({ handleCloseLogin, openRegister }) => {
-
-    const [loginUser, setLoginUser] = useState({});
+    const {user, setUser} = useContext(UserContext)
     const history = useHistory();
 
     //Introduce los datos de los inputs en el objeto newUser
     const handleInput = (event) => {
         const { value, name } = event.target;
-        setLoginUser((prevValue) => ({
+        setUser((prevValue) => ({
             ...prevValue,
             [name]: value,
         }));
@@ -23,7 +24,7 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
 
     const handleSubmit = () => {
         //Petición al servidor de tipo POST - fetch localhost:3300/register
-        ServerRequest("login", "POST", loginUser)
+        ServerRequest("login", "POST", user)
             .then((response) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
@@ -37,7 +38,6 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
         openRegister()
         handleCloseLogin(e);
     }
-
     return (
         <div className="Login">
             <h1>¡Hola de nuevo!</h1>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './EditProfile.css';
 import { useHistory } from "react-router-dom";
 import { setJWT } from "../../utils/LocalStorage.utils";
@@ -7,12 +7,13 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
 import { HOME, PROFILE } from '../../routes/routes';
+import {UserContext} from "../../components/Context/contextProvider"
+
 
 export const EditProfile = (props) => {
-
+  const{user, setUser} = useContext(UserContext)
   const history = useHistory();
 
-  const [user, setUser] = useState({});
   const [editedUser, setEditedUser] = useState({});
   const [newPass, setNewPass] = useState({});
   const [openModalPass, setOpenModalPass] = useState(false);

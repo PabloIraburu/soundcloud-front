@@ -72,7 +72,7 @@ export default function LateralBar (){
                                     ></path>
                                 </g>
                             </svg>
-                            <span className="link-text">Songs</span>
+                            <span className="link-text">Recommended</span>
                         </a>
                     </li>
                     <li className="nav-item">
@@ -100,7 +100,7 @@ export default function LateralBar (){
                                     ></path>
                                 </g>
                             </svg>
-                            <span className="link-text">Artists</span>
+                            <span className="link-text">Recently played</span>
                         </a>
                     </li>
                     <li className="nav-item">
@@ -128,7 +128,7 @@ export default function LateralBar (){
                                     ></path>
                                 </g>
                             </svg>
-                            <span className="link-text">Styles</span>
+                            <span className="link-text">Favourites</span>
                         </a>
                     </li>
 
@@ -157,7 +157,7 @@ export default function LateralBar (){
                                     ></path>
                                 </g>
                             </svg>
-                            <span className="link-text">Favourites</span>
+                            <span className="link-text">Playlists</span>
                         </a>
                     </li>
 
@@ -243,7 +243,7 @@ export default function LateralBar (){
                 </ul>
             {modalOpen &&
             <Modal handleClose={handleCloseFav}>
-                <p>Hello</p>
+                <p>Playlist</p>
             </Modal>}
         </nav>
     )

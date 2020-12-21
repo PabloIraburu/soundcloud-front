@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { Link } from "react-router-dom";
-import { getToken } from "../../utils/LocalStorage.utils";
-import { DecodeToken } from "../../utils/DecodeToken";
-import { ServerRequest } from "../../helpers/ServerRequest";
 import "./Profile.css";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
@@ -10,8 +7,24 @@ import { Modal } from "../../components/Modal/Modal";
 import { CoverBg } from "../../components/CoverBg/CoverBg";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
+import {deleteToken} from "../../utils/LocalStorage.utils"  
+import { useHistory } from "react-router-dom";
+import {HOME} from "../../routes/routes"
+import {UserContext} from "../../components/Context/contextProvider"
+
+
+
+
 
 export const Profile = () => {
+  const history = useHistory ()
+
+  const signOut= () =>{
+    
+     deleteToken  () ; 
+     history.push(HOME)  }
+
+
   const ListaSongsFake = [
     {
       title: "Soy el 1",
@@ -79,19 +92,19 @@ export const Profile = () => {
     },
   ];
 
-  const [user, setUser] = useState({});
+  const {user} = useContext(UserContext);
 
-  useEffect(() => {
-    const token = getToken();
-    const decodedToken = DecodeToken(token);
-    const userId = decodedToken.id;
-
-    ServerRequest(`data/user/${userId}`, "GET")
-      .then((response) => {
-        setUser(response);
-      })
-      .catch(console.log);
-  }, []);
+  // useEffect(() => {
+  //   const token = getToken();
+  //   const decodedToken = DecodeToken(token);
+  //   const userId = decodedToken.id;
+  //
+  //   ServerRequest(`data/user/${userId}`, "GET")
+  //     .then((response) => {
+  //       setUser(response);
+  //     })
+  //     .catch(console.log);
+  // }, []);
 
   //Gestión modal upload
   const [openModalUpload, setOpenModalUpload] = useState(false);
@@ -146,7 +159,12 @@ export const Profile = () => {
           </Link>
           <MyButton onClick={handleOpenUpload} variant="blue-sky" size="200px">
             Upload Song
-        </MyButton>
+          </MyButton>
+
+          <MyButton onClick={signOut } variant="pink-or" size="200px">
+            Sing Out
+          </MyButton>
+
         </div>
       </div>
 

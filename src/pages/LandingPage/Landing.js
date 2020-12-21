@@ -35,19 +35,7 @@ export const Landing = () => {
     setOpenModalLogin(!openModalLogin);
   };
 
-  //Gestión modal upload
-  const [openModalUpload, setOpenModalUpload] = useState(false);
-  const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
-  const handleCloseUpload = (e) => {
-    const { className: el } = e.target;
-    if (
-      el !== "backdrop" &&
-      el !== "fas fa-times" &&
-      el !== "GoToRegister-link"
-    )
-      return;
-    setOpenModalUpload(!openModalUpload);
-  };
+
 
   //Get songs from DB
   const [songList, setSongList] = useState([]);
@@ -83,7 +71,7 @@ export const Landing = () => {
       <div className={styles["Landing-menu"]}>
         <div className={styles["Landing-logo-section"]}>
           <img src={logo} className={styles["Landing-logo"]} alt="logo" />
-          <h3 className={styles["Landing-logo-text"]}>SoundMist</h3>
+          <a href='/discover' className={styles["Landing-logo-text"]}>SoundMist</a>
         </div>
         <div className={styles["Landing-buttons-section"]}>
           <div className={styles["Landing-buttons"]}>
@@ -99,9 +87,9 @@ export const Landing = () => {
           </div>
 
           <div className={styles["Landing-buttons"]}>
-            <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">
-              Upload Song
-            </MyButton>
+            {/*<MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">*/}
+            {/*  Upload Song*/}
+            {/*</MyButton>*/}
           </div>
         </div>
       </div>
@@ -146,11 +134,6 @@ export const Landing = () => {
             handleCloseLogin={handleCloseLogin}
             openRegister={handleOpenRegister}
           />
-        </Modal>
-      )}
-      {openModalUpload && (
-        <Modal handleClose={handleCloseUpload}>
-          <Upload />
         </Modal>
       )}
     </div>
