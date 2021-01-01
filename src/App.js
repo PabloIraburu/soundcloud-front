@@ -23,22 +23,22 @@ function App() {
   const [isLogged, setIsLogged] = useState(true);
 
   return (
-      <UserContextProvider>
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path={HOME} component={Landing} />
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path={HOME} component={Landing} />
+            <UserContextProvider>
               <Route exact path={DISCOVER} component={Discover} />
               <Route exact path={PROFILE} component={Profile} />
               <Route exact path={EDITPROFILE} component={EditProfile} />
               <Route exact path={LIBRARY} component={Library} />
               <Route exact path={UPLOAD} component={Upload} />
               <Route exact path={MYSONGS} component={MySongs} />
-            </Switch>
-          </div>
-        </Router>
-      </UserContextProvider>
-  );
+            </UserContextProvider>
+          </Switch>
+        </div>
+      </Router>
+);
 }
 
 export default App;

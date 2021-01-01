@@ -10,7 +10,7 @@ import {UserContext} from "../../components/Context/contextProvider"
 
 
 export const Login = ({ handleCloseLogin, openRegister }) => {
-    const {user, setUser} = useContext(UserContext)
+    const {user, setUser} = useState({})
     const history = useHistory();
 
     //Introduce los datos de los inputs en el objeto newUser

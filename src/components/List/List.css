@@ -33,3 +33,8 @@
     align-self: center;
 
 }
+
+.user .profileImage{
+    width:150px;
+    height: auto;
+}
