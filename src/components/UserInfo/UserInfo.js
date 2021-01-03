@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import "./UserInfo.css"
-import {UserContext} from "../../components/Context/contextProvider"
+import {UserContext} from "../UserContext/contextProvider"
 
 
 export default function UserInfo() {

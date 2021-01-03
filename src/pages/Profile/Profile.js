@@ -10,7 +10,7 @@ import { CoverSm } from "../../components/CoverSm/CoverSm";
 import {deleteToken} from "../../utils/LocalStorage.utils"  
 import { useHistory } from "react-router-dom";
 import {HOME} from "../../routes/routes"
-import {UserContext} from "../../components/Context/contextProvider"
+import {UserContext} from "../../components/UserContext/contextProvider"
 
 
 
