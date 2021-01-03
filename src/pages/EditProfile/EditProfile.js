@@ -7,7 +7,7 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
 import { HOME, PROFILE } from '../../routes/routes';
-import {UserContext} from "../../components/Context/contextProvider"
+import {UserContext} from "../../components/UserContext/contextProvider"
 
 
 export const EditProfile = (props) => {
