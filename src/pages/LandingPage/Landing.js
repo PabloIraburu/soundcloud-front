@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import styles from "./Landing.module.css";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";

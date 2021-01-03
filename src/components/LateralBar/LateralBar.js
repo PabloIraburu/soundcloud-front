@@ -13,6 +13,10 @@ export default function LateralBar (){
         if (el !== 'backdrop' && el !== 'fas fa-times' ) return;
         setModalOpen(false);
     }
+    const [entity, setEntity]= useState('')
+    const handleChangePlaylist = (event, key) => {
+        setEntity(event.target.value);
+    }
     return(
         <nav className='navbar'>
                 <ul className="navbar-nav">
@@ -48,7 +52,11 @@ export default function LateralBar (){
                         <UserInfo/>
                     </li>
                     <li className="nav-item">
+<<<<<<< HEAD
                         <a href="/mysongs" className="nav-link">
+=======
+                        <a href="#" className="nav-link" value="song">
+>>>>>>> 8a22be60acc84dddc81d64776d12b2d1d96a5c02
                             <svg
                                 aria-hidden="true"
                                 focusable="false"
@@ -100,7 +108,7 @@ export default function LateralBar (){
                                     ></path>
                                 </g>
                             </svg>
-                            <span className="link-text">Recently played</span>
+                            <span className="link-text">Songs</span>
                         </a>
                     </li>
                     <li className="nav-item">

@@ -32,6 +32,7 @@
     margin-right: 10%;
     width:100%;
     height: 100%;
+    overflow: auto;
 }
 .headMid{
     display: inline-block;
@@ -122,10 +123,16 @@ h2{
     height: auto;
     padding: 20px;
     border-radius: 14px;
-    color: var(--clr-highlightText);
-    background-color: var(--clr-lightBackground);
+    color: var(--clr-dimText);
+    background-color: white;
     border: none;
 }
+
+
+#playlist-label-id, #playlist{
+    color:var(--clr-lightText)
+}
+
 .search MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
     display: none;
 }

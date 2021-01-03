@@ -22,6 +22,7 @@ export default function List () {
      const SimpleSelect = () => {
         const classes = useStyles();
         const handleChange = (event) => {
+            console.log(event.target)
             setEntity(event.target.value);
         };
 
@@ -37,6 +38,8 @@ export default function List () {
                     >
                         <MenuItem value='song'>Songs</MenuItem>
                         <MenuItem value='playlist'>Playlists</MenuItem>
+                        <MenuItem value='user'>Users</MenuItem>
+                        <MenuItem value='style'>Styles</MenuItem>
                     </Select>
                 </FormControl>
             </div>
@@ -54,6 +57,15 @@ export default function List () {
          }
          ServerRequest(`data/playlist/${p._id}` ,'PUT', body)
     }*/
+    const handleAddToPlaylist = (x, plist) =>{
+        console.log(x)
+        console.log(plist)
+        debugger
+    let body = {
+           SongIds:x._id
+         }
+         ServerRequest(`data/playlist/${plist._id}` ,'PUT', body)
+    }
     useEffect(()=>{
         ServerRequest(`data/${entity}` ,'GET')
             .then((response) => {
@@ -80,8 +92,9 @@ export default function List () {
         const handleChangePlaylist = (event) => {
             setPlist(event.target.value);
         }
-        const handleSetPlaylist = () => {
-
+        const deletePlaylist = (x) => {
+            console.log(x)
+            ServerRequest(`data/playlist/${x._id}`, 'DELETE')
         }
 
     return(
@@ -98,7 +111,7 @@ export default function List () {
                                     labelId="playlist-label-id"
                                     id="playlist"
                                     value={plist}
-                                    onChange={handleChangePlaylist}
+                                    onChange={(e) => setPlist(e.target.value)}
                                 >
                                 { playlist.map(p => (
                                     <MenuItem value={p.title} key={p._id}>{p.title}</MenuItem>
@@ -131,9 +144,23 @@ export default function List () {
                                     <span className="link-text">Faves</span>
                                 </a>
                                 {plist && <button
-                                    // onClick={handleAddToFavourites}
+                                    onClick={handleAddToPlaylist}
                                 >Add to {plist}</button>}
                             </>)}
+                        {entity === 'user' && (
+                            <div className='user'>
+                                <a href='#' onClick={()=> setEntity('user')}>{x.name}</a>
+                                <p>{x.email}</p>
+                                <img src={x.image} className='profileImage' alt={x.name}/>
+                                <p>Followers:</p><p>{x.followers.length}</p>
+                                {/*<p>Songs Uploaded</p><p>{x.songsId}</p>*/}
+                                <button>Follow User</button>
+                            </div>
+                        )
+                        }
+                        {entity === 'playlist' && (
+                            <button onClick={deletePlaylist}>Delete Playlist</button>
+                        )}
                     </li>
                 ))}
             </ul>
