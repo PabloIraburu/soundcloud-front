@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import { MyButton } from "../../components/MyButton/MyButton";
@@ -7,22 +7,20 @@ import { Modal } from "../../components/Modal/Modal";
 import { CoverBg } from "../../components/CoverBg/CoverBg";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
-import {deleteToken} from "../../utils/LocalStorage.utils"  
+import { deleteToken } from "../../utils/LocalStorage.utils"
 import { useHistory } from "react-router-dom";
-import {HOME} from "../../routes/routes"
-import {UserContext} from "../../components/UserContext/contextProvider"
-
-
-
+import { HOME } from "../../routes/routes"
+import { UserContext } from "../../components/UserContext/contextProvider"
 
 
 export const Profile = () => {
-  const history = useHistory ()
+  const history = useHistory()
 
-  const signOut= () =>{
-    
-     deleteToken  () ; 
-     history.push(HOME)  }
+  const signOut = () => {
+
+    deleteToken();
+    history.push(HOME)
+  }
 
 
   const ListaSongsFake = [
@@ -92,7 +90,7 @@ export const Profile = () => {
     },
   ];
 
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   // useEffect(() => {
   //   const token = getToken();
@@ -121,7 +119,6 @@ export const Profile = () => {
   };
 
   const handleSubmit = () => { };
-  console.log(user);
 
   return (
     <div className="Profile-wrap">
@@ -161,7 +158,7 @@ export const Profile = () => {
             Upload Song
           </MyButton>
 
-          <MyButton onClick={signOut } variant="pink-or" size="200px">
+          <MyButton onClick={signOut} variant="pink-or" size="200px">
             Sing Out
           </MyButton>
 
