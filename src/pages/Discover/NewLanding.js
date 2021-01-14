@@ -1,20 +1,21 @@
-import React, {useState} from "react"
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useState } from "react"
+// import MenuIcon from '@material-ui/icons/Menu';
 import './NewLanding.css'
 import Search from "../../components/Search/Search";
-import UserInfo from "../../components/UserInfo/UserInfo";
-import {Modal} from "../../components/Modal/Modal";
-import {Register} from "../Register/Register";
+// import UserInfo from "../../components/UserInfo/UserInfo";
+import { Modal } from "../../components/Modal/Modal";
+// import {Register} from "../Register/Register";
 import LateralBar from "../../components/LateralBar/LateralBar";
-import {MyButton} from "../../components/MyButton/MyButton";
-import {Upload} from "../../components/Upload/Upload";
+import { MyButton } from "../../components/MyButton/MyButton";
+import { Upload } from "../../components/Upload/Upload";
 import FollowedUsers from "../../components/FollowedUsers/followedUsers";
 import List from "../../components/List/List";
 
-export default function Discover () {
+export default function Discover() {
 
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+
     //Gestión modal upload
     const handleCloseUpload = (e) => {
         const { className: el } = e.target;
@@ -28,17 +29,17 @@ export default function Discover () {
     };
 
 
-    return(
+    return (
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
-            <LateralBar/>
+            <LateralBar />
             <div className="rightBar">
-                <FollowedUsers/>
+                <FollowedUsers />
             </div>
             <div className='middleBar'>
                 <div className="headMid">
                     <div className="search">
-                        <Search/>
+                        <Search />
                     </div>
                     <div className="notif">
                         <span><i className="fas fa-ambulance"></i></span>
@@ -55,19 +56,19 @@ export default function Discover () {
                                 <h2>SLOWING DANCING IN THE DARK</h2>
                             </div>
                             <div className="images">
-                                <img src="https://www.ismorbo.com/wp-content/uploads/2018/10/40550719_1376357265830478_8906633344016595746_n.jpg" alt=""/>
-                                <img src="https://lab.fm/wp-content/uploads/2020/03/030420-Joji-Run-Tonight-Show-Jimmy-Fallon-YouTube.jpg" alt=""/>
+                                <img src="https://www.ismorbo.com/wp-content/uploads/2018/10/40550719_1376357265830478_8906633344016595746_n.jpg" alt="" />
+                                <img src="https://lab.fm/wp-content/uploads/2020/03/030420-Joji-Run-Tonight-Show-Jimmy-Fallon-YouTube.jpg" alt="" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="bottomFrame">
                     <div className="recommended">
-                        <MyButton onClick={handleOpenUpload}  variant="pink-or" size="150px">
+                        <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">
                             Upload Song
                         </MyButton>
                         <div className="listComp">
-                            <List/>
+                            <List />
                         </div>
                         <div className="title"></div>
                         <div className="gallery">
