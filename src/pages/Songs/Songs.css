@@ -1,0 +1,9 @@
+.Songs-wrap {
+    background-color: var(--clr-darkBackground);
+    height: 100vh;
+    width: auto;
+    display: flex;
+    padding-left: 150px;
+    color: white;
+}
+

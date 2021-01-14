@@ -159,3 +159,54 @@ export const Upload = () => {
 
 // Categorías musicales
 // fuente: https://estilonext.com/cultura/tipos-de-musica-generos-musicales
+
+/*
+//Get songs from DB
+const [songList, setSongList] = useState([]);
+useEffect(() => {
+  ServerRequest("data/song", "GET")
+    .then((response) => setSongList(response))
+    .catch(console.log);
+}, [])
+
+console.log("songList", songList);
+
+//Actualizar backend, sino trackId no funcionará
+// const songsId = songList.map(songId => songId.trackId);
+// console.log("songsId", songsId);
+
+// const trackIds = ["5fc4d698c891ef40a7a07580", "5fc4e79bb0b05e5bc165ef9e"];
+// const [currentTrack, setCurrentTrack] = useState(0);
+
+// const handleClickNext = () => {
+//   if (currentTrack < songsId.length - 1) {
+//     setCurrentTrack(currentTrack + 1);
+//   }
+// };
+
+// const handleClickPrev = () => {
+//   if (currentTrack > 0) {
+//     setCurrentTrack(currentTrack - 1);
+//   }
+// };
+
+
+        <audio controls="controls">
+           <source src="track.ogg" type="audio/ogg" />
+          <source src={`http://localhost:3300/track/${songsId[currentTrack]}`} type="audio/mpeg" />
+          <source src="2 - N'to - Ayahuasca.mp3" type="audio/mpeg" />
+        </audio>
+
+              <div className={styles["Landing-player"]}>
+        <AudioPlayer
+          // autoPlay
+          onClickNext={handleClickNext}
+          onClickPrevious={handleClickPrev}
+          showSkipControls={true}
+          showJumpControls={false}
+          src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"
+          src={`http://localhost:3300/track/${songsId[currentTrack]}`}
+        />
+      </div>
+
+*/
