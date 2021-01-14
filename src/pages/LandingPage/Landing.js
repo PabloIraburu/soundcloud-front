@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Landing.module.css";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
-import { Upload } from "../../components/Upload/Upload";
+// import { Upload } from "../../components/Upload/Upload";
 import logo from "../../img/logo.png";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
