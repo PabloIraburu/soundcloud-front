@@ -202,3 +202,27 @@
 .solar #solarIcon {
     display: block;
 }
+
+
+.navBar-logo-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-right: 30px; */
+  }
+  
+.navBar-logo {
+  width: 80px;
+  height: 80px;
+  /* display: inline; */
+  /* margin-left: 30px; */
+}
+
+.navBar-logo-text {
+  color: var(--or);
+  padding-left: 10px;
+  font-size: 1.5rem;
+  font-family: "Raleway", sans-serif;
+  text-decoration: none;
+}

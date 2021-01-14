@@ -11,6 +11,7 @@ import { deleteToken } from "../../utils/LocalStorage.utils"
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../routes/routes"
 import { UserContext } from "../../components/UserContext/contextProvider"
+import LateralBar from "../../components/LateralBar/LateralBar";
 
 
 export const Profile = () => {
@@ -122,6 +123,7 @@ export const Profile = () => {
 
   return (
     <div className="Profile-wrap">
+      <LateralBar />
       <div className="Lateral-menu">
         <h3>{user.name}</h3>
       </div>

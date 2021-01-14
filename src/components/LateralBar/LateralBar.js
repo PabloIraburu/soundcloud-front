@@ -1,8 +1,11 @@
 import UserInfo from "../UserInfo/UserInfo";
-import React, {useState} from "react";
-import {Modal} from "../Modal/Modal";
-import Playlist from "../Playlist/playlist";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import * as route from "../../routes/routes";
+import { Modal } from "../Modal/Modal";
 import "./LateralBar.css"
+import logo from "../../img/logo.png";
+
 
 export default function LateralBar() {
     const [modalOpen, setModalOpen] = useState(false)
@@ -22,9 +25,17 @@ export default function LateralBar() {
     return (
         <nav className='navbar'>
             <ul className="navbar-nav">
+
+
+                {/* Logo encabezado */}
                 <li className="logo">
+
                     <a href="#" className="nav-link">
-                        <span className="link-text logo-text">SoundMist</span>
+                        <div className="navBar-logo-section">
+                            <img src={logo} className="navBar-logo" alt="logo" />
+                            <a href='/discover' className="navBar-logo-text">SoundMist</a>
+                        </div>
+                        {/* <span className="link-text logo-text">SoundMist</span> */}
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -50,9 +61,16 @@ export default function LateralBar() {
                         </svg>
                     </a>
                 </li>
+
+                {/* User Profile */}
+
                 <li className="nav-item-card">
-                    <UserInfo />
+                    <NavLink exact activeClassName="activeNav" to={route.DISCOVER}>
+                        <UserInfo />
+                    </NavLink>
                 </li>
+
+                {/* Recommended */}
                 <li className="nav-item">
                     <a href="#" className="nav-link" value="song">
                         <svg
@@ -78,9 +96,14 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        <span className="link-text">Recommended</span>
+                        {/* <span className="link-text">Recommended</span> */}
+                        <NavLink exact activeClassName="activeNav" to={route.RECOMMENDED}>
+                            Recommended
+                        </NavLink>
                     </a>
                 </li>
+
+
                 <li className="nav-item">
                     <a href="#" className="nav-link">
                         <svg
@@ -106,7 +129,10 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        <span className="link-text">Songs</span>
+                        {/* <span className="link-text">Songs</span> */}
+                        <NavLink exact activeClassName="activeNav" to={route.SONGS}>
+                            Songs
+                        </NavLink>
                     </a>
                 </li>
                 <li className="nav-item">
@@ -134,7 +160,10 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        <span className="link-text">Favourites</span>
+                        {/* <span className="link-text">Favourites</span> */}
+                        <NavLink exact activeClassName="activeNav" to={route.FAVOURITES}>
+                            Favourites
+                        </NavLink>
                     </a>
                 </li>
                 <li className="nav-item">
@@ -162,7 +191,10 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        <span className="link-text">Playlists</span>
+                        {/* <span className="link-text">Playlists</span> */}
+                        <NavLink exact activeClassName="activeNav" to={route.PLAYLISTS}>
+                            Playlist
+                        </NavLink>
                     </a>
                 </li>
 
