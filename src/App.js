@@ -17,7 +17,7 @@ import Discover from "./pages/Discover/NewLanding";
 import { Library } from "./pages/Library/Library";
 import { Upload } from "./components/Upload/Upload";
 import {MySongs} from "./pages/MySongs/MySongs";
-import {UserContextProvider} from "./components/Context/contextProvider";
+import {UserContextProvider} from "./components/UserContext/contextProvider";
 
 function App() {
   const [isLogged, setIsLogged] = useState(true);

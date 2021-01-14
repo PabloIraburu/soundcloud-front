@@ -93,9 +93,9 @@ export default function List () {
             setPlist(event.target.value);
         }
         const deletePlaylist = (x) => {
-            console.log(x)
-            ServerRequest(`data/playlist/${x._id}`, 'DELETE')
+            // ServerRequest(`data/playlist/${x._id}`, 'DELETE')
         }
+
 
     return(
         <div>
@@ -103,21 +103,35 @@ export default function List () {
             <ul className='list'>
                 {list && list.map((x) => (
                     <li key={x._id}>
-                        <a href="#" >{x.title}</a>
+                        <a onClick={()=> {
+                            ServerRequest(`data/${entity}/${x._id}`, 'GET').then((response) => {
+                                if (!response.message) {
+                                    console.log(response.songIds)
+                                }
+                            })
+                                .catch((response) => console.log(response.error))
+                        }}>{x.title}</a>
                         {entity === 'song' && (
                             <>
                                 <InputLabel id="playlist-label-id">Playlist</InputLabel>
                                 <Select
                                     labelId="playlist-label-id"
                                     id="playlist"
-                                    value={plist}
+                                    value={plist.title}
                                     onChange={(e) => setPlist(e.target.value)}
                                 >
+                                    {/*Map de los playlists para el dropdown*/}
+                                    {/* Cómo coger todo el objeto y no solo el nombre */}
                                 { playlist.map(p => (
-                                    <MenuItem value={p.title} key={p._id}>{p.title}</MenuItem>
+                                    <MenuItem value={p} key={p._id} name={p.title} >{p.title}</MenuItem>
                                 ))}
                                 </Select>
-                                <a href="#" className="nav-link">
+                                <a href="#" className="nav-link"  onClick={()=>{
+                                    const body ={
+                                        songIds: x._id
+                                    }
+                                    ServerRequest(`data/playlist/5ff1e05b804a765003907fd5`, 'PUT', body)
+                                }}>
                                     <svg
                                         aria-hidden="true"
                                         focusable="false"
@@ -144,22 +158,35 @@ export default function List () {
                                     <span className="link-text">Faves</span>
                                 </a>
                                 {plist && <button
-                                    onClick={handleAddToPlaylist}
-                                >Add to {plist}</button>}
+                                    onClick={()=>{
+                                        const body ={
+                                            songIds: x._id
+                                        }
+                                        ServerRequest(`data/playlist/${plist._id}`, 'PUT', body)
+                                    }}
+                                >Add to {plist.title}</button>}
                             </>)}
                         {entity === 'user' && (
                             <div className='user'>
                                 <a href='#' onClick={()=> setEntity('user')}>{x.name}</a>
                                 <p>{x.email}</p>
                                 <img src={x.image} className='profileImage' alt={x.name}/>
-                                <p>Followers:</p><p>{x.followers.length}</p>
-                                {/*<p>Songs Uploaded</p><p>{x.songsId}</p>*/}
-                                <button>Follow User</button>
+                                {/*Habría que poner el lenght de los arrays*/}
+                                <p>Followers:</p><p>{x.followerIds}</p>
+                                <p>Songs Uploaded</p><p>{x.songIds}</p>
+                                <button onClick={()=>{
+                                    // Need to get Logged user id
+                                    const body ={
+                                        following: x._id
+                                    }
+                                    ServerRequest(`data/user/5fc423f57afb7223f5486c9f`, 'PUT', body)
+                                }}>Follow User</button>
+                                <button>Unfollow User</button>
                             </div>
                         )
                         }
                         {entity === 'playlist' && (
-                            <button onClick={deletePlaylist}>Delete Playlist</button>
+                            <button onClick={deletePlaylist(x)}>Delete Playlist</button>
                         )}
                     </li>
                 ))}

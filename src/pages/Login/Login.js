@@ -6,7 +6,7 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { DISCOVER } from '../../routes/routes';
 import "./Login.css";
-import {UserContext} from "../../components/Context/contextProvider"
+import {UserContext} from "../../components/UserContext/contextProvider"
 
 
 export const Login = ({ handleCloseLogin, openRegister }) => {
