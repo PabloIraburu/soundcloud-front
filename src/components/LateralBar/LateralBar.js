@@ -1,6 +1,7 @@
 import UserInfo from "../UserInfo/UserInfo";
-import React, { useState } from "react";
-import { Modal } from "../Modal/Modal";
+import React, {useState} from "react";
+import {Modal} from "../Modal/Modal";
+import Playlist from "../Playlist/playlist";
 import "./LateralBar.css"
 
 export default function LateralBar() {
@@ -250,6 +251,7 @@ export default function LateralBar() {
                 <Modal handleClose={handleCloseFav}>
                     <p>Playlist</p>
                 </Modal>}
+
         </nav>
     )
 }
