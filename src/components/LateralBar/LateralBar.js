@@ -137,7 +137,6 @@ export default function LateralBar() {
                         <span className="link-text">Favourites</span>
                     </a>
                 </li>
-
                 <li className="nav-item">
                     <a href="#" className="nav-link" onClick={handleOpenModal}>
                         <svg
