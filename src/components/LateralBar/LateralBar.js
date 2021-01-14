@@ -50,13 +50,12 @@ export default function LateralBar (){
                     </li>
                     <li className="nav-item-card">
                         <UserInfo/>
+                        </li>
+                    <li className="nav-item-card">
+                        <UserInfo/>
                     </li>
                     <li className="nav-item">
-<<<<<<< HEAD
-                        <a href="/mysongs" className="nav-link">
-=======
                         <a href="#" className="nav-link" value="song">
->>>>>>> 8a22be60acc84dddc81d64776d12b2d1d96a5c02
                             <svg
                                 aria-hidden="true"
                                 focusable="false"

@@ -9,25 +9,27 @@ import styles from "./MySongs.module.css";
 export const MySongs = () => {
 
 
-    const [tracks, setTracks] = useState([])
+    const [songs, setSongs] = useState([])
 
     {/*useEffect(() => {
         const token = getToken();
         const decodedToken = DecodeToken(token);
         const userId = decodedToken.id;
     
-        ServerRequest(`data/user/${userId}`, "GET")
+        ServerRequest(`data/mysongs`, "GET")
           .then((response) => {
-            setUser(response);
+              if (!response.message) {
+                    setSongs(response);
+              }
           })
-          .catch(console.log);
+          .catch((response) => console.log(response.error))
       }, []);*/}
 
 
 
     return (
         <div className={styles["mysongs"]}>
-            <h1>Editar y apagar songs</h1>
+            <h1>Edit and delete songs</h1>
             <div className={styles["mysongs-buttons-section"]}>
                 <div className={styles["mysongs-buttons"]}>
                     <MyButton variant="pink-or" size="150px">
