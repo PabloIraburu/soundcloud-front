@@ -5,7 +5,7 @@ import { MyButton } from "../../components/MyButton/MyButton";
 import { Register } from "../../pages/Register/Register";
 import { Login } from "../../pages/Login/Login";
 import logo from "../../img/logo.png";
-import "react-h5-audio-player/lib/styles.css";
+// import "react-h5-audio-player/lib/styles.css";
 
 export const Landing = () => {
   //Gestión modal registro
