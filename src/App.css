@@ -42,7 +42,6 @@ body {
 
 .MainRouter-wrap {
   padding: 120px 150px 60px 200px;
-  width: 100%;
   height: 100vh;
   overflow: auto;
   background-color: var(--clr-darkBackground);

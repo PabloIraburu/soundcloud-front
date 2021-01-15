@@ -167,3 +167,10 @@ h2 {
     display: none;
   }
 }
+
+.Discover-albums {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

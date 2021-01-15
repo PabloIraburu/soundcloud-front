@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import Search from "../../components/search/Search";
+import Search from "../../components/Search/Search";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
 // import FollowedUsers from "../../components/FollowedUsers/followedUsers";
 import List from "../../components/List/List";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import {ListaSongsFake} from "../../data/fakeSongs";
+import { ListaSongsFake } from "../../data/fakeSongs";
 import './Discover.css'
 
 export default function Discover() {
@@ -70,27 +70,27 @@ export default function Discover() {
                 </div>
 
                 <h3>Recommended for you</h3>
-                <div className="CoversMd-wrap-profile">
+                <div className="Discover-albums">
                     {ListaSongsFake.map((song) => (
                         <CoverMd
-                          key={song._id}
-                          title={song.title}
-                          categories={song.categories}
-                          author={song.author}
-                          img={song.img}
+                            key={song._id}
+                            title={song.title}
+                            categories={song.categories}
+                            author={song.author}
+                            img={song.img}
                         />
                     ))}
                 </div>
-                
+
                 <h3>World's Top 100</h3>
-                <div className="CoversMd-wrap-profile">
+                <div className="Discover-albums">
                     {ListaSongsFake.map((song) => (
                         <CoverMd
-                          key={song._id}
-                          title={song.title}
-                          categories={song.categories}
-                          author={song.author}
-                          img={song.img}
+                            key={song._id}
+                            title={song.title}
+                            categories={song.categories}
+                            author={song.author}
+                            img={song.img}
                         />
                     ))}
                 </div>
