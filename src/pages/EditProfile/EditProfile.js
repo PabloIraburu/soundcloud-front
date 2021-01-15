@@ -79,26 +79,30 @@ export const EditProfile = (props) => {
   const goBackTo = () => history.goBack();
 
   return (
-    <div className="Profile-wrap">
+    <>
 
-      <div className="Profile-content">
+      <div className="EditProfile-content">
         <div className="EditProfile-header">
           <h3>Edit my account</h3>
           <p onClick={goBackTo} className="backToProfile"> Back to profile ></p>
         </div>
-        <span>
-          <p>Name</p>
-          <Input type={"text"} name={"name"} onChange={handleInput} placeholder={user.name} />
-        </span>
-        <span>
-          <p>Email</p>
-          <Input type={"email"} name={"email"} onChange={handleInput} placeholder={user.email} />
-        </span>
-        <span>
-          <p>Picture</p>
-          <Input type={"text"} name={"image"} onChange={handleInput} placeholder="Url of profile picture" />
-        </span>
-        <div className="buttons-section">
+
+        <div className="EditProfile-inputs-section">
+          <span>
+            <p>Name</p>
+            <Input type={"text"} name={"name"} onChange={handleInput} placeholder={user.name} />
+          </span>
+          <span>
+            <p>Email</p>
+            <Input type={"email"} name={"email"} onChange={handleInput} placeholder={user.email} />
+          </span>
+          <span>
+            <p>Picture</p>
+            <Input type={"text"} name={"image"} onChange={handleInput} placeholder="Url of profile picture" />
+          </span>
+        </div>
+
+        <div className="EditProfile-buttons-section">
           <MyButton onClick={handleOpenPass} variant="white" size="30%">Change Password</MyButton>
           <MyButton onClick={handleOpenDelete} variant="white" size="30%">Delete Account</MyButton>
         </div>
@@ -120,13 +124,13 @@ export const EditProfile = (props) => {
         <Modal handleClose={handleCloseDelete}>
           <h3 className="modal-h3">Delete Account</h3>
           <p className="modal-p">You will not be able to undo this action. Are you sure you want to delete your account?</p>
-          <span className="buttons-section">
+          <span className="EditProfile-buttons-section">
             <MyButton onClick={handleDelete} variant="darkBlue" size="45%">Delete Account</MyButton>
             <MyButton onClick={handleOpenDelete} variant="pink-or" size="45%">Cancel</MyButton>
           </span>
         </Modal>
       }
-    </div >
+    </ >
   )
 }
 
