@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect, useRef } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import LateralBar from '../../components/LateralBar/LateralBar';
 import { SongList } from "../../components/SongList/SongList";
 import { songReducer } from "../../components/SongReducer/songReducer";
 import "./Songs.css";
@@ -14,8 +13,6 @@ const init = () => {
 export const Songs = () => {
 
     const [songs, dispatch] = useReducer(songReducer, [], init);
-
-
 
     useEffect(() => {
         //actualizar, esto no está bien
@@ -57,7 +54,6 @@ export const Songs = () => {
 
     return (
         <>
-            <LateralBar />
             <div className="Songs-wrap">
                 <h1>Songs</h1>
                 <div className="add-list-options">

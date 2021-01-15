@@ -26,16 +26,12 @@ export default function LateralBar() {
         <nav className='navbar'>
             <ul className="navbar-nav">
 
-
-                {/* Logo encabezado */}
                 <li className="logo">
-
                     <a href="#" className="nav-link">
                         <div className="navBar-logo-section">
                             <img src={logo} className="navBar-logo" alt="logo" />
                             <a href='/discover' className="navBar-logo-text">SoundMist</a>
                         </div>
-                        {/* <span className="link-text logo-text">SoundMist</span> */}
                         <svg
                             aria-hidden="true"
                             focusable="false"

@@ -3,7 +3,7 @@ import * as route from "../routes/routes";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import LateralBar from "../components/LateralBar/LateralBar";
-import Discover from "../pages/Discover/NewLanding";
+import Discover from "../pages/Discover/Discover";
 import { Profile } from "../pages/Profile/Profile";
 import { EditProfile } from "../pages/EditProfile/EditProfile";
 import { Songs } from "../pages/Songs/Songs";
@@ -28,7 +28,7 @@ const PrivateRoute = ({ component: Component, path }) => (
   return (
     <>
       <LateralBar />
-      <div className="">
+      <div className="MainRouter-wrap">
         <Switch>
             <PrivateRoute exact path={route.DISCOVER} component={Discover} />
             <PrivateRoute exact path={route.ALBUMS} component={Albums} />
