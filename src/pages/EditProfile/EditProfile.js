@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import './EditProfile.css';
 import { useHistory } from "react-router-dom";
 import { setJWT } from "../../utils/LocalStorage.utils";
@@ -7,7 +7,7 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
 import { HOME, PROFILE } from '../../routes/routes';
-import {UserContext} from "../../components/UserContext/contextProvider"
+import {UserContext} from "../../contexts/UserContext/contextProvider"
 
 
 export const EditProfile = (props) => {
@@ -34,11 +34,6 @@ export const EditProfile = (props) => {
     if (el !== 'backdrop' && el !== 'fas fa-times') return;
     setOpenModalDelete(!openModalDelete);
   }
-
-  //Recoje los datos del usuario del fetch realizado en userProfile
-  useEffect(() => {
-    setUser(props.location.state.user);
-  }, []);
 
   // Maneja el estado del formulario:
   const handleInput = (event) => {
@@ -80,19 +75,16 @@ export const EditProfile = (props) => {
       .catch((response) => props.history.push(HOME));
   };
 
-  // Volver a página perfil
-  const backToProfile = () => props.history.push(PROFILE);
+  // Volver a la página anterior
+  const goBackTo = () => history.goBack();
 
   return (
     <div className="Profile-wrap">
-      <div className="Lateral-menu">
-        <h3>{user.name}</h3>
-      </div>
 
       <div className="Profile-content">
         <div className="EditProfile-header">
           <h3>Edit my account</h3>
-          <p onClick={backToProfile} className="backToProfile"> Back to profile ></p>
+          <p onClick={goBackTo} className="backToProfile"> Back to profile ></p>
         </div>
         <span>
           <p>Name</p>

@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, { useState} from 'react';
 import { useHistory } from "react-router-dom";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { setJWT } from "../../utils/LocalStorage.utils";
@@ -6,7 +6,6 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { DISCOVER } from '../../routes/routes';
 import "./Login.css";
-import {UserContext} from "../../components/UserContext/contextProvider"
 
 
 export const Login = ({ handleCloseLogin, openRegister }) => {
@@ -23,10 +22,12 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
     }
 
     const handleSubmit = () => {
+
         //Petición al servidor de tipo POST - fetch localhost:3300/register
         ServerRequest("login", "POST", user)
             .then((response) => {
                 setJWT(response.token);
+
                 //Manda al usuario a la home tras el registro completado
                 history.push(DISCOVER);
             })

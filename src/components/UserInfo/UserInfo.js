@@ -1,15 +1,14 @@
 import React, {useContext} from 'react'
 import "./UserInfo.css"
-import {UserContext} from "../UserContext/contextProvider"
+import {UserContext} from "../../contexts/UserContext/contextProvider"
 
 
 export default function UserInfo() {
 const {user} = useContext(UserContext)
-    console.log(user)
 
     return(
         <a className='userCard' href='/profile'>
-            <img src="https://media-exp1.licdn.com/dms/image/C4D03AQHclFQplwf2dg/profile-displayphoto-shrink_400_400/0?e=1611792000&v=beta&t=d9rXAfR4Sa_hOVeEUqIHgJn2FQLNMtqCbahfzRZDBVs" alt="foto"/>
+            <img src={user.image} alt="foto"/>
             <div className="text">
                 <div className="identity">
                     <h1 className='Name'>{user.name}</h1>
