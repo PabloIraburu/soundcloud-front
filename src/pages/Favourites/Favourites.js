@@ -1,8 +1,8 @@
 import React from 'react';
-import { CoverBg } from "../../components/CoverBg/CoverBg";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ListaSongsFake } from "../../data/fakeSongs";
+import styles from './Favourites.module.css';
 
 export const Favourites = () => {
 
@@ -10,9 +10,10 @@ export const Favourites = () => {
     <>
       <h1>Favourites</h1>
 
-      <div className="CoversBg-wrap-profile">
+      <h3>Favourite songs</h3>
+      <div className={styles["Favourites-songs"]}>
         {ListaSongsFake.map((song) => (
-          <CoverBg
+          <CoverSm
             key={song._id}
             title={song.title}
             categories={song.categories}
@@ -22,7 +23,8 @@ export const Favourites = () => {
         ))}
       </div>
 
-      <div className="CoversMd-wrap-profile">
+      <h3>Favourite Playlists</h3>
+      <div className={styles["Favourites-playlists"]}>
         {ListaSongsFake.map((song) => (
           <CoverMd
             key={song._id}
@@ -34,9 +36,10 @@ export const Favourites = () => {
         ))}
       </div>
 
-      <div className="CoversMd-wrap-profile">
+      <h3>Favourite Albums</h3>
+      <div className={styles["Favourites-albums"]}>
         {ListaSongsFake.map((song) => (
-          <CoverSm
+          <CoverMd
             key={song._id}
             title={song.title}
             categories={song.categories}
