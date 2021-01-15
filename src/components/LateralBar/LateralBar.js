@@ -6,25 +6,35 @@ import UserInfo from "../UserInfo/UserInfo";
 import { Modal } from "../Modal/Modal";
 import { MyButton } from "../MyButton/MyButton";
 import { Upload } from "../Upload/Upload";
+import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
+
 import "./LateralBar.css"
 
 
 export default function LateralBar() {
-    const [modalOpen, setModalOpen] = useState(false)
-    const handleOpenModal = () => {
-        setModalOpen(true)
-    }
-    const handleCloseFav = (e) => {
-        const { className: el } = e.target;
-        if (el !== 'backdrop' && el !== 'fas fa-times') return;
-        setModalOpen(false);
-    }
-    const [entity, setEntity] = useState('')
-    const handleChangePlaylist = (event, key) => {
-        setEntity(event.target.value);
-    }
+    // const [modalOpen, setModalOpen] = useState(false)
+    // const handleOpenModal = () => {
+    //     setModalOpen(true)
+    // }
+    // const handleCloseFav = (e) => {
+    //     const { className: el } = e.target;
+    //     if (el !== 'backdrop' && el !== 'fas fa-times') return;
+    //     setModalOpen(false);
+    // }
+    // const [entity, setEntity] = useState('')
+    // const handleChangePlaylist = (event, key) => {
+    //     setEntity(event.target.value);
+    // }
 
-    
+    //Gestión modal CreatePlaylist
+    const [openModalCreatePlaylist, setOpenModalCreatePlaylist] = useState(false);
+    const handleOpenCreatePlaylist = () => setOpenModalCreatePlaylist(!openModalCreatePlaylist);
+    const handleCloseCreatePlaylist = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalCreatePlaylist(!openModalCreatePlaylist);
+    };
+
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
@@ -33,6 +43,7 @@ export default function LateralBar() {
         if (el !== "backdrop" && el !== "fas fa-times") return;
         setOpenModalUpload(!openModalUpload);
     };
+
 
     return (
         <nav className='navbar'>
@@ -198,36 +209,69 @@ export default function LateralBar() {
                     </Link>
                 </li>
 
+                {/* UPLOAD BUTTON */}
                 <li className="nav-item">
                     <p className="nav-link" onClick={handleOpenUpload}>
                         <svg
-                                aria-hidden="true"
-                                focusable="false"
-                                data-prefix="fad"
-                                data-icon="space-shuttle"
-                                role="img"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 640 512"
-                                className="svg-inline--fa fa-space-shuttle fa-w-20 fa-5x"
-                            >
-                                <g className="fa-group">
-                                    <path
-                                        fill="currentColor"
-                                        d="M32 416c0 35.35 21.49 64 48 64h16V352H32zm154.54-232h280.13L376 168C243 140.59 222.45 51.22 128 34.65V160h18.34a45.62 45.62 0 0 1 40.2 24zM32 96v64h64V32H80c-26.51 0-48 28.65-48 64zm114.34 256H128v125.35C222.45 460.78 243 371.41 376 344l90.67-16H186.54a45.62 45.62 0 0 1-40.2 24z"
-                                        className="fa-secondary"
-                                    ></path>
-                                    <path
-                                        fill="currentColor"
-                                        d="M592.6 208.24C559.73 192.84 515.78 184 472 184H186.54a45.62 45.62 0 0 0-40.2-24H32c-23.2 0-32 10-32 24v144c0 14 8.82 24 32 24h114.34a45.62 45.62 0 0 0 40.2-24H472c43.78 0 87.73-8.84 120.6-24.24C622.28 289.84 640 272 640 256s-17.72-33.84-47.4-47.76zM488 296a8 8 0 0 1-8-8v-64a8 8 0 0 1 8-8c31.91 0 31.94 80 0 80z"
-                                        className="fa-primary"
-                                    ></path>
-                                </g>
-                            </svg>
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fad"
+                            data-icon="space-shuttle"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 512"
+                            className="svg-inline--fa fa-space-shuttle fa-w-20 fa-5x"
+                        >
+                            <g className="fa-group">
+                                <path
+                                    fill="currentColor"
+                                    d="M32 416c0 35.35 21.49 64 48 64h16V352H32zm154.54-232h280.13L376 168C243 140.59 222.45 51.22 128 34.65V160h18.34a45.62 45.62 0 0 1 40.2 24zM32 96v64h64V32H80c-26.51 0-48 28.65-48 64zm114.34 256H128v125.35C222.45 460.78 243 371.41 376 344l90.67-16H186.54a45.62 45.62 0 0 1-40.2 24z"
+                                    className="fa-secondary"
+                                ></path>
+                                <path
+                                    fill="currentColor"
+                                    d="M592.6 208.24C559.73 192.84 515.78 184 472 184H186.54a45.62 45.62 0 0 0-40.2-24H32c-23.2 0-32 10-32 24v144c0 14 8.82 24 32 24h114.34a45.62 45.62 0 0 0 40.2-24H472c43.78 0 87.73-8.84 120.6-24.24C622.28 289.84 640 272 640 256s-17.72-33.84-47.4-47.76zM488 296a8 8 0 0 1-8-8v-64a8 8 0 0 1 8-8c31.91 0 31.94 80 0 80z"
+                                    className="fa-primary"
+                                ></path>
+                            </g>
+                        </svg>
                         <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">
                             Upload Song
                         </MyButton>
                     </p>
-                </li> 
+                </li>
+
+                {/* CREATE PLAYLIST */}
+                <li className="nav-item">
+                    <p className="nav-link" onClick={handleOpenCreatePlaylist}>
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fad"
+                            data-icon="space-shuttle"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 512"
+                            className="svg-inline--fa fa-space-shuttle fa-w-20 fa-5x"
+                        >
+                            <g className="fa-group">
+                                <path
+                                    fill="currentColor"
+                                    d="M32 416c0 35.35 21.49 64 48 64h16V352H32zm154.54-232h280.13L376 168C243 140.59 222.45 51.22 128 34.65V160h18.34a45.62 45.62 0 0 1 40.2 24zM32 96v64h64V32H80c-26.51 0-48 28.65-48 64zm114.34 256H128v125.35C222.45 460.78 243 371.41 376 344l90.67-16H186.54a45.62 45.62 0 0 1-40.2 24z"
+                                    className="fa-secondary"
+                                ></path>
+                                <path
+                                    fill="currentColor"
+                                    d="M592.6 208.24C559.73 192.84 515.78 184 472 184H186.54a45.62 45.62 0 0 0-40.2-24H32c-23.2 0-32 10-32 24v144c0 14 8.82 24 32 24h114.34a45.62 45.62 0 0 0 40.2-24H472c43.78 0 87.73-8.84 120.6-24.24C622.28 289.84 640 272 640 256s-17.72-33.84-47.4-47.76zM488 296a8 8 0 0 1-8-8v-64a8 8 0 0 1 8-8c31.91 0 31.94 80 0 80z"
+                                    className="fa-primary"
+                                ></path>
+                            </g>
+                        </svg>
+                        <MyButton onClick={handleOpenCreatePlaylist} variant="pink-or" size="150px">
+                            <p>CreatePlaylist</p>
+                        </MyButton>
+                    </p>
+                </li>
 
                 {/* BOTTOM ICONS */}
                 <li className="nav-item" id="themeButton">
@@ -258,7 +302,7 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        
+
                         {/* ICONO 2 */}
                         <svg
                             className="theme-icon"
@@ -285,7 +329,7 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        
+
                         {/* ICONO 3 */}
                         <svg
                             className="theme-icon"
@@ -316,11 +360,12 @@ export default function LateralBar() {
                 </li>
 
             </ul>
-            {modalOpen &&
-                <Modal handleClose={handleCloseFav}>
-                    <p>Playlist</p>
+            {openModalCreatePlaylist &&
+                <Modal handleClose={handleCloseCreatePlaylist}>
+
+                    <CreatePlaylist />
                 </Modal>}
-            
+
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
                     <Upload />

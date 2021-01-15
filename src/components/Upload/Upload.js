@@ -9,6 +9,7 @@ import { getToken } from "../../utils/LocalStorage.utils";
 export const Upload = () => {
   const [song, setSong] = useState({});
   const fileInputEl = useRef(null);
+  // const { user } = userCon
   // const history = useHistory();
 
   //Introduce los datos de los inputs en el objeto newUser
@@ -17,6 +18,7 @@ export const Upload = () => {
     setSong((prevValue) => ({
       ...prevValue,
       [name]: value,
+      // userId: 
     }));
   };
 
