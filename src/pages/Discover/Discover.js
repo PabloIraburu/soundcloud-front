@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Search from "../../components/Search/Search";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
@@ -8,6 +7,7 @@ import List from "../../components/List/List";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { ListaSongsFake } from "../../data/fakeSongs";
 import './Discover.css'
+import Search from "../../components/Search/Search";
 
 export default function Discover() {
 
