@@ -19,5 +19,6 @@ export const UserContextProvider = ({children}) => {
             })
             .catch(console.log);
     }, []);
+    
     return <UserContext.Provider value={{user, setUser}}>{children}</UserContext.Provider>
 }
