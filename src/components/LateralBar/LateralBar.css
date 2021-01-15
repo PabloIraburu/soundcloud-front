@@ -40,7 +40,8 @@
   display: flex;
   align-items: center;
   height: 5rem;
-  color: var(--text-primary);
+  /* color: var(--lightGrey); */
+  /* color: var(--text-primary); */
   text-decoration: none;
   filter: grayscale(100%) opacity(0.7);
   transition: var(--transition-speed);
@@ -49,7 +50,7 @@
 .nav-link:hover {
   filter: grayscale(0%) opacity(1);
   background: var(--bg-secondary);
-  color: var(--text-secondary);
+  color: var(--or);
 }
 
 .link-text {
@@ -64,11 +65,11 @@
 }
 
 .fa-primary {
-  color: #ff7eee;
+  color: var(--or);
 }
 
 .fa-secondary {
-  color: #df49a6;
+  color: rgb(225, 147, 3);
 }
 
 .fa-primary,
@@ -220,5 +221,10 @@
   padding-left: 10px;
   font-size: 1.5rem;
   font-family: "Raleway", sans-serif;
+  text-decoration: none;
+}
+
+.navbar a {
+  color: var(--or);
   text-decoration: none;
 }
