@@ -1,10 +1,12 @@
-import UserInfo from "../UserInfo/UserInfo";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as route from "../../routes/routes";
-import { Modal } from "../Modal/Modal";
-import "./LateralBar.css"
 import logo from "../../img/logo.png";
+import UserInfo from "../UserInfo/UserInfo";
+import { Modal } from "../Modal/Modal";
+import { MyButton } from "../MyButton/MyButton";
+import { Upload } from "../Upload/Upload";
+import "./LateralBar.css"
 
 
 export default function LateralBar() {
@@ -22,12 +24,23 @@ export default function LateralBar() {
         setEntity(event.target.value);
     }
 
+    
+    //Gestión modal upload
+    const [openModalUpload, setOpenModalUpload] = useState(false);
+    const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+    const handleCloseUpload = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalUpload(!openModalUpload);
+    };
+
     return (
         <nav className='navbar'>
             <ul className="navbar-nav">
 
+                {/* Logo Section */}
                 <li className="logo">
-                    <a href="#" className="nav-link">
+                    <div className="nav-link">
                         <div className="navBar-logo-section">
                             <img src={logo} className="navBar-logo" alt="logo" />
                             <a href='/discover' className="navBar-logo-text">SoundMist</a>
@@ -55,20 +68,19 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                    </a>
+                    </div>
                 </li>
 
-                {/* User Profile */}
-
+                {/* User Profile Section */}
                 <li className="nav-item-card">
-                    <NavLink exact activeClassName="activeNav" to={route.DISCOVER}>
+                    <Link exact to={route.PROFILE}>
                         <UserInfo />
-                    </NavLink>
+                    </Link>
                 </li>
 
-                {/* Recommended */}
+                {/* ALBUMS */}
                 <li className="nav-item">
-                    <a href="#" className="nav-link" value="song">
+                    <Link exact to={route.ALBUMS} className="nav-link">
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -92,16 +104,13 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        {/* <span className="link-text">Recommended</span> */}
-                        <NavLink exact activeClassName="activeNav" to={route.RECOMMENDED}>
-                            Recommended
-                        </NavLink>
-                    </a>
+                            Albums
+                    </Link>
                 </li>
 
-
+                {/* PLAYLISTS */}
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <Link exact to={route.PLAYLISTS} className="nav-link">
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -125,14 +134,13 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        {/* <span className="link-text">Songs</span> */}
-                        <NavLink exact activeClassName="activeNav" to={route.SONGS}>
-                            Songs
-                        </NavLink>
-                    </a>
+                            Playlists
+                    </Link>
                 </li>
+
+                {/* FAVOURITES */}
                 <li className="nav-item">
-                    <a href="#" className="nav-link">
+                    <Link exact to={route.FAVOURITES} className="nav-link">
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -156,14 +164,13 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        {/* <span className="link-text">Favourites</span> */}
-                        <NavLink exact activeClassName="activeNav" to={route.FAVOURITES}>
                             Favourites
-                        </NavLink>
-                    </a>
+                    </Link>
                 </li>
+
+                {/* RECOMMENDED */}
                 <li className="nav-item">
-                    <a href="#" className="nav-link" onClick={handleOpenModal}>
+                    <Link exact to={route.RECOMMENDED} className="nav-link">
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -187,15 +194,45 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        {/* <span className="link-text">Playlists</span> */}
-                        <NavLink exact activeClassName="activeNav" to={route.PLAYLISTS}>
-                            Playlist
-                        </NavLink>
-                    </a>
+                            Recommended
+                    </Link>
                 </li>
 
+                <li className="nav-item">
+                    <p className="nav-link" onClick={handleOpenUpload}>
+                        <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                data-prefix="fad"
+                                data-icon="space-shuttle"
+                                role="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 640 512"
+                                className="svg-inline--fa fa-space-shuttle fa-w-20 fa-5x"
+                            >
+                                <g className="fa-group">
+                                    <path
+                                        fill="currentColor"
+                                        d="M32 416c0 35.35 21.49 64 48 64h16V352H32zm154.54-232h280.13L376 168C243 140.59 222.45 51.22 128 34.65V160h18.34a45.62 45.62 0 0 1 40.2 24zM32 96v64h64V32H80c-26.51 0-48 28.65-48 64zm114.34 256H128v125.35C222.45 460.78 243 371.41 376 344l90.67-16H186.54a45.62 45.62 0 0 1-40.2 24z"
+                                        className="fa-secondary"
+                                    ></path>
+                                    <path
+                                        fill="currentColor"
+                                        d="M592.6 208.24C559.73 192.84 515.78 184 472 184H186.54a45.62 45.62 0 0 0-40.2-24H32c-23.2 0-32 10-32 24v144c0 14 8.82 24 32 24h114.34a45.62 45.62 0 0 0 40.2-24H472c43.78 0 87.73-8.84 120.6-24.24C622.28 289.84 640 272 640 256s-17.72-33.84-47.4-47.76zM488 296a8 8 0 0 1-8-8v-64a8 8 0 0 1 8-8c31.91 0 31.94 80 0 80z"
+                                        className="fa-primary"
+                                    ></path>
+                                </g>
+                            </svg>
+                        <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">
+                            Upload Song
+                        </MyButton>
+                    </p>
+                </li> 
+
+                {/* BOTTOM ICONS */}
                 <li className="nav-item" id="themeButton">
-                    <a href="#" className="nav-link">
+                    <div className="nav-link">
+                        {/* ICONO 1 */}
                         <svg
                             className="theme-icon"
                             id="lightIcon"
@@ -221,6 +258,8 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
+                        
+                        {/* ICONO 2 */}
                         <svg
                             className="theme-icon"
                             id="solarIcon"
@@ -246,6 +285,8 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
+                        
+                        {/* ICONO 3 */}
                         <svg
                             className="theme-icon"
                             id="darkIcon"
@@ -271,14 +312,20 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                    </a>
+                    </div>
                 </li>
+
             </ul>
             {modalOpen &&
                 <Modal handleClose={handleCloseFav}>
                     <p>Playlist</p>
                 </Modal>}
-
+            
+            {openModalUpload && (
+                <Modal handleClose={handleCloseUpload}>
+                    <Upload />
+                </Modal>
+            )}
         </nav>
     )
 }
