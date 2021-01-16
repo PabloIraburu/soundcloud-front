@@ -1,19 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
-import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserCardFollowMenu } from '../UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-const { allUsers } = useContext(UserContext);
+const { allUsers, user } = useContext(UserContext);
 
 const handleFollow = () => {}
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-        <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us recommend some people you may know 🤩</p>
+        {
+          user.following.length === 0
+          ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us recommend some people you may know 🤩</p>
+          : <div className={styles["FollowLateralBar-userItems"]}>
+          {user.following.map((user) => (
+              <UserCardFollowMenu 
+              key={user._id}
+              userId={user._id}
+              name={user.name}
+              img={user.image}
+              followers={user.followers.length}
+              handleFollow={handleFollow}
+            />
+          ))}
+        </div>
+        }
       <h3>Find new SoundFrieds</h3>
       
       {
