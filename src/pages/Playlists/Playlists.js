@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import { ListaSongsFake } from "../../data/fakeSongs";
+import { SongsContext } from "../../contexts/SongsContext/songsContext";
 import styles from './Playlists.module.css';
 
 
 export const Playlists = () => {
+  const { songs } = useContext(SongsContext);
 
   return (
     <>
       <h1>Playlists</h1>
 
       <div className={styles["Playlists-list"]}>
-        {ListaSongsFake.map((song) => (
+      {songs.map((song) => (
           <CoverMd
-            key={song._id}
-            title={song.title}
-            categories={song.categories}
-            author={song.author}
-            img={song.img}
+              key={song._id}
+              title={song.title}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
           />
-        ))}
+      ))}
       </div>
 
     </>

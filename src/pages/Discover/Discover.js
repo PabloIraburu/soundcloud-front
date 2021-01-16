@@ -1,15 +1,24 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import Search  from "../../components/Search/Search";
+=======
+import React, { useState, useContext } from "react"
+>>>>>>> 44b157260552b172a101e16ad23d3041691a8247
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
 // import FollowedUsers from "../../components/FollowedUsers/followedUsers";
 import List from "../../components/List/List";
+import Search from "../../components/Search/Search";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import { ListaSongsFake } from "../../data/fakeSongs";
+import { SongsContext } from "../../contexts/SongsContext/songsContext";
 import './Discover.css'
 
+
 export default function Discover() {
+
+    const { songs } = useContext(SongsContext);
+    console.log(songs);
 
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
@@ -69,31 +78,32 @@ export default function Discover() {
                     <div className="playlist"></div>
                 </div>
 
-                <h3>Recommended for you</h3>
+                {/* <h3>Recommended for you</h3>
                 <div className="Discover-albums">
-                    {ListaSongsFake.map((song) => (
+                    {songs !== {} && songs.map((song) => (
                         <CoverMd
                             key={song._id}
                             title={song.title}
-                            categories={song.categories}
-                            author={song.author}
-                            img={song.img}
+                            categories={song.category}
+                            author={song.artist}
+                            img={song.image}
                         />
                     ))}
                 </div>
 
                 <h3>World's Top 100</h3>
                 <div className="Discover-albums">
-                    {ListaSongsFake.map((song) => (
+                    {songs !== {} && songs.map((song) => (
                         <CoverMd
                             key={song._id}
                             title={song.title}
-                            categories={song.categories}
-                            author={song.author}
-                            img={song.img}
+                            categories={song.category}
+                            author={song.artist}
+                            img={song.image}
                         />
                     ))}
-                </div>
+                </div> */}
+
             </div>
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>

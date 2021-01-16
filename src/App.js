@@ -6,6 +6,7 @@ import { MainRouter } from "./routes/MainRouter";
 
 import { Landing } from "./pages/LandingPage/Landing";
 import { UserContextProvider } from "./contexts/UserContext/contextProvider";
+import { SongsContextProvider } from "./contexts/SongsContext/songsContext";
 
 
 
@@ -17,7 +18,9 @@ function App() {
         <Switch>
           <Route exact path={route.HOME} component={Landing} />
           <UserContextProvider>
-            <MainRouter />
+            <SongsContextProvider>
+              <MainRouter />
+            </SongsContextProvider>
           </UserContextProvider>
         </Switch>
       </div>

@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useRef } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { SongList } from "../../components/SongList/SongList";
-import { songReducer } from "../../components/SongReducer/songReducer";
+import { songsReducer } from "../../reducers/songsReducer";
 import "./Songs.css";
 
 
@@ -12,7 +12,7 @@ const init = () => {
 
 export const Songs = () => {
 
-    const [songs, dispatch] = useReducer(songReducer, [], init);
+    const [songs, dispatch] = useReducer(songsReducer, [], init);
 
     useEffect(() => {
         //actualizar, esto no está bien

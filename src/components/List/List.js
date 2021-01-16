@@ -18,7 +18,7 @@ export default function List () {
         },
     }));
 
-        const [entity, setEntity] = useState('');
+    const [entity, setEntity] = useState('');
      const SimpleSelect = () => {
         const classes = useStyles();
         const handleChange = (event) => {
@@ -46,8 +46,9 @@ export default function List () {
         );
     }
 
-    const [list, setList] = useState()
-     const body ={}
+    const [list, setList] = useState();
+     
+    // const body = {}
     /*const handleAddToFavourites = (x, p) =>{
         console.log(x)
         console.log(p)
@@ -74,7 +75,8 @@ export default function List () {
                 }
             })
             .catch((response) => console.log(response.error))
-    },[entity])
+    },[entity]);
+
 
     const [playlist, setPlaylist] = useState()
 
@@ -86,7 +88,9 @@ export default function List () {
                 }
             })
             .catch((response) => console.log(response.error))
-    },[entity])
+    },[entity]);
+
+
     const [plist, setPlist] = useState('');
 
         const handleChangePlaylist = (event) => {

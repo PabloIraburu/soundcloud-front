@@ -1,7 +1,6 @@
 import React from "react";
 import "./cover.css";
 
-
 const songFeeder= [
   {'Name': 'Physical Education', 'Artist': 'Animals as Leaders', 'URL':'https://upload.wikimedia.org/wikipedia/en/1/1f/The_Joy_Of_Motion2014.jpg', 'likes': '88.000', 'plays': '1M'},
   {'Name': 'Para Mexer', 'Artist': 'Animals as Leaders', 'URL':'https://dummyimage.com/400x400/000/fff', 'likes': '88.000', 'plays': '1M'},

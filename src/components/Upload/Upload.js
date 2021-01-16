@@ -1,15 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { Input } from "../Input/Input";
 import { MyButton } from "../MyButton/MyButton";
 import { Selector } from "../Selector/Selector";
-import "./Upload.css";
 import { getToken } from "../../utils/LocalStorage.utils";
+import { UserContext } from "../../contexts/UserContext/contextProvider";
+import { categories } from "../../data/categories";
+import "./Upload.css";
+
 
 export const Upload = () => {
   const [song, setSong] = useState({});
   const fileInputEl = useRef(null);
-  // const history = useHistory();
+  const { user: { _id: userId } } = useContext(UserContext);
 
   //Introduce los datos de los inputs en el objeto newUser
   const handleInput = (event) => {
@@ -17,6 +20,7 @@ export const Upload = () => {
     setSong((prevValue) => ({
       ...prevValue,
       [name]: value,
+      "id_author": userId
     }));
   };
 
@@ -24,15 +28,10 @@ export const Upload = () => {
     // Petición al servidor de tipo POST - fetch localhost:3300/register
     ServerRequest("data/song", "POST", song)
       .then((response) => {
-        console.debug(file, file[0]);
         const data = new FormData();
         data.append("file", file[0]);
         data.append("filename", song.title);
-        // data.append("song_id", response._id);
 
-        /*ServerRequestSong("track", "POST", data)
-          .then((response) => console.log(response))
-          .catch((response) => console.log(response.error));*/
         const options = {
           method: "POST",
           body: data,
@@ -54,57 +53,6 @@ export const Upload = () => {
       })
       .catch((response) => console.log(response.error));
   };
-
-  const categories = [
-    "Bachata",
-    "Baladas",
-    "Blues",
-    "Bolero",
-    "Bossa Nova",
-    "Celta",
-    "Clásica",
-    "Country",
-    "Criollo",
-    "Cumbia",
-    "Disco",
-    "Dubstep",
-    "Electrónica",
-    "Electro Pop",
-    "Flamenco",
-    "Folk",
-    "Funk",
-    "Garage Rock",
-    "Gospel",
-    "Heavy Metal",
-    "Hip Hop",
-    "Indie",
-    "Jazz​",
-    "Merengue",
-    "Polka",
-    "Pop",
-    "Punk",
-    "Ranchera",
-    "Rap",
-    "Rap Rock",
-    "Reggae",
-    "Reggaeton",
-    "Rock",
-    "Rock and Roll",
-    "Rumba",
-    "Rhythm and Blues",
-    "Salsa",
-    "Samba",
-    "Ska",
-    "Son",
-    "Soul",
-    "Swing",
-    "Tango",
-    "Trash metal",
-    "Trap",
-    "Trova",
-    "Vals",
-    "Vallenato",
-  ];
 
   return (
     <div>
@@ -157,56 +105,3 @@ export const Upload = () => {
   );
 };
 
-// Categorías musicales
-// fuente: https://estilonext.com/cultura/tipos-de-musica-generos-musicales
-
-/*
-//Get songs from DB
-const [songList, setSongList] = useState([]);
-useEffect(() => {
-  ServerRequest("data/song", "GET")
-    .then((response) => setSongList(response))
-    .catch(console.log);
-}, [])
-
-console.log("songList", songList);
-
-//Actualizar backend, sino trackId no funcionará
-// const songsId = songList.map(songId => songId.trackId);
-// console.log("songsId", songsId);
-
-// const trackIds = ["5fc4d698c891ef40a7a07580", "5fc4e79bb0b05e5bc165ef9e"];
-// const [currentTrack, setCurrentTrack] = useState(0);
-
-// const handleClickNext = () => {
-//   if (currentTrack < songsId.length - 1) {
-//     setCurrentTrack(currentTrack + 1);
-//   }
-// };
-
-// const handleClickPrev = () => {
-//   if (currentTrack > 0) {
-//     setCurrentTrack(currentTrack - 1);
-//   }
-// };
-
-
-        <audio controls="controls">
-           <source src="track.ogg" type="audio/ogg" />
-          <source src={`http://localhost:3300/track/${songsId[currentTrack]}`} type="audio/mpeg" />
-          <source src="2 - N'to - Ayahuasca.mp3" type="audio/mpeg" />
-        </audio>
-
-              <div className={styles["Landing-player"]}>
-        <AudioPlayer
-          // autoPlay
-          onClickNext={handleClickNext}
-          onClickPrevious={handleClickPrev}
-          showSkipControls={true}
-          showJumpControls={false}
-          src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"
-          src={`http://localhost:3300/track/${songsId[currentTrack]}`}
-        />
-      </div>
-
-*/
