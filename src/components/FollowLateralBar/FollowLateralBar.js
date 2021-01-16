@@ -6,34 +6,20 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-const { user } = useContext(UserContext);
-const userId = user._id;
-const [allUsers, setAllUsers] = useState({});
-
-useEffect(() => {
-  ServerRequest(`data/user`, "GET")
-  .then((response) => {
-    setAllUsers(response.filter((user) => {
-      if (user._id !== userId) {
-        return true
-      }
-    }));
-  })
-  .catch(console.log);
-  
-}, []);
+const { allUsers } = useContext(UserContext);
 
 const handleFollow = () => {}
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-        <p>You don't follow any profile yet... Let us recommend some people you may know 🤩</p>
+        <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us recommend some people you may know 🤩</p>
       <h3>Find new SoundFrieds</h3>
-        <p>Loading...</p>
-      {/* {
-        (allUsers === {}) ? <p>loading...</p> : 
-        <div className={styles["FollowLateralBar-userItems"]}>
+      
+      {
+        (allUsers.lenght === 0) 
+        ? <p>loading...</p> 
+        : <div className={styles["FollowLateralBar-userItems"]}>
           {allUsers.map((user) => (
               <UserCardFollowMenu 
               key={user._id}
@@ -45,7 +31,7 @@ const handleFollow = () => {}
             />
           ))}
         </div>
-      } */}
+      }
     </nav>
   )
 }

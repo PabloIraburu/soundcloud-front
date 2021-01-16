@@ -4,6 +4,7 @@ import {UserContext} from "../../contexts/UserContext/contextProvider"
 
 
 export default function UserInfo() {
+    
 const {user} = useContext(UserContext)
 
     return(

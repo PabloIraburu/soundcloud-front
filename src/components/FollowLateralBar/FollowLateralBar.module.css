@@ -3,7 +3,7 @@
   color: white;
   height: 100%;
   overflow: scroll;
-  position: absolute;
+  position: fixed;
   right: 0px;
   width: 15%;
   z-index: 100;
@@ -14,7 +14,7 @@
   margin: 0;
 }
 
-.FollowLateralBar-nav p {
+.FollowLateralBar-nav-p {
   font-weight: 100;
   font-size: 0.9rem;
   margin-bottom: 30px;
