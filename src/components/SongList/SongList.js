@@ -1,10 +1,9 @@
 import React from 'react';
 import { SongItem } from '../SongItem/SongItem';
-import { ListaSongsFake } from "../../data/fakeSongs";
 import styles from './SongList.module.css';
 
 
-export const SongList = ({ songs, handleDelete, handleEdit }) => {
+export const SongList = ({ songs, handleAddToPlaylist, handleDeleteSong, handleEditSong }) => {
     return (
         <ol className={styles["SongList-ol"]}>
 
@@ -12,8 +11,9 @@ export const SongList = ({ songs, handleDelete, handleEdit }) => {
                 songs.map(song => (
                     <div key={song._id} >
                         <SongItem 
-                            handleDelete={handleDelete} 
-                            handleEdit={handleEdit} 
+                            handleAddToPlaylist={handleAddToPlaylist} 
+                            handleDeleteSong={handleDeleteSong} 
+                            handleEditSong={handleEditSong}
                             key={song._id}
                             id={song._id}
                             title={song.title}

@@ -1,11 +1,12 @@
 import React from "react";
 
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EditIcon from "@material-ui/icons/Edit";
 import styles from './SongItem.module.css';
 
 
-export const SongItem = ({ id, title, category, author, img, handleClick, handleDeleteSong, handleEditSong }) => {
+export const SongItem = ({ id, title, category, author, img, handleAddToPlaylist, handleDeleteSong, handleEditSong }) => {
     return (
         <>
             {/* TODOLISTITEM: todo, index, handleDelete, handleToggle */}
@@ -22,20 +23,27 @@ export const SongItem = ({ id, title, category, author, img, handleClick, handle
                     </div>
 
                     <div className={styles["SongItem-text"]}>
-                      <p className={styles["SongItem-title"]} onClick={handleClick}>{title}</p>
+                      <p className={styles["SongItem-title"]}>{title}</p>
                       <p>{author}</p>
                       <p>{category}</p>
 
                       <div className={styles["SongItem-icons"]}> 
+                      <AddCircleIcon
+                          fontSize="small"
+                          style={{ color: "white" }}
+                          onClick={() => handleAddToPlaylist(id)}
+                      />
+                    
+                      <EditIcon
+                          fontSize="small"
+                        //   style={{ color: "white", opacity: "50%" }}
+                          style={{ color: "white" }}
+                          onClick={() => handleEditSong(id)}
+                      />
                       <DeleteOutlineOutlinedIcon
                           fontSize="small"
                           style={{ color: "white" }}
                           onClick={() => handleDeleteSong(id)}
-                      />
-                      <EditIcon
-                          fontSize="small"
-                          style={{ color: "white", opacity: "50%" }}
-                          onClick={() => handleEditSong(id)}
                       />
                         </div>
                     </div>
