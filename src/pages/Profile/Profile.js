@@ -32,7 +32,7 @@ export const Profile = () => {
 
   const signOut = () => {
     deleteToken();
-    history.push(HOME)
+    history.replace(HOME)
   }
 
   const handleAddToPlaylist = () => {
@@ -55,7 +55,7 @@ export const Profile = () => {
   return (
     <>
         <div className="Profile-header">
-          <h3>My account</h3>
+          <h1>My account</h1>
         </div>
 
         <div className="Profile-content">

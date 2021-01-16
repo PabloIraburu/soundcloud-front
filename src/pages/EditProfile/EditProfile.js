@@ -83,7 +83,7 @@ export const EditProfile = (props) => {
 
       <div className="EditProfile-content">
         <div className="EditProfile-header">
-          <h3>Edit my account</h3>
+          <h1>Edit my account</h1>
           <p onClick={goBackTo} className="backToProfile"> Back to profile ></p>
         </div>
 
