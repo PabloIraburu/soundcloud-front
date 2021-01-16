@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import { ListaSongsFake } from "../../data/fakeSongs";
+import { SongsContext } from "../../contexts/SongsContext/songsContext";
 import styles from './Recommended.module.css';
 
 export const Recommended = () => {
+  const { songs } = useContext(SongsContext);
 
   return (
     <>
@@ -14,48 +15,37 @@ export const Recommended = () => {
       <div className={styles["Recommended-list-songs"]}>
 
         <div className={styles["Recommended-list-songs-items"]}>
-          {ListaSongsFake.map((song) => (
-            <CoverSm
+        {songs.map((song) => (
+          <CoverSm
               key={song._id}
               title={song.title}
-              categories={song.categories}
-              author={song.author}
-              img={song.img}
-            />
-          ))}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
+          />
+      ))}
         </div>
         <div className={styles["Recommended-list-songs-items"]}>
-          {ListaSongsFake.map((song) => (
-            <CoverSm
+        {songs.map((song) => (
+          <CoverSm
               key={song._id}
               title={song.title}
-              categories={song.categories}
-              author={song.author}
-              img={song.img}
-            />
-          ))}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
+          />
+      ))}
         </div>
         <div className={styles["Recommended-list-songs-items"]}>
-          {ListaSongsFake.map((song) => (
-            <CoverSm
+        {songs.map((song) => (
+          <CoverSm
               key={song._id}
               title={song.title}
-              categories={song.categories}
-              author={song.author}
-              img={song.img}
-            />
-          ))}
-        </div>
-        <div className={styles["Recommended-list-songs-items"]}>
-          {ListaSongsFake.map((song) => (
-            <CoverSm
-              key={song._id}
-              title={song.title}
-              categories={song.categories}
-              author={song.author}
-              img={song.img}
-            />
-          ))}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
+          />
+      ))}
         </div>
 
       </div>
@@ -64,17 +54,16 @@ export const Recommended = () => {
       <h3>Recommended Playlists</h3>
       {/* <div className={styles["Recommended-list-playlists"]}> */}
       <div className={styles["Recommended-list-playlists"]}>
-        {ListaSongsFake.map((song) => (
+      {songs.map((song) => (
           <CoverMd
-            key={song._id}
-            title={song.title}
-            categories={song.categories}
-            author={song.author}
-            img={song.img}
+              key={song._id}
+              title={song.title}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
           />
-        ))}
+      ))}
       </div>
-      {/* </div> */}
     </>
   )
 }
