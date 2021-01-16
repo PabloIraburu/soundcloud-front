@@ -8,13 +8,11 @@ import { HOME } from "../../routes/routes"
 import { UserContext } from "../../contexts/UserContext/contextProvider"
 import { SongList } from "../../components/SongList/SongList";
 import { ServerRequest } from "../../helpers/ServerRequest";
-// import { SongsContext } from "../../contexts/SongsContext/songsContext";
 
 
 export const Profile = () => {
   const { user } = useContext(UserContext);
-  // const { songs } = useContext(SongsContext);
-  const [userSongs, setUserSongs] = useState({})
+  const [userSongs, setUserSongs] = useState([])
   const history = useHistory()
   const userId = user._id;
 
@@ -28,16 +26,14 @@ export const Profile = () => {
   }, [userId]);
 
   console.log('userSongs', userSongs);
-  console.log(userSongs._id);
+  console.log('user id', userSongs._id);
 
   const signOut = () => {
     deleteToken();
     history.replace(HOME)
   }
 
-  const handleAddToPlaylist = () => {
-
-  }
+  const handleAddToPlaylist = () => {}
 
   const handleDeleteSong = () => {
     ServerRequest(`data/song/${userSongs._id}`, "DELETE")
@@ -47,9 +43,7 @@ export const Profile = () => {
     .catch(console.log);
   }
 
-  const handleEditSong = () => {
-
-  }
+  const handleEditSong = () => {}
 
 
   return (
@@ -94,12 +88,14 @@ export const Profile = () => {
 
         <div className="Profile-mySongs-section">
           <h3>My songs</h3>
-            {/* {userSongs && <SongList 
+            {userSongs.length === 0 
+            ? <p>You haven't upload any song yet...</p> 
+            : <SongList 
               songs={userSongs} 
               handleAddToPlaylist={handleAddToPlaylist} 
               handleDeleteSong={handleDeleteSong} 
               handleEditSong={handleEditSong}
-            />} */}
+            />}
         </div>
     </>
 

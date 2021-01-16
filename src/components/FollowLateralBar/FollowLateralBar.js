@@ -8,7 +8,7 @@ export const FollowLateralBar = () => {
 
 const { user } = useContext(UserContext);
 const userId = user._id;
-const [allUsers, setAllUsers] = useState({});
+const [allUsers, setAllUsers] = useState([]);
 
 useEffect(() => {
   ServerRequest(`data/user`, "GET")
@@ -28,12 +28,14 @@ const handleFollow = () => {}
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-        <p>You don't follow any profile yet... Let us recommend some people you may know 🤩</p>
+        <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us recommend some people you may know 🤩</p>
       <h3>Find new SoundFrieds</h3>
-        <p>Loading...</p>
-      {/* {
-        (allUsers === {}) ? <p>loading...</p> : 
-        <div className={styles["FollowLateralBar-userItems"]}>
+        <p className={styles["FollowLateralBar-nav-p"]}>Loading...</p>
+      
+      {
+        (allUsers.lenght === 0) 
+        ? <p>loading...</p> 
+        : <div className={styles["FollowLateralBar-userItems"]}>
           {allUsers.map((user) => (
               <UserCardFollowMenu 
               key={user._id}
@@ -45,7 +47,7 @@ const handleFollow = () => {}
             />
           ))}
         </div>
-      } */}
+      }
     </nav>
   )
 }

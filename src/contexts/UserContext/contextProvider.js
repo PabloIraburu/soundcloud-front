@@ -7,7 +7,11 @@ export const UserContext = createContext();
 
 
 export const UserContextProvider = ({children}) => {
-    const [user, setUser] = useState({})
+
+    const [user, setUser] = useState({});
+    const userId = user._id;
+
+    // Usuario logueado
     useEffect(() => {
         const token = getToken();
         const decodedToken = DecodeToken(token);
@@ -19,6 +23,6 @@ export const UserContextProvider = ({children}) => {
             })
             .catch(console.log);
     }, []);
-    
+
     return <UserContext.Provider value={{user, setUser}}>{children}</UserContext.Provider>
 }
