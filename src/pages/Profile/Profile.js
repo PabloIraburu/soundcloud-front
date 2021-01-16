@@ -21,6 +21,19 @@ export const Profile = () => {
     history.push(HOME)
   }
 
+  const handleAddToPlaylist = () => {
+
+  }
+
+  const handleDeleteSong = () => {
+
+  }
+
+  const handleEditSong = () => {
+
+  }
+
+
   return (
     <>
         <div className="Profile-header">
@@ -63,7 +76,12 @@ export const Profile = () => {
 
         <div className="Profile-mySongs-section">
           <h3>My songs</h3>
-            <SongList songs={songs}/>
+            <SongList 
+              songs={songs} 
+              handleAddToPlaylist={handleAddToPlaylist} 
+              handleDeleteSong={handleDeleteSong} 
+              handleEditSong={handleEditSong}
+            />
         </div>
     </>
 
