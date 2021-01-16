@@ -1,16 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { Input } from "../Input/Input";
 import { MyButton } from "../MyButton/MyButton";
 import { Selector } from "../Selector/Selector";
-import "./Upload.css";
 import { getToken } from "../../utils/LocalStorage.utils";
+import { UserContext } from "../../contexts/UserContext/contextProvider"
+import "./Upload.css";
+
 
 export const Upload = () => {
   const [song, setSong] = useState({});
   const fileInputEl = useRef(null);
-  // const { user } = userCon
-  // const history = useHistory();
+  const { user: { _id: userId } } = useContext(UserContext);
 
   //Introduce los datos de los inputs en el objeto newUser
   const handleInput = (event) => {
@@ -18,7 +19,7 @@ export const Upload = () => {
     setSong((prevValue) => ({
       ...prevValue,
       [name]: value,
-      // userId: 
+      "id_author": userId
     }));
   };
 
@@ -26,6 +27,7 @@ export const Upload = () => {
     // Petición al servidor de tipo POST - fetch localhost:3300/register
     ServerRequest("data/song", "POST", song)
       .then((response) => {
+        console.log(song)
         console.debug(file, file[0]);
         const data = new FormData();
         data.append("file", file[0]);
