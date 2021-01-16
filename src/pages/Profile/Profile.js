@@ -7,10 +7,13 @@ import { useHistory } from "react-router-dom";
 import { HOME } from "../../routes/routes"
 import { UserContext } from "../../contexts/UserContext/contextProvider"
 import { SongList } from "../../components/SongList/SongList";
+import { SongsContext } from "../../contexts/SongsContext/songsContext";
 
 
 export const Profile = () => {
   const { user } = useContext(UserContext);
+  const { songs } = useContext(SongsContext);
+
   const history = useHistory()
 
   const signOut = () => {
@@ -60,7 +63,7 @@ export const Profile = () => {
 
         <div className="Profile-mySongs-section">
           <h3>My songs</h3>
-            <SongList />
+            <SongList songs={songs}/>
         </div>
     </>
 

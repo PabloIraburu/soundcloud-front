@@ -5,10 +5,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import styles from './SongItem.module.css';
 
 
-
-
-
-export const SongItem = ({ id, title, categories, author, img, handleClick, handleDelete }) => {
+export const SongItem = ({ id, title, category, author, img, handleClick, handleDeleteSong, handleEditSong }) => {
     return (
         <>
             {/* TODOLISTITEM: todo, index, handleDelete, handleToggle */}
@@ -27,18 +24,18 @@ export const SongItem = ({ id, title, categories, author, img, handleClick, hand
                     <div className={styles["SongItem-text"]}>
                       <p className={styles["SongItem-title"]} onClick={handleClick}>{title}</p>
                       <p>{author}</p>
-                      <p>{categories}</p>
+                      <p>{category}</p>
 
                       <div className={styles["SongItem-icons"]}> 
                       <DeleteOutlineOutlinedIcon
                           fontSize="small"
                           style={{ color: "white" }}
-                          onClick={() => handleDelete(id)}
+                          onClick={() => handleDeleteSong(id)}
                       />
                       <EditIcon
                           fontSize="small"
                           style={{ color: "white", opacity: "50%" }}
-                          onClick={() => handleDelete(id)}
+                          onClick={() => handleEditSong(id)}
                       />
                         </div>
                     </div>
