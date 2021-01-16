@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import { MyButton } from "../../components/MyButton/MyButton";
@@ -7,14 +7,28 @@ import { useHistory } from "react-router-dom";
 import { HOME } from "../../routes/routes"
 import { UserContext } from "../../contexts/UserContext/contextProvider"
 import { SongList } from "../../components/SongList/SongList";
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
+import { ServerRequest } from "../../helpers/ServerRequest";
+// import { SongsContext } from "../../contexts/SongsContext/songsContext";
 
 
 export const Profile = () => {
   const { user } = useContext(UserContext);
-  const { songs } = useContext(SongsContext);
-
+  // const { songs } = useContext(SongsContext);
+  const [userSongs, setUserSongs] = useState({})
   const history = useHistory()
+  const userId = user._id;
+
+  useEffect(() => {
+      ServerRequest(`data/song/?id_author=${userId}`, "GET")
+          .then((response) => {
+              setUserSongs(response);
+          })
+          .catch(console.log);
+
+  }, [userId]);
+
+  console.log('userSongs', userSongs);
+  console.log(userSongs._id);
 
   const signOut = () => {
     deleteToken();
@@ -26,7 +40,11 @@ export const Profile = () => {
   }
 
   const handleDeleteSong = () => {
-
+    ServerRequest(`data/song/${userSongs._id}`, "DELETE")
+    .then((response) => {
+        setUserSongs(response);
+    })
+    .catch(console.log);
   }
 
   const handleEditSong = () => {
@@ -76,12 +94,12 @@ export const Profile = () => {
 
         <div className="Profile-mySongs-section">
           <h3>My songs</h3>
-            <SongList 
-              songs={songs} 
+            {/* {userSongs && <SongList 
+              songs={userSongs} 
               handleAddToPlaylist={handleAddToPlaylist} 
               handleDeleteSong={handleDeleteSong} 
               handleEditSong={handleEditSong}
-            />
+            />} */}
         </div>
     </>
 

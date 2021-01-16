@@ -1,6 +1,7 @@
 .SongItem-card {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   margin: 10px 0;
   width: 100%;
 }
@@ -75,10 +76,12 @@
   text-decoration: none;
   color: white;
   font-size: 0.7rem;
+  min-width: 25%;
 }
 
 .SongItem-text .SongItem-title {
   font-size: 0.9rem;
+  min-width: 30%;
 }
 
 .SongItem-icons {
