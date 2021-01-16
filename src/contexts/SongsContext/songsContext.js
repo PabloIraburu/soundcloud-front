@@ -15,7 +15,7 @@ export const SongsContextProvider = ({children}) => {
             })
             .catch(console.log);
 
-    }, [songs]);
+    }, []);
     
     return <SongsContext.Provider value={{songs, setSongs}}>{children}</SongsContext.Provider>
 }
