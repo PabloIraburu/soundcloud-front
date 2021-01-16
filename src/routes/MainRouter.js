@@ -11,10 +11,10 @@ import { Albums } from "../pages/Albums/Albums";
 import { Playlists } from "../pages/Playlists/Playlists";
 import { Favourites } from "../pages/Favourites/Favourites";
 import { Recommended } from "../pages/Recommended/Recommended";
-
-import '../App.css';
 import { getToken } from "../utils/LocalStorage.utils";
 import { FollowLateralBar } from "../components/FollowLateralBar/FollowLateralBar";
+
+import '../App.css';
 
 export const MainRouter = () => {
 

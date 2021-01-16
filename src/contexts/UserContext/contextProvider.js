@@ -10,6 +10,7 @@ export const UserContextProvider = ({children}) => {
 
     const [user, setUser] = useState({});
     const userId = user._id;
+    const [allUsers, setAllUsers] = useState([]);
 
     // Usuario logueado
     useEffect(() => {
@@ -24,5 +25,19 @@ export const UserContextProvider = ({children}) => {
             .catch(console.log);
     }, []);
 
-    return <UserContext.Provider value={{user, setUser}}>{children}</UserContext.Provider>
+    // Usuarios excepto el logueado
+    useEffect(() => {
+        ServerRequest(`data/user`, "GET")
+        .then((response) => {
+          setAllUsers(response.filter((user) => {
+            if (user._id !== userId) {
+              return true
+            }
+          }));
+        })
+        .catch(console.log);
+        
+      }, [userId]);
+
+    return <UserContext.Provider value={{user, setUser, allUsers}}>{children}</UserContext.Provider>
 }
