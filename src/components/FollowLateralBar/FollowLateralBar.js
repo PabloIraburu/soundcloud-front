@@ -5,9 +5,19 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-const { allUsers, user } = useContext(UserContext);
+const { allUsers, user, setUser } = useContext(UserContext);
 
-const handleFollow = () => {}
+const handleFollow = (userId, userIdLog) => {
+
+}
+
+// const follow = (id) => {
+//   const body = {
+
+//     following: [...id, userId]
+//   }
+//   ServerRequest(`data/user/${id}`, 'PUT', body)
+// }
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>

@@ -1,52 +1,53 @@
-.userCard{
-    background-color: var(--clr-inactiveField);
-    color: white;
-    height: 50px;
-    width: 50px;
-    margin-top: 2rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    display: flex;
-    border-radius: 18px;
-    text-decoration: none;
-    transition: var(--transition-speed);
+.userCard {
+  background-color: var(--clr-inactiveField);
+  color: white;
+  height: 50px;
+  width: 50px;
+  margin-top: 2rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  display: flex;
+  border-radius: 18px;
+  text-decoration: none;
+  transition: var(--transition-speed);
 }
-.userCard:hover{
-    background-color: var(--clr-inactiveField);
-    color: white;
-    height: 60%;
-    width: auto;
-    margin-top: 2rem;
-    margin-left: 1.5rem;
-    margin-right: 2.5rem;
-    padding:  1.5rem;
-    display: flex;
-    border-radius: 18px;
-    border: 2px solid grey;
-    text-decoration: none;
+.userCard:hover {
+  background-color: var(--clr-inactiveField);
+  color: white;
+  height: 60%;
+  width: auto;
+  margin-top: 2rem;
+  margin-left: 1.5rem;
+  margin-right: 2.5rem;
+  padding: 1.5rem;
+  display: flex;
+  border-radius: 18px;
+  border: 2px solid grey;
+  text-decoration: none;
 }
-.userCard  img {
-    width: 3rem;
-    height: 50px;
-    border-radius: 14px;
-    margin-right: 10px;
-    transition: var(--transition-speed);
-}
-
-
-.userCard .numbers{
-    color: var(--clr-dimText);
-}
-
-.userCard .text .numbers{
-    display: none;
-}
-.userCard:hover .text .numbers{
-    display: block;
+.userCard-img {
+  min-width: 50px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+  transition: var(--transition-speed);
 }
 
-.userCard h1{
-    width: 60rem;
+.userCard .numbers {
+  color: var(--clr-dimText);
 }
 
+.userCard .text .numbers {
+  display: none;
+}
+.userCard:hover .text .numbers {
+  display: block;
+}
 
+.userCard h1 {
+  width: 60rem;
+}
