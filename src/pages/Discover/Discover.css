@@ -2,8 +2,9 @@
   --clr-darkBackground: #131325;
   --clr-inactiveField: #141421;
   --clr-lightBackground: #1b1b2c;
-  --clr-highlightText: #30f8eb;
-  --clr-lightText: #1da79e;
+  --clr-highlightText: #4ce2f9;
+  --clr-lightText: #4ce2f9;
+  /* --clr-lightText: ##4ce2f9; #1da79e  */
   --clr-dimText: #414141;
 }
 
@@ -35,6 +36,8 @@
 
 .headMid {
   display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 .mainFrame {
@@ -47,14 +50,14 @@
   display: flex;
   height: 35vh;
   max-width: 100%;
-  margin: 0 2.5rem;
+  margin: 0 1.5rem;
   padding: 1.75rem;
   background-color: var(--clr-lightBackground);
   border-radius: 14px;
 }
 
 .header h2 {
-  margin-left: 2.5rem;
+  margin-left: 1.5rem;
   color: var(--clr-lightText);
 }
 
@@ -111,7 +114,7 @@ h2 {
 /*Searchbar local styling*/
 
 .search {
-  margin-left: 2.5rem;
+  margin-left: 1.5rem;
   margin-top: 2rem;
   display: inline-block;
 }

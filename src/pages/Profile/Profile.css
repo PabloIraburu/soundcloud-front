@@ -8,6 +8,16 @@
   margin: 0 0 30px;
 }
 
+.Profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  /* overflow: hidden; */
+  /* position: relative; */
+  background-position: center;
+  background-size: cover;
+}
+
 .Profile-content {
   display: flex;
   flex-direction: column;
@@ -39,5 +49,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-top: 40px;
 }
