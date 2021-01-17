@@ -1,15 +1,10 @@
 import React, {createContext, useEffect, useState} from "react";
 import {ServerRequest} from "../../helpers/ServerRequest";
-import { UserContext } from "../UserContext/contextProvider"
-
 
 export const SongsContext = createContext();
 
 
 export const SongsContextProvider = ({children}) => {
-
-    // const { user } = useContext(UserContext);
-    // const userId = user._id;
 
     const [songs, setSongs] = useState({});
 

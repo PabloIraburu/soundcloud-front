@@ -12,21 +12,22 @@
   position: fixed;
 }
 
-
 .mysongs-buttons-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-right: 30px;
-    margin-left: 746px;
-  }
-  
-  .mysongs-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 10px;
-    padding: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 30px;
+  margin-left: 746px;
+}
 
-  
+.mysongs-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+  padding: 10px;
+}
+
+.Profile-mySongs-section h3 {
+  margin: 60px 0 40px;
+}

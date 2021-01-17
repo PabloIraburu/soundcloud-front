@@ -1,6 +1,8 @@
 import React, {createContext, useEffect, useState} from "react";
-import {getToken} from "../../utils/LocalStorage.utils";
+import { useHistory } from "react-router-dom";
+import {getToken, deleteToken} from "../../utils/LocalStorage.utils";
 import {DecodeToken} from "../../utils/DecodeToken";
+import * as route from "../../routes/routes";
 import {ServerRequest} from "../../helpers/ServerRequest";
 
 export const UserContext = createContext();
@@ -8,6 +10,7 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
 
+    const history = useHistory();
     const [user, setUser] = useState({});
     const userId = user._id;
     const [allUsers, setAllUsers] = useState([]);
@@ -39,5 +42,11 @@ export const UserContextProvider = ({children}) => {
         
       }, [userId]);
 
-    return <UserContext.Provider value={{user, setUser, allUsers}}>{children}</UserContext.Provider>
+    //cerrar sesión y redirección a Landing
+    const signOut = () => {
+      deleteToken();
+      history.replace(route.HOME)
+    }
+
+    return <UserContext.Provider value={{user, setUser, allUsers, signOut}}>{children}</UserContext.Provider>
 }
