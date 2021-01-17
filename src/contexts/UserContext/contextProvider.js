@@ -48,5 +48,5 @@ export const UserContextProvider = ({children}) => {
       history.replace(route.HOME)
     }
 
-    return <UserContext.Provider value={{user, setUser, allUsers, signOut}}>{children}</UserContext.Provider>
+    return <UserContext.Provider value={{user, setUser, allUsers, setAllUsers, signOut}}>{children}</UserContext.Provider>
 }

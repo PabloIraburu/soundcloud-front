@@ -1,23 +1,55 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
+import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserCardFollowMenu } from '../UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-const { allUsers, user, setUser } = useContext(UserContext);
+const { allUsers, user } = useContext(UserContext);
+const [editedUserLogged, setEditedUserLogged] = useState(user);
+console.log("userIdLog", user._id);
+console.log("editedUserLogged", editedUserLogged);
 
-const handleFollow = (userId, userIdLog) => {
+const [editedUserFollowed, setEditedUserFollowed] = useState();
+
+
+//userId = id usuario a seguir (followed)
+const handleFollow = (userId) => {
+
+  console.log("Id usuario loguead", user._id);
+  console.log("Id soundFriend", userId);
+
+  //Añadir el id del usuario seguido al array de seguidos del usuario logueado
+  setEditedUserLogged((prevValue) => ({
+    ...prevValue,
+    "following": [...user.following, userId]
+  }))
+  console.log("User Logged", editedUserLogged)
+
+
+  //Añadir el id del usuario logeado al array followers del usuario seguido
+  setEditedUserFollowed(allUsers.find((user) => user._id === userId));
+  console.log(editedUserFollowed);
+
+  setEditedUserFollowed((prevValue) => ({
+    ...prevValue,
+    "followers": [...prevValue.followers, user._id]
+  }))
+  console.log(editedUserFollowed);
+
+
+  /* -------------------------------- */ 
+
+  // //Following
+  // ServerRequest(`data/user/${user._id}`, 'PUT', editedUserLogged)
+
+  // //Followed
+  // ServerRequest(`data/user/${userId}`, 'PUT', newFollower)
 
 }
 
-// const follow = (id) => {
-//   const body = {
 
-//     following: [...id, userId]
-//   }
-//   ServerRequest(`data/user/${id}`, 'PUT', body)
-// }
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
