@@ -6,7 +6,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import styles from './SongItem.module.css';
 
 
-export const SongItem = ({ id, title, category, author, img, handleAddToPlaylist, handleDeleteSong, handleEditSong }) => {
+export const SongItem = ({ id, title, category, author, img, handleAddToPlaylist, handleDeleteSong, handleEditSong, handleOpenModalEditSong }) => {
     return (
         <div className={styles["SongItem-card"]}>
             <div style={{ backgroundImage: `url(${img})` }} className={styles["SongItem-img"]}>
@@ -29,7 +29,8 @@ export const SongItem = ({ id, title, category, author, img, handleAddToPlaylist
                   fontSize="small"
                 //   style={{ color: "white", opacity: "50%" }}
                   style={{ color: "white" }}
-                  onClick={() => handleEditSong(id)}
+                  onClick={handleOpenModalEditSong}
+                //   onClick={() => handleEditSong(id)}
               />
               <DeleteOutlineOutlinedIcon
                   fontSize="small"

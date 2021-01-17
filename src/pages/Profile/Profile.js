@@ -1,50 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import { MyButton } from "../../components/MyButton/MyButton";
-import { deleteToken } from "../../utils/LocalStorage.utils"
-import { useHistory } from "react-router-dom";
-import { HOME } from "../../routes/routes"
 import { UserContext } from "../../contexts/UserContext/contextProvider"
-import { SongList } from "../../components/SongList/SongList";
-import { ServerRequest } from "../../helpers/ServerRequest";
+import { MySongs } from "../MySongs/MySongs";
 
 
 export const Profile = () => {
-  const { user } = useContext(UserContext);
-  const [userSongs, setUserSongs] = useState([])
-  const history = useHistory()
-  const userId = user._id;
-
-  useEffect(() => {
-      ServerRequest(`data/song/?id_author=${userId}`, "GET")
-          .then((response) => {
-              setUserSongs(response);
-          })
-          .catch(console.log);
-
-  }, [userId]);
-
-  console.log('userSongs', userSongs);
-  console.log('user id', userSongs._id);
-
-  const signOut = () => {
-    deleteToken();
-    history.replace(HOME)
-  }
-
-  const handleAddToPlaylist = () => {}
-
-  const handleDeleteSong = () => {
-    ServerRequest(`data/song/${userSongs._id}`, "DELETE")
-    .then((response) => {
-        setUserSongs(response);
-    })
-    .catch(console.log);
-  }
-
-  const handleEditSong = () => {}
-
+  const { user, signOut } = useContext(UserContext);
 
   return (
     <>
@@ -86,18 +49,10 @@ export const Profile = () => {
           </MyButton>
         </div>
 
-        <div className="Profile-mySongs-section">
-          <h3>My songs</h3>
-            {userSongs.length === 0 
-            ? <p>You haven't upload any song yet...</p> 
-            : <SongList 
-              songs={userSongs} 
-              handleAddToPlaylist={handleAddToPlaylist} 
-              handleDeleteSong={handleDeleteSong} 
-              handleEditSong={handleEditSong}
-            />}
-        </div>
+          <MySongs />
+
     </>
 
-  );
+);
 };
+
