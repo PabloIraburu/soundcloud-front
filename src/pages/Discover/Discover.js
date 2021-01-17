@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import Search  from "../../components/Search/Search";
-=======
-import React, { useState, useContext } from "react"
->>>>>>> 44b157260552b172a101e16ad23d3041691a8247
+import React, { useState, useContext } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
