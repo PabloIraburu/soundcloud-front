@@ -1,0 +1,13 @@
+.title-create-playlist {
+  text-align: center;
+}
+.Playlist-Name {
+  margin: 0px;
+  margin-top: 10px;
+}
+.Textarea-description {
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  height: 5em;
+}
