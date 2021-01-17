@@ -11,9 +11,10 @@ import { Albums } from "../pages/Albums/Albums";
 import { Playlists } from "../pages/Playlists/Playlists";
 import { Favourites } from "../pages/Favourites/Favourites";
 import { Recommended } from "../pages/Recommended/Recommended";
+import { getToken } from "../utils/LocalStorage.utils";
+import { FollowLateralBar } from "../components/FollowLateralBar/FollowLateralBar";
 
 import '../App.css';
-import { getToken } from "../utils/LocalStorage.utils";
 
 export const MainRouter = () => {
 
@@ -28,6 +29,7 @@ const PrivateRoute = ({ component: Component, path }) => (
   return (
     <>
       <LateralBar />
+      <FollowLateralBar />
       <div className="MainRouter-wrap">
         <Switch>
             <PrivateRoute exact path={route.DISCOVER} component={Discover} />

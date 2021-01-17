@@ -48,7 +48,7 @@ export const EditProfile = (props) => {
   const handleNewPass = (e) => setNewPass(e.target.value);
 
   // Cambiar datos usuario
-  const handleSubmit = (e) => {
+  const handleSubmitProfileEdited = (e) => {
     ServerRequest(`data/user/${user._id}`, "PUT", editedUser)
       .then((response) => {
         setUser(response);
@@ -83,7 +83,7 @@ export const EditProfile = (props) => {
 
       <div className="EditProfile-content">
         <div className="EditProfile-header">
-          <h3>Edit my account</h3>
+          <h1>Edit my account</h1>
           <p onClick={goBackTo} className="backToProfile"> Back to profile ></p>
         </div>
 
@@ -107,7 +107,7 @@ export const EditProfile = (props) => {
           <MyButton onClick={handleOpenDelete} variant="white" size="30%">Delete Account</MyButton>
         </div>
         <br />
-        <MyButton onClick={handleSubmit} variant="pink-or" size="30%">Submit changes</MyButton>
+        <MyButton onClick={handleSubmitProfileEdited} variant="pink-or" size="30%">Submit changes</MyButton>
       </div>
 
 

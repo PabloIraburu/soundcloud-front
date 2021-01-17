@@ -6,7 +6,7 @@ export const SongsContext = createContext();
 
 export const SongsContextProvider = ({children}) => {
 
-    const [songs, setSongs] = useState({})
+    const [songs, setSongs] = useState({});
 
     useEffect(() => {
         ServerRequest('data/song', "GET")

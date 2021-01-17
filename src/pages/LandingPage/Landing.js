@@ -37,7 +37,7 @@ export const Landing = () => {
       <div className={styles["Landing-menu"]}>
         <div className={styles["Landing-logo-section"]}>
           <img src={logo} className={styles["Landing-logo"]} alt="logo" />
-          <a href='/discover' className={styles["Landing-logo-text"]}>SoundMist</a>
+          <a href='/' className={styles["Landing-logo-text"]}>SoundMist</a>
         </div>
 
         <div className={styles["Landing-buttons-section"]}>

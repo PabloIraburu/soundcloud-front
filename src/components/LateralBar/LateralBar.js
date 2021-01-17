@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import * as route from "../../routes/routes";
 import logo from "../../img/logo.png";
@@ -7,6 +7,7 @@ import { Modal } from "../Modal/Modal";
 import { MyButton } from "../MyButton/MyButton";
 import { Upload } from "../Upload/Upload";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
+import { UserContext } from "../../contexts/UserContext/contextProvider";
 
 import "./LateralBar.css"
 
@@ -26,6 +27,8 @@ export default function LateralBar() {
     //     setEntity(event.target.value);
     // }
 
+    const { signOut } = useContext(UserContext);
+   
     //Gestión modal CreatePlaylist
     const [openModalCreatePlaylist, setOpenModalCreatePlaylist] = useState(false);
     const handleOpenCreatePlaylist = () => setOpenModalCreatePlaylist(!openModalCreatePlaylist);
@@ -289,6 +292,8 @@ export default function LateralBar() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
                             className="svg-inline--fa fa-moon-stars fa-w-16 fa-7x"
+                            onClick={signOut}
+                            alt="logout"
                         >
                             <g className="fa-group">
                                 <path
@@ -316,6 +321,7 @@ export default function LateralBar() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
                             className="svg-inline--fa fa-sun fa-w-16 fa-7x"
+                            onClick={handleOpenCreatePlaylist}
                         >
                             <g className="fa-group">
                                 <path
@@ -363,7 +369,6 @@ export default function LateralBar() {
             </ul>
             {openModalCreatePlaylist &&
                 <Modal handleClose={handleCloseCreatePlaylist}>
-
                     <CreatePlaylist />
                 </Modal>}
 

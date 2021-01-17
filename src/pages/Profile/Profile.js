@@ -1,61 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import { MyButton } from "../../components/MyButton/MyButton";
-import { deleteToken } from "../../utils/LocalStorage.utils"
-import { useHistory } from "react-router-dom";
-import { HOME } from "../../routes/routes"
 import { UserContext } from "../../contexts/UserContext/contextProvider"
-import { SongList } from "../../components/SongList/SongList";
-import { ServerRequest } from "../../helpers/ServerRequest";
-// import { SongsContext } from "../../contexts/SongsContext/songsContext";
+import { MySongs } from "../MySongs/MySongs";
 
 
 export const Profile = () => {
-  const { user } = useContext(UserContext);
-  // const { songs } = useContext(SongsContext);
-  const [userSongs, setUserSongs] = useState({})
-  const history = useHistory()
-  const userId = user._id;
-
-  useEffect(() => {
-      ServerRequest(`data/song/?id_author=${userId}`, "GET")
-          .then((response) => {
-              setUserSongs(response);
-          })
-          .catch(console.log);
-
-  }, [userId]);
-
-  console.log('userSongs', userSongs);
-  console.log(userSongs._id);
-
-  const signOut = () => {
-    deleteToken();
-    history.push(HOME)
-  }
-
-  const handleAddToPlaylist = () => {
-
-  }
-
-  const handleDeleteSong = () => {
-    ServerRequest(`data/song/${userSongs._id}`, "DELETE")
-    .then((response) => {
-        setUserSongs(response);
-    })
-    .catch(console.log);
-  }
-
-  const handleEditSong = () => {
-
-  }
-
+  const { user, signOut } = useContext(UserContext);
 
   return (
     <>
         <div className="Profile-header">
-          <h3>My account</h3>
+          <h1>My account</h1>
         </div>
 
         <div className="Profile-content">
@@ -92,16 +49,10 @@ export const Profile = () => {
           </MyButton>
         </div>
 
-        <div className="Profile-mySongs-section">
-          <h3>My songs</h3>
-            {/* {userSongs && <SongList 
-              songs={userSongs} 
-              handleAddToPlaylist={handleAddToPlaylist} 
-              handleDeleteSong={handleDeleteSong} 
-              handleEditSong={handleEditSong}
-            />} */}
-        </div>
+          <MySongs />
+
     </>
 
-  );
+);
 };
+

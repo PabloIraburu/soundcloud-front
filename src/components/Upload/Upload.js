@@ -14,7 +14,7 @@ export const Upload = () => {
   const fileInputEl = useRef(null);
   const { user: { _id: userId } } = useContext(UserContext);
 
-  //Introduce los datos de los inputs en el objeto newUser
+  //Introduce los datos de los inputs en el objeto song
   const handleInput = (event) => {
     const { value, name } = event.target;
     setSong((prevValue) => ({
