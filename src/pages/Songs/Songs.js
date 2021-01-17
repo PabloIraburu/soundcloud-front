@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect, useRef } from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { SongList } from "../../components/SongList/SongList";
 import { songsReducer } from "../../reducers/songsReducer";
 import "./Songs.css";
 
@@ -76,11 +75,7 @@ export const Songs = () => {
                     />
                 </div>
 
-                <SongList
-                    songs={songs}
-                    handleDelete={handleDelete}
-                // handleToggle={handleToggle}
-                />
+
             </div>
         </>
     )

@@ -1,6 +1,8 @@
 .CoverSm-card {
   display: flex;
   flex-direction: row;
+  min-width: 280px;
+  margin-bottom: 20px;
 }
 
 .CoverSm-wrap {
