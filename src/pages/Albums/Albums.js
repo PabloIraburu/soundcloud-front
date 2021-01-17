@@ -31,18 +31,21 @@ const handleClickPrev = () => {
   return (
     <>
       <h1>Albums</h1>
-
-      <div className={styles["Albums-list"]}>
-      {songs.map((song) => (
-          <CoverMd
-              key={song._id}
-              title={song.title}
-              categories={song.category}
-              author={song.artist}
-              img={song.image}
-          />
-      ))}
-      </div>
+      
+      {
+        (songs.lenght !== 0) &&
+        <div className={styles["Albums-list"]}>
+            {songs.map((song) => (
+              <CoverMd
+                  key={song._id}
+                  title={song.title}
+                  categories={song.category}
+                  author={song.artist}
+                  img={song.image}
+              />
+            ))}
+        </div>
+      }
 
       <audio controls="controls">
           <source src={`http://localhost:3300/track/600237f7fea6f3048545a5a3`} type="audio/mpeg" />
