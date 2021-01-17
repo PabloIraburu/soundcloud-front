@@ -9,7 +9,7 @@ const {user} = useContext(UserContext)
 
     return(
         <a className='userCard' href='/profile'>
-            <img src={user.image} alt="foto"/>
+            <div style={{ backgroundImage: `url(${user.image})` }} className="userCard-img"></div>
             <div className="text">
                 <div className="identity">
                     <h1 className='Name'>{user.name}</h1>
