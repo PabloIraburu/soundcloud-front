@@ -4,8 +4,8 @@
   height: 50px;
   width: 50px;
   margin-top: 2rem;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 2rem;
   display: flex;
   border-radius: 18px;
   text-decoration: none;
@@ -43,6 +43,10 @@
 
 .userCard .text .numbers {
   display: none;
+}
+
+.text {
+  margin-left: 10px;
 }
 .userCard:hover .text .numbers {
   display: block;
