@@ -10,19 +10,20 @@ export const Playlists = () => {
   return (
     <>
       <h1>Playlists</h1>
-
-      <div className={styles["Playlists-list"]}>
-      {songs.map((song) => (
-          <CoverMd
-              key={song._id}
-              title={song.title}
-              categories={song.category}
-              author={song.artist}
-              img={song.image}
-          />
-      ))}
+      {
+        (songs.lenght !== 0) &&
+        <div className={styles["Playlists-list"]}>
+        {songs.map((song) => (
+            <CoverMd
+                key={song._id}
+                title={song.title}
+                categories={song.category}
+                author={song.artist}
+                img={song.image}
+            />
+        ))}
       </div>
-
+      }
     </>
   )
 }

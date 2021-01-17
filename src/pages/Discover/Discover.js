@@ -13,12 +13,10 @@ import './Discover.css'
 export default function Discover() {
 
     const { songs } = useContext(SongsContext);
-    console.log(songs);
-
-    const [openModalUpload, setOpenModalUpload] = useState(false);
-    const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
 
     //Gestión modal upload
+    const [openModalUpload, setOpenModalUpload] = useState(false);
+    const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
     const handleCloseUpload = (e) => {
         const { className: el } = e.target;
         if (el !== "backdrop" && el !== "fas fa-times") return;
@@ -73,31 +71,37 @@ export default function Discover() {
                     <div className="playlist"></div>
                 </div>
 
-                {/* <h3>Recommended for you</h3>
-                <div className="Discover-albums">
-                    {songs !== {} && songs.map((song) => (
-                        <CoverMd
-                            key={song._id}
-                            title={song.title}
-                            categories={song.category}
-                            author={song.artist}
-                            img={song.image}
-                        />
-                    ))}
-                </div>
-
+                <h3>Recommended for you</h3>
+                {
+                    (songs.lenght !== 0) &&
+                    <div className="Discover-albums">
+                        {songs.map((song) => (
+                            <CoverMd
+                                key={song._id}
+                                title={song.title}
+                                categories={song.category}
+                                author={song.artist}
+                                img={song.image}
+                            />
+                        ))}
+                    </div>
+                }
+                
                 <h3>World's Top 100</h3>
-                <div className="Discover-albums">
-                    {songs !== {} && songs.map((song) => (
-                        <CoverMd
-                            key={song._id}
-                            title={song.title}
-                            categories={song.category}
-                            author={song.artist}
-                            img={song.image}
-                        />
-                    ))}
-                </div> */}
+                {
+                    (songs.lenght !== 0) &&
+                    <div className="Discover-albums">
+                        {songs.map((song) => (
+                            <CoverMd
+                                key={song._id}
+                                title={song.title}
+                                categories={song.category}
+                                author={song.artist}
+                                img={song.image}
+                            />
+                        ))}
+                    </div>
+                }
 
             </div>
             {openModalUpload && (
