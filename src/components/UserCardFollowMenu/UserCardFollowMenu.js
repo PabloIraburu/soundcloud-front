@@ -4,7 +4,7 @@ import PersonAddDisabledRoundedIcon from '@material-ui/icons/PersonAddDisabledRo
 import styles from './UserCardFollowMenu.module.css';
 
 
-export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow }) => {
+export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow, following }) => {
 
   return (
     <div className={styles["UserCardFollowMenu-wrap"]}>
@@ -22,7 +22,7 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow 
         <PersonAddRoundedIcon
                   fontSize="small"
                   style={{ color: "white" }}
-                  onClick={() => handleFollow(userId)}
+                  onClick={() => handleFollow(userId, following)}
               />
       </div>
       
