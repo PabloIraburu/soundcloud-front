@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import './EditProfile.css';
 import { useHistory } from "react-router-dom";
 import { setJWT } from "../../utils/LocalStorage.utils";
@@ -6,12 +6,12 @@ import { ServerRequest } from '../../helpers/ServerRequest';
 import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
-import { HOME, PROFILE } from '../../routes/routes';
-import {UserContext} from "../../contexts/UserContext/contextProvider"
+import * as route from '../../routes/routes';
+import { UserContext } from "../../contexts/UserContext/contextProvider"
 
 
 export const EditProfile = (props) => {
-  const{user, setUser} = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const history = useHistory();
 
   const [editedUser, setEditedUser] = useState({});
@@ -53,7 +53,7 @@ export const EditProfile = (props) => {
       .then((response) => {
         setUser(response);
         //Manda al usuario a la home tras el registro completado
-        history.push(PROFILE);
+        history.push(route.PROFILE);
       })
       .catch((response) => console.log);
   };
@@ -72,7 +72,8 @@ export const EditProfile = (props) => {
   const handleDelete = (e) => {
     ServerRequest(`data/user/${user._id}`, "DELETE")
       .then(response => console.log)
-      .catch((response) => props.history.push(HOME));
+      .catch((response) => console.log);
+    history.replace(route.HOME);
   };
 
   // Volver a la página anterior
