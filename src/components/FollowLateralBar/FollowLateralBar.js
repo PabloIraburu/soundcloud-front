@@ -12,40 +12,39 @@ const [editedUserFollowed, setEditedUserFollowed] = useState();
 
 
 //userId = id usuario a seguir (followed)
-const handleFollow = (userId, following) => {
+const handleFollow = (userId) => {
 
   console.log("Id usuario loguead", user._id);
   console.log("Id soundFriend", userId);
 
-  //Añadir el id del usuario seguido al array de seguidos del usuario logueado
-  // if (following.find((id) => userId === id))
-  // {  
+  // if (user.following.find((id) => userId !== id)) {  
+    //Añadir el id del usuario seguido al array de seguidos del usuario logueado
     setEditedUserLogged((prevValue) => ({
-      ...prevValue,
-      "following": [...user.following, userId]
-    }))
-    console.log("User Logged", editedUserLogged)
+      following: [...prevValue.following, userId]
+    }));
+    
+    //Following
+    ServerRequest(`data/user/${user._id}`, 'PUT', editedUserLogged)
+    .then(console.log)
+    .catch(console.log);
+    console.log("User Logged", editedUserLogged);
+
+    /* -------------------------------- */ 
+
+    //Añadir el id del usuario logeado al array followers del usuario seguido
+    setEditedUserFollowed(allUsers.find((user) => user._id === userId));
+    setEditedUserFollowed((prevValue) => ({
+      // ...prevValue,
+      followers: [...prevValue.followers, user._id]
+    }));
+    console.log("User Followed", editedUserFollowed);
+    
+    //Followed
+    ServerRequest(`data/user/${userId}`, 'PUT', editedUserFollowed)
+    .then(console.log)
+    .catch(console.log);
+    console.log("User Followed", editedUserFollowed);
   // }
-
-
-  //Añadir el id del usuario logeado al array followers del usuario seguido
-  setEditedUserFollowed(allUsers.find((user) => user._id === userId));
-  // console.log(editedUserFollowed);
-
-  setEditedUserFollowed((prevValue) => ({
-    ...prevValue,
-    "followers": [...prevValue.followers, user._id]
-  }))
-  console.log(editedUserFollowed);
-
-
-  /* -------------------------------- */ 
-  //Following
-  ServerRequest(`data/user/${user._id}`, 'PUT', editedUserLogged)
-
-  //Followed
-  ServerRequest(`data/user/${userId}`, 'PUT', editedUserFollowed)
-
 }
 
   return (
@@ -62,7 +61,6 @@ const handleFollow = (userId, following) => {
                     name={user.name}
                     img={user.image}
                     followers={user.followers.length}
-                    following={user.following}
                     handleFollow={handleFollow}
                   />
                 ))}
@@ -82,7 +80,6 @@ const handleFollow = (userId, following) => {
               name={user.name}
               img={user.image}
               followers={user.followers.length}
-              following={user.following}
               handleFollow={handleFollow}
             />
           ))}

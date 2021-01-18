@@ -5,7 +5,8 @@ import {UserContext} from "../../contexts/UserContext/contextProvider"
 
 export default function UserInfo() {
     
-const {user} = useContext(UserContext)
+const { user, user: {followers}} = useContext(UserContext);
+console.log(user);
 
     return(
         <a className='userCard' href='/profile'>
@@ -16,7 +17,10 @@ const {user} = useContext(UserContext)
                     {/*<i className="fas fa-drum"></i>*/}
                 </div>
                 <div className="numbers">
-                    <p className="followers">Followers</p>
+                    {followers.length === 0 
+                        ? <p className="followers">0 Followers</p>
+                        : <p className="followers">{followers.length} Followers</p>
+                    }
                     <p className="tracks">Tracks</p>
                 </div>
             </div>
