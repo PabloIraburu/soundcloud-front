@@ -8,3 +8,4 @@ export const PLAYLISTS = '/playlists';
 export const FAVOURITES = '/favourites';
 export const RECOMMENDED = '/recomended';
 export const SONGS = '/songs';
+export const ALBUMDETAIL = '/albumdetail';
