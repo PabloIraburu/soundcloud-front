@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserCardFollowMenu } from '../UserCardFollowMenu/UserCardFollowMenu';
@@ -6,9 +6,41 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-const { allUsers, user } = useContext(UserContext);
+const { allUsers, user, user: { following } } = useContext(UserContext);
+console.log("Followed users", following);
+const [ followedUsers, setFollowedUsers ] = useState([])
 const [editedUserLogged, setEditedUserLogged] = useState(user);
 const [editedUserFollowed, setEditedUserFollowed] = useState();
+
+
+useEffect(() => {
+  // if (following.length !== 0) {
+    setFollowedUsers(allUsers.filter((user) => {
+      if (user._id === following[0]) {
+        return true
+      }
+    }))
+  // }
+}, [following])
+console.log("filtered Users 25", followedUsers);
+
+// useEffect(() => {
+  // if (following.length !== 0) {
+    // for (let i = 0; i > following.length; i++) {
+    //   setFollowedUsers(allUsers.filter((user) => {
+    //     if (user._id === following[i]) {
+    //       return true
+    //     }
+    //   }))
+    // }
+  // }
+// }, [following])
+// console.log("filtered Users 38", followedUsers);
+
+// console.log("folloedUsers", followedUsers);
+// console.log(following[0]);
+// console.log(allUsers.find((user) => user._id === following[0])._id);
+// console.log(following[0] === allUsers.find((user) => user._id === following[0])._id);
 
 
 //userId = id usuario a seguir (followed)
@@ -51,10 +83,10 @@ const handleFollow = (userId) => {
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
         { 
-          (user.length !== 0) 
+          (followedUsers.length === 0) 
             ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
             : <div className={styles["FollowLateralBar-userItems"]}>
-                {user.following.map((user) => (
+                {followedUsers.map((user) => (
                   <UserCardFollowMenu 
                     key={user._id}
                     userId={user._id}
@@ -65,7 +97,6 @@ const handleFollow = (userId) => {
                   />
                 ))}
               </div>
-          
         }
 
       <h3>Find new SoundFrieds</h3>
