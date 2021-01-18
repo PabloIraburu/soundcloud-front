@@ -1,10 +1,10 @@
 import React from 'react';
 import "./Input.css";
 
-export const Input = ({ type, name, onChange, placeholder, ref }) => {
+export const Input = (props) => {
   return (
     <div className="Input-wrap">
-      <input type={type} name={name} onChange={onChange} placeholder={placeholder} ref={ref} />
+      <input {...props} />
       <i></i>
     </div>
   )

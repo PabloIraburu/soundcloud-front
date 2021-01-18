@@ -25,89 +25,94 @@ export const MySongs = () => {
                 setUserSongs(response);
             })
             .catch(console.log);
-  
+
     }, [userId]);
-  
+
     console.log('userSongs', userSongs);
     console.log('user id', userSongs._id);
-  
+
     //Introduce los datos de los inputs en el objeto song
     const handleInput = (event) => {
-      const { value, name } = event.target;
-      setEditedSong((prevValue) => ({
-        ...prevValue,
-        [name]: value,
-      }));
+        const { value, name } = event.target;
+        setEditedSong((prevValue) => ({
+            ...prevValue,
+            [name]: value,
+        }));
     };
-  
+
     // Gestiona el modal editar song
     const [openModalEditSong, setOpenModalEditSong] = useState(false);
-    const handleOpenModalEditSong = () => setOpenModalEditSong(!openModalEditSong);
+    const handleOpenModalEditSong = (s) => {
+        debugger;
+        setEditedSong(s)
+        setOpenModalEditSong(!openModalEditSong);
+    };
     const handleCloseEditSong = (e) => {
-      const { className: el } = e.target;
-      if (el !== 'backdrop' && el !== 'fas fa-times') return;
-      setOpenModalEditSong(!openModalEditSong);
+        const { className: el } = e.target;
+        if (el !== 'backdrop' && el !== 'fas fa-times') return;
+        setOpenModalEditSong(!openModalEditSong);
     }
-    
+
     //Añadir canción a playlist
     const handleAddToPlaylist = (songId, playlistId) => {
-      ServerRequest(`data/playlist/${playlistId}/${songId}`, 'PUT', songId)
-        .then(console.log)
-        .catch(console.log);
+        ServerRequest(`data/playlist/${playlistId}/${songId}`, 'PUT', songId)
+            .then(console.log)
+            .catch(console.log);
     }
-    
+
     //Edición información canciones
     const handleEditSong = (id) => {
         ServerRequest(`data/song/${id}`, "PUT", editedSong)
-        .then((response) => {
-            setEditedSong(response);
-        })
-        .catch((response) => console.log);
+            .then((response) => {
+                setEditedSong(response);
+            })
+            .catch((response) => console.log);
         setUserSongs(userSongs.filter((song) => {
             if (song._id !== id) {
-              return true
+                return true
             }
-          }));
+        }));
     }
-  
+
     //Eliminación canción
     const handleDeleteSong = (id) => {
-      ServerRequest(`data/song/${id}`, "DELETE")
-        .then(console.log)
-        .catch(console.log);
-      setUserSongs(userSongs.filter((song) => {
-        if (song._id !== id) {
-          return true
-        }
-      }));
+        ServerRequest(`data/song/${id}`, "DELETE")
+            .then(console.log)
+            .catch(console.log);
+        setUserSongs(userSongs.filter((song) => {
+            if (song._id !== id) {
+                return true
+            }
+        }));
     }
 
     return (
 
         <>
             <div className={styles["Profile-mySongs-section"]}>
-            <h1>My songs</h1>
+                <h1>My songs</h1>
                 {
-                userSongs.length === 0 
-                    ? <p>You haven't upload any song yet...</p> 
-                    : userSongs.map(song => (
-                        <div key={song._id} >
-                            <SongItem 
-                                handleAddToPlaylist={handleAddToPlaylist} 
-                                handleDeleteSong={handleDeleteSong} 
-                                handleEditSong={handleEditSong}
-                                handleOpenModalEditSong={handleOpenModalEditSong}
-                                key={song._id}
-                                id={song._id}
-                                title={song.title}
-                                category={song.category}
-                                author={song.artist}
-                                img={song.image}
-                            />
-                        </div>
-                    ))
+                    userSongs.length === 0
+                        ? <p>You haven't upload any song yet...</p>
+                        : userSongs.map(song => (
+                            <div key={song._id} >
+                                <SongItem
+                                    handleAddToPlaylist={handleAddToPlaylist}
+                                    handleDeleteSong={handleDeleteSong}
+                                    handleEditSong={handleEditSong}
+                                    handleOpenModalEditSong={handleOpenModalEditSong}
+                                    key={song._id}
+                                    id={song._id}
+                                    title={song.title}
+                                    category={song.category}
+                                    author={song.artist}
+                                    img={song.image}
+                                    song={song}
+                                />
+                            </div>
+                        ))
                 }
-                
+
             </div>
 
             {openModalEditSong &&
@@ -119,6 +124,7 @@ export const MySongs = () => {
                             name={"title"}
                             onChange={handleInput}
                             placeholder={"Song title"}
+                            value={editedSong.title}
                             required
                         />
                         <Input
@@ -137,9 +143,9 @@ export const MySongs = () => {
                         />
                         <Selector name="category" id="category" onChange={handleInput} required>
                             {categories.map((category) => (
-                            <option value={category} key={category}>
-                                {category}
-                            </option>
+                                <option value={category} key={category}>
+                                    {category}
+                                </option>
                             ))}
                         </Selector>
 
@@ -153,7 +159,7 @@ export const MySongs = () => {
                             Update file
                         </MyButton>
                     </div>
-                
+
                     <br />
                     {/* {(newPass !== editedUser.password) ? <p className="flag-pass">*Passwords doesn't match</p> : <MyButton onClick={handleSubmitPassword} variant="pink-or" size="50%">Submit</MyButton>} */}
                 </Modal>
