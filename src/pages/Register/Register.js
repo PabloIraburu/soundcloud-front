@@ -10,7 +10,6 @@ import { MyButton } from '../../components/MyButton/MyButton';
 export const Register = ({ handleCloseRegister, openLogin }) => {
 
     const [newUser, setNewUser] = useState({
-        // "image": "https://www.funcionpublica.gov.co/CCB_N_FOTO/M2221870/376b549b58ac103c2aa5900f5972464797122a06ca06cf499be376260baed1d6eaca5813572a4e4d11384c1a5c468f4a2a05e400eb1b8773d25dc5b70d36744b.jpg"
         "image": "https://previews.123rf.com/images/jemastock/jemastock1701/jemastock170102174/70024333-silhouette-headphones-music-listen-mobile-vector-illustration.jpg"
     });
     const history = useHistory();
