@@ -12,7 +12,7 @@ import './Discover.css'
 
 export default function Discover() {
 
-    const { songs } = useContext(SongsContext);
+    const { songs, handleAddSongToFavourites } = useContext(SongsContext);
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
@@ -78,10 +78,10 @@ export default function Discover() {
                         {songs.map((song) => (
                             <CoverMd
                                 key={song._id}
-                                title={song.title}
+                                entity={song}
                                 categories={song.category}
                                 author={song.artist}
-                                img={song.image}
+                                handleAddToFavourites={handleAddSongToFavourites}
                             />
                         ))}
                     </div>
