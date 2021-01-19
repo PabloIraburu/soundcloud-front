@@ -17,39 +17,42 @@ export const Recommended = () => {
         <div className={styles["Recommended-list-songs"]}>
 
           <div className={styles["Recommended-list-songs-items"]}>
-          {songs.map((song) => (
-            <CoverSm
+            {songs.map((song) => (
+              <CoverSm
                 key={song._id}
                 title={song.title}
                 categories={song.category}
                 author={song.artist}
                 img={song.image}
-            />
-          ))}
+                entity={song}
+              />
+            ))}
           </div>
           <div className={styles["Recommended-list-songs-items"]}>
-          {songs.map((song) => (
-            <CoverSm
+            {songs.map((song) => (
+              <CoverSm
                 key={song._id}
                 title={song.title}
                 categories={song.category}
                 author={song.artist}
                 img={song.image}
-            />
-          ))}
+                entity={song}
+              />
+            ))}
           </div>
           <div className={styles["Recommended-list-songs-items"]}>
-          {songs.map((song) => (
-            <CoverSm
+            {songs.map((song) => (
+              <CoverSm
                 key={song._id}
                 title={song.title}
                 categories={song.category}
                 author={song.artist}
                 img={song.image}
-            />
-          ))}
+                entity={song}
+              />
+            ))}
           </div>
-          
+
         </div>
       }
 
@@ -57,15 +60,15 @@ export const Recommended = () => {
       {
         (songs.lenght !== 0) &&
         <div className={styles["Recommended-list-playlists"]}>
-        {songs.map((song) => (
+          {songs.map((song) => (
             <CoverMd
-                key={song._id}
-                title={song.title}
-                categories={song.category}
-                author={song.artist}
-                img={song.image}
+              key={song._id}
+              title={song.title}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
             />
-        ))}
+          ))}
         </div>
       }
     </>
