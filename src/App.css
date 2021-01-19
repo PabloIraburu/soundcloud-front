@@ -51,3 +51,9 @@ body {
   padding-right: 23%;
   width: auto;
 }
+
+@media screen and (max-width: 1300px) {
+  .MainRouter-wrap {
+    padding-right: 100px;
+  }
+}
