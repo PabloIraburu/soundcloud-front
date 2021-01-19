@@ -6,9 +6,8 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-  const { user, user: { following }, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const userId = user._id;
-  console.log("Followed users", following);
   const [followedUsers, setFollowedUsers] = useState([]);
   const [nonFollowedUsers, setNonFollowedUsers] = useState([]);
   const [unfollowId, setUnfollowId] = useState();
@@ -18,14 +17,16 @@ export const FollowLateralBar = () => {
   useEffect(() => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
+        console.log("response", response);
         setNonFollowedUsers(response.filter((user) => {
           if (user._id !== userId) {
             return true
           }
         }));
+        console.log("nonFollowedUsers", nonFollowedUsers);
       })
       .catch(console.log);
-  }, []);
+  }, [followedUsers]);
 
   const handleFollow = (userId) => {
     const userFollowedId = userId;
