@@ -48,6 +48,12 @@ body {
   height: 100vh;
   overflow: auto;
   padding: 120px 150px 60px 140px;
-  padding-right: 23%;
+  padding-right: 25%;
   width: auto;
+}
+
+@media screen and (max-width: 1300px) {
+  .MainRouter-wrap {
+    padding-right: 100px;
+  }
 }

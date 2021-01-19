@@ -7,7 +7,8 @@
   right: 0px;
   width: 15%;
   z-index: 100;
-  padding: 30px 50px;
+  padding: 3% 3%;
+  /* padding: 30px 50px; */
 }
 
 .FollowLateralBar-nav h1 {
@@ -22,4 +23,10 @@
 
 .FollowLateralBar-userItems {
   margin-top: 30px;
+}
+
+@media screen and (max-width: 1300px) {
+  .FollowLateralBar-nav {
+    visibility: hidden;
+  }
 }
