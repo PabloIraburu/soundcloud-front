@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import PersonAddDisabledRoundedIcon from '@material-ui/icons/PersonAddDisabledRounded';
 import styles from './UserCardFollowMenu.module.css';
 
 
 export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow, handleUnfollow }) => {
+
+  const [followButton, setFollowButton] = useState(true);
 
   return (
     <div className={styles["UserCardFollowMenu-wrap"]}>
@@ -19,7 +21,7 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
       </div>
       <div className={styles["UserCardFollowMenu-followIcon"]}>
         {/* <i className="far fa-heart" onClick={() => handleFollow(userId)}></i> */}
-        <PersonAddRoundedIcon
+        {/* <PersonAddRoundedIcon
           fontSize="small"
           style={{ color: "white" }}
           onClick={() => handleFollow(userId)}
@@ -27,8 +29,31 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
         <PersonAddDisabledRoundedIcon
           fontSize="small"
           style={{ color: "white" }}
-          onClick={() => handleUnfollow(userId)}
-        />
+          onClick={() => {
+            handleUnfollow(userId)
+            setFollowButton(false)
+          }}
+        /> */}
+
+        {!followButton && <PersonAddDisabledRoundedIcon
+          fontSize="small"
+          style={{ color: "white" }}
+          onClick={() => {
+            handleUnfollow(userId)
+            setFollowButton(false)
+          }
+          }
+        />}
+
+
+        {followButton && <PersonAddRoundedIcon
+          fontSize="small"
+          style={{ color: "white" }}
+          onClick={() => {
+            handleFollow(userId)
+            setFollowButton(false)
+          }}
+        />}
       </div>
 
     </div >

@@ -50,14 +50,11 @@ export const FollowLateralBar = () => {
       .catch(console.log);
   }
 
-
-
   const handleUnfollow = (userId) => {
-    ServerRequest(`data/follower/?follower=${user._id}_followed=${userId}`, "GET")
-    //   .then((response) => setUnfollowId(response))
-    //   .catch(console.log);
-
-    // ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
+    ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+      .then((response) => setUnfollowId(response))
+      .catch(console.log);
+    ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
   }
 
   useEffect(() => {
@@ -94,22 +91,22 @@ export const FollowLateralBar = () => {
 
 
       <h3>Find new SoundFrieds</h3>
-      {/* {
-              (nonFollowedUsers.lenght === 0)
-                ? <p>loading...</p>
-                : <div className={styles["FollowLateralBar-userItems"]}>
-                  {nonFollowedUsers.map((user) => (
-                    <UserCardFollowMenu
-                      key={user._id}
-                      userId={user._id}
-                      name={user.name}
-                      img={user.image}
-                      // followers={}
-                      handleFollow={handleFollow}
-                    />
-                  ))}
-                </div>
-            } */}
+      {
+        (nonFollowedUsers.lenght === 0)
+          ? <p>loading...</p>
+          : <div className={styles["FollowLateralBar-userItems"]}>
+            {nonFollowedUsers.map((user) => (
+              <UserCardFollowMenu
+                key={user._id}
+                userId={user._id}
+                name={user.name}
+                img={user.image}
+                handleUnfollow={handleUnfollow}
+                handleFollow={handleFollow}
+              />
+            ))}
+          </div>
+      }
     </nav>
   )
 }
