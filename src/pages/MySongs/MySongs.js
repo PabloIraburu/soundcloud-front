@@ -72,6 +72,7 @@ export const MySongs = () => {
                 return true
             }
         }));
+        setOpenModalEditSong(!openModalEditSong);
     }
 
     //Eliminación canción
@@ -81,8 +82,8 @@ export const MySongs = () => {
             .catch(console.log);
 
         ServerRequest(`track/${song.trackId}`, "DELETE")
-        .then(console.log)
-        .catch(console.log);
+            .then(console.log)
+            .catch(console.log);
 
         setUserSongs(userSongs.filter((song) => {
             if (song.id_author === user._id) {
@@ -104,7 +105,7 @@ export const MySongs = () => {
                                 <SongItem
                                     handleAddToPlaylist={handleAddToPlaylist}
                                     handleDeleteSong={handleDeleteSong}
-                                    handleOpenModalEditSong={handleOpenModalEditSong}                                    
+                                    handleOpenModalEditSong={handleOpenModalEditSong}
                                     song={song}
                                 />
                             </div>
