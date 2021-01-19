@@ -23,3 +23,9 @@
 .FollowLateralBar-userItems {
   margin-top: 30px;
 }
+
+@media screen and (max-width: 1300px) {
+  .FollowLateralBar-nav {
+    visibility: hidden;
+  }
+}
