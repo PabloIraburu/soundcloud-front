@@ -19,14 +19,16 @@ export const FollowLateralBar = () => {
   useEffect(() => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
+        console.log("response", response);
         setNonFollowedUsers(response.filter((user) => {
           if (user._id !== userId) {
             return true
           }
         }));
+        console.log("nonFollowedUsers", nonFollowedUsers);
       })
       .catch(console.log);
-  }, []);
+  }, [followedUsers]);
 
   const handleFollow = (userId) => {
     const userFollowedId = userId;
