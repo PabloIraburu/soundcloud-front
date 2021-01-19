@@ -79,6 +79,7 @@ export default function Discover() {
                             <CoverMd
                                 key={song._id}
                                 entity={song}
+                                img={song.image}
                                 categories={song.category}
                                 author={song.artist}
                                 handleAddToFavourites={handleAddSongToFavourites}
@@ -86,7 +87,7 @@ export default function Discover() {
                         ))}
                     </div>
                 }
-                
+
                 <h3>World's Top 100</h3>
                 {
                     (songs.lenght !== 0) &&

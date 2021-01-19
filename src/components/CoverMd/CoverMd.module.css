@@ -31,13 +31,7 @@
   align-items: center;
   color: transparent;
   transition: all 250ms ease;
-}
-
-.play-icon {
-  transform: translateX(2px) scale(1.3);
-}
-.icon-mini {
-  transform: scale(0.8);
+  
 }
 
 .icon-wrapper:hover {
@@ -45,6 +39,13 @@
   background-color: #23232390;
   backdrop-filter: blur(4px);
   border-radius: 1px solid;
+}
+
+.play-icon {
+  transform: translateX(2px) scale(1.3);
+}
+.icon-mini {
+  transform: scale(0.8);
 }
 
 .CoverMd-text {

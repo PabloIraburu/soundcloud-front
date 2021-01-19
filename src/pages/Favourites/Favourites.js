@@ -17,13 +17,14 @@ export const Favourites = () => {
         <div className={styles["Favourites-songs"]}>
           {songs.map((song) => (
             <CoverSm
-                key={song._id}
-                title={song.title}
-                categories={song.category}
-                author={song.artist}
-                img={song.image}
+              key={song._id}
+              title={song.title}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
+              entity={song}
             />
-        ))}
+          ))}
         </div>
       }
 
@@ -31,15 +32,15 @@ export const Favourites = () => {
       {
         (songs.lenght !== 0) &&
         <div className={styles["Favourites-playlists"]}>
-        {songs.map((song) => (
+          {songs.map((song) => (
             <CoverMd
-                key={song._id}
-                title={song.title}
-                categories={song.category}
-                author={song.artist}
-                img={song.image}
+              key={song._id}
+              title={song.title}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
             />
-        ))}
+          ))}
         </div>
       }
 
@@ -47,15 +48,15 @@ export const Favourites = () => {
       {
         (songs.lenght !== 0) &&
         <div className={styles["Favourites-albums"]}>
-        {songs.map((song) => (
+          {songs.map((song) => (
             <CoverMd
-                key={song._id}
-                title={song.title}
-                categories={song.category}
-                author={song.artist}
-                img={song.image}
+              key={song._id}
+              title={song.title}
+              categories={song.category}
+              author={song.artist}
+              img={song.image}
             />
-        ))}
+          ))}
         </div>
       }
     </>
