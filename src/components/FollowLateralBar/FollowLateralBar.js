@@ -77,7 +77,7 @@ export const FollowLateralBar = () => {
                 userId={user._id}
                 name={user.name}
                 img={user.image}
-                followers={user.followers.length}
+                // followers={}
                 handleFollow={handleFollow}
               // userFollowed={user}
               />
@@ -96,7 +96,7 @@ export const FollowLateralBar = () => {
                 userId={user._id}
                 name={user.name}
                 img={user.image}
-                followers={user.followers.length}
+                // followers={}
                 handleFollow={handleFollow}
               />
             ))}
