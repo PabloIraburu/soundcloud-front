@@ -6,23 +6,24 @@ import EditIcon from "@material-ui/icons/Edit";
 import styles from './SongItem.module.css';
 
 
-export const SongItem = ({ id, title, category, author, img, handleAddToPlaylist, handleDeleteSong, handleEditSong, handleOpenModalEditSong, song }) => {
+export const SongItem = ({ song, handleAddToPlaylist, handleDeleteSong, handleOpenModalEditSong }) => {
+    
     return (
         <div className={styles["SongItem-card"]}>
-            <div style={{ backgroundImage: `url(${img})` }} className={styles["SongItem-img"]}>
+            <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItem-img"]}>
                 <div className={styles["SongItem-icon-wrapper"]}>
                     <i className="fas fa-play play-icon"></i>
                 </div>
             </div>
             <div className={styles["SongItem-text"]}>
-                <p className={styles["SongItem-title"]}>{title}</p>
-                <p>{author}</p>
-                <p>{category}</p>
+                <p className={styles["SongItem-title"]}>{song.title}</p>
+                <p>{song.artist}</p>
+                <p>{song.category}</p>
                 <div className={styles["SongItem-icons"]}>
                     <AddCircleIcon
                         fontSize="small"
                         style={{ color: "white" }}
-                        onClick={() => handleAddToPlaylist(id)}
+                        onClick={() => handleAddToPlaylist(song)}
                     />
 
                     <EditIcon
@@ -30,12 +31,11 @@ export const SongItem = ({ id, title, category, author, img, handleAddToPlaylist
                         //   style={{ color: "white", opacity: "50%" }}
                         style={{ color: "white" }}
                         onClick={() => handleOpenModalEditSong(song)}
-                    //   onClick={() => handleEditSong(id)}
                     />
                     <DeleteOutlineOutlinedIcon
                         fontSize="small"
                         style={{ color: "white" }}
-                        onClick={() => handleDeleteSong(id)}
+                        onClick={() => handleDeleteSong(song)}
                     />
                 </div>
             </div>

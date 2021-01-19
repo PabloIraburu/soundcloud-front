@@ -43,7 +43,7 @@ export const MySongs = () => {
     // Gestiona el modal editar song
     const [openModalEditSong, setOpenModalEditSong] = useState(false);
     const handleOpenModalEditSong = (s) => {
-        debugger;
+        // debugger;
         setEditedSong(s)
         setOpenModalEditSong(!openModalEditSong);
     };
@@ -55,32 +55,38 @@ export const MySongs = () => {
 
     //Añadir canción a playlist
     const handleAddToPlaylist = (songId, playlistId) => {
-        ServerRequest(`data/playlist/${playlistId}/${songId}`, 'PUT', songId)
+        ServerRequest(`data/playlist/${playlistId}`, 'PUT', songId)
             .then(console.log)
             .catch(console.log);
     }
 
     //Edición información canciones
-    const handleEditSong = (id) => {
-        ServerRequest(`data/song/${id}`, "PUT", editedSong)
+    const handleEditSong = () => {
+        ServerRequest(`data/song/${editedSong._id}`, "PUT", editedSong)
             .then((response) => {
                 setEditedSong(response);
             })
             .catch((response) => console.log);
         setUserSongs(userSongs.filter((song) => {
-            if (song._id !== id) {
+            if (song.id_author === user._id) {
                 return true
             }
         }));
+        setOpenModalEditSong(!openModalEditSong);
     }
 
     //Eliminación canción
-    const handleDeleteSong = (id) => {
-        ServerRequest(`data/song/${id}`, "DELETE")
+    const handleDeleteSong = (song) => {
+        ServerRequest(`data/song/${song._id}`, "DELETE")
             .then(console.log)
             .catch(console.log);
+
+        ServerRequest(`track/${song.trackId}`, "DELETE")
+            .then(console.log)
+            .catch(console.log);
+
         setUserSongs(userSongs.filter((song) => {
-            if (song._id !== id) {
+            if (song.id_author === user._id) {
                 return true
             }
         }));
@@ -99,14 +105,7 @@ export const MySongs = () => {
                                 <SongItem
                                     handleAddToPlaylist={handleAddToPlaylist}
                                     handleDeleteSong={handleDeleteSong}
-                                    handleEditSong={handleEditSong}
                                     handleOpenModalEditSong={handleOpenModalEditSong}
-                                    key={song._id}
-                                    id={song._id}
-                                    title={song.title}
-                                    category={song.category}
-                                    author={song.artist}
-                                    img={song.image}
                                     song={song}
                                 />
                             </div>
@@ -132,6 +131,7 @@ export const MySongs = () => {
                             name="artist"
                             onChange={handleInput}
                             placeholder={"Artist name"}
+                            value={editedSong.artist}
                             required
                         />
                         <Input
@@ -139,6 +139,7 @@ export const MySongs = () => {
                             name="image"
                             onChange={handleInput}
                             placeholder={"Url song image"}
+                            value={editedSong.image}
                             required
                         />
                         <Selector name="category" id="category" onChange={handleInput} required>
@@ -151,7 +152,6 @@ export const MySongs = () => {
 
                         <MyButton
                             onClick={handleEditSong}
-                            // onClick={() => handleSubmit(fileInputEl.current.files)}
                             variant="pink-or"
                             size="50%"
                             className="button-custom"
