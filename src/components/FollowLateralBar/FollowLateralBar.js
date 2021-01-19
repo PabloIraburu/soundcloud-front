@@ -6,15 +6,16 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-  const { user, user: { following }, setUser } = useContext(UserContext);
+  const { user, setUser, allUsers, setAllUseres } = useContext(UserContext);
   const userId = user._id;
-  console.log("Followed users", following);
+
   const [followedUsers, setFollowedUsers] = useState([]);
   const [nonFollowedUsers, setNonFollowedUsers] = useState([]);
   const [unfollowId, setUnfollowId] = useState();
   // const [editedUserLogged, setEditedUserLogged] = useState(user);
   // const [editedUserFollowed, setEditedUserFollowed] = useState();
 
+  //Todos los usuarios que no sigue el usuario logueado, menos el logueado
   useEffect(() => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
@@ -34,21 +35,23 @@ export const FollowLateralBar = () => {
       follower: user._id
     }
 
-    console.log(newFollow);
+    ServerRequest(`data/follower`, "POST", newFollow)
+      .then((response) => {
+        setNonFollowedUsers(response);
+        setFollowedUsers((prevValues) => ({
+          ...prevValues,
+          response
+        }));
+        console.log(response);
 
-    // ServerRequest(`follower`, "POST", newFollow)
-    //   .then((response) => {
-    //     setNonFollowedUsers(response);
-    //     setFollowedUsers((prevValues) => ({
-    //       ...prevValues,
-    //       userFollowed
-    //     }))
-    //   })
-    //   .catch(console.log);
+      })
+      .catch(console.log);
   }
 
+
+
   const handleUnfollow = (userId) => {
-    // ServerRequest(`data/follower/?follower=${user._id}_followed=${userId}`, "GET")
+    ServerRequest(`data/follower/?follower=${user._id}_followed=${userId}`, "GET")
     //   .then((response) => setUnfollowId(response))
     //   .catch(console.log);
 
@@ -67,7 +70,7 @@ export const FollowLateralBar = () => {
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-      {
+      {/* {
         (followedUsers.length === 0)
           ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
@@ -82,26 +85,29 @@ export const FollowLateralBar = () => {
               // userFollowed={user}
               />
             ))}
-          </div>
-      }
+          </div> 
+        }
+          
+      */}
+
 
       <h3>Find new SoundFrieds</h3>
-      {
-        (nonFollowedUsers.lenght === 0)
-          ? <p>loading...</p>
-          : <div className={styles["FollowLateralBar-userItems"]}>
-            {nonFollowedUsers.map((user) => (
-              <UserCardFollowMenu
-                key={user._id}
-                userId={user._id}
-                name={user.name}
-                img={user.image}
-                // followers={}
-                handleFollow={handleFollow}
-              />
-            ))}
-          </div>
-      }
+      {/* {
+              (nonFollowedUsers.lenght === 0)
+                ? <p>loading...</p>
+                : <div className={styles["FollowLateralBar-userItems"]}>
+                  {nonFollowedUsers.map((user) => (
+                    <UserCardFollowMenu
+                      key={user._id}
+                      userId={user._id}
+                      name={user.name}
+                      img={user.image}
+                      // followers={}
+                      handleFollow={handleFollow}
+                    />
+                  ))}
+                </div>
+            } */}
     </nav>
   )
 }
