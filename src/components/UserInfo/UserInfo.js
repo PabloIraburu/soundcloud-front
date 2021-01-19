@@ -5,7 +5,7 @@ import {UserContext} from "../../contexts/UserContext/contextProvider"
 
 export default function UserInfo() {
     
-const { user, user: {followers}} = useContext(UserContext);
+const { user } = useContext(UserContext);
 console.log(user);
 
     return(
@@ -17,10 +17,11 @@ console.log(user);
                     {/*<i className="fas fa-drum"></i>*/}
                 </div>
                 <div className="numbers">
-                    {followers.length === 0 
+                    {/* {followers.length === 0 
                         ? <p className="followers">0 Followers</p>
                         : <p className="followers">{followers.length} Followers</p>
-                    }
+                    } */}
+                    <p className="followers">0 Followers</p>
                     <p className="tracks">Tracks</p>
                 </div>
             </div>
