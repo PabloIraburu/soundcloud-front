@@ -32,6 +32,7 @@ export const OtherProfile = () => {
       })
       .catch(console.log);
   }, []);
+
   /* console.log(isLoggedUserFollowing.id_followedUser) */
   // Para comprobar si ya sigue al usuario
   useEffect(() => {
@@ -55,8 +56,9 @@ export const OtherProfile = () => {
         })
     }
   }, [isLoggedUserFollowing])
-  //Para comprobar a quien sigue
 
+
+  //Para comprobar a quien sigue
   useEffect(() => {
     serverRequest(`data/follows/?id_followingUser=${loggedUserId}`, "GET")
       .then((response) => {

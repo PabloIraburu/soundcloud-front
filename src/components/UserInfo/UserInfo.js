@@ -7,7 +7,6 @@ import { ServerRequest } from '../../helpers/ServerRequest';
 export default function UserInfo() {
     
 const { user } = useContext(UserContext);
-console.log(user);
 const [followers, setFollowers] = useState([]);
 console.log(followers);
 
@@ -15,7 +14,6 @@ useEffect(() => {
     ServerRequest(`data/follower/?followed=${user._id}`, "GET")
         .then(response => setFollowers(response))
         .catch(console.log);
-    console.log(followers);
 }, [user])
 
     return(

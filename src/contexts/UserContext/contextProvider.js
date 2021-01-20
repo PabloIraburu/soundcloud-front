@@ -20,6 +20,7 @@ export const UserContextProvider = ({children}) => {
     });
     // const userId = user._id;
     const [allUsers, setAllUsers] = useState([]);
+    const [usersFollowed, setUsersFollowed] = useState([]);
 
     // Usuario logueado
     useEffect(() => {
@@ -49,8 +50,24 @@ export const UserContextProvider = ({children}) => {
           }));
         })
         .catch(console.log);
-        
       }, []);
+
+    // Usuarios excepto el logueado
+    useEffect(() => {
+      const token = getToken();
+      const decodedToken = DecodeToken(token);
+      const userId = decodedToken.id;
+
+      ServerRequest(`data/user`, "GET")
+      .then((response) => {
+        setUsersFollowed(response.filter((user) => {
+          if (user._id !== userId) {
+            return true
+          }
+        }));
+      })
+      .catch(console.log);
+    }, []);
 
     //cerrar sesión y redirección a Landing
     const signOut = () => {
@@ -58,5 +75,5 @@ export const UserContextProvider = ({children}) => {
       history.replace(route.HOME)
     }
 
-    return <UserContext.Provider value={{user, setUser, allUsers, setAllUsers, signOut}}>{children}</UserContext.Provider>
+    return <UserContext.Provider value={{user, setUser, allUsers, setAllUsers, signOut, usersFollowed, setUsersFollowed}}>{children}</UserContext.Provider>
 }

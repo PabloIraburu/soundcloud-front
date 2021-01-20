@@ -39,8 +39,8 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
           fontSize="small"
           style={{ color: "white" }}
           onClick={() => {
-            handleUnfollow(userId)
-            setFollowButton(false)
+            // handleUnfollow(userId)
+            setFollowButton(!followButton)
           }}
         />}
 
@@ -49,8 +49,8 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
           fontSize="small"
           style={{ color: "white" }}
           onClick={() => {
-            handleFollow(userId)
-            setFollowButton(false)
+            // handleFollow(userId)
+            setFollowButton(!followButton)
           }}
         />}
 
