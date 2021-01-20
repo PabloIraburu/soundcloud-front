@@ -16,6 +16,10 @@ export const Albums = () => {
 const trackIds = ["5fc4d698c891ef40a7a07580", "5fc4e79bb0b05e5bc165ef9e"];
 const [currentTrack, setCurrentTrack] = useState(0);
 
+const handlePlay = (song) => {
+    setCurrentTrack(song._id)
+}
+
 const handleClickNext = () => {
   if (currentTrack < songs._id.length - 1) {
     setCurrentTrack(currentTrack + 1);

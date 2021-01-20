@@ -8,7 +8,18 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import AlbumIcon from '@material-ui/icons/Album';
 // import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
-export const CoverMd = ({ entity, img, title, categories, author, description, handleAddToFavourites, handlePlay, handleOpenOptions }) => {
+export const CoverMd = (
+    {
+        entity,
+        img,
+        title,
+        categories,
+        author,
+        description,
+        handleAddToFavourites,
+        handlePlay,
+        handleOpenOptions
+    }) => {
 
   return (
     <div className={styles["CoverMd-wrap"]}>
