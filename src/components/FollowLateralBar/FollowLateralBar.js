@@ -11,6 +11,8 @@ export const FollowLateralBar = () => {
 
   const [followedUsers, setFollowedUsers] = useState([]);
   const [nonFollowedUsers, setNonFollowedUsers] = useState([]);
+  const [isfollowing, setIsfollowing] = useState(false);
+  
   // const [unfollowId, setUnfollowId] = useState();
   // const [editedUserLogged, setEditedUserLogged] = useState(user);
   // const [editedUserFollowed, setEditedUserFollowed] = useState();
@@ -30,7 +32,9 @@ export const FollowLateralBar = () => {
   const handleFollow = (userId) => {
     const userFollowedId = userId;
     const newFollow = {
+      //Perfil seguido
       followed: userFollowedId,
+      //Perfil seguidor, usuario logueado
       follower: user._id
     }
     ServerRequest(`data/follower`, "POST", newFollow)
@@ -48,8 +52,8 @@ export const FollowLateralBar = () => {
     const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
       // .then(response => console.log("response 50", response))
       // .then((response) => setUnfollowId(response) )
-      .then(console.log)
-      .catch(console.log);
+      // .then(console.log)
+      // .catch(console.log);
     ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
     // ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
     //   // .then((response) => setNonFollowedUsers(response))

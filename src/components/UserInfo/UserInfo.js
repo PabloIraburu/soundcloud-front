@@ -1,12 +1,22 @@
-import React, {useContext} from 'react'
-import "./UserInfo.css"
-import {UserContext} from "../../contexts/UserContext/contextProvider"
+import React, { useContext, useState, useEffect } from 'react';
+import "./UserInfo.css";
+import {UserContext} from "../../contexts/UserContext/contextProvider";
+import { ServerRequest } from '../../helpers/ServerRequest';
 
 
 export default function UserInfo() {
     
 const { user } = useContext(UserContext);
 console.log(user);
+const [followers, setFollowers] = useState([]);
+console.log(followers);
+
+useEffect(() => {
+    ServerRequest(`data/follower/?followed=${user._id}`, "GET")
+        .then(response => setFollowers(response))
+        .catch(console.log);
+    console.log(followers);
+}, [user])
 
     return(
         <a className='userCard' href='/profile'>
@@ -14,14 +24,12 @@ console.log(user);
             <div className="text">
                 <div className="identity">
                     <h1 className='Name'>{user.name}</h1>
-                    {/*<i className="fas fa-drum"></i>*/}
                 </div>
                 <div className="numbers">
-                    {/* {followers.length === 0 
+                    {followers.length === 0
                         ? <p className="followers">0 Followers</p>
                         : <p className="followers">{followers.length} Followers</p>
-                    } */}
-                    <p className="followers">0 Followers</p>
+                    }
                     <p className="tracks">Tracks</p>
                 </div>
             </div>
