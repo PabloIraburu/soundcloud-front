@@ -8,33 +8,34 @@ import { useHistory } from "react-router-dom";
 import * as route from '../../routes/routes';
 import styles from "./EditPlaylist.module.css";
 
-export const EditPlaylist = ({handleClose}) => {
+export const EditPlaylist = ({handleClose, playlist}) => {
 
+    console.log(playlist);
   const userId = DecodeToken(getToken()).id;
   const history = useHistory();
 
-  // const [newPlaylist, setNewPlaylist] = useState({
-  //   "id_owner": userId
-  // });
+  const [editedPlaylist, setEditedPlaylist] = useState({});
   
-  // //Introduce los datos de los inputs en el objeto newPlaylist
-  // const handleInput = (event) => {
-  //   const { value, name } = event.target;
-  //   setNewPlaylist((prevValue) => ({
-  //       ...prevValue,
-  //       [name]: value,
-  //   }));
-  //   console.log(newPlaylist);
-  // }
+  //Introduce los datos de los inputs en el objeto newPlaylist
+  const handleInput = (event) => {
+    console.log("input event", event);
+    const { value, name } = event.target;
+    setEditedPlaylist((prevValue) => ({
+        ...prevValue,
+        [name]: value,
+    }));
+    console.log(editedPlaylist);
+  }
 
-  // const handleCreateNewPlaylist = (event) => {
-  //   //Petición al servidor de tipo POST - fetch localhost:3300/register
-  //   ServerRequest("data/playlist", "POST", newPlaylist)
-  //     .then(console.log)
-  //     .catch((response) => console.log(response.error))
-  //   handleClose(event);
-  //   history.push(route.PLAYLISTS)
-  // }
+  const handleEditPlaylist = (event) => {
+    console.log("handleEditplaylist event", event);
+    // Petición al servidor de tipo POST - fetch localhost:3300/data/playlist/:id
+    ServerRequest(`data/playlist/${playlist._id}`, "PUT", editedPlaylist)
+      .then(console.log)
+      .catch((response) => console.log(response.error))
+    handleClose(event);
+    // history.push(route.PLAYLISTS)
+  }
 
   return (
     <div className={styles["EditPlaylist-wrap"]}> 
@@ -42,8 +43,8 @@ export const EditPlaylist = ({handleClose}) => {
           <h4>Playlist name*</h4>
             <Input
               type="text"
-              name="title"
-              placeholder={"My Playlist"}
+              name={"title"}
+              placeholder={playlist.title}
               onChange={handleInput}
               required
             />
@@ -52,25 +53,25 @@ export const EditPlaylist = ({handleClose}) => {
               // autoFocus
               className={styles["EditPlaylist-textarea"]}
               type="text"
-              name="description"
-              placeholder={"Add your best description."}
+              name={"description"}
+              placeholder={playlist.description}
               onChange={handleInput}
             />
           <h4>Image</h4>
             <Input
               type="text"
-              name="image"
-              placeholder={"Image url"}
+              name={"image"}
+              placeholder={playlist.image}
               onChange={handleInput}
               required
             />
         <div className={styles["EditPlaylist-button"]}>
         {
-          (newPlaylist.title === undefined || newPlaylist.title === "" || newPlaylist.title === " ")
-          ? <p>Playlist name field is required*</p>
-          : <MyButton variant="pink-or" size="50%" onClick={handleEditNewPlaylist} >
-              Create
-            </MyButton>
+          (editedPlaylist.title === undefined || editedPlaylist.title === "" || editedPlaylist.title === " ")
+          &&
+          <MyButton variant="pink-or" size="50%" onClick={handleEditPlaylist} >
+              Submit changes
+          </MyButton>
         }
         </div>
     </div>
