@@ -240,7 +240,7 @@ export default function LateralBar() {
                             </g>
                         </svg>
                         <MyButton onClick={handleOpenCreatePlaylist} variant="pink-or" size="150px">
-                            <p>CreatePlaylist</p>
+                            <p>Create Playlist</p>
                         </MyButton>
                     </p>
                 </li>
@@ -338,7 +338,7 @@ export default function LateralBar() {
             </ul>
             {openModalCreatePlaylist &&
                 <Modal handleClose={handleCloseCreatePlaylist}>
-                    <CreatePlaylist />
+                    <CreatePlaylist handleClose={handleOpenCreatePlaylist}/>
                 </Modal>}
 
             {openModalUpload && (

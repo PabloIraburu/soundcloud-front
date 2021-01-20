@@ -1,13 +1,16 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { ServerRequest } from "../../helpers/ServerRequest";
+import { UserContext } from '../UserContext/contextProvider';
+
 
 export const SongsContext = createContext();
 
 
 export const SongsContextProvider = ({ children }) => {
 
-    // const { userId: {user._id} }
+    const { user } = useContext(UserContext);
     const [songs, setSongs] = useState([]);
+    const [userPlaylists, setUserPlaylists] = useState([]);
     const [favouriteSong, setFavouriteSong] = useState();
     const [favouriteAlbum, setFavouriteAlbum] = useState();
     const [favouritePlaylist, setFavouritePlaylist] = useState()
@@ -18,8 +21,16 @@ export const SongsContextProvider = ({ children }) => {
                 setSongs(response);
             })
             .catch(console.log);
-
     }, []);
+
+    useEffect(() => {
+        ServerRequest(`data/playlist/?id_owner=${user._id}`, "GET")
+            .then((response) => {
+                setUserPlaylists(response);
+            })
+            .catch(console.log);
+    }, []);
+
 
     const handleAddSongToFavourites = (songId) => {
         // const songIdLiked = songId;
@@ -50,5 +61,16 @@ export const SongsContextProvider = ({ children }) => {
         //     .catch(console.log);
     }
 
-    return <SongsContext.Provider value={{ songs, setSongs, handleAddSongToFavourites, handleAddAlbumToFavourites, handleAddPlaylistToFavourites, favouriteSong, favouriteAlbum, favouritePlaylist }}>{children}</SongsContext.Provider>
+    return <SongsContext.Provider value={{ 
+        songs, 
+        setSongs, 
+        handleAddSongToFavourites, 
+        handleAddAlbumToFavourites, 
+        handleAddPlaylistToFavourites, 
+        favouriteSong, 
+        favouriteAlbum, 
+        favouritePlaylist, 
+        userPlaylists, 
+        setUserPlaylists 
+        }}>{children}</SongsContext.Provider>
 }
