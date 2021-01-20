@@ -6,16 +6,26 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-  const { user, setUser, allUsers, setAllUseres } = useContext(UserContext);
+  const { user, setUser, allUsers, setAllUsers, usersFollowed, setUsersFollowed } = useContext(UserContext);
   const userId = user._id;
 
   const [followedUsers, setFollowedUsers] = useState([]);
   const [nonFollowedUsers, setNonFollowedUsers] = useState([]);
-  const [isfollowing, setIsfollowing] = useState(false);
+  // const [isfollowing, setIsfollowing] = useState(false);
   
-  // const [unfollowId, setUnfollowId] = useState();
-  // const [editedUserLogged, setEditedUserLogged] = useState(user);
-  // const [editedUserFollowed, setEditedUserFollowed] = useState();
+  //Lista de usuarios seguidos
+  // const [followedList, setFollowedList] = useState([]);
+
+  useEffect(() => {
+    ServerRequest(`data/follower/?follower=${user._id}`, "GET") //Devuelve array de los usuarios que sigo
+        .then(response => {
+          //response.followed = id usuario seguido
+          console.log("Respuesta usuarios que sigo sin editar", response);
+          setUsersFollowed(response.followed);
+          console.log("Ids usuarios que sigo", usersFollowed);
+          })
+        .catch(console.log);
+}, [])
 
   //Todos los usuarios que no sigue el usuario logueado, menos el logueado
   useEffect(() => {
@@ -29,47 +39,46 @@ export const FollowLateralBar = () => {
   }, []);
 
 
-  const handleFollow = (userId) => {
-    const userFollowedId = userId;
-    const newFollow = {
-      //Perfil seguido
-      followed: userFollowedId,
-      //Perfil seguidor, usuario logueado
-      follower: user._id
-    }
-    ServerRequest(`data/follower`, "POST", newFollow)
-      .then((response) => {
-        setNonFollowedUsers(response);
-        setFollowedUsers((prevValues) => ({
-          ...prevValues,
-          response
-        }));
-      })
-      .catch(console.log);
-  }
+  // const handleFollow = (userId) => {
+  //   const userFollowedId = userId;
+  //   const newFollow = {
+  //     //Perfil seguido
+  //     followed: userFollowedId,
+  //     //Perfil seguidor, usuario logueado
+  //     follower: user._id
+  //   }
+  //   ServerRequest(`data/follower`, "POST", newFollow)
+  //     .then((response) => {
+  //       setNonFollowedUsers(response);
+  //       setFollowedUsers((prevValues) => ({
+  //         ...prevValues,
+  //         response
+  //       }));
+  //     })
+  //     .catch(console.log);
+  // }
 
-  const handleUnfollow = async (userId) => {
-    const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
-      // .then(response => console.log("response 50", response))
-      // .then((response) => setUnfollowId(response) )
-      // .then(console.log)
-      // .catch(console.log);
-    ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
-    // ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
-    //   // .then((response) => setNonFollowedUsers(response))
-    //   .then(console.log)
-    //   .catch(console.log);
+  // const handleUnfollow = async (userId) => {
+  //   const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+  //     // .then(response => console.log("response 50", response))
+  //     // .then((response) => setUnfollowId(response) )
+  //     // .then(console.log)
+  //     // .catch(console.log);
+  //   ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
+  //   // ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+  //   //   // .then((response) => setNonFollowedUsers(response))
+  //   //   .then(console.log)
+  //   //   .catch(console.log);
 
-    console.log(unfollowId);
-  }
-
+  //   console.log(unfollowId);
+  // }
 
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
       {/* {
-        (followedUsers.length === 0)
+        (usersFollowed.length === 0)
           ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
             {followedUsers.map((user) => (
@@ -86,9 +95,6 @@ export const FollowLateralBar = () => {
           </div>
       } */}
 
-
-
-
       <h3>Find new SoundFrieds</h3>
       {
         (nonFollowedUsers.lenght === 0)
@@ -100,8 +106,8 @@ export const FollowLateralBar = () => {
                 userId={user._id}
                 name={user.name}
                 img={user.image}
-                handleUnfollow={handleUnfollow}
-                handleFollow={handleFollow}
+                // handleUnfollow={handleUnfollow}
+                // handleFollow={handleFollow}
               />
             ))}
           </div>
@@ -109,40 +115,3 @@ export const FollowLateralBar = () => {
     </nav>
   )
 }
-
-
-  // //userId = id usuario a seguir (followed)
-  // const handleFollow = (userId) => {
-
-  //   console.log("Id usuario loguead", user._id);
-  //   console.log("Id soundFriend", userId);
-
-  //   // if (user.following.find((id) => userId !== id)) {  
-  //   //Añadir el id del usuario seguido al array de seguidos del usuario logueado
-  //   setEditedUserLogged((prevValue) => ({
-  //     following: [...prevValue.following, userId]
-  //   }));
-
-  //   //Following
-  //   ServerRequest(`data/user/${user._id}`, 'PUT', editedUserLogged)
-  //     .then(console.log)
-  //     .catch(console.log);
-  //   console.log("User Logged", editedUserLogged);
-
-  //   /* -------------------------------- */
-
-  //   //Añadir el id del usuario logeado al array followers del usuario seguido
-  //   setEditedUserFollowed(allUsers.find((user) => user._id === userId));
-  //   setEditedUserFollowed((prevValue) => ({
-  //     // ...prevValue,
-  //     followers: [...prevValue.followers, user._id]
-  //   }));
-  //   console.log("User Followed", editedUserFollowed);
-
-  //   //Followed
-  //   ServerRequest(`data/user/${userId}`, 'PUT', editedUserFollowed)
-  //     .then(console.log)
-  //     .catch(console.log);
-  //   console.log("User Followed", editedUserFollowed);
-  //   // }
-  // }
