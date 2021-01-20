@@ -15,11 +15,21 @@ export const Playlists = () => {
 
   const userId = DecodeToken(getToken()).id;
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const [playlist, setPlaylist] = useState({});
+  const [playlists, setPlaylists] = useState([]);
 
   useEffect(() => {
     ServerRequest(`data/playlist/?id_owner=${userId}`, "GET")
       .then(response => setUserPlaylists(response))
+      .catch(console.log)
+  }, [])
+
+    useEffect(() => {
+    ServerRequest(`data/playlist`, "GET")
+      .then(response => {
+          setPlaylists(response)
+          console.log('this', response)
+      })
+
       .catch(console.log)
   }, [])
 
@@ -35,7 +45,7 @@ export const Playlists = () => {
   //Gestión modal EditPlaylist
   const [openModalEditPlaylist, setOpenModalEditPlaylist] = useState(false);
   const handleOpenEditPlaylist = (e) => {
-    setPlaylist(e);
+    setPlaylists(e);
     setOpenModalEditPlaylist(!openModalEditPlaylist)
   };
   const handleCloseEditPlaylist = (e) => {
@@ -65,14 +75,31 @@ export const Playlists = () => {
             ))}
         </div>
         }
-      {openModalNewPlaylist &&
+        <h1>ALL PLAYLISTS</h1>
+
+        {
+          (playlists.lenght !== 0) &&
+          <div className={styles["Playlists-list"]}>
+            {playlists.map((playlist) => (
+              <CoverMd
+                  entity={playlist}
+                  key={playlist._id}
+                  title={playlist.title}
+                  description={playlist.description}
+                  img={playlist.image}
+                  handleOpenOptions={handleOpenEditPlaylist}
+              />
+            ))}
+        </div>
+        }
+        {openModalNewPlaylist &&
         <Modal handleClose={handleCloseNewPlaylist}>
           <CreatePlaylist handleClose={handleOpenNewPlaylist}/>
         </Modal>}
 
       {openModalEditPlaylist &&
         <Modal handleClose={handleCloseEditPlaylist}>
-          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={playlist}/>
+          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={playlists}/>
         </Modal>}
     </>
   )
