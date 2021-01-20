@@ -6,27 +6,26 @@ import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, allUsers, setAllUseres } = useContext(UserContext);
   const userId = user._id;
+
   const [followedUsers, setFollowedUsers] = useState([]);
   const [nonFollowedUsers, setNonFollowedUsers] = useState([]);
-  const [unfollowId, setUnfollowId] = useState();
+  // const [unfollowId, setUnfollowId] = useState();
   // const [editedUserLogged, setEditedUserLogged] = useState(user);
   // const [editedUserFollowed, setEditedUserFollowed] = useState();
 
+  //Todos los usuarios que no sigue el usuario logueado, menos el logueado
   useEffect(() => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
         console.log("response", response);
-        setNonFollowedUsers(response.filter((user) => {
-          if (user._id !== userId) {
-            return true
-          }
-        }));
+        setNonFollowedUsers(allUsers);
         console.log("nonFollowedUsers", nonFollowedUsers);
       })
       .catch(console.log);
-  }, [followedUsers]);
+  }, []);
+
 
   const handleFollow = (userId) => {
     const userFollowedId = userId;
@@ -34,41 +33,38 @@ export const FollowLateralBar = () => {
       followed: userFollowedId,
       follower: user._id
     }
-
-    console.log(newFollow);
-
-    // ServerRequest(`follower`, "POST", newFollow)
-    //   .then((response) => {
-    //     setNonFollowedUsers(response);
-    //     setFollowedUsers((prevValues) => ({
-    //       ...prevValues,
-    //       userFollowed
-    //     }))
-    //   })
-    //   .catch(console.log);
-  }
-
-  const handleUnfollow = (userId) => {
-    // ServerRequest(`data/follower/?follower=${user._id}_followed=${userId}`, "GET")
-    //   .then((response) => setUnfollowId(response))
-    //   .catch(console.log);
-
-    // ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
-  }
-
-  useEffect(() => {
-    ServerRequest(`data/follower/?follower=${user._id}`, "GET")
-      .then((response) => setUnfollowId(response))
+    ServerRequest(`data/follower`, "POST", newFollow)
+      .then((response) => {
+        setNonFollowedUsers(response);
+        setFollowedUsers((prevValues) => ({
+          ...prevValues,
+          response
+        }));
+      })
       .catch(console.log);
+  }
+
+  const handleUnfollow = async (userId) => {
+    const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+      // .then(response => console.log("response 50", response))
+      // .then((response) => setUnfollowId(response) )
+      .then(console.log)
+      .catch(console.log);
+    ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
+    // ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+    //   // .then((response) => setNonFollowedUsers(response))
+    //   .then(console.log)
+    //   .catch(console.log);
 
     console.log(unfollowId);
+  }
 
-  }, [])
+
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-      {
+      {/* {
         (followedUsers.length === 0)
           ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
@@ -84,20 +80,23 @@ export const FollowLateralBar = () => {
               />
             ))}
           </div>
-      }
+      } */}
+
+
+
 
       <h3>Find new SoundFrieds</h3>
       {
         (nonFollowedUsers.lenght === 0)
           ? <p>loading...</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
-            {nonFollowedUsers.map((user) => (
+            {allUsers.map((user) => (
               <UserCardFollowMenu
                 key={user._id}
                 userId={user._id}
                 name={user.name}
                 img={user.image}
-                // followers={}
+                handleUnfollow={handleUnfollow}
                 handleFollow={handleFollow}
               />
             ))}

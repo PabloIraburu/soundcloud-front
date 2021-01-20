@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import PersonAddDisabledRoundedIcon from '@material-ui/icons/PersonAddDisabledRounded';
 import styles from './UserCardFollowMenu.module.css';
 
+export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow, handleUnfollow }) => {
 
-export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow, handleUnfollow}) => {
-const [followButton, setFollowButton]= useState(true)
+  const [followButton, setFollowButton] = useState(true);
+
   return (
     <div className={styles["UserCardFollowMenu-wrap"]}>
       <div style={{ backgroundImage: `url(${img})` }} className={styles["UserCardFollowMenu-img"]}></div>
@@ -19,23 +20,40 @@ const [followButton, setFollowButton]= useState(true)
       </div>
       <div className={styles["UserCardFollowMenu-followIcon"]}>
         {/* <i className="far fa-heart" onClick={() => handleFollow(userId)}></i> */}
-          {followButton && <PersonAddRoundedIcon
-              fontSize="small"
-              style={{color: "white"}}
-              onClick={() => {
-                  handleFollow(userId)
-                  setFollowButton(false)
-              }}
-          />}
-          {!followButton && <PersonAddDisabledRoundedIcon
-              fontSize="small"
-              style={{color: "white"}}
-              onClick={() => {
-                      handleUnfollow(userId)
-                      setFollowButton(false)
-                  }
-              }
-          />}
+
+        {/* <PersonAddRoundedIcon
+          fontSize="small"
+          style={{ color: "white" }}
+          onClick={() => handleFollow(userId)}
+        />
+        <PersonAddDisabledRoundedIcon
+          fontSize="small"
+          style={{ color: "white" }}
+          onClick={() => {
+            handleUnfollow(userId)
+            setFollowButton(false)
+          }}
+        /> */}
+
+        {!followButton && <PersonAddDisabledRoundedIcon
+          fontSize="small"
+          style={{ color: "white" }}
+          onClick={() => {
+            handleUnfollow(userId)
+            setFollowButton(false)
+          }}
+        />}
+
+
+        {followButton && <PersonAddRoundedIcon
+          fontSize="small"
+          style={{ color: "white" }}
+          onClick={() => {
+            handleFollow(userId)
+            setFollowButton(false)
+          }}
+        />}
+
       </div>
 
     </div >
