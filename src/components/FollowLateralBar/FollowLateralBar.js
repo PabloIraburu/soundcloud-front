@@ -11,7 +11,7 @@ export const FollowLateralBar = () => {
 
   const [followedUsers, setFollowedUsers] = useState([]);
   const [nonFollowedUsers, setNonFollowedUsers] = useState([]);
-  const [unfollowId, setUnfollowId] = useState();
+  // const [unfollowId, setUnfollowId] = useState();
   // const [editedUserLogged, setEditedUserLogged] = useState(user);
   // const [editedUserFollowed, setEditedUserFollowed] = useState();
 
@@ -20,15 +20,12 @@ export const FollowLateralBar = () => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
         console.log("response", response);
-        setNonFollowedUsers(response.filter((user) => {
-          if (user._id !== userId) {
-            return true
-          }
-        }));
+        setNonFollowedUsers(allUsers);
         console.log("nonFollowedUsers", nonFollowedUsers);
       })
       .catch(console.log);
-  }, [followedUsers]);
+  }, []);
+
 
   const handleFollow = (userId) => {
     const userFollowedId = userId;
@@ -36,7 +33,6 @@ export const FollowLateralBar = () => {
       followed: userFollowedId,
       follower: user._id
     }
-
     ServerRequest(`data/follower`, "POST", newFollow)
       .then((response) => {
         setNonFollowedUsers(response);
@@ -44,27 +40,26 @@ export const FollowLateralBar = () => {
           ...prevValues,
           response
         }));
-        console.log(response);
-
       })
       .catch(console.log);
   }
 
-  const handleUnfollow = (userId) => {
-    ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
-      .then((response) => setUnfollowId(response))
+  const handleUnfollow = async (userId) => {
+    const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+      // .then(response => console.log("response 50", response))
+      // .then((response) => setUnfollowId(response) )
+      .then(console.log)
       .catch(console.log);
     ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
-  }
-
-  useEffect(() => {
-    ServerRequest(`data/follower/?follower=${user._id}`, "GET")
-      .then((response) => setUnfollowId(response))
-      .catch(console.log);
+    // ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
+    //   // .then((response) => setNonFollowedUsers(response))
+    //   .then(console.log)
+    //   .catch(console.log);
 
     console.log(unfollowId);
+  }
 
-  }, [])
+
 
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
@@ -84,10 +79,10 @@ export const FollowLateralBar = () => {
               // userFollowed={user}
               />
             ))}
-          </div> 
-        }
-          
-      */}
+          </div>
+      } */}
+
+
 
 
       <h3>Find new SoundFrieds</h3>
@@ -95,7 +90,7 @@ export const FollowLateralBar = () => {
         (nonFollowedUsers.lenght === 0)
           ? <p>loading...</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
-            {nonFollowedUsers.map((user) => (
+            {allUsers.map((user) => (
               <UserCardFollowMenu
                 key={user._id}
                 userId={user._id}
