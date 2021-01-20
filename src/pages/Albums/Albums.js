@@ -47,19 +47,23 @@ const handleClickPrev = () => {
         </div>
       }
 
-      <audio controls="controls">
-          <source src={`http://localhost:3300/track/600237f7fea6f3048545a5a3`} type="audio/mpeg" />
-          {/* <source src={`http://localhost:3300/track/${songsId[currentTrack]}`} type="audio/mpeg" /> */}
-      </audio>
+
 
         <div className={styles["Landing-player"]}>
+            <audio
+                controls={true}
+                muted={false}>
+            <source src={`https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`} type="audio/mpeg" />
+            {/* <source src={`http://localhost:3300/track/${songsId[currentTrack]}`} type="audio/mpeg" /> */}
+        </audio>
         <AudioPlayer
           onClickNext={handleClickNext}
           onClickPrevious={handleClickPrev}
           showSkipControls={true}
           showJumpControls={false}
+          preload='metadata'
           // src={`http://localhost:3300/track/${songsId[currentTrack]}`}
-          src={`http://localhost:3300/track/600237f7fea6f3048545a5a3`}
+          src={`https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`}
         />
       </div>
 

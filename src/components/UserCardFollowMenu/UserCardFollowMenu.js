@@ -3,7 +3,6 @@ import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import PersonAddDisabledRoundedIcon from '@material-ui/icons/PersonAddDisabledRounded';
 import styles from './UserCardFollowMenu.module.css';
 
-
 export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow, handleUnfollow }) => {
 
   const [followButton, setFollowButton] = useState(true);
@@ -21,6 +20,7 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
       </div>
       <div className={styles["UserCardFollowMenu-followIcon"]}>
         {/* <i className="far fa-heart" onClick={() => handleFollow(userId)}></i> */}
+
         {/* <PersonAddRoundedIcon
           fontSize="small"
           style={{ color: "white" }}
@@ -41,8 +41,7 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
           onClick={() => {
             handleUnfollow(userId)
             setFollowButton(false)
-          }
-          }
+          }}
         />}
 
 
@@ -54,6 +53,7 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
             setFollowButton(false)
           }}
         />}
+
       </div>
 
     </div >
