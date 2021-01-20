@@ -1,27 +1,32 @@
-.CreatePlaylist-wrap h1 {
+.EditPlaylist-wrap h1 {
   margin-top: 0;
 }
 
-.CreatePlaylist-wrap h4 {
+.EditPlaylist-wrap h4 {
   margin-bottom: 0;
 }
 
-.CreatePlaylist-wrap textarea {
+.EditPlaylist-wrap textarea {
   margin-top: 20px;
 }
 
-.CreatePlaylist-title {
+.EditPlaylist-title {
   text-align: center;
 }
 
-.CreatePlaylist-textarea {
+.Playlist-Name {
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.EditPlaylist-textarea {
   cursor: pointer;
   border-radius: 5px;
   width: 100%;
   height: 5em;
 }
 
-.CreatePlaylist-button {
+.EditPlaylist-button {
   display: flex;
   margin-top: 30px;
   justify-content: flex-end;
