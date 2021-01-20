@@ -240,7 +240,7 @@ export default function LateralBar() {
                             </g>
                         </svg>
                         <MyButton onClick={handleOpenCreatePlaylist} variant="pink-or" size="150px">
-                            <p>Create Playlist</p>
+                            Create Playlist
                         </MyButton>
                     </p>
                 </li>

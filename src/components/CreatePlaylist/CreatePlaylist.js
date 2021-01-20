@@ -1,15 +1,13 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import { Input } from "../Input/Input";
 import { MyButton } from "../MyButton/MyButton";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import styles from "./CreatePlaylist.module.css";
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
 import { DecodeToken } from "../../utils/DecodeToken";
 import { getToken } from "../../utils/LocalStorage.utils";
 
 const CreatePlaylist = ({handleClose}) => {
 
-  const { userPlaylists, setUserPlaylists } = useContext(SongsContext)  
   const userId = DecodeToken(getToken()).id;
   const [newPlaylist, setNewPlaylist] = useState({
     "id_owner": userId
@@ -22,6 +20,7 @@ const CreatePlaylist = ({handleClose}) => {
         ...prevValue,
         [name]: value,
     }));
+    console.log(newPlaylist);
   }
 
   const handleCreateNewPlaylist = (event) => {
@@ -35,7 +34,7 @@ const CreatePlaylist = ({handleClose}) => {
   return (
     <div className={styles["CreatePlaylist-wrap"]}> 
         <h1 className={styles["CreatePlaylist-title"]}>Create Playlist</h1>
-          <h4>Name</h4>
+          <h4>Playlist name*</h4>
             <Input
               type="text"
               name="title"
@@ -61,9 +60,13 @@ const CreatePlaylist = ({handleClose}) => {
               required
             />
         <div className={styles["CreatePlaylist-button"]}>
-            <MyButton variant="pink-or" size="50%" onClick={handleCreateNewPlaylist} >
+        {
+          (newPlaylist.title === undefined || newPlaylist.title === "" || newPlaylist.title === " ")
+          ? <p>Playlist name field is required*</p>
+          : <MyButton variant="pink-or" size="50%" onClick={handleCreateNewPlaylist} >
               Create
             </MyButton>
+        }
         </div>
     </div>
   )
