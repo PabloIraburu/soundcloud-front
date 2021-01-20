@@ -21,6 +21,8 @@ export const SongsContextProvider = ({ children }) => {
                 setSongs(response);
             })
             .catch(console.log);
+        console.log(songs);
+
     }, []);
 
     useEffect(() => {
@@ -61,16 +63,16 @@ export const SongsContextProvider = ({ children }) => {
         //     .catch(console.log);
     }
 
-    return <SongsContext.Provider value={{ 
-        songs, 
-        setSongs, 
-        handleAddSongToFavourites, 
-        handleAddAlbumToFavourites, 
-        handleAddPlaylistToFavourites, 
-        favouriteSong, 
-        favouriteAlbum, 
-        favouritePlaylist, 
-        userPlaylists, 
-        setUserPlaylists 
-        }}>{children}</SongsContext.Provider>
+    return <SongsContext.Provider value={{
+        songs,
+        setSongs,
+        handleAddSongToFavourites,
+        handleAddAlbumToFavourites,
+        handleAddPlaylistToFavourites,
+        favouriteSong,
+        favouriteAlbum,
+        favouritePlaylist,
+        userPlaylists,
+        setUserPlaylists
+    }}>{children}</SongsContext.Provider>
 }
