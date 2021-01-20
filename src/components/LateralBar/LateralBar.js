@@ -29,13 +29,13 @@ export default function LateralBar() {
 
     const { signOut } = useContext(UserContext);
 
-    //Gestión modal CreatePlaylist
-    const [openModalCreatePlaylist, setOpenModalCreatePlaylist] = useState(false);
-    const handleOpenCreatePlaylist = () => setOpenModalCreatePlaylist(!openModalCreatePlaylist);
-    const handleCloseCreatePlaylist = (e) => {
+    //Gestión modal NewPlaylist
+    const [openModalNewPlaylist, setOpenModalNewPlaylist] = useState(false);
+    const handleOpenNewPlaylist = () => setOpenModalNewPlaylist(!openModalNewPlaylist);
+    const handleCloseNewPlaylist = (e) => {
         const { className: el } = e.target;
         if (el !== "backdrop" && el !== "fas fa-times") return;
-        setOpenModalCreatePlaylist(!openModalCreatePlaylist);
+        setOpenModalNewPlaylist(!openModalNewPlaylist);
     };
 
     //Gestión modal upload
@@ -215,7 +215,7 @@ export default function LateralBar() {
 
                 {/* CREATE PLAYLIST */}
                 <li className="nav-item">
-                    <p className="nav-link" onClick={handleOpenCreatePlaylist}>
+                    <p className="nav-link" onClick={handleOpenNewPlaylist}>
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -239,8 +239,8 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        <MyButton onClick={handleOpenCreatePlaylist} variant="pink-or" size="150px">
-                            Create Playlist
+                        <MyButton onClick={handleOpenNewPlaylist} variant="pink-or" size="150px">
+                            New Playlist
                         </MyButton>
                     </p>
                 </li>
@@ -289,7 +289,7 @@ export default function LateralBar() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
                             className="svg-inline--fa fa-sun fa-w-16 fa-7x"
-                            onClick={handleOpenCreatePlaylist}
+                            onClick={handleOpenNewPlaylist}
                         >
                             <g className="fa-group">
                                 <path
@@ -336,9 +336,9 @@ export default function LateralBar() {
                 </li>
 
             </ul>
-            {openModalCreatePlaylist &&
-                <Modal handleClose={handleCloseCreatePlaylist}>
-                    <CreatePlaylist handleClose={handleOpenCreatePlaylist}/>
+            {openModalNewPlaylist &&
+                <Modal handleClose={handleCloseNewPlaylist}>
+                    <CreatePlaylist handleClose={handleOpenNewPlaylist}/>
                 </Modal>}
 
             {openModalUpload && (

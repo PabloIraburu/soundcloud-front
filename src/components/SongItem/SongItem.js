@@ -3,16 +3,23 @@ import React from "react";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EditIcon from "@material-ui/icons/Edit";
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import styles from './SongItem.module.css';
 
 
-export const SongItem = ({ song, handleAddToPlaylist, handleDeleteSong, handleOpenModalEditSong }) => {
+export const SongItem = ({ song, handleAddToAlbum, handleDeleteSong, handleOpenModalEditSong }) => {
+
+    const handlePlay = () => {}
     
     return (
         <div className={styles["SongItem-card"]}>
             <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItem-img"]}>
                 <div className={styles["SongItem-icon-wrapper"]}>
-                    <i className="fas fa-play play-icon"></i>
+                    <PlayCircleFilledIcon
+                      fontSize="small"
+                      // style={{ color: "white" }}
+                      onClick={() => handlePlay(song)}
+                    />
                 </div>
             </div>
             <div className={styles["SongItem-text"]}>
@@ -23,7 +30,7 @@ export const SongItem = ({ song, handleAddToPlaylist, handleDeleteSong, handleOp
                     <AddCircleIcon
                         fontSize="small"
                         style={{ color: "white" }}
-                        onClick={() => handleAddToPlaylist(song)}
+                        onClick={() => handleAddToAlbum(song)}
                     />
 
                     <EditIcon

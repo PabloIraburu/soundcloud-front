@@ -24,7 +24,7 @@ export const CoverMd = ({ entity, img, title, categories, author, description, h
           <MoreHorizRoundedIcon
             fontSize="small"
             // style={{ color: "white" }}
-            onClick={() => handleOpenOptions(entity._id)}
+            onClick={() => handleOpenOptions(entity)}
           />
           <PlayCircleFilledIcon
             fontSize="large"
