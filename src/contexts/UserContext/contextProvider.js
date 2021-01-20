@@ -16,8 +16,6 @@ export const UserContextProvider = ({children}) => {
       _id: "",
       name: "",
       email: "",
-      followers: [],
-      following: [],
       image: "https://previews.123rf.com/images/jemastock/jemastock1701/jemastock170102174/70024333-silhouette-headphones-music-listen-mobile-vector-illustration.jpg"
     });
     // const userId = user._id;
