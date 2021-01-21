@@ -34,7 +34,7 @@ export const EditPlaylist = ({handleClose, playlist}) => {
       .then(console.log)
       .catch((response) => console.log(response.error))
     handleClose(event);
-    // history.push(route.PLAYLISTS)
+    history.push(route.PLAYLISTS)
   }
 
   return (
@@ -43,9 +43,10 @@ export const EditPlaylist = ({handleClose, playlist}) => {
           <h4>Playlist name*</h4>
             <Input
               type="text"
-              name={"title"}
+              name="title"
               placeholder={playlist.title}
               onChange={handleInput}
+              value={playlist.title}
               required
             />
           <h4>Description</h4>

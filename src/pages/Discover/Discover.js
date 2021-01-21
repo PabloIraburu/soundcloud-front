@@ -82,6 +82,7 @@ export default function Discover() {
                                 img={song.image}
                                 categories={song.category}
                                 author={song.artist}
+                                title={song.title}
                                 handleAddToFavourites={handleAddSongToFavourites}
                             />
                         ))}
