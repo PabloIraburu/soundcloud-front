@@ -1,86 +1,108 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ServerRequest } from '../../helpers/ServerRequest';
+import { DecodeToken } from '../../utils/DecodeToken';
+import { getToken } from '../../utils/LocalStorage.utils';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
+import { MyButton } from '../../components/MyButton/MyButton';
+import { Modal } from "../../components/Modal/Modal";
+import { EditAlbum } from "../../components/EditAlbum/EditAlbum";
+import CreateAlbum from "../../components/CreateAlbum/CreateAlbum";
+
 import styles from './Albums.module.css';
+
 
 export const Albums = () => {
 
-  const { songs } = useContext(SongsContext);
+  const userId = DecodeToken(getToken()).id;
+  const [userAlbums, setUserAlbums] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
-  //Actualizar backend, sino trackId no funcionará
-  // const songsId = songs.map(songId => songId.trackId);
-  // console.log("songsId", songsId);
+  //GET USER Album
+  useEffect(() => {
+    ServerRequest(`data/album/?id_owner=${userId}`, "GET")
+      .then(response => setUserAlbums(response))
+      .catch(console.log)
+  }, [])
 
-  const trackIds = ["5fc4d698c891ef40a7a07580", "5fc4e79bb0b05e5bc165ef9e"];
-  const [currentTrack, setCurrentTrack] = useState(0);
+  //GET ALL Album
+  useEffect(() => {
+    ServerRequest(`data/album`, "GET")
+      .then(response => {
+          setAlbums(response)
+          console.log('this', response)
+      })
 
-const handlePlay = (song) => {
-    setCurrentTrack(song._id)
-}
+      .catch(console.log)
+  }, [])
 
-const handleClickNext = () => {
-  if (currentTrack < songs._id.length - 1) {
-    setCurrentTrack(currentTrack + 1);
-  }
-};
+  //Gestión modal NewAlbum
+  const [openModalNewAlbum, setOpenModalNewAlbum] = useState(false);
+  const handleOpenNewAlbum = () => setOpenModalNewAlbum(!openModalNewAlbum);
+  const handleCloseNewAlbum = (e) => {
+      const { className: el } = e.target;
+      if (el !== "backdrop" && el !== "fas fa-times") return;
+      setOpenModalNewAlbum(!openModalNewAlbum);
+  };
 
-  const handleClickPrev = () => {
-    if (currentTrack > 0) {
-      setCurrentTrack(currentTrack - 1);
-    }
+  //Gestión modal EditAlbum
+  const [openModalEditAlbum, setOpenModalEditAlbum] = useState(false);
+  const handleOpenEditAlbum = (e) => {
+    setAlbums(e);
+    setOpenModalEditAlbum(!openModalEditAlbum)
+  };
+  const handleCloseEditAlbum = (e) => {
+      const { className: el } = e.target;
+      if (el !== "backdrop" && el !== "fas fa-times") return;
+      setOpenModalEditAlbum(!openModalEditAlbum);
   };
 
   return (
     <>
-      <h1>Albums</h1>
-
-      {
-        (songs.lenght !== 0) &&
-        <div className={styles["Albums-list"]}>
-          {songs.map((song) => (
-            <CoverMd
-              key={song._id}
-              title={song.title}
-              categories={song.category}
-              author={song.artist}
-              img={song.image}
-            />
-          ))}
-        </div>
-      }
-
-
-
-      <div className={styles["Landing-player"]}>
-        <audio
-          controls={true}
-          muted={false}>
-          {/* <source src={`https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`} type="audio/mpeg" /> */}
-          <source src={`http://localhost:3300/track/60022da4fea6f3048545a4b1`} type="audio/mpeg" />
-
-
-          {/* <source src={`http://localhost:3300/track/${songsId[currentTrack]}`} type="audio/mpeg" /> */}
-        </audio>
-        <AudioPlayer
-          onClickNext={handleClickNext}
-          onClickPrevious={handleClickPrev}
-          showSkipControls={true}
-          showJumpControls={false}
-          preload='metadata'
-          // src={`http://localhost:3300/track/${songsId[currentTrack]}`}
-          src={`http://localhost:3300/track/60022da4fea6f3048545a4b1`}
-        // src={`https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`}
-        />
+      <div className={styles["Albums-header"]}>
+        <h1>My Albums</h1>
+        <MyButton onClick={handleOpenNewAlbum} variant="pink-or" size="150px">New Album</MyButton>
       </div>
+        {
+          (userAlbums.lenght !== 0) &&
+          <div className={styles["Albums-list"]}>
+            {userAlbums.map((album) => (
+              <CoverMd
+                  entity={album}
+                  key={album._id}
+                  title={album.title}
+                  description={album.description}
+                  img={album.image}
+                  handleOpenOptions={handleOpenEditAlbum}
+              />
+            ))}
+        </div>
+        }
+        <h1>All Albums</h1>
 
+        {
+          (albums.lenght !== 0) &&
+          <div className={styles["Albums-list"]}>
+            {albums.map((album) => (
+              <CoverMd
+                  entity={album}
+                  key={album._id}
+                  title={album.title}
+                  description={album.description}
+                  img={album.image}
+                  handleOpenOptions={handleOpenEditAlbum}
+              />
+            ))}
+        </div>
+        }
+        {openModalNewAlbum &&
+        <Modal handleClose={handleCloseNewAlbum}>
+          <CreateAlbum handleClose={handleOpenNewAlbum}/>
+        </Modal>}
+
+      {openModalEditAlbum &&
+        <Modal handleClose={handleCloseEditAlbum}>
+          <EditAlbum handleClose={handleOpenEditAlbum} albums={albums}/>
+        </Modal>}
     </>
   )
 }
-
-
-
-
-
-

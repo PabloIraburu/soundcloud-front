@@ -9,3 +9,4 @@ export const FAVOURITES = '/favourites';
 export const RECOMMENDED = '/recomended';
 export const SONGS = '/songs';
 export const ALBUMDETAIL = '/albumdetail';
+export const PLAYLISTDETAIL = '/playlistdetail'; //temporal

@@ -11,6 +11,7 @@ import AlbumIcon from '@material-ui/icons/Album';
 export const CoverMd = (
     {
         entity,
+        path,
         img,
         title,
         categories,
@@ -50,7 +51,7 @@ export const CoverMd = (
         </div>
       </div>
       <div className={styles["CoverMd-text"]}>
-        <Link className={styles["CoverMd-title"]}>
+        <Link className={styles["CoverMd-title"]} to={{pathname: {path}, state: {entity}}}>
           {title}
         </Link>
         <p className={styles["CoverMd-author"]}>{author}</p>
