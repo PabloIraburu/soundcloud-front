@@ -47,7 +47,7 @@ body {
   flex-direction: column;
   height: 100vh;
   overflow: auto;
-  padding: 120px 150px 60px 140px;
+  padding: 80px 150px 60px 140px;
   padding-right: 23%;
   width: auto;
 }
