@@ -20,7 +20,7 @@ import { PlaylistDetail } from "../pages/PlaylistDetail/PlaylistDetail";
 
 export const MainRouter = () => {
 
-const PrivateRoute = ({ component: Component, path }) => (
+  const PrivateRoute = ({ component: Component, path }) => (
     <Route
       path={path}
       render={() => getToken() ? <Component /> : <Redirect to={route.HOME} />}
@@ -34,18 +34,19 @@ const PrivateRoute = ({ component: Component, path }) => (
       <FollowLateralBar />
       <div className="MainRouter-wrap">
         <Switch>
-            <PrivateRoute exact path={route.DISCOVER} component={Discover} />
-            <PrivateRoute exact path={route.ALBUMS} component={Albums} />
-            <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
-            <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
-            <PrivateRoute exact path={route.RECOMMENDED} component={Recommended} />
-            <PrivateRoute exact path={route.SONGS} component={Songs} />
-            <PrivateRoute exact path={route.PROFILE} component={Profile} />
-            <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
-            <PrivateRoute exact path={route.ALBUMDETAIL} component={AlbumDetail} />
-            <PrivateRoute exact path={route.PLAYLISTDETAIL} component={PlaylistDetail} />
-    
-            <Redirect to="/discover" />
+          <PrivateRoute exact path={route.DISCOVER} component={Discover} />
+          <PrivateRoute exact path={route.ALBUMS} component={Albums} />
+          <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
+          <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
+          <PrivateRoute exact path={route.RECOMMENDED} component={Recommended} />
+          <PrivateRoute exact path={route.SONGS} component={Songs} />
+          <PrivateRoute exact path={route.PROFILE} component={Profile} />
+          <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
+          <PrivateRoute exact path={route.ALBUMDETAIL} component={AlbumDetail} />
+          <PrivateRoute path={route.PLAYLISTDETAIL} component={PlaylistDetail} />
+          <PrivateRoute path={route.ALBUMDETAIL} component={PlaylistDetail} />
+
+          {/* <Redirect to="/discover" /> */}
 
         </Switch>
       </div>

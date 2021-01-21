@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { example } from "../reducers/example";
+import { playFeaturesReducer } from "../reducers/example";
 
 export const PlayerContext = createContext();
 
