@@ -15,6 +15,7 @@ import { getToken } from "../utils/LocalStorage.utils";
 import { FollowLateralBar } from "../components/FollowLateralBar/FollowLateralBar";
 import { AlbumDetail } from "../pages/AlbumDetail/AlbumDetail";
 import '../App.css';
+import { PlaylistDetail } from "../pages/PlaylistDetail/PlaylistDetail";
 
 
 export const MainRouter = () => {
@@ -42,7 +43,8 @@ const PrivateRoute = ({ component: Component, path }) => (
             <PrivateRoute exact path={route.PROFILE} component={Profile} />
             <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
             <PrivateRoute exact path={route.ALBUMDETAIL} component={AlbumDetail} />
-
+            <PrivateRoute exact path={route.PLAYLISTDETAIL} component={PlaylistDetail} />
+    
             <Redirect to="/discover" />
 
         </Switch>

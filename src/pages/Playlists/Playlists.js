@@ -17,13 +17,15 @@ export const Playlists = () => {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
+  //GET USER PLAYLISTS
   useEffect(() => {
     ServerRequest(`data/playlist/?id_owner=${userId}`, "GET")
       .then(response => setUserPlaylists(response))
       .catch(console.log)
   }, [])
 
-    useEffect(() => {
+  //GET ALL PLAYLISTS
+  useEffect(() => {
     ServerRequest(`data/playlist`, "GET")
       .then(response => {
           setPlaylists(response)
