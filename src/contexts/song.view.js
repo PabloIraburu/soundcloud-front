@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { PlayerContext } from './playerContext'
+import { PlayerContext } from './PlayerContext/playerContext'
 
 export const songView = () => {
 

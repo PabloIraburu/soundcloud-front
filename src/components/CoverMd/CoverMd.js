@@ -11,7 +11,7 @@ import AlbumIcon from '@material-ui/icons/Album';
 export const CoverMd = (
   {
     entity,
-    path,
+    id,
     img,
     title,
     categories,
@@ -19,7 +19,8 @@ export const CoverMd = (
     description,
     handleAddToFavourites,
     handlePlay,
-    handleOpenOptions
+    handleOpenOptions,
+    entityType
   }) => {
 
   return (
@@ -51,10 +52,10 @@ export const CoverMd = (
         </div>
       </div>
       <div className={styles["CoverMd-text"]}>
-        {/* <Link className={styles["CoverMd-title"]} to={{ pathname: { path }, state: { entity } }}>
+        <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: { entity } }}>
           {title}
-        </Link> */}
-        <h4>{title}</h4>
+        </Link>
+        {/* <h4>{title}</h4> */}
         <p className={styles["CoverMd-author"]}>{author}</p>
         <p className={styles["CoverMd-category"]}>{categories}</p>
         <p className={styles["CoverMd-description"]}>{description}</p>
