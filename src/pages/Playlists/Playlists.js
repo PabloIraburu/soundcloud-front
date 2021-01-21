@@ -23,7 +23,7 @@ export const Playlists = () => {
     ServerRequest(`data/playlist/?id_owner=${userId}`, "GET")
       .then(response => setUserPlaylists(response))
       .catch(console.log)
-      console.log('user playlists', userPlaylists);
+    console.log('user playlists', userPlaylists);
   }, [])
 
   //GET ALL PLAYLISTS
@@ -31,16 +31,16 @@ export const Playlists = () => {
     ServerRequest(`data/playlist`, "GET")
       .then(response => setPlaylists(response))
       .catch(console.log)
-      console.log('playlists', playlists)
+    console.log('playlists', playlists)
   }, [])
 
   //Gestión modal NewPlaylist
   const [openModalNewPlaylist, setOpenModalNewPlaylist] = useState(false);
   const handleOpenNewPlaylist = () => setOpenModalNewPlaylist(!openModalNewPlaylist);
   const handleCloseNewPlaylist = (e) => {
-      const { className: el } = e.target;
-      if (el !== "backdrop" && el !== "fas fa-times") return;
-      setOpenModalNewPlaylist(!openModalNewPlaylist);
+    const { className: el } = e.target;
+    if (el !== "backdrop" && el !== "fas fa-times") return;
+    setOpenModalNewPlaylist(!openModalNewPlaylist);
   };
 
   //Gestión modal EditPlaylist
@@ -50,10 +50,18 @@ export const Playlists = () => {
     setOpenModalEditPlaylist(!openModalEditPlaylist)
   };
   const handleCloseEditPlaylist = (e) => {
-      const { className: el } = e.target;
-      if (el !== "backdrop" && el !== "fas fa-times") return;
-      setOpenModalEditPlaylist(!openModalEditPlaylist);
+    const { className: el } = e.target;
+    if (el !== "backdrop" && el !== "fas fa-times") return;
+    setOpenModalEditPlaylist(!openModalEditPlaylist);
   };
+
+  // const handleAddToFavourite = (id) => {
+  //   const newFavoritePlaylist = {
+  //     user_id: userId,
+  //     song_id: id
+  //   }
+  //   ServerRequest(`favouritesongs`, "POST", newFavoritePlaylist)
+  // }
 
   return (
     <>
@@ -61,46 +69,50 @@ export const Playlists = () => {
         <h1>My Playlists</h1>
         <MyButton onClick={handleOpenNewPlaylist} variant="pink-or" size="150px">New Playlist</MyButton>
       </div>
-        {
-          (userPlaylists.lenght !== 0) &&
-          <div className={styles["Playlists-list"]}>
-            {userPlaylists.map((playlist) => (
-              <CoverMd
-                  entity={playlist}
-                  key={playlist._id}
-                  title={playlist.title}
-                  description={playlist.description}
-                  img={playlist.image}
-                  handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
-              />
-            ))}
+      {
+        (userPlaylists.lenght !== 0) &&
+        <div className={styles["Playlists-list"]}>
+          {userPlaylists.map((playlist) => (
+            <CoverMd
+              entity={playlist}
+              key={playlist._id}
+              title={playlist.title}
+              description={playlist.description}
+              img={playlist.image}
+              id={playlist._id}
+              entityType="playlist"
+              handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+            />
+          ))}
         </div>
-        }
-        <h1>ALL PLAYLISTS</h1>
+      }
+      <h1>ALL PLAYLISTS</h1>
 
-        {
-          (playlists.lenght !== 0) &&
-          <div className={styles["Playlists-list"]}>
-            {playlists.map((playlist) => (
-              <CoverMd
-                  entity={playlist}
-                  key={playlist._id}
-                  title={playlist.title}
-                  description={playlist.description}
-                  img={playlist.image}
-                  handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
-              />
-            ))}
+      {
+        (playlists.lenght !== 0) &&
+        <div className={styles["Playlists-list"]}>
+          {playlists.map((playlist) => (
+            <CoverMd
+              entity={playlist}
+              key={playlist._id}
+              title={playlist.title}
+              description={playlist.description}
+              img={playlist.image}
+              id={playlist._id}
+              entityType="playlist"
+              handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+            />
+          ))}
         </div>
-        }
-        {openModalNewPlaylist &&
+      }
+      {openModalNewPlaylist &&
         <Modal handleClose={handleCloseNewPlaylist}>
-          <CreatePlaylist handleClose={handleOpenNewPlaylist}/>
+          <CreatePlaylist handleClose={handleOpenNewPlaylist} />
         </Modal>}
 
       {openModalEditPlaylist &&
         <Modal handleClose={handleCloseEditPlaylist}>
-          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist}/>
+          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} />
         </Modal>}
     </>
   )
