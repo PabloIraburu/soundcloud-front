@@ -60,10 +60,18 @@
   padding: 0;
 }
 
+.CoverMd-text h4 {
+  /* margin: 0;
+  padding: 0; */
+  color: white;
+  font-size: 2rem;
+}
+
 .CoverMd-title {
   text-decoration: none;
   color: white;
 }
+
 .CoverMd-author {
   color: rgb(250, 250, 250);
   font-size: 0.8rem;
