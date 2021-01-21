@@ -29,6 +29,10 @@ export const Upload = () => {
         const data = new FormData();
         data.append("file", file[0]);
         data.append("filename", file[0].name);
+        data.append("title", song.title);
+        data.append("artist", song.artist);
+        data.append("image", song.image);
+        data.append("category", song.category);
         const options = {
             method: "POST",
             body: data,
@@ -41,31 +45,18 @@ export const Upload = () => {
         fetch("http://localhost:3300/track", options)
             .then((response) => {
                 if (response.status === 201) {
-                    return response.json();
                     console.log(response.json())
+                    return response.json();
                 }
                 return Promise.reject(response.status);
             })
             .then((payload) => {
                 console.log(`Saved song with id: ${payload.id}`)
-                let id = {"trackId": payload.id}
-                console.log(id)
-                setSong((prevValue)=>({
-                    ...prevValue,
-                    "trackId": payload.id
-                }))
                 console.log(song)
             })
             .catch((error) => console.log(error));
 
 
-        ServerRequest("data/song", "POST", song)
-            .then((response) => {
-                if (response.status === 201) {
-                    return response.json();
-                }
-                return Promise.reject(response.status);
-            })
     };
 
     return (
