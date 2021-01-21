@@ -20,7 +20,7 @@ export const FollowLateralBar = () => {
       ServerRequest(`data/follower/?follower=${userId}`, "GET") //Devuelve array de los usuarios que sigo
         .then(response => {
           //response.followed = id usuario seguido
-          debugger;
+          // debugger;
           setFollowing(response.map(f => allUsers.find(u => u._id === f.followed)));
           console.log("Ids usuarios que sigo", following);
         })

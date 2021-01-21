@@ -9,18 +9,18 @@ import AlbumIcon from '@material-ui/icons/Album';
 // import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
 export const CoverMd = (
-    {
-        entity,
-        path,
-        img,
-        title,
-        categories,
-        author,
-        description,
-        handleAddToFavourites,
-        handlePlay,
-        handleOpenOptions
-    }) => {
+  {
+    entity,
+    path,
+    img,
+    title,
+    categories,
+    author,
+    description,
+    handleAddToFavourites,
+    handlePlay,
+    handleOpenOptions
+  }) => {
 
   return (
     <div className={styles["CoverMd-wrap"]}>
@@ -51,9 +51,10 @@ export const CoverMd = (
         </div>
       </div>
       <div className={styles["CoverMd-text"]}>
-        <Link className={styles["CoverMd-title"]} to={{pathname: {path}, state: {entity}}}>
+        {/* <Link className={styles["CoverMd-title"]} to={{ pathname: { path }, state: { entity } }}>
           {title}
-        </Link>
+        </Link> */}
+        <h4>{title}</h4>
         <p className={styles["CoverMd-author"]}>{author}</p>
         <p className={styles["CoverMd-category"]}>{categories}</p>
         <p className={styles["CoverMd-description"]}>{description}</p>
