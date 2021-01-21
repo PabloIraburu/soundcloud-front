@@ -28,12 +28,19 @@ export const EditAlbum = ({handleClose, album}) => {
 
   const handleEditAlbum = (event) => {
     console.log("handleEditAlbum event", event);
-    // Petición al servidor de tipo POST - fetch localhost:3300/data/playlist/:id
     ServerRequest(`data/album/${album._id}`, "PUT", editedAlbum)
       .then(console.log)
       .catch((response) => console.log(response.error))
     handleClose(event);
-    // history.push(route.PLAYLISTS)
+    // history.push(route.ALBUMS)
+  }
+  const handleDeleteAlbum = (event) => {
+    console.log("handleEditAlbum event", event);
+    ServerRequest(`data/album/${album._id}`, "DELETE")
+      .then(console.log)
+      .catch((response) => console.log(response.error))
+    handleClose(event);
+    // history.push(route.ALBUMS)
   }
 
   return (
@@ -68,10 +75,15 @@ export const EditAlbum = ({handleClose, album}) => {
         {
           (editedAlbum.title === undefined || editedAlbum.title === "" || editedAlbum.title === " ")
           &&
-          <MyButton variant="pink-or" size="50%" onClick={handleEditAlbum} >
+          <>
+            <MyButton variant="darkBlue" size="40%" onClick={handleDeleteAlbum} >
+              Delete
+            </MyButton>
+            <MyButton variant="pink-or" size="40%" onClick={handleEditAlbum} >
               Submit changes
-          </MyButton>
-        }
+            </MyButton>
+          </>
+          }
         </div>
     </div>
   )

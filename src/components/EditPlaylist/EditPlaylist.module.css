@@ -29,5 +29,6 @@
 .EditPlaylist-button {
   display: flex;
   margin-top: 30px;
-  justify-content: flex-end;
+  justify-content: space-between;
+
 }

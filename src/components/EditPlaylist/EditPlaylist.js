@@ -37,6 +37,15 @@ export const EditPlaylist = ({handleClose, playlist}) => {
     history.push(route.PLAYLISTS)
   }
 
+  const handleDeletePlaylist = (event) => {
+    console.log("handleDeleteplaylist event", event);
+    ServerRequest(`data/playlist/${playlist._id}`, "DELETE", editedPlaylist)
+      .then(console.log)
+      .catch((response) => console.log(response.error))
+    handleClose(event);
+    history.push(route.PLAYLISTS)
+  }
+
   return (
     <div className={styles["EditPlaylist-wrap"]}> 
         <h1 className={styles["EditPlaylist-title"]}>Edit Playlist</h1>
@@ -70,9 +79,14 @@ export const EditPlaylist = ({handleClose, playlist}) => {
         {
           (editedPlaylist.title === undefined || editedPlaylist.title === "" || editedPlaylist.title === " ")
           &&
-          <MyButton variant="pink-or" size="50%" onClick={handleEditPlaylist} >
-              Submit changes
-          </MyButton>
+              <>
+                <MyButton variant="darkBlue" size="40%" onClick={handleDeletePlaylist} >
+                  Delete
+                </MyButton>
+                <MyButton variant="pink-or" size="40%" onClick={handleEditPlaylist} >
+                  Submit changes
+                </MyButton>
+              </>
         }
         </div>
     </div>

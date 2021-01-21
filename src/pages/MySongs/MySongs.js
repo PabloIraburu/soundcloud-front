@@ -16,6 +16,7 @@ export const MySongs = () => {
     const userId = user._id;
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
+    const [forceReload, setForceReload] = useState(false);
 
 
     //Canciones subidas por el usuario
@@ -26,7 +27,7 @@ export const MySongs = () => {
             })
             .catch(console.log);
 
-    }, [userId]);
+    }, [userId, forceReload]);
 
     console.log('userSongs', userSongs);
     console.log('user id', userSongs._id);
@@ -77,19 +78,17 @@ export const MySongs = () => {
 
     //Eliminación canción
     const handleDeleteSong = (song) => {
-        ServerRequest(`data/song/${song._id}`, "DELETE")
-            .then(console.log)
+        ServerRequest(`data/song/${editedSong._id}`, "DELETE")
+            .then((res) => setForceReload(!forceReload))
             .catch(console.log);
 
-        ServerRequest(`track/${song.trackId}`, "DELETE")
-            .then(console.log)
-            .catch(console.log);
 
         setUserSongs(userSongs.filter((song) => {
             if (song.id_author === user._id) {
                 return true
             }
         }));
+        setOpenModalEditSong(!openModalEditSong);
     }
 
     return (
@@ -149,15 +148,24 @@ export const MySongs = () => {
                                 </option>
                             ))}
                         </Selector>
-
-                        <MyButton
-                            onClick={handleEditSong}
-                            variant="pink-or"
-                            size="50%"
-                            className="button-custom"
-                        >
-                            Update file
-                        </MyButton>
+                        <div className={styles["mysongs-buttons"]}>
+                            <MyButton
+                                onClick={handleDeleteSong}
+                                variant="darkBlue"
+                                size="50%"
+                                className="button-custom"
+                            >
+                                Delete file
+                            </MyButton>
+                            <MyButton
+                                onClick={handleEditSong}
+                                variant="pink-or"
+                                size="50%"
+                                className="button-custom"
+                            >
+                                Update file
+                            </MyButton>
+                        </div>
                     </div>
 
                     <br />
