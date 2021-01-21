@@ -38,11 +38,13 @@ export const CoverMd = (
             // style={{ color: "white" }}
             onClick={() => handleOpenOptions(entity)}
           />
-          <PlayCircleFilledIcon
-            fontSize="large"
-            // style={{ color: "white" }}
-            onClick={() => handlePlay(entity._id)}
-          />
+          <div className={styles["PlayButton"]}>
+              <PlayCircleFilledIcon
+                  fontSize="large"
+                  // style={{ color: "red" }}
+                  onClick={() => handlePlay(entity._id)}
+              />
+          </div>
           <FavoriteBorderOutlinedIcon
             fontSize="small"
             // style={{ color: "white" }}
