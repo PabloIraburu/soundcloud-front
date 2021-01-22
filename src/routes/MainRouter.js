@@ -14,8 +14,8 @@ import { Recommended } from "../pages/Recommended/Recommended";
 import { getToken } from "../utils/LocalStorage.utils";
 import { FollowLateralBar } from "../components/FollowLateralBar/FollowLateralBar";
 import { AlbumDetail } from "../pages/AlbumDetail/AlbumDetail";
+import { EntityDetail } from "../pages/EntityDetail/EntityDetail";
 import '../App.css';
-import { PlaylistDetail } from "../pages/PlaylistDetail/PlaylistDetail";
 
 
 export const MainRouter = () => {
@@ -43,8 +43,8 @@ export const MainRouter = () => {
           <PrivateRoute exact path={route.PROFILE} component={Profile} />
           <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
           <PrivateRoute exact path={route.ALBUMDETAIL} component={AlbumDetail} />
-          <PrivateRoute path={route.PLAYLISTDETAIL} component={PlaylistDetail} />
-          <PrivateRoute path={route.ALBUMDETAIL} component={PlaylistDetail} />
+          <PrivateRoute path={route.PLAYLISTDETAIL} component={EntityDetail} />
+          <PrivateRoute path={route.ALBUMDETAIL} component={EntityDetail} />
 
           {/* <Redirect to="/discover" /> */}
 
