@@ -2,7 +2,7 @@ import { getToken } from "../utils/LocalStorage.utils";
 
 export const ServerRequest = (routes, method, body) => {
     const token = getToken();
-    const url = window.location.hostname === "http://www.tunain.com" ? "tunainblahblah url back" : `http://localhost:3300/${routes}`;
+    const url = window.location.hostname === "http://www.soundmist.com" ? "soundmistblahblah url back" : `http://localhost:3300/${routes}`;
     const JSONBody = JSON.stringify(body);
     const options = {
         method: method,
