@@ -16,6 +16,7 @@ export const Albums = () => {
   const userId = DecodeToken(getToken()).id;
   const [userAlbums, setUserAlbums] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const [editAlbum, setEditAlbum] = useState();
 
   //GET USER Album
   useEffect(() => {
@@ -47,7 +48,7 @@ export const Albums = () => {
   //Gestión modal EditAlbum
   const [openModalEditAlbum, setOpenModalEditAlbum] = useState(false);
   const handleOpenEditAlbum = (e) => {
-    setAlbums(e);
+    setEditAlbum(e);
     setOpenModalEditAlbum(!openModalEditAlbum)
   };
   const handleCloseEditAlbum = (e) => {
@@ -72,7 +73,9 @@ export const Albums = () => {
                   title={album.title}
                   description={album.description}
                   img={album.image}
-                  handleOpenOptions={handleOpenEditAlbum}
+                  id={album._id}
+                  entityType="album"
+                  handleOpenOptions={() => handleOpenEditAlbum(album)}
               />
             ))}
         </div>
@@ -89,7 +92,9 @@ export const Albums = () => {
                   title={album.title}
                   description={album.description}
                   img={album.image}
-                  handleOpenOptions={handleOpenEditAlbum}
+                  id={album._id}
+                  entityType="album"
+                  handleOpenOptions={() => handleOpenEditAlbum(album)}
               />
             ))}
         </div>
@@ -101,7 +106,7 @@ export const Albums = () => {
 
       {openModalEditAlbum &&
         <Modal handleClose={handleCloseEditAlbum}>
-          <EditAlbum handleClose={handleOpenEditAlbum} albums={albums}/>
+          <EditAlbum handleClose={handleOpenEditAlbum} albums={editAlbum}/>
         </Modal>}
     </>
   )
