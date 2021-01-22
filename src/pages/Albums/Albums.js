@@ -72,6 +72,7 @@ export const Albums = () => {
                   key={album._id}
                   title={album.title}
                   description={album.description}
+                  author={album.author}
                   img={album.image}
                   id={album._id}
                   entityType="album"
