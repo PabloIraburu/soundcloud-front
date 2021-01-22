@@ -17,7 +17,7 @@ export const SongItem = ({ song, handleDeleteSong, handleOpenModalEditSong }) =>
     const [userAlbums, setUserAlbums] = useState([]);
     const [visible, setVisible] = useState(false);
 
-    const handlePlay = () => {}
+    const handlePlay = () => { }
 
     useEffect(() => {
         ServerRequest(`data/album/${userId}`, "GET")
@@ -34,31 +34,18 @@ export const SongItem = ({ song, handleDeleteSong, handleOpenModalEditSong }) =>
         handleAddToAlbum(song._id)
     }
 
-    const handleAddToAlbum = (album, songId) => {
-        album = {
-            ...album,
-            song: songId
-        }
-
-        ServerRequest(`data/album/${album._id}`, "PUT", song)
-        .then((response) => {
-            setUserAlbums(
-                ...userAlbums,
-                response)
-        })
-        .catch(console.log)
-    }
+    const handleAddToAlbum = () => { }
 
     //Hacer populate tambén para que devuelta todos los álbumes del usuario actualizados?
-    
+
     return (
         <div className={styles["SongItem-card"]}>
             <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItem-img"]}>
                 <div className={styles["SongItem-icon-wrapper"]}>
                     <PlayCircleFilledIcon
-                      fontSize="small"
-                      // style={{ color: "white" }}
-                      onClick={() => handlePlay(song)}
+                        fontSize="small"
+                        // style={{ color: "white" }}
+                        onClick={() => handlePlay(song)}
                     />
                 </div>
             </div>
@@ -73,16 +60,6 @@ export const SongItem = ({ song, handleDeleteSong, handleOpenModalEditSong }) =>
                         // onClick={() => handleAddToAlbum(song)}
                         onClick={() => handleShowSelector(song)}
                     />
-
-                    {/* <Selector name={userAlbums.title} id={userAlbums._id} onChange={onChange}/>
-                                                
-                            {userAlbums.lenght !== 0 && userAlbums.map((album) => (
-                                <option value={album.title} key={album.title} onClick={() => handleAddToAlbum(album)}>
-                                    {album._id}
-                                </option>
-                            ))}
-                        
-                    </Selector> */}
 
                     <EditIcon
                         fontSize="small"
