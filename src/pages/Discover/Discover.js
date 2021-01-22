@@ -107,8 +107,8 @@ export default function Discover() {
                             <CoverSm
                                 key={song._id}
                                 title={song.title}
-                                categories={song.category}
                                 author={song.artist}
+                                categories={song.category}
                                 img={song.image}
                             />
                         ))}
@@ -122,13 +122,14 @@ export default function Discover() {
                     : <div className="Discover-playlists">
                       {playlists.map((playlist) => (
                         <CoverMd
-                          entity={playlist}
                           key={playlist._id}
+                          entityType="playlist"
+                          entity={playlist}
+                          id={playlist._id}
                           title={playlist.title}
                           description={playlist.description}
+                          categories={playlist.category}
                           img={playlist.image}
-                          id={playlist._id}
-                          entityType="playlist"
                         // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                         />
                       ))}
@@ -142,14 +143,14 @@ export default function Discover() {
                     : <div className="Discover-playlists">
                       {albums.map((album) => (
                         <CoverMd
-                          entity={album}
                           key={album._id}
+                          entityType="album"
+                          entity={album}
+                          id={album._id}
                           title={album.title}
+                          author={album.author}
                           description={album.description}
                           img={album.image}
-                          id={album._id}
-                          author={album.author}
-                          entityType="album"
                         // handleOpenOptions={() => handleOpenEditPlaylist(album)}
                         />
                       ))}

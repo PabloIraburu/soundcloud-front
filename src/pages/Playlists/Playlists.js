@@ -18,6 +18,8 @@ export const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState();
 
+  console.log("Playlist id", playlists._id);
+
   //GET USER PLAYLISTS
   useEffect(() => {
     ServerRequest(`data/playlist/?id_owner=${userId}`, "GET")
