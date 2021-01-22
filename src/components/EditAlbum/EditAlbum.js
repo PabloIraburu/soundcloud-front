@@ -8,20 +8,20 @@ import { useHistory } from "react-router-dom";
 import * as route from '../../routes/routes';
 import styles from "./EditAlbum.module.css";
 
-export const EditAlbum = ({handleClose, album}) => {
+export const EditAlbum = ({ handleClose, album }) => {
 
   const userId = DecodeToken(getToken()).id;
   const history = useHistory();
 
   const [editedAlbum, setEditedAlbum] = useState({});
-  
+
   //Introduce los datos de los inputs en el objeto newAlbum
   const handleInput = (event) => {
     console.log("input event", event);
     const { value, name } = event.target;
     setEditedAlbum((prevValue) => ({
-        ...prevValue,
-        [name]: value,
+      ...prevValue,
+      [name]: value,
     }));
     console.log(editedAlbum);
   }
@@ -44,36 +44,45 @@ export const EditAlbum = ({handleClose, album}) => {
   }
 
   return (
-    <div className={styles["EditAlbum-wrap"]}> 
-        <h1 className={styles["EditAlbum-title"]}>Edit Album</h1>
-          <h4>Album name*</h4>
-            <Input
-              type="text"
-              name={"title"}
-              placeholder={album.title}
-              onChange={handleInput}
-              required
-            />
-          <h4>Description</h4>
-            <textarea 
-              // autoFocus
-              className={styles["EditAlbum-textarea"]}
-              type="text"
-              name={"description"}
-              placeholder={album.description}
-              onChange={handleInput}
-            />
-          <h4>Image</h4>
-            <Input
-              type="text"
-              name={"image"}
-              placeholder={album.image}
-              onChange={handleInput}
-              required
-            />
-        <div className={styles["EditAlbum-button"]}>
+    <div className={styles["EditAlbum-wrap"]}>
+      <h1 className={styles["EditAlbum-title"]}>Edit Album</h1>
+      <h4>Album name</h4>
+      <Input
+        type="text"
+        name={"title"}
+        placeholder={album.title}
+        onChange={handleInput}
+        required
+      />
+      <h4>Album author</h4>
+      <Input
+        type="text"
+        name={"title"}
+        placeholder={album.title}
+        onChange={handleInput}
+        required
+      />
+      <h4>Description</h4>
+      <textarea
+        // autoFocus
+        className={styles["EditAlbum-textarea"]}
+        type="text"
+        name={"description"}
+        placeholder={album.description}
+        onChange={handleInput}
+      />
+      <h4>Image</h4>
+      <Input
+        type="text"
+        name={"image"}
+        placeholder={album.image}
+        onChange={handleInput}
+        required
+      />
+      <div className={styles["EditAlbum-button"]}>
         {
-          (editedAlbum.title === undefined || editedAlbum.title === "" || editedAlbum.title === " ")
+          (editedAlbum.title === undefined || editedAlbum.title === "" || editedAlbum.title === " " ||
+            editedAlbum.author === undefined || editedAlbum.author === "" || editedAlbum.author === " ")
           &&
           <>
             <MyButton variant="darkBlue" size="40%" onClick={handleDeleteAlbum} >
@@ -83,8 +92,8 @@ export const EditAlbum = ({handleClose, album}) => {
               Submit changes
             </MyButton>
           </>
-          }
-        </div>
+        }
+      </div>
     </div>
   )
 }

@@ -12,7 +12,10 @@ import './Discover.css'
 
 export default function Discover() {
 
-    const { songs, handleAddSongToFavourites } = useContext(SongsContext);
+    // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
+    const [songs, setSongs] = useState([]);
+    const [albums, setAlbums] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
@@ -83,7 +86,7 @@ export default function Discover() {
                                 categories={song.category}
                                 author={song.artist}
                                 title={song.title}
-                                handleAddToFavourites={handleAddSongToFavourites}
+                            // handleAddToFavourites={handleAddSongToFavourites}
                             />
                         ))}
                     </div>

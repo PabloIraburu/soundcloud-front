@@ -44,7 +44,7 @@
   color: #fff;
   background-color: #23232390;
   backdrop-filter: blur(4px);
-  border-radius: 1px solid;
+  border: 1px solid;
 }
 
 .play-icon {
@@ -98,7 +98,6 @@
 }
 
 .PlayButton {
-  color: white;
   position: relative;
   transition: transform ease-in-out 190ms;
 }
@@ -116,7 +115,6 @@
 }
 
 .PlayButton::before {
-  background: white;
   z-index: 10;
   transition: opacity 75ms linear, background-color 100ms linear;
 }
@@ -126,7 +124,7 @@
 }
 
 .PlayButton:hover::after {
-  background: grey;
+  background: white;
   z-index: 1;
   animation: pulse 1250ms infinite;
 }

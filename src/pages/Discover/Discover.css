@@ -100,7 +100,6 @@
 span {
   display: inline-flex;
   margin-right: 10px;
-  color: var(--clr-lightText);
 }
 
 i {
