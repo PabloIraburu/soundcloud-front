@@ -22,7 +22,7 @@ export const EntityDetail = () => {
   }, []);
   
   useEffect(() => {
-      ServerRequest(`/songsin${entityType}/?id_${entityType}=${entityId}`)
+      ServerRequest(`data/songsin${entityType}/?id_${entityType}=${entityId}`)
         .then(response => setEntitySongs(response))
         .catch(console.log)
   }, []);
@@ -34,7 +34,7 @@ export const EntityDetail = () => {
         <div className={styles["PlaylistDetail-header"]}>
           <CoverBg
             title={entity.title}
-            author={entity.id_owner}
+            author={entity.author}
             img={entity.image}
             description={entity.description}
           />

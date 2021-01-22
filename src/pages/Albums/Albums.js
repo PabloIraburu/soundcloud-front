@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ServerRequest } from '../../helpers/ServerRequest';
-import { DecodeToken } from '../../utils/DecodeToken';
-import { getToken } from '../../utils/LocalStorage.utils';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from "../../components/Modal/Modal";
@@ -9,11 +7,13 @@ import { EditAlbum } from "../../components/EditAlbum/EditAlbum";
 import CreateAlbum from "../../components/CreateAlbum/CreateAlbum";
 
 import styles from './Albums.module.css';
+import { UserContext } from '../../contexts/UserContext/contextProvider';
 
 
 export const Albums = () => {
 
-  const userId = DecodeToken(getToken()).id;
+  const { userId } = useContext(UserContext);
+  
   const [userAlbums, setUserAlbums] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [editAlbum, setEditAlbum] = useState();
@@ -93,6 +93,7 @@ export const Albums = () => {
                   description={album.description}
                   img={album.image}
                   id={album._id}
+                  author={album.author}
                   entityType="album"
                   handleOpenOptions={() => handleOpenEditAlbum(album)}
               />

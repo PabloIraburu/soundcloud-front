@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
 import styles from './Favourites.module.css';
 import { ServerRequest } from '../../helpers/ServerRequest';
-import { DecodeToken } from '../../utils/DecodeToken';
-import { getToken } from '../../utils/LocalStorage.utils';
+import { UserContext } from '../../contexts/UserContext/contextProvider';
 
 export const Favourites = () => {
 
-  const userId = DecodeToken(getToken()).id;
+  const { userId } = useContext(UserContext);
 
   const [favSongs, setFavSongs] = useState([]);
   const [favAlbums, setFavAlbums] = useState([]);
