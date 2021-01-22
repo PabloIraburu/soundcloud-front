@@ -11,6 +11,8 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
 
+    const userId = DecodeToken(getToken()).id;
+
     const history = useHistory();
     const [user, setUser] = useState({
       _id: "",
@@ -20,14 +22,9 @@ export const UserContextProvider = ({children}) => {
     });
     // const userId = user._id;
     const [allUsers, setAllUsers] = useState([]);
-    const [usersFollowed, setUsersFollowed] = useState([]);
 
     // Usuario logueado
     useEffect(() => {
-        const token = getToken();
-        const decodedToken = DecodeToken(token);
-        const userId = decodedToken.id;
-
         ServerRequest(`data/user/${userId}`, "GET")
             .then((response) => {
                 setUser(response);
@@ -37,10 +34,6 @@ export const UserContextProvider = ({children}) => {
 
     // Usuarios excepto el logueado
     useEffect(() => {
-        const token = getToken();
-        const decodedToken = DecodeToken(token);
-        const userId = decodedToken.id;
-
         ServerRequest(`data/user`, "GET")
         .then((response) => {
           setAllUsers(response.filter((user) => {
@@ -52,23 +45,6 @@ export const UserContextProvider = ({children}) => {
         .catch(console.log);
       }, []);
 
-    // Usuarios excepto el logueado
-    useEffect(() => {
-      const token = getToken();
-      const decodedToken = DecodeToken(token);
-      const userId = decodedToken.id;
-
-      ServerRequest(`data/user`, "GET")
-      .then((response) => {
-        setUsersFollowed(response.filter((user) => {
-          if (user._id !== userId) {
-            return true
-          }
-        }));
-      })
-      .catch(console.log);
-    }, []);
-
     //cerrar sesión y redirección a Landing
     const signOut = () => {
       deleteToken();
@@ -76,12 +52,11 @@ export const UserContextProvider = ({children}) => {
     }
 
     return <UserContext.Provider value={{
+        userId,
         user, 
         setUser, 
         allUsers, 
         setAllUsers, 
         signOut, 
-        usersFollowed, 
-        setUsersFollowed
       }}>{children}</UserContext.Provider>
 }

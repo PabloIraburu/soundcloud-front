@@ -10,7 +10,6 @@ import { Songs } from "../pages/Songs/Songs";
 import { Albums } from "../pages/Albums/Albums";
 import { Playlists } from "../pages/Playlists/Playlists";
 import { Favourites } from "../pages/Favourites/Favourites";
-import { Recommended } from "../pages/Recommended/Recommended";
 import { getToken } from "../utils/LocalStorage.utils";
 import { FollowLateralBar } from "../components/FollowLateralBar/FollowLateralBar";
 import { AlbumDetail } from "../pages/AlbumDetail/AlbumDetail";
@@ -38,7 +37,6 @@ export const MainRouter = () => {
           <PrivateRoute exact path={route.ALBUMS} component={Albums} />
           <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
           <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
-          <PrivateRoute exact path={route.RECOMMENDED} component={Recommended} />
           <PrivateRoute exact path={route.SONGS} component={Songs} />
           <PrivateRoute exact path={route.PROFILE} component={Profile} />
           <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />

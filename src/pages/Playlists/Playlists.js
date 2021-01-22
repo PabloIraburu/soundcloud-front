@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ServerRequest } from '../../helpers/ServerRequest';
-import { DecodeToken } from '../../utils/DecodeToken';
-import { getToken } from '../../utils/LocalStorage.utils';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from "../../components/Modal/Modal";
@@ -9,11 +7,13 @@ import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import CreatePlaylist from "../../components/CreatePlaylist/CreatePlaylist";
 
 import styles from './Playlists.module.css';
+import { UserContext } from '../../contexts/UserContext/contextProvider';
 
 
 export const Playlists = () => {
 
-  const userId = DecodeToken(getToken()).id;
+  const { userId } = useContext(UserContext);
+
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState();
