@@ -12,8 +12,7 @@ import { categories } from "../../data/categories";
 
 export const MySongs = () => {
 
-    const { user } = useContext(UserContext);
-    const userId = user._id;
+    const { user, userId } = useContext(UserContext);
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
     const [forceReload, setForceReload] = useState(false);
@@ -82,13 +81,11 @@ export const MySongs = () => {
             .then((res) => setForceReload(!forceReload))
             .catch(console.log);
 
-
         setUserSongs(userSongs.filter((song) => {
             if (song.id_author === user._id) {
                 return true
             }
         }));
-        setOpenModalEditSong(!openModalEditSong);
     }
 
     return (
@@ -100,14 +97,13 @@ export const MySongs = () => {
                     userSongs.length === 0
                         ? <p>You haven't upload any song yet...</p>
                         : userSongs.map(song => (
-                            <div key={song._id} >
-                                <SongItem
-                                    handleAddToPlaylist={handleAddToPlaylist}
-                                    handleDeleteSong={handleDeleteSong}
-                                    handleOpenModalEditSong={handleOpenModalEditSong}
-                                    song={song}
-                                />
-                            </div>
+                            <SongItem
+                                key={song._id}
+                                handleAddToPlaylist={handleAddToPlaylist}
+                                handleDeleteSong={() => handleDeleteSong(song)}
+                                handleOpenModalEditSong={() => handleOpenModalEditSong(song)}
+                                song={song}
+                            />
                         ))
                 }
 
