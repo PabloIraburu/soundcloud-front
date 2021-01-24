@@ -122,6 +122,13 @@ export const MySongs = () => {
                         />
                         <Input
                             type="text"
+                            name="Album"
+                            onChange={handleInput}
+                            placeholder={"Insert album name"}
+                            value={editedSong.album}
+                        />
+                        <Input
+                            type="text"
                             name="artist"
                             onChange={handleInput}
                             placeholder={"Artist name"}
