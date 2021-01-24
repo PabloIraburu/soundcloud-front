@@ -8,7 +8,6 @@ export default function UserInfo() {
 
     const {user} = useContext(UserContext);
     const [followers, setFollowers] = useState([]);
-    console.log(followers);
 
     useEffect(() => {
         ServerRequest(`data/follower/?followed=${user._id}`, "GET")

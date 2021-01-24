@@ -19,10 +19,7 @@ export const FollowLateralBar = () => {
     if (allUsers) {
       ServerRequest(`data/follower/?follower=${userId}`, "GET") //Devuelve array de los usuarios que sigo
         .then(response => {
-          //response.followed = id usuario seguido
-          // debugger;
           setFollowing(response.map(f => allUsers.find(u => u._id === f.followed)));
-          console.log("Ids usuarios que sigo", following);
         })
         .catch(console.log);
     }
@@ -33,11 +30,9 @@ export const FollowLateralBar = () => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
         setNonFollowing(response);
-        console.log("nonFollowing", nonFollowing);
       })
       .catch(console.log);
   }, []);
-
 
   const handleFollow = (userId) => {
     const userFollowedId = userId;
@@ -47,6 +42,8 @@ export const FollowLateralBar = () => {
       //Perfil seguidor, usuario logueado
       follower: user._id
     }
+
+    
     ServerRequest(`data/follower`, "POST", newFollow)
       .then((response) => {
         setNonFollowing(response);
@@ -60,17 +57,9 @@ export const FollowLateralBar = () => {
 
   const handleUnfollow = async (userId) => {
     const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
-    // .then(response => console.log("response 50", response))
-    // .then((response) => setUnfollowId(response) )
-    // .then(console.log)
-    // .catch(console.log);
-    ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
-    // ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
-    //   // .then((response) => setNonFollowedUsers(response))
-    //   .then(console.log)
-    //   .catch(console.log);
 
-    console.log(unfollowId);
+    ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
+
   }
 
 

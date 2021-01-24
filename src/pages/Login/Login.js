@@ -27,7 +27,6 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
         ServerRequest("login", "POST", user)
             .then((response) => {
                 setJWT(response.token);
-
                 //Manda al usuario a la home tras el registro completado
                 history.push(DISCOVER);
             })

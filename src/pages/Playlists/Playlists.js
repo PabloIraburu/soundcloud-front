@@ -13,7 +13,6 @@ import { UserContext } from '../../contexts/UserContext/contextProvider';
 export const Playlists = () => {
 
   const { userId } = useContext(UserContext);
-
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState();
@@ -59,14 +58,6 @@ export const Playlists = () => {
     if (el !== "backdrop" && el !== "fas fa-times") return;
     setOpenModalEditPlaylist(!openModalEditPlaylist);
   };
-
-  // const handleAddToFavourite = (id) => {
-  //   const newFavoritePlaylist = {
-  //     user_id: userId,
-  //     song_id: id
-  //   }
-  //   ServerRequest(`favouritesongs`, "POST", newFavoritePlaylist)
-  // }
 
   return (
     <>

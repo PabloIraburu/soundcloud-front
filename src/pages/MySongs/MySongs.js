@@ -11,12 +11,10 @@ import { categories } from "../../data/categories";
 
 
 export const MySongs = () => {
-    const { user, userId } = useContext(UserContext);
+    const { userId } = useContext(UserContext);
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
     const [forceReload, setForceReload] = useState(false);
-
-
 
     //Canciones subidas por el usuario
     useEffect(() => {
@@ -25,11 +23,7 @@ export const MySongs = () => {
                 setUserSongs(response);
             })
             .catch(console.log);
-
     }, [userId, forceReload]);
-
-    console.log('userSongs', userSongs);
-    console.log('user id', userSongs._id);
 
     //Introduce los datos de los inputs en el objeto song
     const handleInput = (event) => {
@@ -43,7 +37,6 @@ export const MySongs = () => {
     // Gestiona el modal editar song
     const [openModalEditSong, setOpenModalEditSong] = useState(false);
     const handleOpenModalEditSong = (s) => {
-        // debugger;
         setEditedSong(s)
         setOpenModalEditSong(!openModalEditSong);
     };
@@ -80,12 +73,7 @@ export const MySongs = () => {
             .catch(()=> {
                 setForceReload(!forceReload)
             }
-    );
-        // setUserSongs(userSongs.filter((song) => {
-        //     if (song.id_author === user._id) {
-        //         return true
-        //     }
-        // }));
+        );
     }
 
     return (
