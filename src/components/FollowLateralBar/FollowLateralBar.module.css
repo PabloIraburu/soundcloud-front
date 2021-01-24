@@ -6,7 +6,8 @@
   right: 0px;
   width: 18%;
   z-index: 100;
-  padding: 30px 50px;
+  padding: 3% 3%;
+  /* padding: 30px 50px; */
 }
 
 .FollowLateralBar-nav h1 {

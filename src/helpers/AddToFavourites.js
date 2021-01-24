@@ -15,17 +15,6 @@ export const AddSongToFavourites = (song) => {
         .catch(console.log)
 }
 
-//ADD ALBUM TO FAVOURITES
-export const AddAlbumToFavourites = (album) => {
-    const favAlbum = {
-        id_album: album._id,
-        id_user: userId
-    }
-    ServerRequest("/favouritealbums", "POST", favAlbum)
-        .then(console.log)
-        .catch(console.log)
-}
-
 //ADD PLAYLIST TO FAVOURITES
 export const AddPlaylistToFavourites = (playlist) => {
     const favPlaylist = {
