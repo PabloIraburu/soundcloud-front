@@ -39,7 +39,10 @@ export const MySongs = () => {
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
-    const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+    const handleOpenUpload = (e) => {
+        setOpenModalUpload(!openModalUpload)
+        setForceReload(!forceReload)
+    };
     const handleCloseUpload = (e) => {
         const { className: el } = e.target;
         if (el !== "backdrop" && el !== "fas fa-times") return;
@@ -191,7 +194,7 @@ export const MySongs = () => {
             }
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload />
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload}/>
                 </Modal>
             )}
         </>
