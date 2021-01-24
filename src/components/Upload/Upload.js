@@ -1,22 +1,22 @@
-import React, {useState, useRef, useContext} from "react";
-import {ServerRequest} from "../../helpers/ServerRequest";
-import {Input} from "../Input/Input";
-import {MyButton} from "../MyButton/MyButton";
-import {Selector} from "../Selector/Selector";
-import {getToken} from "../../utils/LocalStorage.utils";
-import {UserContext} from "../../contexts/UserContext/contextProvider";
-import {categories} from "../../data/categories";
+import React, { useState, useRef, useContext } from "react";
+import { ServerRequest } from "../../helpers/ServerRequest";
+import { Input } from "../Input/Input";
+import { MyButton } from "../MyButton/MyButton";
+import { Selector } from "../Selector/Selector";
+import { getToken } from "../../utils/LocalStorage.utils";
+import { UserContext } from "../../contexts/UserContext/contextProvider";
+import { categories } from "../../data/categories";
 import "./Upload.css";
 
 
 export const Upload = () => {
     const [song, setSong] = useState({});
     const fileInputEl = useRef(null);
-    const {user: {_id: userId}} = useContext(UserContext);
+    const { user: { _id: userId } } = useContext(UserContext);
 
     //Introduce los datos de los inputs en el objeto song
     const handleInput = (event) => {
-        const {value, name} = event.target;
+        const { value, name } = event.target;
         setSong((prevValue) => ({
             ...prevValue,
             [name]: value,
@@ -74,6 +74,13 @@ export const Upload = () => {
                 name="artist"
                 onChange={handleInput}
                 placeholder={"Artist name"}
+                required
+            />
+            <Input
+                type="text"
+                name="album"
+                onChange={handleInput}
+                placeholder={"Album name"}
                 required
             />
             <Input

@@ -34,7 +34,7 @@ export const MainRouter = () => {
         <PlayerContextProvider>
           <SongsContextProvider>
 
-            {/* <Player /> */}
+            <Player />
             <LateralBar />
             <FollowLateralBar />
             <div className="MainRouter-wrap">
