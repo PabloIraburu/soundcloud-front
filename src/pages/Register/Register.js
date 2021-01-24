@@ -31,7 +31,6 @@ export const Register = ({ handleCloseRegister, openLogin }) => {
                 setJWT(response.token);
                 //Manda al usuario a la home tras el registro completado
                 history.push(DISCOVER);
-                console.log(newUser);
             })
             .catch((response) => console.log(response.error))
     };

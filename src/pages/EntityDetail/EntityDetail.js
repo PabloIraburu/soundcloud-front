@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { CoverBg } from '../../components/CoverBg/CoverBg'
 import { SongItemList } from '../../components/SongItemList/SongItemList'
 import styles from "./EntityDetail.module.css";
@@ -40,17 +40,6 @@ export const EntityDetail = () => {
 
   }, []);
   
-  // //GET SONGS IN ENTITY (PLAYLIST OR ALBUM)
-  // useEffect(() => {
-  //   if (entity.length !== 0 && entityId.length !== 0) {
-  //     ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}`, "GET")
-  //       .then(response => {
-  //         setEntitySongs(response)
-  //         // console.log("entity type", entityType);
-  //       })
-  //       .catch(console.log)
-  //   }
-  // }, [entityId]);
 
   return (
     <>
