@@ -112,7 +112,7 @@ export default function LateralBar() {
                 </li>
 
                 {/* ALBUMS */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <Link exact to={route.ALBUMS} className="nav-link">
                         <svg
                             aria-hidden="true"
@@ -139,7 +139,7 @@ export default function LateralBar() {
                         </svg>
                             Albums
                     </Link>
-                </li>
+                </li> */}
 
                 {/* PLAYLISTS */}
                 <li className="nav-item">
