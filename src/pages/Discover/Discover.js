@@ -54,15 +54,6 @@ export default function Discover() {
         setOpenModalUpload(!openModalUpload);
     };
 
-    const { state, dispatch } = useContext(PlayerContext);
-
-    const handleClickNext = () => {
-        dispatch({ type: playerActions.REPRODUCE_NEXT });
-    };
-    const handleClickPrev = () => {
-        console.log('Next');
-        dispatch({ type: playerActions.PREV_SONG });
-    };
 
     return (
         <div className='landing'>
@@ -110,24 +101,6 @@ export default function Discover() {
                     <div className="playlist"></div> */}
                 </div>
 
-                {songs.length !== 0 && songs.map((song) =>
-                    <div>
-                        <h4>{song.title}</h4>
-                        <audio controls={true} muted={false}>
-                            <source src={`http://localhost:3300/track/${song.trackId}`} type="audio/mpeg" />
-                        </audio>
-                        <AudioPlayer
-                            onClickNext={handleClickNext}
-                            onClickPrevious={handleClickPrev}
-                            showSkipControls
-                            showJumpControls={false}
-                            autoPlayAfterSrcChange
-                            onEnded={handleClickPrev}
-                            src={`${API_URL}/track/${song.trackId}`}
-                            layout={'stacked'}
-                        />
-                    </div>
-                )}
 
                 <h1>Recommended for you</h1>
 

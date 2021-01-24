@@ -1,3 +1,4 @@
+
 import React, {useState, useRef, useContext} from "react";
 import {Input} from "../Input/Input";
 import {MyButton} from "../MyButton/MyButton";
@@ -14,10 +15,9 @@ export const Upload = () => {
     const fileInputEl = useRef(null);
     const { userId } = useContext(UserContext);
 
-
     //Introduce los datos de los inputs en el objeto song
     const handleInput = (event) => {
-        const {value, name} = event.target;
+        const { value, name } = event.target;
         setSong((prevValue) => ({
             ...prevValue,
             [name]: value,
@@ -77,6 +77,13 @@ export const Upload = () => {
                 name="artist"
                 onChange={handleInput}
                 placeholder={"Artist name"}
+                required
+            />
+            <Input
+                type="text"
+                name="album"
+                onChange={handleInput}
+                placeholder={"Album name"}
                 required
             />
             <Input
