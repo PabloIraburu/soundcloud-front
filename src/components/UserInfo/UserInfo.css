@@ -47,9 +47,11 @@
 
 .identity{
   transition-duration: 15ms;
+  min-width: 15rem;
 }
 
 .numbers{
   transition-duration: 15ms;
+  min-width: 15rem;
 }
 

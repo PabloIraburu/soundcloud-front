@@ -1,23 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
-import List from "../../components/List/List";
 import Search from "../../components/Search/Search";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import './Discover.css'
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { UserContext } from "../../contexts/UserContext/contextProvider";
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
-import { playerActions } from "../../reducers/playerReducer";
-import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import {API_URL} from "../../helpers/ServerRequest";
+import './Discover.css'
 
 export default function Discover() {
-
-    const { userId } = useContext(UserContext);
 
     // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
     const [songs, setSongs] = useState([]);
