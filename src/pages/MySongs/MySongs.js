@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { MyButton } from "../../components/MyButton/MyButton";
-import styles from "./MySongs.module.css";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { Modal } from '../../components/Modal/Modal';
 import { SongItem } from '../../components/SongItem/SongItem';
 import { Input } from '../../components/Input/Input';
 import { Selector } from "../../components/Selector/Selector";
 import { categories } from "../../data/categories";
+import { Upload } from '../../components/Upload/Upload';
+import EventIcon from '@material-ui/icons/Event';
+import styles from "./MySongs.module.css";
 
 
 export const MySongs = () => {
@@ -32,6 +34,16 @@ export const MySongs = () => {
             ...prevValue,
             [name]: value,
         }));
+    };
+
+
+    //Gestión modal upload
+    const [openModalUpload, setOpenModalUpload] = useState(false);
+    const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+    const handleCloseUpload = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalUpload(!openModalUpload);
     };
 
     // Gestiona el modal editar song
@@ -79,22 +91,37 @@ export const MySongs = () => {
     return (
 
         <>
-            <div className={styles["Profile-mySongs-section"]}>
-                <h1>My songs</h1>
-                {
-                    userSongs.length === 0
-                        ? <p>You haven't upload any songs yet...</p>
-                        : userSongs.map(song => (
-                            <SongItem
-                                key={song._id}
-                                handleAddToPlaylist={handleAddToPlaylist}
-                                handleDeleteSong={() => handleDeleteSong(song)}
-                                handleOpenModalEditSong={() => handleOpenModalEditSong(song)}
-                                song={song}
-                            />
-                        ))
-                }
+            <div className={styles["mysongs-header"]}>
+                <h1>My Songs</h1>
+                <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">Upload Song</MyButton>
+                
             </div>
+            <div className={styles["mysongs-list"]}>
+                <div className={styles["mysongs-img"]}></div>
+                <div className={styles["mysongs-text"]}>
+                    <p className={styles["mysongs-title"]}>Song Title</p>
+                    <p>Artist</p>
+                    <p>Album</p>
+                    <p>Category</p>
+                    <p><EventIcon fontSize="small" style={{ color: "white" }} /></p>
+                    <div className={styles["mysongs-icons"]}></div>
+                </div>
+            </div >
+            <hr className={styles["mysong-hr"]}/>
+            
+            {
+                userSongs.length === 0
+                    ? <p>You haven't upload any songs yet...</p>
+                    : userSongs.map(song => (
+                        <SongItem
+                            key={song._id}
+                            handleAddToPlaylist={handleAddToPlaylist}
+                            handleDeleteSong={() => handleDeleteSong(song)}
+                            handleOpenModalEditSong={() => handleOpenModalEditSong(song)}
+                            song={song}
+                        />
+                    ))
+            }
 
             {openModalEditSong &&
                 <Modal handleClose={handleCloseEditSong}>
@@ -162,6 +189,11 @@ export const MySongs = () => {
                     {/* {(newPass !== editedUser.password) ? <p className="flag-pass">*Passwords doesn't match</p> : <MyButton onClick={handleSubmitPassword} variant="pink-or" size="50%">Submit</MyButton>} */}
                 </Modal>
             }
+            {openModalUpload && (
+                <Modal handleClose={handleCloseUpload}>
+                    <Upload />
+                </Modal>
+            )}
         </>
     )
 }

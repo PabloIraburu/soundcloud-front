@@ -1,6 +1,4 @@
 .mysongs {
-  /* height: 100vh; */
-  /* width: 100vw; */
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -10,6 +8,14 @@
   background-size: cover;
   background-repeat: no-repeat;
   position: fixed;
+}
+
+.mysongs-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
 }
 
 .mysongs-buttons-section {
@@ -28,6 +34,57 @@
   padding: 10px;
 }
 
-.Profile-mySongs-section h3 {
-  margin: 60px 0 40px;
+.mysongs-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.mysongs-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  transition: all 250ms ease;
+}
+
+.mysongs-text {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0 5px 10px;
+  background-color: transparent;
+  z-index: 1;
+  line-height: 1.4rem;
+}
+
+.mysongs-text p {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+  min-width: 15%;
+}
+
+.mysongs-text .mysongs-title {
+  min-width: 25%;
+}
+
+.mysongs-icons {
+  width: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px 0 10px 10px;
+}
+
+.mysong-hr {
+  width: 100%;
 }

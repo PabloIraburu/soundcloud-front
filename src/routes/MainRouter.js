@@ -17,6 +17,7 @@ import { UserContextProvider } from "../contexts/UserContext/contextProvider";
 import { SongsContextProvider } from "../contexts/SongsContext/songsContext";
 import '../App.css';
 import { Player } from "../components/Player/Player";
+import { MySongs } from "../pages/MySongs/MySongs";
 
 
 export const MainRouter = () => {
@@ -40,6 +41,7 @@ export const MainRouter = () => {
             <div className="MainRouter-wrap">
               <Switch>
                 <PrivateRoute exact path={route.DISCOVER} component={Discover} />
+                <PrivateRoute exact path={route.MYSONGS} component={MySongs} />
                 <PrivateRoute exact path={route.ALBUMS} component={Albums} />
                 <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
                 <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
