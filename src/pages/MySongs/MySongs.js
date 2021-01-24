@@ -11,11 +11,11 @@ import { categories } from "../../data/categories";
 
 
 export const MySongs = () => {
-
     const { user, userId } = useContext(UserContext);
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
     const [forceReload, setForceReload] = useState(false);
+
 
 
     //Canciones subidas por el usuario
@@ -65,27 +65,27 @@ export const MySongs = () => {
         ServerRequest(`data/song/${editedSong._id}`, "PUT", editedSong)
             .then((response) => {
                 setEditedSong(response);
+                setForceReload(!forceReload)
             })
             .catch((response) => console.log);
-        setUserSongs(userSongs.filter((song) => {
-            if (song.id_author === user._id) {
-                return true
-            }
-        }));
+
         setOpenModalEditSong(!openModalEditSong);
     }
 
     //Eliminación canción
     const handleDeleteSong = (song) => {
-        ServerRequest(`data/song/${editedSong._id}`, "DELETE")
-            .then((res) => setForceReload(!forceReload))
-            .catch(console.log);
-
-        setUserSongs(userSongs.filter((song) => {
-            if (song.id_author === user._id) {
-                return true
+        ServerRequest(`data/song/${song._id}`, "DELETE")
+            .then((res) => {
+            })
+            .catch(()=> {
+                setForceReload(!forceReload)
             }
-        }));
+    );
+        // setUserSongs(userSongs.filter((song) => {
+        //     if (song.id_author === user._id) {
+        //         return true
+        //     }
+        // }));
     }
 
     return (
@@ -95,7 +95,7 @@ export const MySongs = () => {
                 <h1>My songs</h1>
                 {
                     userSongs.length === 0
-                        ? <p>You haven't upload any song yet...</p>
+                        ? <p>You haven't upload any songs yet...</p>
                         : userSongs.map(song => (
                             <SongItem
                                 key={song._id}
@@ -106,7 +106,6 @@ export const MySongs = () => {
                             />
                         ))
                 }
-
             </div>
 
             {openModalEditSong &&

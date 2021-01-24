@@ -2,7 +2,6 @@
   background-color: var(--clr-lightBackground);
   color: white;
   height: 100%;
-  overflow: scroll;
   position: fixed;
   right: 0px;
   width: 18%;

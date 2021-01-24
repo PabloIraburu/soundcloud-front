@@ -13,7 +13,7 @@ import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { playerActions } from "../../reducers/playerReducer";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-
+import {API_URL} from "../../helpers/ServerRequest";
 
 export default function Discover() {
 
@@ -100,6 +100,7 @@ export default function Discover() {
                     {/* <div className="player"></div>
                     <div className="playlist"></div> */}
                 </div>
+
 
                 <h1>Recommended for you</h1>
 
