@@ -14,9 +14,9 @@ export const playerActions = {
 
     //iniciar reproducción playlist, album, favoritos
     START_PLAY: 'START_PLAY',
-    
+
     //reproducción ordenada
-    PLAY_REPEAT: 'PLAY_REPEAT',
+    PLAY_LOOP: 'PLAY_LOOP',
 
     //reproducción random
     PLAY_RANDOM: 'PLAY_RANDOM',
@@ -37,21 +37,21 @@ export const playerActions = {
 const playerReducer = (state, action) => {
 
     const newState = { ...state }
-    
+
     switch (action.type) {
         case playerActions.LOAD_SONG:
             newState.reproduceSongList = action.songs;
             return newState;
-    
+
         case playerActions.ADD_TO_QUEUE:
             newState.reproduceSongList = [...state.reproduceSongList, action.song];
             return newState;
-        
+
         case playerActions.START_PLAY:
             newState.currentPlay = 0;
             return newState;
-        
-        case playerActions.PLAY_REPEAT:
+
+        case playerActions.PLAY_LOOP:
             return newState;
 
         case playerActions.PLAY_RANDOM:
@@ -61,7 +61,7 @@ const playerReducer = (state, action) => {
         case playerActions.PLAY_THIS_SONG:
             newState.currentPlay = action.index;
             return newState;
-        
+
         case playerActions.PLAY_SONG:
             newState.reproduceSongList = action.song;
             return newState;
@@ -80,7 +80,7 @@ const playerReducer = (state, action) => {
 
         default:
             return state;
-    } 
+    }
 }
 
 
