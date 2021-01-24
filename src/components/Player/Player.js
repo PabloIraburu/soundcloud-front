@@ -35,7 +35,7 @@ export const Player = () => {
           showJumpControls={}
           autoPlayerAfterSrcChange
           onEnded={handleClickNext}
-          src={`http://localhost3300/track/${_id}`}
+          src={`http://localhost:3300/track/${_id}`}
         />
       </div>
 

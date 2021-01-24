@@ -7,6 +7,7 @@ import {getToken} from "../../utils/LocalStorage.utils";
 import {UserContext} from "../../contexts/UserContext/contextProvider";
 import {categories} from "../../data/categories";
 import "./Upload.css";
+import {API_URL} from "../../helpers/ServerRequest";
 
 
 export const Upload = () => {
@@ -42,7 +43,7 @@ export const Upload = () => {
             mode: "cors",
         };
         // Petición al servidor de tipo POST - fetch localhost:3300/register
-        fetch("http://localhost:3300/track", options)
+        fetch(`${API_URL}/track`, options)
             .then((response) => {
                 if (response.status === 201) {
                     console.log(response.json())
