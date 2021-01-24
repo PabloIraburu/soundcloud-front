@@ -17,6 +17,8 @@ export const Playlists = () => {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState();
+  const [forceReload, setForceReload] = useState(false);
+
 
   console.log("Playlist id", playlists._id);
 
@@ -26,7 +28,7 @@ export const Playlists = () => {
       .then(response => setUserPlaylists(response))
       .catch(console.log)
     console.log('user playlists', userPlaylists);
-  }, [])
+  }, [forceReload])
 
   //GET ALL PLAYLISTS
   useEffect(() => {
@@ -34,7 +36,7 @@ export const Playlists = () => {
       .then(response => setPlaylists(response))
       .catch(console.log)
     console.log('playlists', playlists)
-  }, [])
+  }, [forceReload])
 
   //Gestión modal NewPlaylist
   const [openModalNewPlaylist, setOpenModalNewPlaylist] = useState(false);
@@ -49,6 +51,7 @@ export const Playlists = () => {
   const [openModalEditPlaylist, setOpenModalEditPlaylist] = useState(false);
   const handleOpenEditPlaylist = (e) => {
     setEditPlaylist(e);
+    setForceReload(!forceReload)
     setOpenModalEditPlaylist(!openModalEditPlaylist)
   };
   const handleCloseEditPlaylist = (e) => {
@@ -114,7 +117,7 @@ export const Playlists = () => {
 
       {openModalEditPlaylist &&
         <Modal handleClose={handleCloseEditPlaylist}>
-          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} />
+          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload}/>
         </Modal>}
     </>
   )

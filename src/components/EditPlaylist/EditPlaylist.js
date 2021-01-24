@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import * as route from '../../routes/routes';
 import styles from "./EditPlaylist.module.css";
 
-export const EditPlaylist = ({handleClose, playlist}) => {
+export const EditPlaylist = ({handleClose, playlist, setForceReload, forceReload}) => {
 
     console.log(playlist);
   const userId = DecodeToken(getToken()).id;
@@ -41,9 +41,11 @@ export const EditPlaylist = ({handleClose, playlist}) => {
     console.log("handleDeleteplaylist event", event);
     ServerRequest(`data/playlist/${playlist._id}`, "DELETE", editedPlaylist)
       .then(console.log)
-      .catch((response) => console.log(response.error))
+      .catch((response) => {
+        console.log(response.error)
+        setForceReload(!forceReload)
+      })
     handleClose(event);
-    history.push(route.PLAYLISTS)
   }
 
   return (
