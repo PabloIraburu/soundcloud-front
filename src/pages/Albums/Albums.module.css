@@ -1,8 +1,22 @@
-.Albums-list {
+/* .Albums-list {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
     padding: 0;
+} */
+
+.Albums-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Albums-list {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }

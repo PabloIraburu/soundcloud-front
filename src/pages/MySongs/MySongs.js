@@ -11,11 +11,11 @@ import { categories } from "../../data/categories";
 
 
 export const MySongs = () => {
-
-    const { user } = useContext(UserContext);
-    const userId = user._id;
+    const { user, userId } = useContext(UserContext);
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
+    const [forceReload, setForceReload] = useState(false);
+
 
 
     //Canciones subidas por el usuario
@@ -26,7 +26,7 @@ export const MySongs = () => {
             })
             .catch(console.log);
 
-    }, [userId]);
+    }, [userId, forceReload]);
 
     console.log('userSongs', userSongs);
     console.log('user id', userSongs._id);
@@ -65,31 +65,27 @@ export const MySongs = () => {
         ServerRequest(`data/song/${editedSong._id}`, "PUT", editedSong)
             .then((response) => {
                 setEditedSong(response);
+                setForceReload(!forceReload)
             })
             .catch((response) => console.log);
-        setUserSongs(userSongs.filter((song) => {
-            if (song.id_author === user._id) {
-                return true
-            }
-        }));
+
         setOpenModalEditSong(!openModalEditSong);
     }
 
     //Eliminación canción
     const handleDeleteSong = (song) => {
         ServerRequest(`data/song/${song._id}`, "DELETE")
-            .then(console.log)
-            .catch(console.log);
-
-        ServerRequest(`track/${song.trackId}`, "DELETE")
-            .then(console.log)
-            .catch(console.log);
-
-        setUserSongs(userSongs.filter((song) => {
-            if (song.id_author === user._id) {
-                return true
+            .then((res) => {
+            })
+            .catch(()=> {
+                setForceReload(!forceReload)
             }
-        }));
+    );
+        // setUserSongs(userSongs.filter((song) => {
+        //     if (song.id_author === user._id) {
+        //         return true
+        //     }
+        // }));
     }
 
     return (
@@ -99,19 +95,17 @@ export const MySongs = () => {
                 <h1>My songs</h1>
                 {
                     userSongs.length === 0
-                        ? <p>You haven't upload any song yet...</p>
+                        ? <p>You haven't upload any songs yet...</p>
                         : userSongs.map(song => (
-                            <div key={song._id} >
-                                <SongItem
-                                    handleAddToPlaylist={handleAddToPlaylist}
-                                    handleDeleteSong={handleDeleteSong}
-                                    handleOpenModalEditSong={handleOpenModalEditSong}
-                                    song={song}
-                                />
-                            </div>
+                            <SongItem
+                                key={song._id}
+                                handleAddToPlaylist={handleAddToPlaylist}
+                                handleDeleteSong={() => handleDeleteSong(song)}
+                                handleOpenModalEditSong={() => handleOpenModalEditSong(song)}
+                                song={song}
+                            />
                         ))
                 }
-
             </div>
 
             {openModalEditSong &&
@@ -125,6 +119,13 @@ export const MySongs = () => {
                             placeholder={"Song title"}
                             value={editedSong.title}
                             required
+                        />
+                        <Input
+                            type="text"
+                            name="Album"
+                            onChange={handleInput}
+                            placeholder={"Insert album name"}
+                            value={editedSong.album}
                         />
                         <Input
                             type="text"
@@ -149,15 +150,24 @@ export const MySongs = () => {
                                 </option>
                             ))}
                         </Selector>
-
-                        <MyButton
-                            onClick={handleEditSong}
-                            variant="pink-or"
-                            size="50%"
-                            className="button-custom"
-                        >
-                            Update file
-                        </MyButton>
+                        <div className={styles["mysongs-buttons"]}>
+                            {/* <MyButton
+                                onClick={handleDeleteSong}
+                                variant="darkBlue"
+                                size="50%"
+                                className="button-custom"
+                            >
+                                Delete file
+                            </MyButton> */}
+                            <MyButton
+                                onClick={handleEditSong}
+                                variant="pink-or"
+                                size="50%"
+                                className="button-custom"
+                            >
+                                Update file
+                            </MyButton>
+                        </div>
                     </div>
 
                     <br />

@@ -2,13 +2,26 @@ import React from "react";
 import styles from "./CoverMd.module.css";
 import { Link } from "react-router-dom";
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-import AlbumIcon from '@material-ui/icons/Album';
+// import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
+// import AlbumIcon from '@material-ui/icons/Album';
 // import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
-export const CoverMd = ({ entity, img, title, categories, author, description, handleAddToFavourites, handlePlay, handleOpenOptions }) => {
+export const CoverMd = (
+  {
+    entity,
+    id,
+    img,
+    title,
+    categories,
+    author,
+    description,
+    entityType,
+    handleAddToFavourites,
+    handlePlay,
+    handleOpenOptions
+  }) => {
 
   return (
     <div className={styles["CoverMd-wrap"]}>
@@ -17,29 +30,25 @@ export const CoverMd = ({ entity, img, title, categories, author, description, h
         className={styles["CoverMd-img"]}
       >
         <div className={styles["icon-wrapper"]}>
-          {/* 
-          <i className="fas fa-ellipsis-h icon-mini" />
-          <i className="fas fa-play play-icon"></i>
-          <i className="far fa-heart" /> */}
           <MoreHorizRoundedIcon
             fontSize="small"
-            // style={{ color: "white" }}
-            onClick={() => handleOpenOptions(entity._id)}
+            onClick={() => handleOpenOptions(entity)}
           />
-          <PlayCircleFilledIcon
-            fontSize="large"
-            // style={{ color: "white" }}
-            onClick={() => handlePlay(entity._id)}
-          />
+          <div className={styles["PlayButton"]}>
+            <PlayCircleFilledIcon
+                fontSize="large"
+                onClick={() => handlePlay(entity._id)}
+            />
+          </div>
           <FavoriteBorderOutlinedIcon
             fontSize="small"
-            // style={{ color: "white" }}
             onClick={() => handleAddToFavourites(entity._id)}
           />
         </div>
       </div>
       <div className={styles["CoverMd-text"]}>
-        <Link className={styles["CoverMd-title"]}>
+        <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: id }}>
+        {/* <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: { entity } }}>*/}
           {title}
         </Link>
         <p className={styles["CoverMd-author"]}>{author}</p>

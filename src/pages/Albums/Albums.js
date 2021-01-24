@@ -1,74 +1,79 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ServerRequest } from '../../helpers/ServerRequest';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
+
+
 import styles from './Albums.module.css';
+import { UserContext } from '../../contexts/UserContext/contextProvider';
+
 
 export const Albums = () => {
 
-  const { songs } = useContext(SongsContext);
+  const { userId } = useContext(UserContext);
 
-//Actualizar backend, sino trackId no funcionará
-// const songsId = songs.map(songId => songId.trackId);
-// console.log("songsId", songsId);
+  const [userAlbums, setUserAlbums] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
-const trackIds = ["5fc4d698c891ef40a7a07580", "5fc4e79bb0b05e5bc165ef9e"];
-const [currentTrack, setCurrentTrack] = useState(0);
+  //GET USER Album
+  useEffect(() => {
+    ServerRequest(`data/album/?id_owner=${userId}`, "GET")
+      .then(response => setUserAlbums(response))
+      .catch(console.log)
+  }, [])
 
-const handleClickNext = () => {
-  if (currentTrack < songs._id.length - 1) {
-    setCurrentTrack(currentTrack + 1);
-  }
-};
+  //GET ALL Album
+  useEffect(() => {
+    ServerRequest(`data/album`, "GET")
+      .then(response => {
+        setAlbums(response)
+        console.log('this', response)
+      })
 
-const handleClickPrev = () => {
-  if (currentTrack > 0) {
-    setCurrentTrack(currentTrack - 1);
-  }
-};
+      .catch(console.log)
+  }, [])
 
   return (
     <>
-      <h1>Albums</h1>
-      
+      <div className={styles["Albums-header"]}>
+        <h1>My Albums</h1>
+      </div>
       {
-        (songs.lenght !== 0) &&
+        (userAlbums.lenght !== 0) &&
         <div className={styles["Albums-list"]}>
-            {songs.map((song) => (
-              <CoverMd
-                  key={song._id}
-                  title={song.title}
-                  categories={song.category}
-                  author={song.artist}
-                  img={song.image}
-              />
-            ))}
+          {userAlbums.map((album) => (
+            <CoverMd
+              entity={album}
+              key={album._id}
+              title={album.title}
+              description={album.description}
+              author={album.author}
+              img={album.image}
+              id={album._id}
+              entityType="album"
+            />
+          ))}
         </div>
       }
+      <h1>All Albums</h1>
 
-      <audio controls="controls">
-          <source src={`http://localhost:3300/track/600237f7fea6f3048545a5a3`} type="audio/mpeg" />
-          {/* <source src={`http://localhost:3300/track/${songsId[currentTrack]}`} type="audio/mpeg" /> */}
-      </audio>
-
-        <div className={styles["Landing-player"]}>
-        <AudioPlayer
-          onClickNext={handleClickNext}
-          onClickPrevious={handleClickPrev}
-          showSkipControls={true}
-          showJumpControls={false}
-          // src={`http://localhost:3300/track/${songsId[currentTrack]}`}
-          src={`http://localhost:3300/track/600237f7fea6f3048545a5a3`}
-        />
-      </div>
+      {
+        (albums.lenght !== 0) &&
+        <div className={styles["Albums-list"]}>
+          {albums.map((album) => (
+            <CoverMd
+              entity={album}
+              key={album._id}
+              title={album.title}
+              description={album.description}
+              img={album.image}
+              id={album._id}
+              author={album.author}
+              entityType="album"
+            />
+          ))}
+        </div>
+      }
 
     </>
   )
 }
-
-
-
-
-
-

@@ -23,7 +23,7 @@ export const Login = ({ handleCloseLogin, openRegister }) => {
 
     const handleSubmit = () => {
 
-        //Petición al servidor de tipo POST - fetch localhost:3300/register
+        //Petición al servidor de tipo POST - fetch localhost:3300/login
         ServerRequest("login", "POST", user)
             .then((response) => {
                 setJWT(response.token);

@@ -1,18 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EditIcon from "@material-ui/icons/Edit";
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import styles from './SongItem.module.css';
+import { Selector } from "../Selector/Selector";
+import { ServerRequest } from "../../helpers/ServerRequest";
+import { DecodeToken } from "../../utils/DecodeToken";
+import { getToken } from "../../utils/LocalStorage.utils";
 
 
-export const SongItem = ({ song, handleAddToPlaylist, handleDeleteSong, handleOpenModalEditSong }) => {
-    
+export const SongItem = ({ song, handleDeleteSong, handleOpenModalEditSong }) => {
+
+    const userId = DecodeToken(getToken()).id;
+    const [userAlbums, setUserAlbums] = useState([]);
+    const [visible, setVisible] = useState(false);
+
+    const handlePlay = () => { }
+
+    useEffect(() => {
+        ServerRequest(`data/album/${userId}`, "GET")
+            .then((response) => {
+                setUserAlbums(
+                    ...userAlbums,
+                    response);
+            })
+            .catch(console.log)
+    }, [])
+
+    const handleShowSelector = (song) => {
+        setVisible(!visible);
+        handleAddToAlbum(song._id)
+    }
+
+    const handleAddToAlbum = () => { }
+
+    //Hacer populate tambén para que devuelta todos los álbumes del usuario actualizados?
+
     return (
         <div className={styles["SongItem-card"]}>
             <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItem-img"]}>
                 <div className={styles["SongItem-icon-wrapper"]}>
-                    <i className="fas fa-play play-icon"></i>
+                    <PlayCircleFilledIcon
+                        fontSize="small"
+                        // style={{ color: "white" }}
+                        onClick={() => handlePlay(song)}
+                    />
                 </div>
             </div>
             <div className={styles["SongItem-text"]}>
@@ -23,7 +57,8 @@ export const SongItem = ({ song, handleAddToPlaylist, handleDeleteSong, handleOp
                     <AddCircleIcon
                         fontSize="small"
                         style={{ color: "white" }}
-                        onClick={() => handleAddToPlaylist(song)}
+                        // onClick={() => handleAddToAlbum(song)}
+                        onClick={() => handleShowSelector(song)}
                     />
 
                     <EditIcon

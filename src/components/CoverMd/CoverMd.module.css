@@ -1,3 +1,10 @@
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 .CoverMd-wrap {
   width: 200px;
   height: auto;
@@ -31,14 +38,13 @@
   align-items: center;
   color: transparent;
   transition: all 250ms ease;
-  
 }
 
 .icon-wrapper:hover {
   color: #fff;
   background-color: #23232390;
   backdrop-filter: blur(4px);
-  border-radius: 1px solid;
+  border: 1px solid;
 }
 
 .play-icon {
@@ -60,16 +66,76 @@
   padding: 0;
 }
 
+.CoverMd-text a {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: 1rem;
+}
+
+.CoverMd-text a:hover {
+  color: var(--sky);
+}
+
 .CoverMd-title {
   text-decoration: none;
   color: white;
 }
+
 .CoverMd-author {
+  color: rgb(250, 250, 250);
+  font-size: 0.8rem;
+}
+
+.CoverMd-description {
   color: rgb(250, 250, 250);
   font-size: 0.8rem;
 }
 
 .CoverMd-category {
   color: rgb(250, 250, 250);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+}
+
+.PlayButton {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+}
+
+.PlayButton::before,
+.PlayButton::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.PlayButton::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.PlayButton:hover::before {
+  background: white;
+}
+
+.PlayButton:hover::after {
+  background: white;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
 }

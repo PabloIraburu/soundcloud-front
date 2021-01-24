@@ -1,6 +1,7 @@
 :root {
   font-size: 16px;
   --transition-speed: 600ms;
+  --transition-speedSlow: 900ms ;
 }
 
 .navbar {
@@ -225,6 +226,5 @@
 }
 
 .navbar a {
-  color: var(--or);
   text-decoration: none;
 }

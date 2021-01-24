@@ -1,18 +1,41 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
-// import FollowedUsers from "../../components/FollowedUsers/followedUsers";
-import List from "../../components/List/List";
 import Search from "../../components/Search/Search";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
+import { CoverSm } from "../../components/CoverSm/CoverSm";
+import { ServerRequest } from "../../helpers/ServerRequest";
+import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
-
 
 export default function Discover() {
 
-    const { songs, handleAddSongToFavourites } = useContext(SongsContext);
+    // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
+    const [songs, setSongs] = useState([]);
+    const [albums, setAlbums] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
+
+    //GET SONGS
+    useEffect(() => {
+        ServerRequest(`data/song`, "GET")
+            .then((response) => { setSongs(response) })
+            .catch(console.log)
+    }, [])
+
+    //GET ALBUMS
+    useEffect(() => {
+        ServerRequest(`data/album`, "GET")
+            .then((response) => setAlbums(response))
+            .catch(console.log)
+    }, [])
+
+    //GET PLAYLISTS
+    useEffect(() => {
+        ServerRequest(`data/playlist`, "GET")
+            .then((response) => setPlaylists(response))
+            .catch(console.log)
+    }, [])
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
@@ -23,13 +46,12 @@ export default function Discover() {
         setOpenModalUpload(!openModalUpload);
     };
 
+
     return (
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
-            {/* <div className="rightBar">
-                <FollowedUsers />
-            </div> */}
             <div className='middleBar'>
+
                 <div className="headMid">
                     <div className="search">
                         <Search />
@@ -41,7 +63,7 @@ export default function Discover() {
                 </div>
                 <div className="mainFrame">
                     <div className="header">
-                        <h2>Weekly Top Track</h2>
+                        <h1>Weekly Top Track</h1>
                     </div>
                     <div className="slider">
                         <div className="display">
@@ -61,47 +83,75 @@ export default function Discover() {
                             Upload Song
                         </MyButton>
                         <div className="listComp">
-                            <List />
+                            {/* <List /> */}
                         </div>
-                        <div className="title"></div>
-                        <div className="gallery">
-                        </div>
+                        {/* <div className="title"></div>
+                        <div className="gallery"> 
+                        </div>*/}
                     </div>
-                    <div className="player"></div>
-                    <div className="playlist"></div>
+                    {/* <div className="player"></div>
+                    <div className="playlist"></div> */}
                 </div>
 
-                <h3>Recommended for you</h3>
+
+                <h1>Recommended for you</h1>
+
+                <h3>World's Top Music</h3>
                 {
                     (songs.lenght !== 0) &&
-                    <div className="Discover-albums">
+                    <div className="Discover-topSongs">
                         {songs.map((song) => (
-                            <CoverMd
+                            <CoverSm
                                 key={song._id}
-                                entity={song}
-                                img={song.image}
-                                categories={song.category}
+                                title={song.title}
                                 author={song.artist}
-                                handleAddToFavourites={handleAddSongToFavourites}
+                                categories={song.category}
+                                img={song.image}
                             />
                         ))}
                     </div>
                 }
 
-                <h3>World's Top 100</h3>
+                <h3>Most Listened Playlists</h3>
                 {
-                    (songs.lenght !== 0) &&
-                    <div className="Discover-albums">
-                        {songs.map((song) => (
-                            <CoverMd
-                                key={song._id}
-                                title={song.title}
-                                categories={song.category}
-                                author={song.artist}
-                                img={song.image}
-                            />
-                        ))}
-                    </div>
+                    (playlists.lenght === 0)
+                        ? <p>You haven't any favourite playlist.</p>
+                        : <div className="Discover-playlists">
+                            {playlists.map((playlist) => (
+                                <CoverMd
+                                    key={playlist._id}
+                                    entityType="playlist"
+                                    entity={playlist}
+                                    id={playlist._id}
+                                    title={playlist.title}
+                                    description={playlist.description}
+                                    categories={playlist.category}
+                                    img={playlist.image}
+                                // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+                                />
+                            ))}
+                        </div>
+                }
+
+                <h3>Best Albums</h3>
+                {
+                    (albums.lenght === 0)
+                        ? <p>You haven't any favourite album.</p>
+                        : <div className="Discover-playlists">
+                            {albums.map((album) => (
+                                <CoverMd
+                                    key={album._id}
+                                    entityType="album"
+                                    entity={album}
+                                    id={album._id}
+                                    title={album.title}
+                                    author={album.author}
+                                    description={album.description}
+                                    img={album.image}
+                                // handleOpenOptions={() => handleOpenEditPlaylist(album)}
+                                />
+                            ))}
+                        </div>
                 }
 
             </div>
