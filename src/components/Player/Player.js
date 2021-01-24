@@ -34,13 +34,13 @@ export const Player = () => {
 
         {songs && songs.map((song) => {
           <div>
-          <AudioPlayer
-            showSkipControls={true}
-            showJumpControls={false}
-            preload='metadata'
-            src={`http://localhost:3300/track/${song.trackId}`}
-            layout={'stacked'}
-          />
+            <AudioPlayer
+              showSkipControls={true}
+              showJumpControls={false}
+              preload='metadata'
+              src={`http://localhost:3300/track/${song.trackId}`}
+              layout={'stacked'}
+            />
           </div>
         })}
 

@@ -2,11 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
-// import FollowedUsers from "../../components/FollowedUsers/followedUsers";
 import List from "../../components/List/List";
 import Search from "../../components/Search/Search";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import { SongsContext } from "../../contexts/SongsContext/songsContext";
 import './Discover.css'
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
@@ -25,26 +23,26 @@ export default function Discover() {
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [playlists, setPlaylists] = useState([]);
-    
+
     //GET SONGS
     useEffect(() => {
-       ServerRequest(`data/song`, "GET")
-        .then((response) => {setSongs(response)})
-        .catch(console.log)
+        ServerRequest(`data/song`, "GET")
+            .then((response) => { setSongs(response) })
+            .catch(console.log)
     }, [])
 
     //GET ALBUMS
     useEffect(() => {
-       ServerRequest(`data/album`, "GET")
-        .then((response) => setAlbums(response))
-        .catch(console.log)
+        ServerRequest(`data/album`, "GET")
+            .then((response) => setAlbums(response))
+            .catch(console.log)
     }, [])
 
     //GET PLAYLISTS
     useEffect(() => {
-       ServerRequest(`data/playlist`, "GET")
-        .then((response) => setPlaylists(response))
-        .catch(console.log)
+        ServerRequest(`data/playlist`, "GET")
+            .then((response) => setPlaylists(response))
+            .catch(console.log)
     }, [])
 
     //Gestión modal upload
@@ -59,18 +57,18 @@ export default function Discover() {
     const { state, dispatch } = useContext(PlayerContext);
 
     const handleClickNext = () => {
-      dispatch({ type: playerActions.REPRODUCE_NEXT });
+        dispatch({ type: playerActions.REPRODUCE_NEXT });
     };
     const handleClickPrev = () => {
-      console.log('Next');
-      dispatch({ type: playerActions.PREV_SONG });
+        console.log('Next');
+        dispatch({ type: playerActions.PREV_SONG });
     };
 
     return (
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
             <div className='middleBar'>
-                
+
                 <div className="headMid">
                     <div className="search">
                         <Search />
@@ -102,7 +100,7 @@ export default function Discover() {
                             Upload Song
                         </MyButton>
                         <div className="listComp">
-                            <List />
+                            {/* <List /> */}
                         </div>
                         {/* <div className="title"></div>
                         <div className="gallery"> 
@@ -116,17 +114,17 @@ export default function Discover() {
                     <div>
                         <h4>{song.title}</h4>
                         <audio controls={true} muted={false}>
-                          <source src={`http://localhost:3300/track/${song.trackId}`} type="audio/mpeg" />
+                            <source src={`http://localhost:3300/track/${song.trackId}`} type="audio/mpeg" />
                         </audio>
                         <AudioPlayer
-                          onClickNext={handleClickNext}
-                          onClickPrevious={handleClickPrev}
-                          showSkipControls
-                          showJumpControls={false}
-                          autoPlayAfterSrcChange
-                          onEnded={handleClickPrev}
-                          src={`http://localhost:3300/track/${song.trackId}`}
-                          layout={'stacked'}
+                            onClickNext={handleClickNext}
+                            onClickPrevious={handleClickPrev}
+                            showSkipControls
+                            showJumpControls={false}
+                            autoPlayAfterSrcChange
+                            onEnded={handleClickPrev}
+                            src={`http://localhost:3300/track/${song.trackId}`}
+                            layout={'stacked'}
                         />
                     </div>
                 })}
@@ -151,44 +149,44 @@ export default function Discover() {
 
                 <h3>Most Listened Playlists</h3>
                 {
-                  (playlists.lenght === 0)
-                    ? <p>You haven't any favourite playlist.</p>
-                    : <div className="Discover-playlists">
-                      {playlists.map((playlist) => (
-                        <CoverMd
-                          key={playlist._id}
-                          entityType="playlist"
-                          entity={playlist}
-                          id={playlist._id}
-                          title={playlist.title}
-                          description={playlist.description}
-                          categories={playlist.category}
-                          img={playlist.image}
-                        // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
-                        />
-                      ))}
-                    </div>
+                    (playlists.lenght === 0)
+                        ? <p>You haven't any favourite playlist.</p>
+                        : <div className="Discover-playlists">
+                            {playlists.map((playlist) => (
+                                <CoverMd
+                                    key={playlist._id}
+                                    entityType="playlist"
+                                    entity={playlist}
+                                    id={playlist._id}
+                                    title={playlist.title}
+                                    description={playlist.description}
+                                    categories={playlist.category}
+                                    img={playlist.image}
+                                // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+                                />
+                            ))}
+                        </div>
                 }
 
                 <h3>Best Albums</h3>
                 {
-                  (albums.lenght === 0)
-                    ? <p>You haven't any favourite album.</p>
-                    : <div className="Discover-playlists">
-                      {albums.map((album) => (
-                        <CoverMd
-                          key={album._id}
-                          entityType="album"
-                          entity={album}
-                          id={album._id}
-                          title={album.title}
-                          author={album.author}
-                          description={album.description}
-                          img={album.image}
-                        // handleOpenOptions={() => handleOpenEditPlaylist(album)}
-                        />
-                      ))}
-                    </div>
+                    (albums.lenght === 0)
+                        ? <p>You haven't any favourite album.</p>
+                        : <div className="Discover-playlists">
+                            {albums.map((album) => (
+                                <CoverMd
+                                    key={album._id}
+                                    entityType="album"
+                                    entity={album}
+                                    id={album._id}
+                                    title={album.title}
+                                    author={album.author}
+                                    description={album.description}
+                                    img={album.image}
+                                // handleOpenOptions={() => handleOpenEditPlaylist(album)}
+                                />
+                            ))}
+                        </div>
                 }
 
             </div>

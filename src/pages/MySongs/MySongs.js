@@ -145,14 +145,14 @@ export const MySongs = () => {
                             ))}
                         </Selector>
                         <div className={styles["mysongs-buttons"]}>
-                            <MyButton
+                            {/* <MyButton
                                 onClick={handleDeleteSong}
                                 variant="darkBlue"
                                 size="50%"
                                 className="button-custom"
                             >
                                 Delete file
-                            </MyButton>
+                            </MyButton> */}
                             <MyButton
                                 onClick={handleEditSong}
                                 variant="pink-or"

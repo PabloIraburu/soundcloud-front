@@ -31,8 +31,8 @@ export const MainRouter = () => {
   return (
     <>
       <UserContextProvider>
-        <SongsContextProvider>
-          <PlayerContextProvider>
+        <PlayerContextProvider>
+          <SongsContextProvider>
 
             {/* <Player /> */}
             <LateralBar />
@@ -51,8 +51,8 @@ export const MainRouter = () => {
               </Switch>
             </div>
 
-          </PlayerContextProvider>
-        </SongsContextProvider>
+          </SongsContextProvider>
+        </PlayerContextProvider>
       </UserContextProvider>
     </>
   );

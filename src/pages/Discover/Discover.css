@@ -181,5 +181,5 @@ h2 {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
