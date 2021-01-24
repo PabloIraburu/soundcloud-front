@@ -48,7 +48,7 @@ export const CoverMd = (
       </div>
       <div className={styles["CoverMd-text"]}>
         <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: id }}>
-        {/* <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: { entity } }}> */}
+        {/* <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: { entity } }}>*/}
           {title}
         </Link>
         <p className={styles["CoverMd-author"]}>{author}</p>
