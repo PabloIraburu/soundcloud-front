@@ -8,6 +8,7 @@ import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
+import {EditPlaylist} from "../../components/EditPlaylist/EditPlaylist";
 
 export default function Discover() {
 
@@ -15,13 +16,15 @@ export default function Discover() {
     const [songs, setSongs] = useState([]);
     // const [albums, setAlbums] = useState([]);
     const [playlists, setPlaylists] = useState([]);
+    const [forceReload, setForceReload] = useState(false);
+
 
     //GET SONGS
     useEffect(() => {
         ServerRequest(`data/song`, "GET")
             .then((response) => { setSongs(response) })
             .catch(console.log)
-    }, [])
+    }, [forceReload])
 
     //GET ALBUMS
 
@@ -35,7 +38,10 @@ export default function Discover() {
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
-    const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
+    const handleOpenUpload = (e) => {
+        setOpenModalUpload(!openModalUpload)
+        setForceReload(!forceReload)
+    };
     const handleCloseUpload = (e) => {
         const { className: el } = e.target;
         if (el !== "backdrop" && el !== "fas fa-times") return;
@@ -153,7 +159,7 @@ export default function Discover() {
             </div>
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload />
+                    <Upload  setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload}/>
                 </Modal>
             )}
         </div>

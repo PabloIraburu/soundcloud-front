@@ -10,7 +10,7 @@ import "./Upload.css";
 import {API_URL} from "../../helpers/ServerRequest";
 
 
-export const Upload = () => {
+export const Upload = ({setForceReload, forceReload, handleClose}) => {
     const [song, setSong] = useState({});
     const fileInputEl = useRef(null);
     const { userId } = useContext(UserContext);
@@ -26,7 +26,7 @@ export const Upload = () => {
     };
 
 
-    const handleSubmit = (file) => {
+    const handleSubmit = (file, e) => {
         const data = new FormData();
         data.append("file", file[0]);
         data.append("filename", file[0].name);
@@ -49,17 +49,19 @@ export const Upload = () => {
         fetch(`${API_URL}/track`, options)
             .then((response) => {
                 if (response.status === 201) {
-                    console.log(response.json())
-                    return response.json();
+                    console.log(response)
+                    return response;
                 }
-                return Promise.reject(response.status);
+                // return Promise.reject(response.status);
             })
-            .then((payload) => {
-                console.log(`Saved song with id: ${payload.id}`)
+            .then((response) => {
+                console.log(response.json())
+                console.log(`Saved song with id: ${response.id}`)
                 console.log(song)
+                setForceReload(!forceReload)
+                handleClose(e)
             })
             .catch((error) => console.log(error));
-
 
     };
 
