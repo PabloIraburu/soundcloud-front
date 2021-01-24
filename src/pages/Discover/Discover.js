@@ -14,7 +14,6 @@ export default function Discover() {
 
     // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
     const [songs, setSongs] = useState([]);
-    // const [albums, setAlbums] = useState([]);
     const [playlists, setPlaylists] = useState([]);
     const [forceReload, setForceReload] = useState(false);
 
@@ -134,27 +133,6 @@ export default function Discover() {
                             ))}
                         </div>
                 }
-
-                <h3>Best Albums</h3>
-                {/* {
-                    (albums.lenght === 0)
-                        ? <p>You haven't any favourite album.</p>
-                        : <div className="Discover-playlists">
-                            {albums.map((album) => (
-                                <CoverMd
-                                    key={album._id}
-                                    entityType="album"
-                                    entity={album}
-                                    id={album._id}
-                                    title={album.title}
-                                    author={album.author}
-                                    description={album.description}
-                                    img={album.image}
-                                // handleOpenOptions={() => handleOpenEditPlaylist(album)}
-                                />
-                            ))}
-                        </div>
-                } */}
 
             </div>
             {openModalUpload && (

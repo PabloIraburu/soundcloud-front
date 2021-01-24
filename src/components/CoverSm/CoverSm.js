@@ -1,8 +1,13 @@
 import React from "react";
 import styles from './CoverSm.module.css';
 import { Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import LibraryMusicOutlinedIcon from '@material-ui/icons/LibraryMusicOutlined';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+
 
 
 export const CoverSm = ({ entity, title, categories, author, img, description, handlePlay }) => {
@@ -25,6 +30,20 @@ export const CoverSm = ({ entity, title, categories, author, img, description, h
         <p className={styles["CoverSm-author"]}>{author}</p>
         <p className={styles["CoverSm-category"]}>{categories}</p>
         <p className={styles["CoverSm-description"]}>{description}</p>
+      </div>
+      <div className={styles["CoverSm-button-options"]}>
+          <LibraryMusicOutlinedIcon
+            fontSize="inherit"
+            onClick={() => handlePlay(entity._id)}
+          />
+          <PlaylistAddIcon
+            fontSize="inherit"
+            onClick={() => handlePlay(entity._id)}
+          />
+          <FavoriteBorderOutlinedIcon
+            fontSize="inherit"
+            onClick={() => handlePlay(entity._id)}
+          />
       </div>
     </div >
   );
