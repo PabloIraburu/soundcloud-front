@@ -24,7 +24,7 @@ export const SongItem = ({ song, handleDeleteSong, handleOpenModalEditSong }) =>
             .then((response) => {
                 setUserAlbums(
                     ...userAlbums,
-                    response)
+                    response);
             })
             .catch(console.log)
     }, [])
