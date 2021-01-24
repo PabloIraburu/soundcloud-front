@@ -13,7 +13,7 @@ export default function Discover() {
 
     // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
     const [songs, setSongs] = useState([]);
-    const [albums, setAlbums] = useState([]);
+    // const [albums, setAlbums] = useState([]);
     const [playlists, setPlaylists] = useState([]);
 
     //GET SONGS
@@ -24,11 +24,7 @@ export default function Discover() {
     }, [])
 
     //GET ALBUMS
-    useEffect(() => {
-        ServerRequest(`data/album`, "GET")
-            .then((response) => setAlbums(response))
-            .catch(console.log)
-    }, [])
+
 
     //GET PLAYLISTS
     useEffect(() => {
@@ -134,7 +130,7 @@ export default function Discover() {
                 }
 
                 <h3>Best Albums</h3>
-                {
+                {/* {
                     (albums.lenght === 0)
                         ? <p>You haven't any favourite album.</p>
                         : <div className="Discover-playlists">
@@ -152,7 +148,7 @@ export default function Discover() {
                                 />
                             ))}
                         </div>
-                }
+                } */}
 
             </div>
             {openModalUpload && (

@@ -10,20 +10,12 @@ export const Favourites = () => {
   const { userId } = useContext(UserContext);
 
   const [favSongs, setFavSongs] = useState([]);
-  const [favAlbums, setFavAlbums] = useState([]);
   const [favPlaylists, setFavPlaylists] = useState([]);
 
   //GET FAVOURITE SONGS
   useEffect(() => {
     ServerRequest(`/favouritesongs/?id_user=${userId}`, "GET")
       .then(response => setFavSongs([...favSongs, response]))
-      .catch(console.log)
-  }, []);
-
-  //GET FAVOURITE ALBUMS
-  useEffect(() => {
-    ServerRequest(`/favouritealbums/?id_user=${userId}`, "GET")
-      .then(response => setFavAlbums([...favAlbums, response]))
       .catch(console.log)
   }, []);
 
@@ -73,26 +65,6 @@ export const Favourites = () => {
                 id={playlist._id}
                 entityType="playlist"
               // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
-              />
-            ))}
-          </div>
-      }
-
-      <h3>Favourite Albums</h3>
-      {
-        (favAlbums.lenght === 0)
-          ? <p>You haven't any favourite album.</p>
-          : <div className={styles["Favourites-albums"]}>
-            {favAlbums.map((album) => (
-              <CoverMd
-                entity={album}
-                key={album._id}
-                title={album.title}
-                description={album.description}
-                img={album.image}
-                id={album._id}
-                entityType="album"
-              // handleOpenOptions={() => handleOpenEditPlaylist(album)}
               />
             ))}
           </div>
