@@ -31,6 +31,7 @@ export const Upload = () => {
         data.append("file", file[0]);
         data.append("filename", file[0].name);
         data.append("title", song.title);
+        data.append("album", song.album);
         data.append("artist", song.artist);
         data.append("image", song.image);
         data.append("category", song.category);
