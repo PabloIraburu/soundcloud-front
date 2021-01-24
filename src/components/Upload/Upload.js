@@ -1,5 +1,4 @@
 import React, {useState, useRef, useContext} from "react";
-import {ServerRequest} from "../../helpers/ServerRequest";
 import {Input} from "../Input/Input";
 import {MyButton} from "../MyButton/MyButton";
 import {Selector} from "../Selector/Selector";
@@ -13,7 +12,8 @@ import {API_URL} from "../../helpers/ServerRequest";
 export const Upload = () => {
     const [song, setSong] = useState({});
     const fileInputEl = useRef(null);
-    const {user: {_id: userId}} = useContext(UserContext);
+    const { userId } = useContext(UserContext);
+
 
     //Introduce los datos de los inputs en el objeto song
     const handleInput = (event) => {
@@ -34,6 +34,8 @@ export const Upload = () => {
         data.append("artist", song.artist);
         data.append("image", song.image);
         data.append("category", song.category);
+        data.append("id_author", userId)
+
         const options = {
             method: "POST",
             body: data,

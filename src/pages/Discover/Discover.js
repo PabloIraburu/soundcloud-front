@@ -13,7 +13,7 @@ import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { playerActions } from "../../reducers/playerReducer";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-
+import {API_URL} from "../../helpers/ServerRequest";
 
 export default function Discover() {
 
@@ -110,7 +110,7 @@ export default function Discover() {
                     <div className="playlist"></div> */}
                 </div>
 
-                {songs.length !== 0 && songs.map((song) => {
+                {songs.length !== 0 && songs.map((song) =>
                     <div>
                         <h4>{song.title}</h4>
                         <audio controls={true} muted={false}>
@@ -123,11 +123,11 @@ export default function Discover() {
                             showJumpControls={false}
                             autoPlayAfterSrcChange
                             onEnded={handleClickPrev}
-                            src={`http://localhost:3300/track/${song.trackId}`}
+                            src={`${API_URL}/track/${song.trackId}`}
                             layout={'stacked'}
                         />
                     </div>
-                })}
+                )}
 
                 <h1>Recommended for you</h1>
 
