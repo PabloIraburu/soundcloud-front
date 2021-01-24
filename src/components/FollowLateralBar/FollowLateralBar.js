@@ -30,6 +30,7 @@ export const FollowLateralBar = () => {
     ServerRequest(`data/user`, "GET")
       .then((response) => {
         setNonFollowing(response);
+        console.log(response)
       })
       .catch(console.log);
   }, []);
@@ -43,16 +44,20 @@ export const FollowLateralBar = () => {
       follower: user._id
     }
 
-    
+
     ServerRequest(`data/follower`, "POST", newFollow)
       .then((response) => {
-        setNonFollowing(response);
-        setNonFollowing([
-          ...nonFollowing,
-          response
-        ]);
+          console.log(following)
+          console.log(response.followed)
+          const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
+          const friendo = allUsers.filter(friend => friend._id === response.followed)
+          setFollowing(...following, friendo)
+          console.log(potentialFriendsLeft)
+        setNonFollowing(potentialFriendsLeft);
+          console.log(nonFollowing)
       })
-      .catch(console.log);
+      .catch(()=>{
+      });
   }
 
   const handleUnfollow = async (userId) => {
@@ -66,7 +71,7 @@ export const FollowLateralBar = () => {
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-      {/* {
+       {
         (following.length === 0)
           ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
@@ -82,21 +87,21 @@ export const FollowLateralBar = () => {
               />
             ))}
           </div>
-      } */}
+      }
 
-      <h3>Find new SoundFrieds</h3>
+      <h3>Find new SoundFriends</h3>
       {
-        (nonFollowing.lenght === 0)
+        (nonFollowing.length === 0)
           ? <p>loading...</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
-            {allUsers.map((user) => (
+            {nonFollowing.map((user) => (
               <UserCardFollowMenu
                 key={user._id}
                 userId={user._id}
                 name={user.name}
                 img={user.image}
               // handleUnfollow={handleUnfollow}
-              // handleFollow={handleFollow}
+              handleFollow={handleFollow}
               />
             ))}
           </div>

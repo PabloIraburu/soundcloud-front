@@ -49,7 +49,7 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
           fontSize="small"
           style={{ color: "white" }}
           onClick={() => {
-            // handleFollow(userId)
+            handleFollow(userId)
             setFollowButton(!followButton)
           }}
         />}
