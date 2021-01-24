@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { CoverMd } from "../../components/CoverMd/CoverMd";
-import { MyButton } from '../../components/MyButton/MyButton';
-import { Modal } from "../../components/Modal/Modal";
-import { EditAlbum } from "../../components/EditAlbum/EditAlbum";
-import CreateAlbum from "../../components/CreateAlbum/CreateAlbum";
+
 
 import styles from './Albums.module.css';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
@@ -13,10 +10,9 @@ import { UserContext } from '../../contexts/UserContext/contextProvider';
 export const Albums = () => {
 
   const { userId } = useContext(UserContext);
-  
+
   const [userAlbums, setUserAlbums] = useState([]);
   const [albums, setAlbums] = useState([]);
-  const [editAlbum, setEditAlbum] = useState();
 
   //GET USER Album
   useEffect(() => {
@@ -29,87 +25,55 @@ export const Albums = () => {
   useEffect(() => {
     ServerRequest(`data/album`, "GET")
       .then(response => {
-          setAlbums(response)
-          console.log('this', response)
+        setAlbums(response)
+        console.log('this', response)
       })
 
       .catch(console.log)
   }, [])
 
-  //Gestión modal NewAlbum
-  const [openModalNewAlbum, setOpenModalNewAlbum] = useState(false);
-  const handleOpenNewAlbum = () => setOpenModalNewAlbum(!openModalNewAlbum);
-  const handleCloseNewAlbum = (e) => {
-      const { className: el } = e.target;
-      if (el !== "backdrop" && el !== "fas fa-times") return;
-      setOpenModalNewAlbum(!openModalNewAlbum);
-  };
-
-  //Gestión modal EditAlbum
-  const [openModalEditAlbum, setOpenModalEditAlbum] = useState(false);
-  const handleOpenEditAlbum = (e) => {
-    setEditAlbum(e);
-    setOpenModalEditAlbum(!openModalEditAlbum)
-  };
-  const handleCloseEditAlbum = (e) => {
-      const { className: el } = e.target;
-      if (el !== "backdrop" && el !== "fas fa-times") return;
-      setOpenModalEditAlbum(!openModalEditAlbum);
-  };
-
   return (
     <>
       <div className={styles["Albums-header"]}>
         <h1>My Albums</h1>
-        <MyButton onClick={handleOpenNewAlbum} variant="pink-or" size="150px">New Album</MyButton>
       </div>
-        {
-          (userAlbums.lenght !== 0) &&
-          <div className={styles["Albums-list"]}>
-            {userAlbums.map((album) => (
-              <CoverMd
-                  entity={album}
-                  key={album._id}
-                  title={album.title}
-                  description={album.description}
-                  author={album.author}
-                  img={album.image}
-                  id={album._id}
-                  entityType="album"
-                  handleOpenOptions={() => handleOpenEditAlbum(album)}
-              />
-            ))}
+      {
+        (userAlbums.lenght !== 0) &&
+        <div className={styles["Albums-list"]}>
+          {userAlbums.map((album) => (
+            <CoverMd
+              entity={album}
+              key={album._id}
+              title={album.title}
+              description={album.description}
+              author={album.author}
+              img={album.image}
+              id={album._id}
+              entityType="album"
+            />
+          ))}
         </div>
-        }
-        <h1>All Albums</h1>
+      }
+      <h1>All Albums</h1>
 
-        {
-          (albums.lenght !== 0) &&
-          <div className={styles["Albums-list"]}>
-            {albums.map((album) => (
-              <CoverMd
-                  entity={album}
-                  key={album._id}
-                  title={album.title}
-                  description={album.description}
-                  img={album.image}
-                  id={album._id}
-                  author={album.author}
-                  entityType="album"
-                  handleOpenOptions={() => handleOpenEditAlbum(album)}
-              />
-            ))}
+      {
+        (albums.lenght !== 0) &&
+        <div className={styles["Albums-list"]}>
+          {albums.map((album) => (
+            <CoverMd
+              entity={album}
+              key={album._id}
+              title={album.title}
+              description={album.description}
+              img={album.image}
+              id={album._id}
+              author={album.author}
+              entityType="album"
+            />
+          ))}
         </div>
-        }
-        {openModalNewAlbum &&
-        <Modal handleClose={handleCloseNewAlbum}>
-          <CreateAlbum handleClose={handleOpenNewAlbum}/>
-        </Modal>}
+      }
 
-      {openModalEditAlbum &&
-        <Modal handleClose={handleCloseEditAlbum}>
-          <EditAlbum handleClose={handleOpenEditAlbum} albums={editAlbum}/>
-        </Modal>}
     </>
   )
 }
