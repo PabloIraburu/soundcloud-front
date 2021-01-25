@@ -7,7 +7,7 @@ import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
-import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
+// import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
@@ -85,17 +85,6 @@ export default function Discover() {
     }
 
     //GESTIÓN ADD SONG TO PLAYLISTT
-    //GET USER PLAYLISTS:
-    // useEffect(() => {
-    //     playlists.map((playlist) => {
-    //         if (playlist.id_owner === userId) {
-    //             setUserPlaylists([...userPlaylists, playlist])
-    //         }
-    //     });
-    // }, []);
-    console.log("userPlaylists", userPlaylists);
-
-
     //GESTIÓN MODAL ADD SONG TO PLAYLIST
     const [openModalAddToPlaylist, setOpenModalAddToPlaylist] = useState(false);
     const handleOpenAddToPlaylist = (id) => {
