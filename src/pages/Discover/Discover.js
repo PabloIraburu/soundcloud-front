@@ -7,28 +7,42 @@ import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
-import {EditPlaylist} from "../../components/EditPlaylist/EditPlaylist";
+import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
+import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function Discover() {
 
     const { userId } = useContext(UserContext);
-    const [songs, setSongs] = useState([]);
+    const { state, dispatch } = useContext(PlayerContext);
+    // const [songs, setSongs] = useState([]);
+    const [songId, setSongId] = useState([]);
     const [playlists, setPlaylists] = useState([]);
+    const [userPlaylists, setUserPlaylists] = useState([]);
     const [forceReload, setForceReload] = useState(false);
 
     //GET SONGS
     useEffect(() => {
         ServerRequest(`data/song`, "GET")
-            .then((response) => { setSongs(response) })
+            // .then((response) => { setSongs(response) })
+            .then((payload) => { dispatch({ type: playerActions.LOAD_SONG, songs: payload }) })
             .catch(console.log)
     }, [forceReload])
 
     //GET PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/playlist`, "GET")
-            .then((response) => setPlaylists(response))
+            .then((response) => {
+                setPlaylists(response);
+                setUserPlaylists(response.filter((playlist) => {
+                    if (playlist.id_owner === userId) {
+                        return true
+                    }
+                }));
+            })
             .catch(console.log)
     }, [])
 
@@ -69,7 +83,43 @@ export default function Discover() {
             .then(console.log)
             .catch(console.log)
     }
-    
+
+    //GESTIÓN ADD SONG TO PLAYLISTT
+    //GET USER PLAYLISTS:
+    // useEffect(() => {
+    //     playlists.map((playlist) => {
+    //         if (playlist.id_owner === userId) {
+    //             setUserPlaylists([...userPlaylists, playlist])
+    //         }
+    //     });
+    // }, []);
+    console.log("userPlaylists", userPlaylists);
+
+
+    //GESTIÓN MODAL ADD SONG TO PLAYLIST
+    const [openModalAddToPlaylist, setOpenModalAddToPlaylist] = useState(false);
+    const handleOpenAddToPlaylist = (id) => {
+        setSongId(id);
+        setOpenModalAddToPlaylist(!openModalAddToPlaylist);
+        setForceReload(!forceReload);
+    };
+    const handleCloseAddToPlaylist = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalAddToPlaylist(!openModalAddToPlaylist);
+    };
+
+    //ADD SONG TO PLAYLIST
+    const handleAddToPlaylist = (playlistId) => {
+        const newSongInPlaylist = {
+            id_playlist: playlistId,
+            id_song: songId
+        }
+        ServerRequest(`data/songsinplaylist`, "POST", newSongInPlaylist)
+            .then(setForceReload(!forceReload))
+            .catch(console.log)
+    }
+
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = (e) => {
@@ -134,9 +184,9 @@ export default function Discover() {
 
                 <h3>World's Top Music</h3>
                 {
-                    (songs.lenght !== 0) &&
-                    <div className="Discover-topSongs">
-                        {songs.map((song) => (
+                    state.reproduceSongList &&
+                    state.reproduceSongList.map((song, index) => (
+                        <div className="Discover-topSongs">
                             <CoverSm
                                 key={song._id}
                                 id={song._id}
@@ -146,9 +196,11 @@ export default function Discover() {
                                 img={song.image}
                                 handleAddToFavourites={AddSongToFavourites}
                                 handleRemoveFromFavourite={RemoveSongFromFavourites}
+                                handleAddToPlaylist={handleOpenAddToPlaylist}
+                                index={index}
                             />
-                        ))}
-                    </div>
+                        </div>
+                    ))
                 }
 
                 <h3>Most Listened Playlists</h3>
@@ -177,7 +229,24 @@ export default function Discover() {
             </div>
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload  setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload}/>
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} />
+                </Modal>
+            )}
+            {openModalAddToPlaylist && (
+                <Modal handleClose={handleCloseAddToPlaylist}>
+                    <h3>Add song to playlist</h3>
+                    {userPlaylists.length === 0
+                        ? <p>Any playlist created yet</p>
+                        : userPlaylists.map((playlist) => (
+                            <div className="Discover-AddToPlaylistList">
+                                <p onClick={() => handleAddToPlaylist(playlist._id)}>{playlist.title}</p>
+                                <AddCircleIcon
+                                    fontSize="inherit"
+                                    style={{ color: "#333" }}
+                                    onClick={() => handleAddToPlaylist(playlist._id)}
+                                />
+                            </div>
+                        ))}
                 </Modal>
             )}
         </div>

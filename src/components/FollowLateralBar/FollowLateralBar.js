@@ -47,16 +47,16 @@ export const FollowLateralBar = () => {
 
     ServerRequest(`data/follower`, "POST", newFollow)
       .then((response) => {
-          console.log(following)
-          console.log(response.followed)
-          const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
-          const friendo = allUsers.filter(friend => friend._id === response.followed)
-          setFollowing(...following, friendo)
-          console.log(potentialFriendsLeft)
+        console.log(following)
+        console.log(response.followed)
+        const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
+        const friendo = allUsers.filter(friend => friend._id === response.followed)
+        setFollowing(...following, friendo)
+        console.log(potentialFriendsLeft)
         setNonFollowing(potentialFriendsLeft);
-          console.log(nonFollowing)
+        console.log(nonFollowing)
       })
-      .catch(()=>{
+      .catch(() => {
       });
   }
 
@@ -71,7 +71,7 @@ export const FollowLateralBar = () => {
   return (
     <nav className={styles["FollowLateralBar-nav"]}>
       <h1>Your SoundFriends</h1>
-       {
+      {/* {
         (following.length === 0)
           ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
@@ -87,10 +87,10 @@ export const FollowLateralBar = () => {
               />
             ))}
           </div>
-      }
+      } */}
 
       <h3>Find new SoundFriends</h3>
-      {
+      {/* {
         (nonFollowing.length === 0)
           ? <p>loading...</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
@@ -105,7 +105,7 @@ export const FollowLateralBar = () => {
               />
             ))}
           </div>
-      }
+      } */}
     </nav>
   )
 }
