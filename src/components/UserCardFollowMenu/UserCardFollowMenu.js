@@ -3,9 +3,8 @@ import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import PersonAddDisabledRoundedIcon from '@material-ui/icons/PersonAddDisabledRounded';
 import styles from './UserCardFollowMenu.module.css';
 
-export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow, handleUnfollow }) => {
+export const UserCardFollowMenu = ({ userId, img, name, handleFollow, handleUnfollow, followButton }) => {
 
-  const [followButton, setFollowButton] = useState(true);
 
   return (
     <div className={styles["UserCardFollowMenu-wrap"]}>
@@ -14,33 +13,19 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
         <div className={styles["UserCardFollowMenu-userName"]}>
           <p>{name}</p>
         </div>
-        <div className={styles["UserCardFollowMenu-followers"]}>
-          {followers === undefined ? <p>0 followers</p> : <p>{followers} followers</p>}
-        </div>
+        {/*<div className={styles["UserCardFollowMenu-followers"]}>*/}
+        {/*  {followers === undefined ? <p>0 followers</p> : <p>{followers} followers</p>}*/}
+        {/*</div>*/}
       </div>
       <div className={styles["UserCardFollowMenu-followIcon"]}>
         {/* <i className="far fa-heart" onClick={() => handleFollow(userId)}></i> */}
 
-        {/* <PersonAddRoundedIcon
-          fontSize="small"
-          style={{ color: "white" }}
-          onClick={() => handleFollow(userId)}
-        />
-        <PersonAddDisabledRoundedIcon
-          fontSize="small"
-          style={{ color: "white" }}
-          onClick={() => {
-            handleUnfollow(userId)
-            setFollowButton(false)
-          }}
-        /> */}
 
         {!followButton && <PersonAddDisabledRoundedIcon
           fontSize="small"
           style={{ color: "white" }}
           onClick={() => {
             handleUnfollow(userId)
-            setFollowButton(!followButton)
           }}
         />}
 
@@ -50,10 +35,8 @@ export const UserCardFollowMenu = ({ userId, img, name, followers, handleFollow,
           style={{ color: "white" }}
           onClick={() => {
             handleFollow(userId)
-            setFollowButton(!followButton)
           }}
         />}
-
       </div>
 
     </div >
