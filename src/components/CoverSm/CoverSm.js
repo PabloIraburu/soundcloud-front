@@ -10,7 +10,7 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 
 
 
-export const CoverSm = ({ entity, title, categories, author, img, description, handlePlay }) => {
+export const CoverSm = ({ entity, title, categories, author, img, description, id, handleAddToFavourites, handleRemoveFromFavourites, handlePlay }) => {
 
   const handleClick = () => { }
 
@@ -34,15 +34,15 @@ export const CoverSm = ({ entity, title, categories, author, img, description, h
       <div className={styles["CoverSm-button-options"]}>
           <LibraryMusicOutlinedIcon
             fontSize="inherit"
-            onClick={() => handlePlay(entity._id)}
+            onClick={() => handlePlay(id)}
           />
           <PlaylistAddIcon
             fontSize="inherit"
-            onClick={() => handlePlay(entity._id)}
+            onClick={() => handlePlay(id)}
           />
           <FavoriteBorderOutlinedIcon
             fontSize="inherit"
-            onClick={() => handlePlay(entity._id)}
+            onClick={() => handleAddToFavourites(id)}
           />
       </div>
     </div >

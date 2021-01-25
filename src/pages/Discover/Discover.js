@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
@@ -6,17 +6,17 @@ import Search from "../../components/Search/Search";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
+import { UserContext } from '../../contexts/UserContext/contextProvider';
+import {EditPlaylist} from "../../components/EditPlaylist/EditPlaylist";
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
-import {EditPlaylist} from "../../components/EditPlaylist/EditPlaylist";
 
 export default function Discover() {
 
-    // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
+    const { userId } = useContext(UserContext);
     const [songs, setSongs] = useState([]);
     const [playlists, setPlaylists] = useState([]);
     const [forceReload, setForceReload] = useState(false);
-
 
     //GET SONGS
     useEffect(() => {
@@ -25,9 +25,6 @@ export default function Discover() {
             .catch(console.log)
     }, [forceReload])
 
-    //GET ALBUMS
-
-
     //GET PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/playlist`, "GET")
@@ -35,6 +32,44 @@ export default function Discover() {
             .catch(console.log)
     }, [])
 
+    //ADD SONG TO FAVOURITES
+    const AddSongToFavourites = (songId) => {
+        const favSong = {
+            id_song: songId,
+            id_user: userId,
+            isFav: true
+        }
+        ServerRequest("data/favouritesongs", "POST", favSong)
+            .then(console.log)
+            .catch(console.log);
+    }
+
+    //REMOVE SONG FROM FAVOURITES
+    const RemoveSongFromFavourites = (songId) => {
+        ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
+            .then(console.log)
+            .catch(console.log)
+    }
+
+    //ADD PLAYLIST TO FAVOURITES
+    const AddPlaylistToFavourites = (playlistId) => {
+        const favPlaylist = {
+            id_playlist: playlistId,
+            id_user: userId,
+            isFav: true
+        }
+        ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
+            .then(console.log)
+            .catch(console.log)
+    }
+
+    //REMOVE PLAYLIST FROM FAVOURITES
+    const RemovePlaylistFromFavourites = (playlistId) => {
+        ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
+            .then(console.log)
+            .catch(console.log)
+    }
+    
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = (e) => {
@@ -104,10 +139,13 @@ export default function Discover() {
                         {songs.map((song) => (
                             <CoverSm
                                 key={song._id}
+                                id={song._id}
                                 title={song.title}
                                 author={song.artist}
                                 categories={song.category}
                                 img={song.image}
+                                handleAddToFavourites={AddSongToFavourites}
+                                handleRemoveFromFavourite={RemoveSongFromFavourites}
                             />
                         ))}
                     </div>
@@ -128,6 +166,8 @@ export default function Discover() {
                                     description={playlist.description}
                                     categories={playlist.category}
                                     img={playlist.image}
+                                    handleAddToFavourites={AddPlaylistToFavourites}
+                                    handleRemoveFromFavourites={RemovePlaylistFromFavourites}
                                 // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                                 />
                             ))}
