@@ -14,18 +14,20 @@ export const Favourites = () => {
 
   //GET FAVOURITE SONGS
   useEffect(() => {
-    ServerRequest(`/favouritesongs/?id_user=${userId}`, "GET")
-      .then(response => setFavSongs([...favSongs, response]))
+    ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+      .then(response => setFavSongs(...favSongs, response))
       .catch(console.log)
-  }, []);
-
-  //GET FAVOURITE PLAYLISTS
-  useEffect(() => {
-    ServerRequest(`/favouriteplaylists/?id_user=${userId}`, "GET")
-      .then(response => setFavPlaylists([...favPlaylists, response]))
+    }, []);
+    
+    //GET FAVOURITE PLAYLISTS
+    useEffect(() => {
+      ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+      .then(response => setFavPlaylists(...favPlaylists, response))
       .catch(console.log)
-  }, []);
-
+    }, []);
+    
+    console.log("favSong", favSongs);
+    console.log("favPlaylist", favPlaylists);
   return (
     <>
       <h1>Favourites</h1>
@@ -51,6 +53,7 @@ export const Favourites = () => {
       }
 
       <h3>Favourite Playlists</h3>
+
       {
         (favPlaylists.lenght === 0)
           ? <p>You haven't any favourite playlist.</p>
