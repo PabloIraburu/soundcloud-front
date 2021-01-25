@@ -11,22 +11,23 @@ import styles from './SongItemList.module.css';
 
 export const SongItemList = ({ song, handleAddRemove, handleAddFavSong }) => {
 
-    const handlePlay = () => {}
-    
+    const handlePlay = () => { }
+
     return (
         <div className={styles["SongItemList-card"]}>
             <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItemList-img"]}>
                 <div className={styles["SongItemList-icon-wrapper"]}>
                     <PlayCircleFilledIcon
-                      fontSize="small"
-                      // style={{ color: "white" }}
-                      onClick={() => handlePlay(song)}
+                        fontSize="small"
+                        // style={{ color: "white" }}
+                        onClick={() => handlePlay(song)}
                     />
                 </div>
             </div>
             <div className={styles["SongItemList-text"]}>
                 <p className={styles["SongItemList-title"]}>{song.title}</p>
                 <p>{song.artist}</p>
+                <p>{song.album}</p>
                 <p>{song.category}</p>
                 <div className={styles["SongItemList-icons"]}>
 

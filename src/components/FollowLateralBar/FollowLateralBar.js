@@ -90,7 +90,7 @@ export const FollowLateralBar = () => {
       } */}
 
       <h3>Find new SoundFriends</h3>
-      {/* {
+      {
         (nonFollowing.length === 0)
           ? <p>loading...</p>
           : <div className={styles["FollowLateralBar-userItems"]}>
@@ -100,12 +100,12 @@ export const FollowLateralBar = () => {
                 userId={user._id}
                 name={user.name}
                 img={user.image}
-              // handleUnfollow={handleUnfollow}
-              handleFollow={handleFollow}
+                // handleUnfollow={handleUnfollow}
+                handleFollow={handleFollow}
               />
             ))}
           </div>
-      } */}
+      }
     </nav>
   )
 }

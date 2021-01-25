@@ -76,12 +76,12 @@
   text-decoration: none;
   color: white;
   font-size: 0.7rem;
-  min-width: 25%;
+  min-width: 15%;
 }
 
 .SongItemList-text .SongItemList-title {
   font-size: 0.9rem;
-  min-width: 30%;
+  min-width: 25%;
 }
 
 .SongItemList-icons {
