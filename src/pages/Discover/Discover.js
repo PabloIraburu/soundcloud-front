@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { Upload } from "../../components/Upload/Upload";
@@ -6,34 +6,108 @@ import Search from "../../components/Search/Search";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
+import { UserContext } from '../../contexts/UserContext/contextProvider';
+// import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
+import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
-import {EditPlaylist} from "../../components/EditPlaylist/EditPlaylist";
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function Discover() {
 
-    // const { songs, handleAddSongToFavourites } = useContext(SongsContext);
-    const [songs, setSongs] = useState([]);
+    const { userId } = useContext(UserContext);
+    const { state, dispatch } = useContext(PlayerContext);
+    // const [songs, setSongs] = useState([]);
+    const [songId, setSongId] = useState([]);
     const [playlists, setPlaylists] = useState([]);
+    const [userPlaylists, setUserPlaylists] = useState([]);
     const [forceReload, setForceReload] = useState(false);
-
 
     //GET SONGS
     useEffect(() => {
         ServerRequest(`data/song`, "GET")
-            .then((response) => { setSongs(response) })
+            // .then((response) => { setSongs(response) })
+            .then((payload) => { dispatch({ type: playerActions.LOAD_SONG, songs: payload }) })
             .catch(console.log)
     }, [forceReload])
-
-    //GET ALBUMS
-
 
     //GET PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/playlist`, "GET")
-            .then((response) => setPlaylists(response))
+            .then((response) => {
+                setPlaylists(response);
+                setUserPlaylists(response.filter((playlist) => {
+                    if (playlist.id_owner === userId) {
+                        return true
+                    }
+                }));
+            })
             .catch(console.log)
     }, [])
+
+    //ADD SONG TO FAVOURITES
+    const AddSongToFavourites = (songId) => {
+        const favSong = {
+            id_song: songId,
+            id_user: userId,
+            isFav: true
+        }
+        ServerRequest("data/favouritesongs", "POST", favSong)
+            .then(console.log)
+            .catch(console.log);
+    }
+
+    //REMOVE SONG FROM FAVOURITES
+    const RemoveSongFromFavourites = (songId) => {
+        ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
+            .then(console.log)
+            .catch(console.log)
+    }
+
+    //ADD PLAYLIST TO FAVOURITES
+    const AddPlaylistToFavourites = (playlistId) => {
+        const favPlaylist = {
+            id_playlist: playlistId,
+            id_user: userId,
+            isFav: true
+        }
+        ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
+            .then(console.log)
+            .catch(console.log)
+    }
+
+    //REMOVE PLAYLIST FROM FAVOURITES
+    const RemovePlaylistFromFavourites = (playlistId) => {
+        ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
+            .then(console.log)
+            .catch(console.log)
+    }
+
+    //GESTIÓN ADD SONG TO PLAYLISTT
+    //GESTIÓN MODAL ADD SONG TO PLAYLIST
+    const [openModalAddToPlaylist, setOpenModalAddToPlaylist] = useState(false);
+    const handleOpenAddToPlaylist = (id) => {
+        setSongId(id);
+        setOpenModalAddToPlaylist(!openModalAddToPlaylist);
+        setForceReload(!forceReload);
+    };
+    const handleCloseAddToPlaylist = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalAddToPlaylist(!openModalAddToPlaylist);
+    };
+
+    //ADD SONG TO PLAYLIST
+    const handleAddToPlaylist = (playlistId) => {
+        const newSongInPlaylist = {
+            id_playlist: playlistId,
+            id_song: songId
+        }
+        ServerRequest(`data/songsinplaylist`, "POST", newSongInPlaylist)
+            .then(setForceReload(!forceReload))
+            .catch(console.log)
+    }
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
@@ -99,18 +173,23 @@ export default function Discover() {
 
                 <h3>World's Top Music</h3>
                 {
-                    (songs.lenght !== 0) &&
-                    <div className="Discover-topSongs">
-                        {songs.map((song) => (
+                    state.reproduceSongList &&
+                    state.reproduceSongList.map((song, index) => (
+                        <div className="Discover-topSongs">
                             <CoverSm
                                 key={song._id}
+                                id={song._id}
                                 title={song.title}
                                 author={song.artist}
                                 categories={song.category}
                                 img={song.image}
+                                handleAddToFavourites={AddSongToFavourites}
+                                handleRemoveFromFavourite={RemoveSongFromFavourites}
+                                handleAddToPlaylist={handleOpenAddToPlaylist}
+                                index={index}
                             />
-                        ))}
-                    </div>
+                        </div>
+                    ))
                 }
 
                 <h3>Most Listened Playlists</h3>
@@ -128,6 +207,8 @@ export default function Discover() {
                                     description={playlist.description}
                                     categories={playlist.category}
                                     img={playlist.image}
+                                    handleAddToFavourites={AddPlaylistToFavourites}
+                                    handleRemoveFromFavourites={RemovePlaylistFromFavourites}
                                 // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                                 />
                             ))}
@@ -137,7 +218,24 @@ export default function Discover() {
             </div>
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload  setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload}/>
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} />
+                </Modal>
+            )}
+            {openModalAddToPlaylist && (
+                <Modal handleClose={handleCloseAddToPlaylist}>
+                    <h3>Add song to playlist</h3>
+                    {userPlaylists.length === 0
+                        ? <p>Any playlist created yet</p>
+                        : userPlaylists.map((playlist) => (
+                            <div className="Discover-AddToPlaylistList">
+                                <p onClick={() => handleAddToPlaylist(playlist._id)}>{playlist.title}</p>
+                                <AddCircleIcon
+                                    fontSize="inherit"
+                                    style={{ color: "#333" }}
+                                    onClick={() => handleAddToPlaylist(playlist._id)}
+                                />
+                            </div>
+                        ))}
                 </Modal>
             )}
         </div>

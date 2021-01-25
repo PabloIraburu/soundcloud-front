@@ -6,7 +6,7 @@ import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 // import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
 // import AlbumIcon from '@material-ui/icons/Album';
-// import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
 export const CoverMd = (
   {
@@ -19,8 +19,10 @@ export const CoverMd = (
     description,
     entityType,
     handleAddToFavourites,
+    handleRemoveFromFavourites,
     handlePlay,
-    handleOpenOptions
+    handleOpenOptions,
+    isFav
   }) => {
 
   return (
@@ -40,10 +42,16 @@ export const CoverMd = (
                 onClick={() => handlePlay(entity._id)}
             />
           </div>
+          
           <FavoriteBorderOutlinedIcon
             fontSize="small"
-            onClick={() => handleAddToFavourites(entity._id)}
+            onClick={() => handleAddToFavourites(id)}
           />
+          {/* {isFav && <FavoriteOutlinedIcon
+            fontSize="small"
+            onClick={() => handleRemoveFromFavourites(id)}
+          />} */}
+
         </div>
       </div>
       <div className={styles["CoverMd-text"]}>

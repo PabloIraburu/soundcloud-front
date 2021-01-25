@@ -183,3 +183,14 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.Discover-AddToPlaylistList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Discover-AddToPlaylistList p:hover{
+  color: var(--or);
+}

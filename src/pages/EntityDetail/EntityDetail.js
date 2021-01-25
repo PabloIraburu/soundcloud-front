@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from "react-router-dom";
 import { CoverBg } from '../../components/CoverBg/CoverBg'
 import { SongItemList } from '../../components/SongItemList/SongItemList'
 import styles from "./EntityDetail.module.css";
 import { ServerRequest } from '../../helpers/ServerRequest';
-// import { SongsContext } from '../../contexts/SongsContext/songsContext';
+import { SongsContext } from '../../contexts/SongsContext/songsContext';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 
 export const EntityDetail = () => {
 
-  // const {songs} = useContext(SongsContext);
+  const { songs } = useContext(SongsContext);
   const location = useLocation();
   // const entityId = useParams();
   const entityId = ((location.pathname).split("/", 3))[2];
   // const entityType = ((location.pathname).split("/", 2))[1];
   const [entity, setEntity] = useState({});
-  const [entitySongs, setEntitySongs] = useState([]);
-  
+  // const [entitySongs, setEntitySongs] = useState([]);
+  const [owner, setOwner] = useState({})
+
   console.log("entity id", entityId);
   // console.log("entity type", entityType);
 
@@ -29,49 +31,64 @@ export const EntityDetail = () => {
 
   //GET ENTITY INFORMATION
   useEffect(() => {
-      ServerRequest(`data/playlist/${entityId}`, "GET")
-        .then(response => {
-          setEntity(response)
-          console.log("entity id 1231231", response);
-        })
-        .catch((response)=>{
-          console.log('hey THIS SHIT DOESNT WORK')
-        })
-
+    ServerRequest(`data/playlist/${entityId}`, "GET")
+      .then(response => {
+        setEntity(response)
+      })
+      .catch(console.log)
   }, []);
-  
+
+  useEffect(() => {
+    ServerRequest(`data/user/?_id=${entity.id_owner}`, "GET")
+      .then(response => setOwner(response))
+      .catch(console.log)
+  }, [entity]);
+
 
   return (
     <>
       {
         // (entity === undefined) &&
-        (entity === {})
-        ? <p>Loading...</p>
-        : <div className={styles["PlaylistDetail-header"]}>
+        (entity === {} || owner === {})
+          ? <p>Loading...</p>
+          : <div className={styles["PlaylistDetail-header"]}>
             <CoverBg
               key={entity._id}
               title={entity.title}
-              author={entity.author}
+              author={owner.name}
               img={entity.image}
               description={entity.description}
+              created={entity.createdAt}
             />
-        </div>
+          </div>
       }
-      {/* <MyButton onClick={handleOpenNewPlaylist} variant="pink-or" size="150px">New Playlist</MyButton> */}
+
+      <div className={styles["EntityDetail-list"]}>
+        <div className={styles["EntityDetail-img"]}></div>
+        <div className={styles["EntityDetail-text"]}>
+          <p className={styles["EntityDetail-title"]}>Song Title</p>
+          <p>Artist</p>
+          <p>Album</p>
+          <p>Category</p>
+          <p><MoreHorizIcon fontSize="small" style={{ color: "lightgrey" }} /></p>
+          <div className={styles["EntityDetail-icons"]}></div>
+        </div>
+      </div >
+      <hr className={styles["EntityDetail-hr"]} />
 
       {
         // (entitySongs.lenght !== 0) &&
-        (entitySongs.length === 0) 
-        ? <p>This Playlist is empty.</p>
-        : <div className={styles["PlaylistDetail-list"]}>
-          {entitySongs.map((songs) => (
-            <SongItemList
-              // handleAddRemove={handleRemoveSongFromPlaylist}
-              // handleAddFavSong={handleAddSongToFav}
-              song={songs}
-            />
-          ))}
-        </div>
+        (songs.length === 0)
+          ? <p>This Playlist is empty.</p>
+          : <div className={styles["PlaylistDetail-list"]}>
+            {songs.map((song) => (
+              <SongItemList
+                // handleAddRemove={handleRemoveSongFromPlaylist}
+                // handleAddFavSong={handleAddSongToFav}
+                song={song}
+              />
+            ))}
+          </div>
       }
 
     </>
