@@ -1,13 +1,11 @@
 import React, { useContext } from 'react'
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext'
-import { SongsContext } from '../../contexts/SongsContext/songsContext';
 import AudioPlayer from 'react-h5-audio-player';
 import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
 
 export const Player = () => {
 
-  // const { songs } = useContext(SongsContext);
   const { state, dispatch } = useContext(PlayerContext);
   console.log(state);
   // console.log("trackId", state.songToReproduce[state.currentPlay].trackId);
