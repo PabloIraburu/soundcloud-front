@@ -105,7 +105,10 @@ export default function Discover() {
             id_song: songId
         }
         ServerRequest(`data/songsinplaylist`, "POST", newSongInPlaylist)
-            .then(setForceReload(!forceReload))
+            .then(() => {
+                setOpenModalAddToPlaylist(!openModalAddToPlaylist);
+                setForceReload(!forceReload);
+            })
             .catch(console.log)
     }
 
