@@ -56,12 +56,12 @@ export const EntityDetail = () => {
   return (
     <>
       {
-        // (entity === undefined) &&
         (entity === {} || owner === {})
           ? <p>Loading...</p>
           : <div className={styles["PlaylistDetail-header"]}>
             <CoverBg
               key={entity._id}
+              id={entity._id}
               title={entity.title}
               author={owner.name}
               img={entity.image}
@@ -70,6 +70,8 @@ export const EntityDetail = () => {
             />
           </div>
       }
+
+      <h1>REAL SONGS OF PLAYLIST</h1>
 
       <div className={styles["EntityDetail-list"]}>
         <div className={styles["EntityDetail-img"]}></div>
@@ -84,17 +86,7 @@ export const EntityDetail = () => {
       </div >
       <hr className={styles["EntityDetail-hr"]} />
 
-      {/* {
-        (songs.length === 0)
-          ? <p>This Playlist is empty.</p>
-          : <div className={styles["PlaylistDetail-list"]}>
-            {songs.map((song) => (
-              <SongItemList
-                song={song}
-              />
-            ))}
-          </div>
-      } */}
+
       {
         (entitySongs.length !== 0)
           ? <p>This Playlist is empty.</p>
@@ -103,6 +95,31 @@ export const EntityDetail = () => {
               <SongItemList
                 // handleAddRemove={handleRemoveSongFromPlaylist}
                 // handleAddFavSong={handleAddSongToFav}
+                song={song}
+              />
+            ))}
+          </div>
+      }
+
+      <h1>FAKE LIST SONGS </h1>
+      <div className={styles["EntityDetail-list"]}>
+        <div className={styles["EntityDetail-img"]}></div>
+        <div className={styles["EntityDetail-text"]}>
+          <p className={styles["EntityDetail-title"]}>Song Title</p>
+          <p>Artist</p>
+          <p>Album</p>
+          <p>Category</p>
+          <p><MoreHorizIcon fontSize="small" style={{ color: "lightgrey" }} /></p>
+          <div className={styles["EntityDetail-icons"]}></div>
+        </div>
+      </div >
+      <hr className={styles["EntityDetail-hr"]} />
+      {
+        (songs.length === 0)
+          ? <p>This Playlist is empty.</p>
+          : <div className={styles["PlaylistDetail-list"]}>
+            {songs.map((song) => (
+              <SongItemList
                 song={song}
               />
             ))}

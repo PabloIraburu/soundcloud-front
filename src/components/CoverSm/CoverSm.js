@@ -14,7 +14,7 @@ import { playerActions } from "../../reducers/playerReducer";
 
 export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist }) => {
 
-  const { state, dispatch } = useContext(PlayerContext);
+  const { /*state,*/ dispatch } = useContext(PlayerContext);
 
   return (
     <div className={styles["CoverSm-card"]}>
