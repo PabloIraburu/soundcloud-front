@@ -176,23 +176,23 @@ export default function Discover() {
 
                 <h3>World's Top Music</h3>
                 {
-                    state.reproduceSongList &&
-                    state.reproduceSongList.map((song, index) => (
-                        <div className="Discover-topSongs">
-                            <CoverSm
-                                key={song._id}
-                                id={song._id}
-                                title={song.title}
-                                author={song.artist}
-                                categories={song.category}
-                                img={song.image}
-                                handleAddToFavourites={AddSongToFavourites}
-                                handleRemoveFromFavourite={RemoveSongFromFavourites}
-                                handleAddToPlaylist={handleOpenAddToPlaylist}
-                                index={index}
-                            />
-                        </div>
-                    ))
+                    <div className="Discover-topSongs">
+                        {state.reproduceSongList &&
+                            state.reproduceSongList.map((song, index) => (
+                                <CoverSm
+                                    key={song._id}
+                                    id={song._id}
+                                    title={song.title}
+                                    author={song.artist}
+                                    categories={song.category}
+                                    img={song.image}
+                                    handleAddToFavourites={AddSongToFavourites}
+                                    handleRemoveFromFavourite={RemoveSongFromFavourites}
+                                    handleAddToPlaylist={handleOpenAddToPlaylist}
+                                    index={index}
+                                />
+                            ))}
+                    </div>
                 }
 
                 <h3>Most Listened Playlists</h3>
