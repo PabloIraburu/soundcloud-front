@@ -41,16 +41,17 @@ export const FollowLateralBar = () => {
     useEffect(() => {
         ServerRequest(`data/user`, "GET")
             .then((response) => {
-                const res = (response.filter(r => r._id !== user._id));
+                const res = (response.filter(r => r._id !== userId));
                 setAllUsers(res)
                 ServerRequest(`data/follower/?follower=${userId}`, "GET") //Devuelve array de los usuarios que sigo
                     .then(response => {
-                        console.log(response)
+                        console.log('Followed users', response)
                         console.log('AllUsers', res)
                         setFollowing(response.map(f => res.find(u => u._id === f.followed)));
                         response.map(f => console.log(f.followed))
                         console.log(response.map(f => res.filter(u => u._id !== f.followed)))
-                        setNonFollowing(response.map(f => res.filter(u => u._id !== f.followed)))
+                        // setNonFollowing(response.map(f => res.filter(u => u._id !== f.followed)))
+                        setNonFollowing(allUsers.filter(f => res.map(u => u.followed !== f._id)))
                     })
                     .catch(console.log);
             })
@@ -72,31 +73,17 @@ export const FollowLateralBar = () => {
             .then((response) => {
                 console.log(following)
                 console.log(response.followed)
-                const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
+                // const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
                 const friendo = allUsers.filter(friend => friend._id === response.followed)
                 setFollowing(...following, friendo)
-                console.log(potentialFriendsLeft)
-                setNonFollowing(potentialFriendsLeft);
+                // console.log(potentialFriendsLeft)
+                setAllUsers(allUsers.filter(a=>a._id !== response.followed))
                 console.log(nonFollowing)
             })
             .catch(() => {
             });
-
-
-        // ServerRequest(`data/follower`, "POST", newFollow)
-        //   .then((response) => {
-        //       console.log(following)
-        //       console.log(response.followed)
-        //       const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
-        //       const friendo = allUsers.filter(friend => friend._id === response.followed)
-        //       setFollowing(...following, friendo)
-        //       console.log(potentialFriendsLeft)
-        //     // setNonFollowing(potentialFriendsLeft);
-        //       console.log(nonFollowing)
-        //   })
-        //   .catch(()=>{
-        //   });
     }
+
 
     const handleUnfollow = async (userId) => {
         const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
@@ -132,9 +119,8 @@ export const FollowLateralBar = () => {
             <h3>Find new SoundFriends</h3>
             {
                 (nonFollowing.length === 0)
-                    ? <p>loading...</p>
-                    : <div className={styles["FollowLateralBar-userItems"]}>
-                        {nonFollowing[0].map((user) => (
+                    ? <div className={styles["FollowLateralBar-userItems"]}>
+                        {allUsers.map((user) => (
                             <UserCardFollowMenu
                                 key={user._id}
                                 userId={user._id}
@@ -143,6 +129,21 @@ export const FollowLateralBar = () => {
                                 followButton={!followButton}
                                 handleFollow={handleFollow}
                             />
+                        ))}
+                    </div>
+                    : <div className={styles["FollowLateralBar-userItems"]}>
+                        {nonFollowing.map((user) => (
+                            <>
+                                <h1>este</h1>
+                                <UserCardFollowMenu
+                                    key={user._id}
+                                    userId={user._id}
+                                    name={user.name}
+                                    img={user.image}
+                                    followButton={!followButton}
+                                    handleFollow={handleFollow}
+                                />
+                            </>
                         ))}
                     </div>
             }
