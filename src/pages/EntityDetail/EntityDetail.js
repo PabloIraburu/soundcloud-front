@@ -13,11 +13,11 @@ export const EntityDetail = () => {
   const { songs } = useContext(SongsContext);
   const location = useLocation();
   // const entityId = useParams();
-  const entityId = ((location.pathname).split("/", 3))[2];
   // const entityType = ((location.pathname).split("/", 2))[1];
+  const entityId = ((location.pathname).split("/", 3))[2];
   const [entity, setEntity] = useState({});
-  // const [entitySongs, setEntitySongs] = useState([]);
-  const [owner, setOwner] = useState({})
+  const [entitySongs, setEntitySongs] = useState([]);
+  const [owner, setOwner] = useState({});
 
   console.log("entity id", entityId);
   // console.log("entity type", entityType);
@@ -44,6 +44,14 @@ export const EntityDetail = () => {
       .catch(console.log)
   }, [entity]);
 
+  //GET ENTITY SONGS  
+  useEffect(() => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}`, "GET")
+      .then(response => setEntitySongs(response))
+      .catch(console.log)
+  }, [])
+
+  console.log(entitySongs);
 
   return (
     <>
@@ -76,12 +84,22 @@ export const EntityDetail = () => {
       </div >
       <hr className={styles["EntityDetail-hr"]} />
 
-      {
-        // (entitySongs.lenght !== 0) &&
+      {/* {
         (songs.length === 0)
           ? <p>This Playlist is empty.</p>
           : <div className={styles["PlaylistDetail-list"]}>
             {songs.map((song) => (
+              <SongItemList
+                song={song}
+              />
+            ))}
+          </div>
+      } */}
+      {
+        (entitySongs.length !== 0)
+          ? <p>This Playlist is empty.</p>
+          : <div className={styles["PlaylistDetail-list"]}>
+            {entitySongs.map((song) => (
               <SongItemList
                 // handleAddRemove={handleRemoveSongFromPlaylist}
                 // handleAddFavSong={handleAddSongToFav}
