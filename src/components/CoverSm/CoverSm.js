@@ -1,20 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from './CoverSm.module.css';
 import { Link } from "react-router-dom";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-// import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import LibraryMusicOutlinedIcon from '@material-ui/icons/LibraryMusicOutlined';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { playerActions } from "../../reducers/playerReducer";
-
+import { FavContext } from "../../contexts/FavContext/favContext";
+import { favActions } from "../../reducers/favouritesReducer";
+import { UserContext } from "../../contexts/UserContext/contextProvider";
+import { ServerRequest } from "../../helpers/ServerRequest";
 
 
 export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist }) => {
 
-  const { /*state,*/ dispatch } = useContext(PlayerContext);
+  const { userId } = useContext(UserContext);
+  const { player, dispatchPlayer } = useContext(PlayerContext);
+  const { dispatchFav } = useContext(FavContext);
+  const [isFav, setIsFav] = useState(false);
+
+  // GET FAVOURITE SONGS
+  useEffect(() => {
+    ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+      .then(response => (
+        response.find((fsong) => {
+          if (fsong.id_song === id) {
+            setIsFav(!isFav);
+          }
+        })))
+      .catch(console.log)
+  }, [id]);
+
+  // useEffect(() => {
+  //   favourite.favSongs.find((fsong) => {
+  //     if (fsong.id_song === id) {
+  //       setIsFav(!isFav)
+  //     }
+  //   })
+  // }, [id])
+
 
   return (
     <div className={styles["CoverSm-card"]}>
@@ -22,14 +48,14 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
         <div className={styles["CoverSm-icon-wrapper"]}>
           <PlayCircleFilledIcon
             fontSize="large"
-            onClick={() => dispatch({ type: playerActions.PLAY_THIS_SONG, index })}
+            onClick={() => dispatchPlayer({ type: playerActions.PLAY_THIS_SONG, index })}
           />
         </div>
       </div>
       <div className={styles["CoverSm-text"]}>
         <Link
           className={styles["CoverSm-title"]}
-          onClick={() => dispatch({ type: playerActions.PLAY_THIS_SONG, index })}
+          onClick={() => dispatchPlayer({ type: playerActions.PLAY_THIS_SONG, index })}
         >
           {title}
         </Link>
@@ -44,12 +70,22 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
         />
         <PlaylistAddIcon
           fontSize="inherit"
-          onClick={() => dispatch({ type: playerActions.ADD_TO_QUEUE, song: entity })}
+          onClick={() => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })}
         />
-        <FavoriteBorderOutlinedIcon
-          fontSize="inherit"
-          onClick={() => handleAddToFavourites(id)}
-        />
+
+        {
+          !isFav && <FavoriteBorderOutlinedIcon
+            fontSize="inherit"
+            onClick={() => handleAddToFavourites(id)}
+          />
+        }
+        {
+          isFav && <FavoriteIcon
+            fontSize="inherit"
+            style={{ color: '#f9b807' }}
+            onClick={() => dispatchFav({ type: favActions.UNFAV_SONG, songId: id })}
+          />
+        }
       </div>
     </div >
   );

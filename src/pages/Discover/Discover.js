@@ -8,27 +8,31 @@ import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 // import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { playerActions } from "../../reducers/playerReducer";
+import { FavContext } from "../../contexts/FavContext/favContext";
+import { favActions } from "../../reducers/favouritesReducer";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function Discover() {
 
     const { userId } = useContext(UserContext);
-    const { state, dispatch } = useContext(PlayerContext);
+    const { player, dispatchPlayer } = useContext(PlayerContext);
+    const { favourite, dispatchFav } = useContext(FavContext);
     // const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
     const [playlists, setPlaylists] = useState([]);
     const [userPlaylists, setUserPlaylists] = useState([]);
     const [forceReload, setForceReload] = useState(false);
+    console.log(favourite);
 
     //GET SONGS
     useEffect(() => {
         ServerRequest(`data/song`, "GET")
             // .then((response) => { setSongs(response) })
-            .then((payload) => { dispatch({ type: playerActions.LOAD_SONG, songs: payload }) })
+            .then((payload) => { dispatchPlayer({ type: playerActions.LOAD_SONG, songs: payload }) })
             .catch(console.log)
     }, [forceReload])
 
@@ -54,14 +58,15 @@ export default function Discover() {
             isFav: true
         }
         ServerRequest("data/favouritesongs", "POST", favSong)
-            .then(console.log)
+            .then((payload) => { dispatchFav({ type: favActions.FAV_SONG, fSong: payload }) })
             .catch(console.log);
+        console.log(favourite);
     }
 
     //REMOVE SONG FROM FAVOURITES
     const RemoveSongFromFavourites = (songId) => {
         ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
-            .then(console.log)
+            .then(dispatchFav({ type: favActions.UNFAV_SONG, songId: songId }))
             .catch(console.log)
     }
 
@@ -73,14 +78,14 @@ export default function Discover() {
             isFav: true
         }
         ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
-            .then(console.log)
+            .then((payload) => { dispatchFav({ type: favActions.FAV_PLAYLIST, fPlaylist: payload }) })
             .catch(console.log)
     }
 
     //REMOVE PLAYLIST FROM FAVOURITES
     const RemovePlaylistFromFavourites = (playlistId) => {
         ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
-            .then(console.log)
+            .then(dispatchFav({ type: favActions.UNFAV_PLAYLIST, playlistId: playlistId }))
             .catch(console.log)
     }
 
@@ -177,8 +182,8 @@ export default function Discover() {
                 <h3>World's Top Music</h3>
                 {
                     <div className="Discover-topSongs">
-                        {state.reproduceSongList &&
-                            state.reproduceSongList.map((song, index) => (
+                        {player.reproduceSongList &&
+                            player.reproduceSongList.map((song, index) => (
                                 <CoverSm
                                     key={song._id}
                                     id={song._id}

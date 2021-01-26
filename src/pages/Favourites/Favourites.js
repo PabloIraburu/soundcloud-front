@@ -4,6 +4,7 @@ import { CoverSm } from "../../components/CoverSm/CoverSm";
 import styles from './Favourites.module.css';
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
+import { FavContext } from "../../contexts/FavContext/favContext";
 
 export const Favourites = () => {
 
@@ -11,23 +12,24 @@ export const Favourites = () => {
 
   const [favSongs, setFavSongs] = useState([]);
   const [favPlaylists, setFavPlaylists] = useState([]);
+  const { favourite, dispatchFav } = useContext(FavContext);
 
-  //GET FAVOURITE SONGS
+  // //GET FAVOURITE SONGS
   useEffect(() => {
     ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
       .then(response => setFavSongs(...favSongs, response))
       .catch(console.log)
-    }, []);
-    
-    //GET FAVOURITE PLAYLISTS
-    useEffect(() => {
-      ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+  }, []);
+
+  //GET FAVOURITE PLAYLISTS
+  useEffect(() => {
+    ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
       .then(response => setFavPlaylists(...favPlaylists, response))
       .catch(console.log)
-    }, []);
-    
-    console.log("favSong", favSongs);
-    console.log("favPlaylist", favPlaylists);
+  }, []);
+
+  console.log("favSong", favSongs);
+  console.log("favPlaylist", favPlaylists);
   return (
     <>
       <h1>Favourites</h1>
