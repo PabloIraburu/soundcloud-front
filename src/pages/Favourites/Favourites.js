@@ -3,8 +3,6 @@ import styles from './Favourites.module.css';
 import { Modal } from "../../components/Modal/Modal";
 import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
-import { FavContext } from "../../contexts/FavContext/favContext";
-import { favActions } from "../../reducers/favouritesReducer";
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -13,63 +11,66 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 export const Favourites = () => {
 
   const { userId } = useContext(UserContext);
-  const { favourite, dispatchFav } = useContext(FavContext);
   const [songId, setSongId] = useState([]);
   const [forceReload, setForceReload] = useState(false);
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const [, setPlaylists] = useState([]);
+  const [favSongs, setFavSongs] = useState([]);
+  const [favPlaylists, setFavPlaylists] = useState([]);
 
-  console.log("favSong", favourite.favSongs);
-  console.log("favourites", favourite);
+  console.log("favSong", favSongs);
+  console.log("favourites", favPlaylists);
 
-  //GET PLAYLISTS
+
+  //GET FAVOURITE SONGS
   useEffect(() => {
-    ServerRequest(`data/playlist`, "GET")
-      .then((response) => {
-        setPlaylists(response);
-        setUserPlaylists(response.filter((playlist) =>
-          playlist.id_owner === userId
-        ));
-      })
+    ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+      .then(response => setFavSongs(response))
       .catch(console.log)
-  }, [])
+  }, [forceReload]);
 
-  //ADD SONG TO FAVOURITES
-  const AddSongToFavourites = (songId) => {
-    const favSong = {
-      id_song: songId,
-      id_user: userId,
-      isFav: true
-    }
-    ServerRequest("data/favouritesongs", "POST", favSong)
-      .then((payload) => { dispatchFav({ type: favActions.FAV_SONG, fSong: payload }) })
-      .catch(console.log);
-    console.log(favourite);
-  }
+  //GET FAVOURITE PLAYLISTS
+  useEffect(() => {
+    ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+      .then(response => setFavPlaylists(response))
+      .catch(console.log)
+  }, [forceReload])
+
+  // //ADD SONG TO FAVOURITES
+  // const AddSongToFavourites = (songId) => {
+  //   const favSong = {
+  //     id_song: songId,
+  //     id_user: userId,
+  //     isFav: true
+  //   }
+  //   ServerRequest("data/favouritesongs", "POST", favSong)
+  //     .then((response) => setFavSongs([...favSongs, response]))
+  //     .catch(console.log);
+  //   console.log(favourite);
+  // }
 
   //REMOVE SONG FROM FAVOURITES
   const RemoveSongFromFavourites = (songId) => {
     ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
-      .then(dispatchFav({ type: favActions.UNFAV_SONG, songId: songId }))
+      .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
       .catch(console.log)
   }
 
-  //ADD PLAYLIST TO FAVOURITES
-  const AddPlaylistToFavourites = (playlistId) => {
-    const favPlaylist = {
-      id_playlist: playlistId,
-      id_user: userId,
-      isFav: true
-    }
-    ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
-      .then((payload) => { dispatchFav({ type: favActions.FAV_PLAYLIST, fPlaylist: payload }) })
-      .catch(console.log)
-  }
+  // //ADD PLAYLIST TO FAVOURITES
+  // const AddPlaylistToFavourites = (playlistId) => {
+  //   const favPlaylist = {
+  //     id_playlist: playlistId,
+  //     id_user: userId,
+  //     isFav: true
+  //   }
+  //   ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
+  //     .then((response) => setFavPlaylists([...favPlaylists, response]))
+  //     .catch(console.log)
+  // }
 
   //REMOVE PLAYLIST FROM FAVOURITES
   const RemovePlaylistFromFavourites = (playlistId) => {
     ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
-      .then(dispatchFav({ type: favActions.UNFAV_PLAYLIST, playlistId: playlistId }))
+      .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
       .catch(console.log)
   }
 
@@ -107,19 +108,21 @@ export const Favourites = () => {
 
       <h3>Favourite songs</h3>
       {
-        (favourite.favSongs.lenght === 0)
+        (favSongs.lenght === 0)
           ? <p>You haven't any favourite song.</p>
           : <div className={styles["Favourites-songs"]}>
-            {favourite.favSongs.map((song) => (
+            {favSongs.map((song) => (
               <CoverSm
-                entity={song}
-                key={song._id}
-                title={song.title}
-                description={song.description}
-                img={song.image}
-                id={song._id}
+                entity={song.id_song}
+                key={song.id_song._id}
+                title={song.id_song.title}
+                author={song.id_song.artist}
+                description={song.id_song.description}
+                categories={song.id_song.category}
+                img={song.id_song.image}
+                id={song.id_song._id}
                 entityType="song"
-                handleAddToFavourites={AddSongToFavourites}
+                // handleAddToFavourites={AddSongToFavourites}
                 handleRemoveFromFavourite={RemoveSongFromFavourites}
                 handleAddToPlaylist={handleOpenAddToPlaylist}
               />
@@ -130,20 +133,20 @@ export const Favourites = () => {
       <h3>Favourite Playlists</h3>
 
       {
-        (favourite.favPlaylists.lenght === 0)
+        (favPlaylists.lenght === 0)
           ? <p>You haven't any favourite playlist.</p>
           : <div className={styles["Favourites-playlists"]}>
-            {favourite.favPlaylists.map((playlist) => (
+            {favPlaylists.map((playlist) => (
               <CoverMd
-                entity={playlist}
-                key={playlist._id}
-                title={playlist.title}
-                description={playlist.description}
-                categories={playlist.category}
-                img={playlist.image}
-                id={playlist._id}
+                entity={playlist.id_playlist}
+                key={playlist.id_playlist._id}
+                title={playlist.id_playlist.title}
+                description={playlist.id_playlist.description}
+                categories={playlist.id_playlist.category}
+                img={playlist.id_playlist.image}
+                id={playlist.id_playlist._id}
                 entityType="playlist"
-                handleAddToFavourites={AddPlaylistToFavourites}
+                // handleAddToFavourites={AddPlaylistToFavourites}
                 handleRemoveFromFavourites={RemovePlaylistFromFavourites}
               // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
               />
