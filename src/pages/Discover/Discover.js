@@ -50,6 +50,20 @@ export default function Discover() {
             .catch(console.log)
     }, [])
 
+    // // GET FAVOURITE SONGS
+    // useEffect(() => {
+    //     ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+    //         .then((payload) => { dispatchFav({ type: favActions.LOAD_FAV_SONGS, favListSongs: payload }) })
+    //         .catch(console.log)
+    // }, []);
+
+    // // GET FAVOURITE PLAYLISTS
+    // useEffect(() => {
+    //     ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+    //         .then((payload) => { dispatchFav({ type: favActions.LOAD_FAV_PLAYLISTS, favListPlaylists: payload }) })
+    //         .catch(console.log)
+    // }, []);
+
     //ADD SONG TO FAVOURITES
     const AddSongToFavourites = (songId) => {
         const favSong = {

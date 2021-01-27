@@ -1,45 +1,45 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from './CoverSm.module.css';
 import { Link } from "react-router-dom";
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import { playerActions } from "../../reducers/playerReducer";
+import { FavContext } from "../../contexts/FavContext/favContext";
+// import { favActions } from "../../reducers/favouritesReducer";
+// import { UserContext } from "../../contexts/UserContext/contextProvider";
+// import { ServerRequest } from "../../helpers/ServerRequest";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import LibraryMusicOutlinedIcon from '@material-ui/icons/LibraryMusicOutlined';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
-import { playerActions } from "../../reducers/playerReducer";
-import { FavContext } from "../../contexts/FavContext/favContext";
-import { favActions } from "../../reducers/favouritesReducer";
-import { UserContext } from "../../contexts/UserContext/contextProvider";
-import { ServerRequest } from "../../helpers/ServerRequest";
 
 
 export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist }) => {
 
-  const { userId } = useContext(UserContext);
+  // const { userId } = useContext(UserContext);
   const { player, dispatchPlayer } = useContext(PlayerContext);
-  const { dispatchFav } = useContext(FavContext);
+  const { favourite, dispatchFav } = useContext(FavContext);
   const [isFav, setIsFav] = useState(false);
 
-  // GET FAVOURITE SONGS
-  useEffect(() => {
-    ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
-      .then(response => (
-        response.find((fsong) => {
-          if (fsong.id_song === id) {
-            setIsFav(!isFav);
-          }
-        })))
-      .catch(console.log)
-  }, [id]);
-
+  // // GET FAVOURITE SONGS
   // useEffect(() => {
-  //   favourite.favSongs.find((fsong) => {
-  //     if (fsong.id_song === id) {
-  //       setIsFav(!isFav)
-  //     }
-  //   })
-  // }, [id])
+  //   ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+  //     .then(response => (
+  //       response.find((fsong) => {
+  //         if (fsong.id_song === id) {
+  //           setIsFav(!isFav);
+  //         }
+  //       })))
+  //     .catch(console.log)
+  // }, [id]);
+
+  useEffect(() => {
+    favourite.favSongs.find((fsong) => {
+      if (fsong.id_song === id) {
+        setIsFav(!isFav)
+      }
+    })
+  }, [id])
 
 
   return (
@@ -83,7 +83,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
           isFav && <FavoriteIcon
             fontSize="inherit"
             style={{ color: '#f9b807' }}
-            onClick={() => dispatchFav({ type: favActions.UNFAV_SONG, songId: id })}
+            onClick={() => handleRemoveFromFavourites(id)}
           />
         }
       </div>
