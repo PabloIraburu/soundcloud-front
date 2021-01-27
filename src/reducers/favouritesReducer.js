@@ -38,7 +38,7 @@ export const favouritesReducer = (state = initialState, action) => {
     // return newState;
 
     case favActions.LOAD_FAV_PLAYLISTS:
-      newState.favPlaylist = action.favListPlaylists;
+      newState.favPlaylists = action.favListPlaylists;
       return newState;
 
     case favActions.FAV_PLAYLIST:

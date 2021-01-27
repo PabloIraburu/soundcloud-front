@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./CoverMd.module.css";
 import { Link } from "react-router-dom";
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-// import PlayCircleOutlineRoundedIcon from '@material-ui/icons/PlayCircleOutlineRounded';
-// import AlbumIcon from '@material-ui/icons/Album';
-// import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import { FavContext } from "../../contexts/FavContext/favContext";
+import { favActions } from "../../reducers/favouritesReducer";
+
 
 export const CoverMd = (
   {
@@ -22,8 +24,20 @@ export const CoverMd = (
     handleRemoveFromFavourites,
     handlePlay,
     handleOpenOptions,
-    isFav
+
   }) => {
+
+  const { player, dispatchPlayer } = useContext(PlayerContext);
+  const { favourite, dispatchFav } = useContext(FavContext);
+  const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    favourite.favPlaylists.find((fplaylist) => {
+      if (fplaylist.id_song === id) {
+        setIsFav(!isFav)
+      }
+    })
+  }, [id])
 
   return (
     <div className={styles["CoverMd-wrap"]}>
@@ -43,14 +57,15 @@ export const CoverMd = (
             />
           </div>
 
-          <FavoriteBorderOutlinedIcon
+          {!isFav && <FavoriteBorderOutlinedIcon
             fontSize="small"
             onClick={() => handleAddToFavourites(id)}
-          />
-          {/* {isFav && <FavoriteOutlinedIcon
+          />}
+          {isFav && <FavoriteIcon
             fontSize="small"
+            style={{ color: '#f9b807' }}
             onClick={() => handleRemoveFromFavourites(id)}
-          />} */}
+          />}
 
         </div>
       </div>
