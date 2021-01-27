@@ -13,8 +13,6 @@ export const Player = () => {
   console.log(player.currentPlay);
   // console.log("track id en player.song", player.songToReproduce[player.currentPlay].trackId);
 
-
-
   const handleClickNext = () => {
     dispatchPlayer({ type: playerActions.NEXT_SONG });
   };
