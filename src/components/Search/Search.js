@@ -1,22 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import TextField from '@material-ui/core/TextField';
 import "./search.css"
+import {ServerRequest} from "../../helpers/ServerRequest";
 
-const mockSearch = [
-  "Robert Glasper",
-  "Chris Dave",
-  "Hiatus kaiyote",
-  "Bantamweight",
-  "Funk yo mamma",
-];
+
+
 
 function Search() {
+  const [songs,setSongs] = useState([])
+  useEffect(()=>{
+    ServerRequest('data/song', 'GET')
+        .then((response)=> {
+          setSongs(response)
+          console.log(response)
+        } )
+  },[])
+
+  const mockSearch = songs.map(s=>s.title)
   const [searchItem, setSearchItem] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const handleChange = (e) => {
     setSearchItem(e.target.value);
   };
   useEffect(() => {
+    console.log(mockSearch)
     const results =
       mockSearch &&
       mockSearch.filter((art) => art.toLowerCase().includes(searchItem));

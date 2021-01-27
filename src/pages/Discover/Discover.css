@@ -133,11 +133,10 @@ h2 {
 }
 
 .search MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
-  display: none;
 }
 
 .search ul {
-  display: none;
+
 }
 
 .notif {
