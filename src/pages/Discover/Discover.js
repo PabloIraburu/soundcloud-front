@@ -136,7 +136,7 @@ export default function Discover() {
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
-    const handleOpenUpload = (e) => {
+    const handleOpenUpload = () => {
         setOpenModalUpload(!openModalUpload)
         setForceReload(!forceReload)
     };

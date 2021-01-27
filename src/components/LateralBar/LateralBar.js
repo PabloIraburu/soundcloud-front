@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import * as route from "../../routes/routes";
 import logo from "../../img/logo.png";
-import UserInfo from "../UserInfo/UserInfo";
+import UserInfo from "./UserInfo/UserInfo";
 import { Modal } from "../Modal/Modal";
 import { MyButton } from "../MyButton/MyButton";
 import { Upload } from "../Upload/Upload";
@@ -276,8 +276,8 @@ export default function LateralBar() {
                 </li>
 
                 {/* BOTTOM ICONS */}
-                <li className="nav-item" id="themeButton">
-                    <div className="nav-link">
+                <li className="nav-item" >
+                    <Link className="nav-link">
                         {/* ICONO 1 LOGOUT */}
                         <svg
                             id="lightIcon"
@@ -305,8 +305,8 @@ export default function LateralBar() {
                                 ></path>
                             </g>
                         </svg>
-                        <p>Log Out</p>
-                    </div>
+                        Log Out
+                    </Link>
                 </li>
 
             </ul>

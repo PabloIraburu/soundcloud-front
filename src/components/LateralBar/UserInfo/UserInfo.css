@@ -16,7 +16,7 @@
   background-color: var(--clr-inactiveField);
   color: white;
   height: 80%;
-  width: 80%;
+  width: 85%;
   margin-top: 2rem;
   margin-left: 1.5rem;
   margin-right: 2.5rem;
@@ -45,13 +45,15 @@
   display: none;
 }
 
-.identity{
+.identity h1{
   transition-duration: 15ms;
   min-width: 15rem;
+  color: white;
 }
 
 .numbers{
   transition-duration: 15ms;
   min-width: 15rem;
+  justify-content: space-between;
 }
 

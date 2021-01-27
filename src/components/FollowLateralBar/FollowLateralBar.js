@@ -3,7 +3,7 @@ import {ServerRequest} from '../../helpers/ServerRequest';
 import {DecodeToken} from '../../utils/DecodeToken';
 import {getToken} from '../../utils/LocalStorage.utils';
 import {UserContext} from '../../contexts/UserContext/contextProvider';
-import {UserCardFollowMenu} from '../UserCardFollowMenu/UserCardFollowMenu';
+import {UserCardFollowMenu} from './UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
