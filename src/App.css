@@ -51,6 +51,14 @@ body {
   padding-right: 21%;
   width: auto;
 }
+svg{
+  cursor: pointer;
+  transition: ease-out;
+}
+
+button{
+  cursor: pointer;
+}
 
 @media screen and (max-width: 1300px) {
   .MainRouter-wrap {

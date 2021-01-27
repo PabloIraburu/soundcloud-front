@@ -17,7 +17,7 @@ export const Favourites = () => {
   const [songId, setSongId] = useState([]);
   const [forceReload, setForceReload] = useState(false);
   const [userPlaylists, setUserPlaylists] = useState([]);
-  const [playlists, setPlaylists] = useState([]);
+  const [, setPlaylists] = useState([]);
 
   console.log("favSong", favourite.favSongs);
   console.log("favourites", favourite);
@@ -27,11 +27,9 @@ export const Favourites = () => {
     ServerRequest(`data/playlist`, "GET")
       .then((response) => {
         setPlaylists(response);
-        setUserPlaylists(response.filter((playlist) => {
-          if (playlist.id_owner === userId) {
-            return true
-          }
-        }));
+        setUserPlaylists(response.filter((playlist) =>
+          playlist.id_owner === userId
+        ));
       })
       .catch(console.log)
   }, [])
@@ -157,7 +155,7 @@ export const Favourites = () => {
         <Modal handleClose={handleCloseAddToPlaylist}>
           <h3>Add song to playlist</h3>
           {userPlaylists.length === 0
-            ? <p>Any playlist created yet</p>
+            ? <p>You haven't created any playlists yet</p>
             : userPlaylists.map((playlist) => (
               <div className="Discover-AddToPlaylistList">
                 <p onClick={() => handleAddToPlaylist(playlist._id)}>{playlist.title}</p>

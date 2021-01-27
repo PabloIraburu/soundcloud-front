@@ -100,6 +100,7 @@
 .PlayButton {
   position: relative;
   transition: transform ease-in-out 190ms;
+  cursor: pointer;
 }
 
 .PlayButton::before,
@@ -128,6 +129,41 @@
   z-index: 1;
   animation: pulse 1250ms infinite;
 }
+
+
+.FavoriteIcon {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+  cursor: pointer;
+}
+
+.FavoriteIcon::before,
+.FavoriteIcon::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.FavoriteIcon::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.FavoriteIcon:hover::before {
+  background: white;
+}
+
+.FavoriteIcon:hover::after {
+  background: #f9b807;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
 
 @keyframes pulse {
   0% {

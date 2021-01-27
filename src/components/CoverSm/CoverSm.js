@@ -12,6 +12,8 @@ import LibraryMusicOutlinedIcon from '@material-ui/icons/LibraryMusicOutlined';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Tooltip from '@material-ui/core/Tooltip';
+import {withStyles} from "@material-ui/styles";
 
 
 export const CoverSm = ({
@@ -32,6 +34,14 @@ export const CoverSm = ({
     const {player, dispatchPlayer} = useContext(PlayerContext);
     const {favourite, dispatchFav} = useContext(FavContext);
     const [isFav, setIsFav] = useState(false);
+    const HtmlTooltip = withStyles((theme) => ({
+        tooltip: {
+            backgroundColor: '#f5f5f9',
+            color: 'rgba(0, 0, 0, 0.87)',
+            maxWidth: 220,
+            border: '1px solid #dadde9',
+        },
+    }))(Tooltip);
 
     // // GET FAVOURITE SONGS
     // useEffect(() => {
@@ -76,27 +86,44 @@ export const CoverSm = ({
                 <p className={styles["CoverSm-description"]}>{description}</p>
             </div>
             <div className={styles["CoverSm-button-options"]}>
-                <LibraryMusicOutlinedIcon
-                    fontSize="inherit"
-                    onClick={() => handleAddToPlaylist(id)}
-                />
-                <PlaylistAddIcon
-                    fontSize="inherit"
-                    onClick={() => dispatchPlayer({type: playerActions.ADD_TO_QUEUE, song: entity})}
-                />
+                <HtmlTooltip title="Add To Playlist" placement="left">
+                    <LibraryMusicOutlinedIcon
+                        fontSize="inherit"
+                        onClick={() => handleAddToPlaylist(id)}
+                    />
+                </HtmlTooltip>
+
+                <HtmlTooltip title="Add To Queue" placement="left">
+                    <PlaylistAddIcon
+                        fontSize="inherit"
+                        onClick={() => dispatchPlayer({type: playerActions.ADD_TO_QUEUE, song: entity})}
+                    />
+                </HtmlTooltip>
+
 
                 {
-                    !isFav && <FavoriteBorderOutlinedIcon
-                        fontSize="inherit"
-                        onClick={() => handleAddToFavourites(id)}
-                    />
+                    !isFav &&
+                    <HtmlTooltip title="Add Favorite" placement="left">
+                        <div className={styles["FavoriteIcon"]}>
+                            <FavoriteBorderOutlinedIcon
+                                fontSize="inherit"
+                                style={{color: '#f9b807'}}
+                                onClick={() => handleRemoveFromFavourites(id)}
+                            />
+                        </div>
+                    </HtmlTooltip>
                 }
                 {
-                    isFav && <FavoriteIcon
-                        fontSize="inherit"
-                        style={{color: '#f9b807'}}
-                        onClick={() => handleRemoveFromFavourites(id)}
-                    />
+                    isFav &&
+                    <HtmlTooltip title="Remove Favorite" placement="left">
+                        <div className={styles["FavoriteIcon"]}>
+                            <FavoriteIcon
+                                fontSize="inherit"
+                                style={{color: '#f9b807'}}
+                                onClick={() => handleRemoveFromFavourites(id)}
+                            />
+                        </div>
+                    </HtmlTooltip>
                 }
             </div>
         </div>

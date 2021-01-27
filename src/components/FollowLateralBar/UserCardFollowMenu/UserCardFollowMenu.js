@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import PersonAddDisabledRoundedIcon from '@material-ui/icons/PersonAddDisabledRounded';
 import styles from './UserCardFollowMenu.module.css';
@@ -13,12 +13,8 @@ export const UserCardFollowMenu = ({ userId, img, name, handleFollow, handleUnfo
         <div className={styles["UserCardFollowMenu-userName"]}>
           <p>{name}</p>
         </div>
-        {/*<div className={styles["UserCardFollowMenu-followers"]}>*/}
-        {/*  {followers === undefined ? <p>0 followers</p> : <p>{followers} followers</p>}*/}
-        {/*</div>*/}
       </div>
       <div className={styles["UserCardFollowMenu-followIcon"]}>
-        {/* <i className="far fa-heart" onClick={() => handleFollow(userId)}></i> */}
 
 
         {!followButton && <PersonAddDisabledRoundedIcon

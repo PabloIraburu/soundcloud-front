@@ -17,7 +17,7 @@ export const FollowLateralBar = () => {
     const [following, setFollowing] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
     const [nonFollowing, setNonFollowing] = useState([]);
-    const [followButton, setFollowButton] = useState(false);
+    const followButton =false;
     const [reload, setReload] = useState(false);
 
 

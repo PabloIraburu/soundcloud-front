@@ -44,11 +44,9 @@ export default function Discover() {
         ServerRequest(`data/playlist`, "GET")
             .then((response) => {
                 setPlaylists(response);
-                setUserPlaylists(response.filter((playlist) => {
-                    if (playlist.id_owner === userId) {
-                        return true
-                    }
-                }));
+                setUserPlaylists(response.filter((playlist) =>
+                     playlist.id_owner === userId
+                ));
             })
             .catch(console.log)
     }, [])
@@ -156,10 +154,10 @@ export default function Discover() {
                     <div className="search">
                         <Search />
                     </div>
-                    <div className="notif">
-                        <span><i className="fas fa-ambulance"></i></span>
-                        <span><i className="far fa-dot-circle"></i></span>
-                    </div>
+                    {/*<div className="notif">*/}
+                    {/*    <span><i className="fas fa-ambulance"></i></span>*/}
+                    {/*    <span><i className="far fa-dot-circle"></i></span>*/}
+                    {/*</div>*/}
                 </div>
                 <div className="mainFrame">
                     <div className="header">
@@ -250,7 +248,7 @@ export default function Discover() {
                 <Modal handleClose={handleCloseAddToPlaylist}>
                     <h3>Add song to playlist</h3>
                     {userPlaylists.length === 0
-                        ? <p>Any playlist created yet</p>
+                        ? <p>You haven't created any playlists yet</p>
                         : userPlaylists.map((playlist) => (
                             <div className="Discover-AddToPlaylistList">
                                 <p onClick={() => handleAddToPlaylist(playlist._id)}>{playlist.title}</p>

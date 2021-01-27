@@ -36,11 +36,8 @@ export const UserContextProvider = ({children}) => {
     useEffect(() => {
         ServerRequest(`data/user`, "GET")
         .then((response) => {
-          setAllUsers(response.filter((user) => {
-            if (user._id !== userId) {
-              return true
-            }
-          }));
+          setAllUsers(response.filter((user) => (user._id !== userId)
+          ));
         })
         .catch(console.log);
       }, []);

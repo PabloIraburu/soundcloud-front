@@ -63,7 +63,6 @@ export const CoverMd = (
                     />}
                     {isFav && <FavoriteIcon
                         fontSize="small"
-                        style={{color: '#f9b807'}}
                         onClick={() => handleRemoveFromFavourites(id)}
                     />}
 

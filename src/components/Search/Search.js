@@ -2,8 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import TextField from '@material-ui/core/TextField';
 import "./search.css"
 import {ServerRequest} from "../../helpers/ServerRequest";
-
-
+import {CoverSm} from "../CoverSm/CoverSm";
 
 
 function Search() {
@@ -22,6 +21,7 @@ function Search() {
   const handleChange = (e) => {
     setSearchItem(e.target.value);
   };
+
   useEffect(() => {
     console.log(mockSearch)
     const results =
@@ -39,7 +39,10 @@ function Search() {
                    onChange={handleChange} />
       <ul>
         {searchItem !== "" && searchResults.map((res, index) => (
-          <li key={index}>{res}</li>
+            <>
+                <li key={index}>{res}</li>
+                <CoverSm/>
+            </>
         ))}
       </ul>
     </div>
