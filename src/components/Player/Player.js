@@ -11,6 +11,8 @@ export const Player = () => {
   // console.log("trackId", state.songToReproduce[state.currentPlay].trackId);
   console.log(player.songToReproduce);
   console.log(player.currentPlay);
+  // console.log("track id en player.song", player.songToReproduce[player.currentPlay].trackId);
+
 
 
   const handleClickNext = () => {
@@ -23,7 +25,7 @@ export const Player = () => {
 
   return (
     <>
-      {(player.reproduceSongList.length !== 0 && player.currentPlay !== undefined) &&
+      {(player.reproduceSongList.length !== 0 && player.currentPlay !== undefined && player.songToReproduce[player.currentPlay].trackId) &&
         <AudioPlayer
           onClickNext={handleClickNext}
           onClickPrevious={handleClickPrev}
