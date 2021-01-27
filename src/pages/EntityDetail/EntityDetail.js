@@ -1,23 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import { CoverBg } from '../../components/CoverBg/CoverBg'
 import { SongItemList } from '../../components/SongItemList/SongItemList'
 import styles from "./EntityDetail.module.css";
 import { ServerRequest } from '../../helpers/ServerRequest';
-import { SongsContext } from '../../contexts/SongsContext/songsContext';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 
 export const EntityDetail = () => {
 
-  const { songs } = useContext(SongsContext);
+  // const { songs } = useContext(SongsContext);
   const location = useLocation();
   // const entityId = useParams();
   // const entityType = ((location.pathname).split("/", 2))[1];
   const entityId = ((location.pathname).split("/", 3))[2];
   const [entity, setEntity] = useState({});
   const [entitySongs, setEntitySongs] = useState([]);
+  const [songs, setSongs] = useState([]);
   const [owner, setOwner] = useState({});
+  const [forceReload, setForceReload] = useState(false);
+
 
   console.log("entity id", entityId);
   // console.log("entity type", entityType);
@@ -28,6 +30,16 @@ export const EntityDetail = () => {
 
   // console.log("request to data/entity", `data/${entityType}/${entityId}`);
   // console.log("request to data/songsinentity", `data/songsin${entityType}/?id_${entityType}=${entityId}`);
+
+
+  //GET SONGS
+  useEffect(() => {
+    ServerRequest(`data/song`, "GET")
+      .then((payload) => {
+        setSongs(payload)
+      })
+      .catch(console.log)
+  }, [forceReload])
 
   //GET ENTITY INFORMATION
   useEffect(() => {
@@ -48,10 +60,11 @@ export const EntityDetail = () => {
   useEffect(() => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}`, "GET")
       .then(response => setEntitySongs(response))
+      // .then(response => console.log('ESTE', entityId))
       .catch(console.log)
   }, [])
 
-  console.log(entitySongs);
+  console.log("entity song properties:", entitySongs);
 
   return (
     <>
@@ -66,6 +79,7 @@ export const EntityDetail = () => {
               author={owner.name}
               img={entity.image}
               description={entity.description}
+              categories={entity.category}
               created={entity.createdAt}
             />
           </div>
@@ -88,39 +102,14 @@ export const EntityDetail = () => {
 
 
       {
-        (entitySongs.length !== 0)
+        (entitySongs.length === 0)
           ? <p>This Playlist is empty.</p>
           : <div className={styles["PlaylistDetail-list"]}>
             {entitySongs.map((song) => (
               <SongItemList
                 // handleAddRemove={handleRemoveSongFromPlaylist}
                 // handleAddFavSong={handleAddSongToFav}
-                song={song}
-              />
-            ))}
-          </div>
-      }
-
-      <h1>FAKE LIST SONGS </h1>
-      <div className={styles["EntityDetail-list"]}>
-        <div className={styles["EntityDetail-img"]}></div>
-        <div className={styles["EntityDetail-text"]}>
-          <p className={styles["EntityDetail-title"]}>Song Title</p>
-          <p>Artist</p>
-          <p>Album</p>
-          <p>Category</p>
-          <p><MoreHorizIcon fontSize="small" style={{ color: "lightgrey" }} /></p>
-          <div className={styles["EntityDetail-icons"]}></div>
-        </div>
-      </div >
-      <hr className={styles["EntityDetail-hr"]} />
-      {
-        (songs.length === 0)
-          ? <p>This Playlist is empty.</p>
-          : <div className={styles["PlaylistDetail-list"]}>
-            {songs.map((song) => (
-              <SongItemList
-                song={song}
+                song={song.id_song}
               />
             ))}
           </div>
