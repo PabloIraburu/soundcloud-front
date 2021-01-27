@@ -6,14 +6,17 @@ import {ServerRequest} from '../../helpers/ServerRequest';
 
 export default function UserInfo() {
 
-    const {user} = useContext(UserContext);
+    const {userId, user} = useContext(UserContext);
     const [followers, setFollowers] = useState([]);
 
     useEffect(() => {
-        ServerRequest(`data/follower/?followed=${user._id}`, "GET")
-            .then(response => setFollowers(response))
+        ServerRequest(`data/follower/?followed=${userId}`, "GET")
+            .then(response => {
+                console.log(response)
+                setFollowers(response)
+            })
             .catch(console.log);
-    }, [user])
+    }, [])
 
     return (
         <a className='userCard' href='/profile'>

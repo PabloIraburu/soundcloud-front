@@ -10,7 +10,7 @@ import "./Upload.css";
 import {API_URL} from "../../helpers/ServerRequest";
 
 
-export const Upload = ({setForceReload, forceReload, handleClose}) => {
+export const Upload = ({setForceReload, forceReload, handleClose, notify}) => {
     const [song, setSong] = useState({});
     const fileInputEl = useRef(null);
     const { userId } = useContext(UserContext);
@@ -60,6 +60,7 @@ export const Upload = ({setForceReload, forceReload, handleClose}) => {
                 console.log(song)
                 setForceReload(!forceReload)
                 handleClose(e)
+                notify('Song Uploaded Correctly')
             })
             .catch((error) => console.log(error));
 

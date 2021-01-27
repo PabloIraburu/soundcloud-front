@@ -10,6 +10,7 @@ import { categories } from "../../data/categories";
 import { Upload } from '../../components/Upload/Upload';
 import EventIcon from '@material-ui/icons/Event';
 import styles from "./MySongs.module.css";
+import {toast} from "react-toastify";
 
 
 export const MySongs = () => {
@@ -17,6 +18,8 @@ export const MySongs = () => {
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
     const [forceReload, setForceReload] = useState(false);
+    const notify = (e) => toast(`${e}`);
+
 
     //Canciones subidas por el usuario
     useEffect(() => {
@@ -194,7 +197,7 @@ export const MySongs = () => {
             }
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload}/>
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify}/>
                 </Modal>
             )}
         </>

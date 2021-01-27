@@ -15,9 +15,12 @@ import { favActions } from "../../reducers/favouritesReducer";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Discover() {
 
+    const notify = (e) => toast(`${e}`);
     const { userId } = useContext(UserContext);
     const { player, dispatchPlayer } = useContext(PlayerContext);
     const { favourite, dispatchFav } = useContext(FavContext);
@@ -240,7 +243,7 @@ export default function Discover() {
             </div>
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} />
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify} />
                 </Modal>
             )}
             {openModalAddToPlaylist && (
@@ -260,6 +263,17 @@ export default function Discover() {
                         ))}
                 </Modal>
             )}
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 

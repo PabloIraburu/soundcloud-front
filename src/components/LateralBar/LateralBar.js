@@ -10,12 +10,14 @@ import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
 import { UserContext } from "../../contexts/UserContext/contextProvider";
 
 import "./LateralBar.css"
+import {toast} from "react-toastify";
 
 
 export default function LateralBar() {
 
 
     const { signOut } = useContext(UserContext);
+
 
     //Gestión modal NewPlaylist
     const [openModalNewPlaylist, setOpenModalNewPlaylist] = useState(false);
@@ -26,6 +28,7 @@ export default function LateralBar() {
         setOpenModalNewPlaylist(!openModalNewPlaylist);
     };
 
+
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);
@@ -34,6 +37,10 @@ export default function LateralBar() {
         if (el !== "backdrop" && el !== "fas fa-times") return;
         setOpenModalUpload(!openModalUpload);
     };
+    const [forceReload, setForceReload] = useState(false);
+    const notify = (e) => toast(`${e}`);
+
+
 
 
     return (
@@ -310,7 +317,7 @@ export default function LateralBar() {
 
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload />
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify}  />
                 </Modal>
             )}
         </nav>

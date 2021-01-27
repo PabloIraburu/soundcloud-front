@@ -1,7 +1,6 @@
 import React from "react";
 import * as route from "../routes/routes";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 import LateralBar from "../components/LateralBar/LateralBar";
 import Discover from "../pages/Discover/Discover";
 import { Profile } from "../pages/Profile/Profile";
@@ -32,6 +31,7 @@ export const MainRouter = () => {
 
   return (
     <>
+
       <UserContextProvider>
         <PlayerContextProvider>
           <FavContextProvider>

@@ -5,16 +5,20 @@ import {getToken} from '../../utils/LocalStorage.utils';
 import {UserContext} from '../../contexts/UserContext/contextProvider';
 import {UserCardFollowMenu} from '../UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const FollowLateralBar = () => {
 
     const {user} = useContext(UserContext);
-    const userId = DecodeToken(getToken()).id;
+    const loggedUserId = DecodeToken(getToken()).id;
 
     const [following, setFollowing] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
     const [nonFollowing, setNonFollowing] = useState([]);
     const [followButton, setFollowButton] = useState(false);
+    const [reload, setReload] = useState(false);
 
 
     //Lista de usuarios seguidos
@@ -41,22 +45,21 @@ export const FollowLateralBar = () => {
     useEffect(() => {
         ServerRequest(`data/user`, "GET")
             .then((response) => {
-                const res = (response.filter(r => r._id !== userId));
+                const res = (response.filter(r => r._id !== loggedUserId));
                 setAllUsers(res)
-                ServerRequest(`data/follower/?follower=${userId}`, "GET") //Devuelve array de los usuarios que sigo
+                ServerRequest(`data/follower/?follower=${loggedUserId}`, "GET") //Devuelve array de los usuarios que sigo
                     .then(response => {
-                        console.log('Followed users', response)
                         console.log('AllUsers', res)
+                        console.log('Followed users', response.map(u => u.followed))
+                        console.log(response)
+                        let followedPeeps = response.map(u => u.followed)
                         setFollowing(response.map(f => res.find(u => u._id === f.followed)));
-                        response.map(f => console.log(f.followed))
-                        console.log(response.map(f => res.filter(u => u._id !== f.followed)))
-                        // setNonFollowing(response.map(f => res.filter(u => u._id !== f.followed)))
-                        setNonFollowing(allUsers.filter(f => res.map(u => u.followed !== f._id)))
+                        setNonFollowing(res.filter(u => !followedPeeps.includes(u._id)))
                     })
                     .catch(console.log);
             })
             .catch(console.log);
-    }, []);
+    }, [reload]);
 
 
     const handleFollow = (userId) => {
@@ -67,28 +70,39 @@ export const FollowLateralBar = () => {
             //Perfil seguidor, usuario logueado
             follower: user._id
         }
-
-
         ServerRequest(`data/follower`, "POST", newFollow)
-            .then((response) => {
-                console.log(following)
-                console.log(response.followed)
-                // const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
-                const friendo = allUsers.filter(friend => friend._id === response.followed)
-                setFollowing(...following, friendo)
-                // console.log(potentialFriendsLeft)
-                setAllUsers(allUsers.filter(a=>a._id !== response.followed))
-                console.log(nonFollowing)
+            .then(() => {
+                setReload(!reload)
             })
-            .catch(() => {
-            });
+
+        // ServerRequest(`data/follower`, "POST", newFollow)
+        //     .then((response) => {
+        //         console.log(following)
+        //         console.log(response.followed)
+        //         // const potentialFriendsLeft = nonFollowing.filter(nonFriend => nonFriend._id !== response.followed)
+        //         const friendo = allUsers.filter(friend => friend._id === response.followed)
+        //         console.log(following)
+        //         console.log(...following, friendo)
+        //         // console.log(potentialFriendsLeft)
+        //         setAllUsers(allUsers.filter(a=>a._id !== response.followed))
+        //         console.log(nonFollowing)
+        //     })
+        //     .catch(() => {
+        //     });
     }
 
 
-    const handleUnfollow = async (userId) => {
-        const unfollowId = await ServerRequest(`data/follower/?follower=${user._id}&&followed=${userId}`, "GET")
-
-        ServerRequest(`data/follower/${unfollowId._id}`, "DELETE")
+    const handleUnfollow = (userId) => {
+        console.log(userId)
+        console.log(loggedUserId)
+        ServerRequest(`data/follower/?followed=${userId}&follower=${loggedUserId}`, "GET")
+            .then((response) => {
+                setReload(!reload)
+                console.log(response)
+                ServerRequest(`data/follower/${response[0]._id}`, "DELETE")
+                    .then(() => setReload(!reload)
+                    )
+            })
 
     }
 
@@ -134,7 +148,6 @@ export const FollowLateralBar = () => {
                     : <div className={styles["FollowLateralBar-userItems"]}>
                         {nonFollowing.map((user) => (
                             <>
-                                <h1>este</h1>
                                 <UserCardFollowMenu
                                     key={user._id}
                                     userId={user._id}
@@ -145,7 +158,19 @@ export const FollowLateralBar = () => {
                                 />
                             </>
                         ))}
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
                     </div>
+
             }
         </nav>
     )
