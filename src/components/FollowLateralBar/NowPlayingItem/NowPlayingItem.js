@@ -1,4 +1,5 @@
-import React  from "react";
+import React from "react";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import styles from './NowPlayingItem.module.css';
 
@@ -6,14 +7,15 @@ export const NowPlayingItem = ({ entity, title, categories, author, img, descrip
 
 
     return (
-        <div className={styles["UserCardFollowMenu-wrap"]}>
-            <div style={{ backgroundImage: `url(${img})` }} className={styles["UserCardFollowMenu-img"]}></div>
-            <div className={styles["UserCardFollowMenu-info"]}>
-                <div className={styles["UserCardFollowMenu-userName"]}>
-                    <p>{title}</p>
+        <div className={styles["NowPlayingItemFollowMenu-wrap"]}>
+            <div style={{ backgroundImage: `url(${img})` }} className={styles["NowPlayingItemFollowMenu-img"]}></div>
+            <div className={styles["NowPlayingItemFollowMenu-info"]}>
+                <div className={styles["NowPlayingItemFollowMenu-userName"]}>
+                    <p className={styles["NowPlayingItemFollowMenu-title"]}>{title}</p>
+                    <p className={styles["NowPlayingItemFollowMenu-author"]}>{author}</p>
                 </div>
             </div>
-
+            <MoreVertIcon fontSize="inherit" />
         </div >
     );
 };

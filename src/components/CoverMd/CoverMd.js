@@ -2,10 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import styles from "./CoverMd.module.css";
 import { Link } from "react-router-dom";
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-// import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import { playerActions } from "../../reducers/playerReducer";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { UserContext } from "../../contexts/UserContext/contextProvider";
 import Tooltip from '@material-ui/core/Tooltip';
@@ -29,7 +32,7 @@ export const CoverMd = (
     }) => {
 
     const { userId } = useContext(UserContext);
-    // const { player, dispatchPlayer } = useContext(PlayerContext);
+    const { player, dispatchPlayer } = useContext(PlayerContext);
     const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
@@ -39,6 +42,7 @@ export const CoverMd = (
             border: '1px solid #dadde9',
         },
     }))(Tooltip);
+
 
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
@@ -59,18 +63,18 @@ export const CoverMd = (
                 className={styles["CoverMd-img"]}
             >
                 <div className={styles["icon-wrapper"]}>
-                    <HtmlTooltip title="Options" placement="top">
-                        <MoreHorizRoundedIcon
+                    <HtmlTooltip title="Add To Queue" placement="left">
+                        <PlaylistAddIcon
                             fontSize="small"
-                            onClick={() => handleOpenOptions(entity)}
+                            onClick={() => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })}
                         />
                     </HtmlTooltip>
 
-                    <div className={styles["PlayButton"]}>
+                    <div /*className={styles["PlayButton"]} */>
                         <HtmlTooltip title="Play" placement="top">
                             <PlayCircleFilledIcon
                                 fontSize="large"
-                                onClick={() => handlePlay(entity._id)}
+                                onClick={() => handlePlay(id)}
                             />
                         </HtmlTooltip>
 
@@ -97,14 +101,22 @@ export const CoverMd = (
 
                 </div>
             </div>
-            <div className={styles["CoverMd-text"]}>
-                <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: id }}>
-                    {/* <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: { entity } }}>*/}
-                    {title}
-                </Link>
-                <p className={styles["CoverMd-author"]}>{author}</p>
-                <p className={styles["CoverMd-category"]}>{categories}</p>
-                <p className={styles["CoverMd-description"]}>{description}</p>
+            <div className={styles["CoverMd-info"]}>
+                <div className={styles["CoverMd-text"]}>
+
+                    <Link className={styles["CoverMd-title"]} to={{ pathname: `/${entityType}/${id}`, state: id }}>
+                        {title}
+                    </Link>
+                    <p className={styles["CoverMd-author"]}>{author}</p>
+                    <p className={styles["CoverMd-category"]}>{categories}</p>
+                    <p className={styles["CoverMd-description"]}>{description}</p>
+                </div>
+
+                <div className={styles["CoverMd-icon"]}>
+                    <HtmlTooltip title="Options" placement="top">
+                        <MoreVertIcon fontSize="small" />
+                    </HtmlTooltip>
+                </div>
             </div>
         </div>
     );

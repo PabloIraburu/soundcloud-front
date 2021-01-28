@@ -70,7 +70,7 @@ export const Playlists = () => {
   //PLAY PLAYLIST
   const handlePlayPlaylist = (playlistId) => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
-      .then(payload => dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.id_song }))
+      .then(payload => { dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.map(playlist => playlist.id_song) }) })
       .catch(console.log)
   };
 
