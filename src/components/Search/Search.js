@@ -5,7 +5,7 @@ import {ServerRequest} from "../../helpers/ServerRequest";
 import {CoverSm} from "../CoverSm/CoverSm";
 
 
-function Search( handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist ) {
+function Search( handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylistSearch ) {
     const [songs, setSongs] = useState([])
     useEffect(() => {
         ServerRequest('data/song', 'GET')
@@ -48,7 +48,7 @@ function Search( handleAddToFavourites, handleRemoveFromFavourites, handleAddToP
                             entityType="song"
                             handleAddToFavourites={handleAddToFavourites}
                             handleRemoveFromFavourites={handleRemoveFromFavourites}
-                            handleAddToPlaylist={handleAddToPlaylist}
+                            handleAddToPlaylist={handleAddToPlaylistSearch}
                         />
                 ))}
             </ul>
