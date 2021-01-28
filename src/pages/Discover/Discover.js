@@ -7,7 +7,7 @@ import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
-// import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
+import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { playerActions } from "../../reducers/playerReducer";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -24,6 +24,7 @@ export default function Discover() {
     const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
     const [playlists, setPlaylists] = useState([]);
+    const [editPlaylist, setEditPlaylist] = useState();
     const [favSongs, setFavSongs] = useState([]);
     const [favPlaylists, setFavPlaylists] = useState([]);
     const [userPlaylists, setUserPlaylists] = useState([]);
@@ -172,6 +173,19 @@ export default function Discover() {
     };
 
 
+    //Gestión modal EditPlaylist
+    const [openModalEditPlaylist, setOpenModalEditPlaylist] = useState(false);
+    const handleOpenEditPlaylist = (e) => {
+        setEditPlaylist(e);
+        setForceReload(!forceReload)
+        setOpenModalEditPlaylist(!openModalEditPlaylist)
+    };
+    const handleCloseEditPlaylist = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalEditPlaylist(!openModalEditPlaylist);
+    };
+
     return (
         <div className='landing'>
             <script src="https://kit.fontawesome.com/2903311b15.js" crossOrigin="anonymous"></script>
@@ -262,9 +276,9 @@ export default function Discover() {
                                     description={playlist.description}
                                     categories={playlist.category}
                                     img={playlist.image}
+                                    handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                                     handleAddToFavourites={AddPlaylistToFavourites}
                                     handleRemoveFromFavourites={RemovePlaylistFromFavourites}
-                                    handleOpenOptions={() => handleAddToQueue(playlist._id)}
                                     handlePlay={handlePlayPlaylist}
                                 />
                             ))}
@@ -294,6 +308,10 @@ export default function Discover() {
                         ))}
                 </Modal>
             )}
+            {openModalEditPlaylist &&
+                <Modal handleClose={handleCloseEditPlaylist}>
+                    <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} />
+                </Modal>}
             <ToastContainer
                 position="top-center"
                 autoClose={5000}

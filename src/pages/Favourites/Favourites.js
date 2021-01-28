@@ -5,6 +5,7 @@ import { CoverMd } from "../../components/CoverMd/CoverMd";
 import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
+import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { playerActions } from '../../reducers/playerReducer';
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
@@ -15,6 +16,7 @@ export const Favourites = () => {
   const { dispatchPlayer } = useContext(PlayerContext);
   const [songId, setSongId] = useState([]);
   const [forceReload, setForceReload] = useState(false);
+  const [editPlaylist, setEditPlaylist] = useState();
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [favSongs, setFavSongs] = useState([]);
   const [favPlaylists, setFavPlaylists] = useState([]);
@@ -108,6 +110,19 @@ export const Favourites = () => {
       .catch(console.log)
   };
 
+  //Gestión modal EditPlaylist
+  const [openModalEditPlaylist, setOpenModalEditPlaylist] = useState(false);
+  const handleOpenEditPlaylist = (e) => {
+    setEditPlaylist(e);
+    setForceReload(!forceReload)
+    setOpenModalEditPlaylist(!openModalEditPlaylist)
+  };
+  const handleCloseEditPlaylist = (e) => {
+    const { className: el } = e.target;
+    if (el !== "backdrop" && el !== "fas fa-times") return;
+    setOpenModalEditPlaylist(!openModalEditPlaylist);
+  };
+
   return (
     <>
       <h1>Favourites</h1>
@@ -151,8 +166,8 @@ export const Favourites = () => {
                 img={playlist.id_playlist.image}
                 id={playlist.id_playlist._id}
                 entityType="playlist"
+                handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                 handleRemoveFromFavourites={RemovePlaylistFromFavourites}
-                handleOpenOptions={() => handleAddToQueue(playlist._id)}
                 handlePlay={handlePlayPlaylist}
               />
             ))}
@@ -176,6 +191,10 @@ export const Favourites = () => {
             ))}
         </Modal>
       )}
+      {openModalEditPlaylist &&
+        <Modal handleClose={handleCloseEditPlaylist}>
+          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} />
+        </Modal>}
     </>
   )
 }

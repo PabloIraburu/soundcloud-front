@@ -81,7 +81,7 @@ export const CoverMd = (
                     </div>
 
                     {!isFav &&
-                        <HtmlTooltip title="Add Favourites" placement="top">
+                        <HtmlTooltip title="Add Favourites" placement="right">
                             <FavoriteBorderOutlinedIcon
                                 fontSize="small"
                                 onClick={() => handleAddToFavourites(id)}
@@ -90,7 +90,7 @@ export const CoverMd = (
 
                     }
                     {isFav &&
-                        <HtmlTooltip title="Remove Favourite" placement="top">
+                        <HtmlTooltip title="Remove Favourite" placement="right">
                             <FavoriteIcon
                                 fontSize="small"
                                 style={{ color: '#f9b807' }}
@@ -113,8 +113,8 @@ export const CoverMd = (
                 </div>
 
                 <div className={styles["CoverMd-icon"]}>
-                    <HtmlTooltip title="Options" placement="top">
-                        <MoreVertIcon fontSize="small" />
+                    <HtmlTooltip title="Edit Playlist" placement="bottom">
+                        <MoreVertIcon fontSize="small" onClick={() => handleOpenOptions(id)} />
                     </HtmlTooltip>
                 </div>
             </div>
