@@ -137,7 +137,7 @@ export const Playlists = () => {
               img={playlist.image}
               id={playlist._id}
               entityType="playlist"
-              handleOpenOptions={() => handleAddToQueue(playlist._id)}
+              handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
               handleAddToFavourites={AddPlaylistToFavourites}
               handleRemoveFromFavourites={RemovePlaylistFromFavourites}
               handlePlay={handlePlayPlaylist}

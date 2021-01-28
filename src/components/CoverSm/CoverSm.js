@@ -81,7 +81,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                         <div className={styles["FavoriteIcon"]}>
                             <FavoriteBorderOutlinedIcon
                                 fontSize="inherit"
-                                style={{ color: '#f9b807' }}
+                                // style={{ color: '#f9b807' }}
                                 onClick={() => handleAddToFavourites(id)}
                             />
                         </div>
@@ -93,7 +93,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                         <div className={styles["FavoriteIcon"]}>
                             <FavoriteIcon
                                 fontSize="inherit"
-                                style={{ color: '#f9b807' }}
+                                // style={{ color: '#f9b807' }}
                                 onClick={() => handleRemoveFromFavourites(id)}
                             />
                         </div>
