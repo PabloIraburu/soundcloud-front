@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MyButton } from '../MyButton/MyButton';
 import styles from "./CoverBg.module.css";
+import { ServerRequest } from "../../helpers/ServerRequest";
+import { playerActions } from "../../reducers/playerReducer";
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 
 export const CoverBg = ({ title, categories, author, img, description, entityType, created, id }) => {
 
+  const { dispatchPlayer } = useContext(PlayerContext);
+
+  //PLAY PLAYLIST
+  const handlePlayPlaylist = (playlistId) => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+      .then(payload => { dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.map(playlist => playlist.id_song) }) })
+      .catch(console.log)
+  };
   const options = { month: "2-digit", day: "2-digit", year: "numeric" };
 
   return (
@@ -25,7 +36,7 @@ export const CoverBg = ({ title, categories, author, img, description, entityTyp
         </p>
         <div className={styles["CoverBg-reproduceButton"]}>
           <MyButton
-            // onClick={}
+            onClick={() => handlePlayPlaylist(id)}
             variant="blue-sky"
             size="150px"
           >

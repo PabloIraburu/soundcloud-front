@@ -7,15 +7,15 @@ import { UserCardFollowMenu } from './UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {PlayerContext} from "../../contexts/PlayerContext/playerContext";
-import {playerActions} from "../../reducers/playerReducer";
-import {CoverSm} from "../CoverSm/CoverSm";
-import {NowPlayingItem} from "./NowPlayingItem/NowPlayingItem";
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import { playerActions } from "../../reducers/playerReducer";
+import { CoverSm } from "../CoverSm/CoverSm";
+import { NowPlayingItem } from "./NowPlayingItem/NowPlayingItem";
 
 export const FollowLateralBar = () => {
 
     const { user } = useContext(UserContext);
-    const { player, dispatchPlayer} = useContext(PlayerContext)
+    const { player, dispatchPlayer } = useContext(PlayerContext)
     const loggedUserId = DecodeToken(getToken()).id;
     const [following, setFollowing] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
@@ -70,45 +70,32 @@ export const FollowLateralBar = () => {
     return (
         <nav className={styles["FollowLateralBar-nav"]}>
             <div className={styles["Follows"]}>
-            <h1>Your SoundFriends</h1>
-            {
-                (following.length === 0)
-                    ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest
+                <h1>Your SoundFriends</h1>
+                {
+                    (following.length === 0)
+                        ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest
                         some people you may know 🤩</p>
-                    : <div className={styles["FollowLateralBar-userItems"]}>
-                        {following.map((user) => (
-                            <UserCardFollowMenu
-                                key={user._id}
-                                userId={user._id}
-                                name={user.name}
-                                img={user.image}
-                                // followers={}
-                                handleUnfollow={handleUnfollow}
-                                // userFollowed={user}
-                                followButton={followButton}
-                            />
-                        ))}
-                    </div>
-            }
+                        : <div className={styles["FollowLateralBar-userItems"]}>
+                            {following.map((user) => (
+                                <UserCardFollowMenu
+                                    key={user._id}
+                                    userId={user._id}
+                                    name={user.name}
+                                    img={user.image}
+                                    // followers={}
+                                    handleUnfollow={handleUnfollow}
+                                    // userFollowed={user}
+                                    followButton={followButton}
+                                />
+                            ))}
+                        </div>
+                }
 
-            <h3>Find new SoundFriends</h3>
-            {
-                (nonFollowing.length === 0)
-                    ? <div className={styles["FollowLateralBar-userItems"]}>
-                        {allUsers.map((user) => (
-                            <UserCardFollowMenu
-                                key={user._id}
-                                userId={user._id}
-                                name={user.name}
-                                img={user.image}
-                                followButton={!followButton}
-                                handleFollow={handleFollow}
-                            />
-                        ))}
-                    </div>
-                    : <div className={styles["FollowLateralBar-userItems"]}>
-                        {nonFollowing.map((user) => (
-                            <>
+                <h3>Find new SoundFriends</h3>
+                {
+                    (nonFollowing.length === 0)
+                        ? <div className={styles["FollowLateralBar-userItems"]}>
+                            {allUsers.map((user) => (
                                 <UserCardFollowMenu
                                     key={user._id}
                                     userId={user._id}
@@ -117,38 +104,51 @@ export const FollowLateralBar = () => {
                                     followButton={!followButton}
                                     handleFollow={handleFollow}
                                 />
-                            </>
-                        ))}
-                        <ToastContainer
-                            position="top-center"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
+                            ))}
+                        </div>
+                        : <div className={styles["FollowLateralBar-userItems"]}>
+                            {nonFollowing.map((user) => (
+                                <>
+                                    <UserCardFollowMenu
+                                        key={user._id}
+                                        userId={user._id}
+                                        name={user.name}
+                                        img={user.image}
+                                        followButton={!followButton}
+                                        handleFollow={handleFollow}
+                                    />
+                                </>
+                            ))}
+                            <ToastContainer
+                                position="top-center"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                            />
+                        </div>
+                }
+            </div>
+            <div className={styles["NowPlaying"]}>
+                <h3>Currently playing</h3>
+                <div className={styles["Playlist"]}>
+                    {player.reproduceSongList.map(s =>
+                        <NowPlayingItem
+                            key={s._id}
+                            entity={s}
+                            id={s._id}
+                            title={s.title}
+                            author={s.artist}
+                            categories={s.category}
+                            img={s.image}
                         />
-                    </div>
-            }
+                    )}
                 </div>
-                <div className={styles["NowPlaying"]}>
-                        <h3>Currently playing</h3>
-                            <div className={styles["Playlist"]}>
-                                {player.reproduceSongList.map(s=>
-                                <NowPlayingItem
-                                    key={s._id}
-                                    entity={s}
-                                    id={s._id}
-                                    title={s.title}
-                                    author={s.artist}
-                                    categories={s.category}
-                                    img={s.image}
-                                />
-                                )}
-                            </div>
-                </div>
+            </div>
         </nav>
     )
 }

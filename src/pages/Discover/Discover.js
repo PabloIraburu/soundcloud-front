@@ -120,17 +120,15 @@ export default function Discover() {
     //PLAY PLAYLIST
     const handlePlayPlaylist = (playlistId) => {
         ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
-            .then(payload => dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.id_song }))
+            .then(payload => { dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.map(playlist => playlist.id_song) }) })
             .catch(console.log)
-        console.log('playlists', playlists)
     };
 
-    //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
+    //ADD PLAYLIST TO QUEUE
     const handleAddToQueue = (playlistId) => {
         ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
             .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
             .catch(console.log)
-        console.log('playlists', playlists)
     };
 
     //GESTIÓN ADD SONG TO PLAYLISTT
@@ -182,9 +180,9 @@ export default function Discover() {
                 <div className="headMid">
                     <div className="search">
                         <Search
-                            // handleAddToFavourites={AddSongToFavourites}
-                            // handleRemoveFromFavourite={RemoveSongFromFavourites}
-                            // handleAddToPlaylistSearch={handleOpenAddToPlaylist}
+                        // handleAddToFavourites={AddSongToFavourites}
+                        // handleRemoveFromFavourite={RemoveSongFromFavourites}
+                        // handleAddToPlaylistSearch={handleOpenAddToPlaylist}
                         />
                     </div>
                     {/*<div className="notif">*/}

@@ -54,6 +54,17 @@
   transform: scale(0.8);
 }
 
+.CoverMd-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.CoverMd-icon {
+  display: flex;
+  align-items: center;
+}
+
 .CoverMd-text {
   padding: 10px;
   background-color: transparent;
