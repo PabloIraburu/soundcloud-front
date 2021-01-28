@@ -148,6 +148,8 @@ export const FollowLateralBar = () => {
                         />
                     )}
                 </div>
+             </div>
+
             </div>
         </nav>
     )

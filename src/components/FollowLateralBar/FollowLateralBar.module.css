@@ -32,7 +32,16 @@
 }
 
 .NowPlaying h3{
-  position: relative;
+  position: fixed;
+  background-color: var(--clr-lightBackground);
+  width: 16%;
+  z-index: 99;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.Playlist{
+  margin-top: 4.5rem;
 }
 
 .Follows{
