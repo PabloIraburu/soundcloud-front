@@ -12,6 +12,8 @@
 
 .searchBar ul{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .searchBar li {
@@ -19,6 +21,7 @@
   padding-left: 2rem;
   color: white;
   margin-top: 2rem;
+
 }
 
 .searchBar input {
