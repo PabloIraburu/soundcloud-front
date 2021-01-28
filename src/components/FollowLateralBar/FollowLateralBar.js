@@ -7,11 +7,15 @@ import { UserCardFollowMenu } from './UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import {PlayerContext} from "../../contexts/PlayerContext/playerContext";
+import {playerActions} from "../../reducers/playerReducer";
+import {CoverSm} from "../CoverSm/CoverSm";
+import {NowPlayingItem} from "./NowPlayingItem/NowPlayingItem";
 
 export const FollowLateralBar = () => {
 
     const { user } = useContext(UserContext);
+    const { player, dispatchPlayer} = useContext(PlayerContext)
     const loggedUserId = DecodeToken(getToken()).id;
     const [following, setFollowing] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
@@ -65,6 +69,7 @@ export const FollowLateralBar = () => {
 
     return (
         <nav className={styles["FollowLateralBar-nav"]}>
+            <div className={styles["Follows"]}>
             <h1>Your SoundFriends</h1>
             {
                 (following.length === 0)
@@ -127,6 +132,23 @@ export const FollowLateralBar = () => {
                         />
                     </div>
             }
+                </div>
+                <div className={styles["NowPlaying"]}>
+                        <h3>Currently playing</h3>
+                            <div className={styles["Playlist"]}>
+                                {player.reproduceSongList.map(s=>
+                                <NowPlayingItem
+                                    key={s._id}
+                                    entity={s}
+                                    id={s._id}
+                                    title={s.title}
+                                    author={s.artist}
+                                    categories={s.category}
+                                    img={s.image}
+                                />
+                                )}
+                            </div>
+                </div>
         </nav>
     )
 }

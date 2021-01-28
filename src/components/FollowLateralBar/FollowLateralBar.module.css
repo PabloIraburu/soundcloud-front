@@ -6,9 +6,7 @@
   right: 0px;
   width: 18%;
   z-index: 90;
-  padding: 3% 3%;
-  padding-bottom: 120px;
-  overflow: scroll;
+  padding: 2% 0% 2% 3%;
   /* scroll-behavior: inherit; */
   /* padding: 30px 50px; */
 }
@@ -25,6 +23,22 @@
 
 .FollowLateralBar-userItems {
   margin-top: 30px;
+}
+
+.NowPlaying{
+  height: 50%;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+
+.NowPlaying h3{
+  position: relative;
+}
+
+.Follows{
+  height: 50%;
+  overflow-y: scroll;
+  overflow-x:hidden;
 }
 
 @media screen and (max-width: 1300px) {
