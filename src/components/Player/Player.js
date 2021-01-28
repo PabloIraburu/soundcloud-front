@@ -8,13 +8,23 @@ import 'react-h5-audio-player/lib/styles.css';
 
 export const Player = () => {
 
+  // const initialState = {
+  //   reproduceSongList: [],
+  //   currentPlay: undefined
+  // }
+
   const { player, dispatchPlayer } = useContext(PlayerContext);
   console.log(player);
-  console.log("Song to reproduce", player.songToReproduce);
+  console.log("Song to reproduce", player.reproduceSongList);
   console.log("index played", player.currentPlay);
+  if (player.reproduceSongList.length !== 0) {
+    console.log("Canción en la posición del currentPlay", player.reproduceSongList[0].trackId);
+  }
+
 
   const handleClickNext = () => {
     dispatchPlayer({ type: playerActions.NEXT_SONG });
+    console.log(player.currentPlay)
   };
   const handleClickPrev = () => {
     console.log('Next');
@@ -23,7 +33,7 @@ export const Player = () => {
 
   return (
     <>
-      {player.reproduceSongList.length !== 0 && player.currentPlay
+      {player.reproduceSongList.length !== 0 /* && player.currentPlay */
 
         ?
         <AudioPlayer
@@ -34,14 +44,16 @@ export const Player = () => {
           onClickPrevious={handleClickPrev}
           showSkipControls
           showJumpControls={false}
-          autoPlayAfterSrcChange
+          autoPlayAfterSrcChange={true}
           onEnded={handleClickPrev}
-          // src={`http://localhost:3300/track/${songs[0].trackId}`}
-          // src={`track/${player.songToReproduce[player.currentPlay].trackId}`}
-          src={`http://localhost:3001/track/${
+
+          // { player.reproduceSongList.map((song) => {
+
+          // })}
+          src={`http://localhost:3300/track/${
             player.reproduceSongList.length !== 0 &&
             player.currentPlay !== undefined &&
-            player.songToReproduce[player.currentPlay].trackId
+            player.reproduceSongList[player.currentPlay].trackId
             }`}
           layout={'stacked'}
           customAdditionalControls={

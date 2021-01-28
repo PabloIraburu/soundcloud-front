@@ -27,6 +27,8 @@ export const SongItemList = ({ song, handleRemoveSongFromPlaylist, handleAddToFa
         },
     }))(Tooltip);
 
+    console.log(song)
+
     // GET FAVOURITE SONGS
     useEffect(() => {
         ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
