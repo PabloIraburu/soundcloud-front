@@ -20,7 +20,7 @@ export default function Discover() {
 
     const notify = (e) => toast(`${e}`);
     const { userId } = useContext(UserContext);
-    const { player, dispatchPlayer } = useContext(PlayerContext);
+    const { dispatchPlayer } = useContext(PlayerContext);
     const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
     const [playlists, setPlaylists] = useState([]);
@@ -28,20 +28,15 @@ export default function Discover() {
     const [favPlaylists, setFavPlaylists] = useState([]);
     const [userPlaylists, setUserPlaylists] = useState([]);
     const [forceReload, setForceReload] = useState(false);
-    // console.log(favourite);
 
     //GET SONGS
     useEffect(() => {
         ServerRequest(`data/song`, "GET")
-            .then((payload) => {
-                setSongs(payload)
+            .then((response) => {
+                setSongs(response)
             })
             .catch(console.log)
     }, [forceReload])
-
-    console.log("player reducer en discover");
-    console.log("songs useState en discover", songs);
-
 
 
     //GET PLAYLISTS
@@ -50,7 +45,7 @@ export default function Discover() {
             .then((response) => {
                 setPlaylists(response);
                 setUserPlaylists(response.filter((playlist) =>
-                     playlist.id_owner === userId
+                    playlist.id_owner === userId
                 ));
             })
             .catch(console.log)
@@ -107,6 +102,22 @@ export default function Discover() {
             .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
             .catch(console.log)
     }
+
+    //PLAY PLAYLIST
+    const handlePlayPlaylist = (playlistId) => {
+        ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+            .then(payload => dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.id_song }))
+            .catch(console.log)
+        console.log('playlists', playlists)
+    };
+
+    //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
+    const handleAddToQueue = (playlistId) => {
+        ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+            .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+            .catch(console.log)
+        console.log('playlists', playlists)
+    };
 
     //GESTIÓN ADD SONG TO PLAYLISTT
     //GESTIÓN MODAL ADD SONG TO PLAYLIST
@@ -237,7 +248,8 @@ export default function Discover() {
                                     img={playlist.image}
                                     handleAddToFavourites={AddPlaylistToFavourites}
                                     handleRemoveFromFavourites={RemovePlaylistFromFavourites}
-                                // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+                                    handleOpenOptions={() => handleAddToQueue(playlist._id)}
+                                    handlePlay={handlePlayPlaylist}
                                 />
                             ))}
                         </div>

@@ -6,11 +6,13 @@ import { CoverSm } from "../../components/CoverSm/CoverSm";
 import { ServerRequest } from '../../helpers/ServerRequest';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-
+import { playerActions } from '../../reducers/playerReducer';
+import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
 
 export const Favourites = () => {
 
   const { userId } = useContext(UserContext);
+  const { dispatchPlayer } = useContext(PlayerContext);
   const [songId, setSongId] = useState([]);
   const [forceReload, setForceReload] = useState(false);
   const [userPlaylists, setUserPlaylists] = useState([]);
@@ -35,37 +37,12 @@ export const Favourites = () => {
       .catch(console.log)
   }, [forceReload])
 
-  // //ADD SONG TO FAVOURITES
-  // const AddSongToFavourites = (songId) => {
-  //   const favSong = {
-  //     id_song: songId,
-  //     id_user: userId,
-  //     isFav: true
-  //   }
-  //   ServerRequest("data/favouritesongs", "POST", favSong)
-  //     .then((response) => setFavSongs([...favSongs, response]))
-  //     .catch(console.log);
-  //   console.log(favourite);
-  // }
-
   //REMOVE SONG FROM FAVOURITES
   const RemoveSongFromFavourites = (songId) => {
     ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
       .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
       .catch(console.log)
   }
-
-  // //ADD PLAYLIST TO FAVOURITES
-  // const AddPlaylistToFavourites = (playlistId) => {
-  //   const favPlaylist = {
-  //     id_playlist: playlistId,
-  //     id_user: userId,
-  //     isFav: true
-  //   }
-  //   ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
-  //     .then((response) => setFavPlaylists([...favPlaylists, response]))
-  //     .catch(console.log)
-  // }
 
   //REMOVE PLAYLIST FROM FAVOURITES
   const RemovePlaylistFromFavourites = (playlistId) => {
@@ -102,6 +79,20 @@ export const Favourites = () => {
       .catch(console.log)
   }
 
+  //PLAY PLAYLIST
+  const handlePlayPlaylist = (playlistId) => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+      .then(payload => dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.id_song }))
+      .catch(console.log)
+  };
+
+  //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
+  const handleAddToQueue = (playlistId) => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+      .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+      .catch(console.log)
+  };
+
   return (
     <>
       <h1>Favourites</h1>
@@ -122,7 +113,6 @@ export const Favourites = () => {
                 img={song.id_song.image}
                 id={song.id_song._id}
                 entityType="song"
-                // handleAddToFavourites={AddSongToFavourites}
                 handleRemoveFromFavourite={RemoveSongFromFavourites}
                 handleAddToPlaylist={handleOpenAddToPlaylist}
               />
@@ -146,9 +136,9 @@ export const Favourites = () => {
                 img={playlist.id_playlist.image}
                 id={playlist.id_playlist._id}
                 entityType="playlist"
-                // handleAddToFavourites={AddPlaylistToFavourites}
                 handleRemoveFromFavourites={RemovePlaylistFromFavourites}
-              // handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+                handleOpenOptions={() => handleAddToQueue(playlist._id)}
+                handlePlay={handlePlayPlaylist}
               />
             ))}
           </div>

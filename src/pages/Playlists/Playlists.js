@@ -5,19 +5,21 @@ import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from "../../components/Modal/Modal";
 import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import CreatePlaylist from "../../components/CreatePlaylist/CreatePlaylist";
-
-import styles from './Playlists.module.css';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
+import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
+import { playerActions } from '../../reducers/playerReducer';
+import styles from './Playlists.module.css';
 
 
 export const Playlists = () => {
 
   const { userId } = useContext(UserContext);
+  const { dispatchPlayer } = useContext(PlayerContext);
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState();
+  const [favPlaylists, setFavPlaylists] = useState([]);
   const [forceReload, setForceReload] = useState(false);
-
 
   console.log("Playlist id", playlists._id);
 
@@ -36,6 +38,42 @@ export const Playlists = () => {
       .catch(console.log)
     console.log('playlists', playlists)
   }, [forceReload])
+
+
+  //ADD PLAYLIST TO FAVOURITES
+  const AddPlaylistToFavourites = (playlistId) => {
+    const favPlaylist = {
+      id_playlist: playlistId,
+      id_user: userId,
+      isFav: true
+    }
+    ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
+      .then((response) => setFavPlaylists([...favPlaylists, response]))
+      .catch(console.log)
+  }
+
+  //REMOVE PLAYLIST FROM FAVOURITES
+  const RemovePlaylistFromFavourites = (playlistId) => {
+    ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
+      .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
+      .catch(console.log)
+  }
+
+  //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
+  const handleAddToQueue = (playlistId) => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+      .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+      .catch(console.log)
+    console.log('playlists', playlists)
+  };
+
+  //PLAY PLAYLIST
+  const handlePlayPlaylist = (playlistId) => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
+      .then(payload => dispatchPlayer({ type: playerActions.START_PLAY, songs: payload.id_song }))
+      .catch(console.log)
+  };
+
 
   //Gestión modal NewPlaylist
   const [openModalNewPlaylist, setOpenModalNewPlaylist] = useState(false);
@@ -78,6 +116,9 @@ export const Playlists = () => {
               id={playlist._id}
               entityType="playlist"
               handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+              handleAddToFavourites={AddPlaylistToFavourites}
+              handleRemoveFromFavourites={RemovePlaylistFromFavourites}
+              handlePlay={handlePlayPlaylist}
             />
           ))}
         </div>
@@ -96,7 +137,10 @@ export const Playlists = () => {
               img={playlist.image}
               id={playlist._id}
               entityType="playlist"
-              handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
+              handleOpenOptions={() => handleAddToQueue(playlist._id)}
+              handleAddToFavourites={AddPlaylistToFavourites}
+              handleRemoveFromFavourites={RemovePlaylistFromFavourites}
+              handlePlay={handlePlayPlaylist}
             />
           ))}
         </div>
@@ -108,7 +152,7 @@ export const Playlists = () => {
 
       {openModalEditPlaylist &&
         <Modal handleClose={handleCloseEditPlaylist}>
-          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload}/>
+          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} />
         </Modal>}
     </>
   )

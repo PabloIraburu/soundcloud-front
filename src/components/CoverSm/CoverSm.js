@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from './CoverSm.module.css';
-import { Link } from "react-router-dom";
 import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { playerActions } from "../../reducers/playerReducer";
 import { UserContext } from "../../contexts/UserContext/contextProvider";
@@ -11,25 +10,13 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Tooltip from '@material-ui/core/Tooltip';
-import {withStyles} from "@material-ui/styles";
+import { withStyles } from "@material-ui/styles";
 
 
-export const CoverSm = ({
-    entity,
-    title,
-    categories,
-    author,
-    img,
-    description,
-    id,
-    index,
-    handleAddToFavourites,
-    handleRemoveFromFavourites,
-    handleAddToPlaylist
-}) => {
+export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist }) => {
 
     const { userId } = useContext(UserContext);
-    const { player, dispatchPlayer } = useContext(PlayerContext);
+    const { dispatchPlayer } = useContext(PlayerContext);
     const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
@@ -54,7 +41,7 @@ export const CoverSm = ({
 
     return (
         <div className={styles["CoverSm-card"]}>
-            <div style={{backgroundImage: `url(${img})`}} className={styles["CoverSm-img"]}>
+            <div style={{ backgroundImage: `url(${img})` }} className={styles["CoverSm-img"]}>
                 <div className={styles["CoverSm-icon-wrapper"]}>
                     <PlayCircleFilledIcon
                         fontSize="large"
@@ -63,12 +50,12 @@ export const CoverSm = ({
                 </div>
             </div>
             <div className={styles["CoverSm-text"]}>
-                <Link
+                <p
                     className={styles["CoverSm-title"]}
                     onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}
                 >
                     {title}
-                </Link>
+                </p>
                 <p className={styles["CoverSm-author"]}>{author}</p>
                 <p className={styles["CoverSm-category"]}>{categories}</p>
                 <p className={styles["CoverSm-description"]}>{description}</p>
@@ -84,10 +71,9 @@ export const CoverSm = ({
                 <HtmlTooltip title="Add To Queue" placement="left">
                     <PlaylistAddIcon
                         fontSize="inherit"
-                        onClick={() => dispatchPlayer({type: playerActions.ADD_TO_QUEUE, song: entity})}
+                        onClick={() => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })}
                     />
                 </HtmlTooltip>
-
 
                 {
                     !isFav &&
@@ -95,8 +81,8 @@ export const CoverSm = ({
                         <div className={styles["FavoriteIcon"]}>
                             <FavoriteBorderOutlinedIcon
                                 fontSize="inherit"
-                                style={{color: '#f9b807'}}
-                                onClick={() => handleRemoveFromFavourites(id)}
+                                style={{ color: '#f9b807' }}
+                                onClick={() => handleAddToFavourites(id)}
                             />
                         </div>
                     </HtmlTooltip>
@@ -107,7 +93,7 @@ export const CoverSm = ({
                         <div className={styles["FavoriteIcon"]}>
                             <FavoriteIcon
                                 fontSize="inherit"
-                                style={{color: '#f9b807'}}
+                                style={{ color: '#f9b807' }}
                                 onClick={() => handleRemoveFromFavourites(id)}
                             />
                         </div>
@@ -117,3 +103,4 @@ export const CoverSm = ({
         </div>
     );
 };
+
