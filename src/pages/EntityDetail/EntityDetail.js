@@ -43,7 +43,10 @@ export const EntityDetail = () => {
   //GET ENTITY SONGS  
   useEffect(() => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}`, "GET")
-      .then(response => setEntitySongs(response))
+      .then(response => {
+        setEntitySongs(response)
+        console.log('these are the songs', response)
+      })
       .catch(console.log)
   }, [forceReload]);
 

@@ -9,7 +9,7 @@
 .SongItemList-wrap {
   width: 40px;
   height: auto;
-  border-radius: 1px solid rgb(187, 187, 187);
+  border-radius: 1px;
   box-shadow: 2px 2px 6px rgba(128, 128, 128, 0.5);
   display: flex;
   /* flex-direction: row; */
@@ -56,7 +56,7 @@
   color: #fff;
   background-color: #23232390;
   backdrop-filter: blur(4px);
-  border-radius: 1px solid;
+  border-radius: 1px;
 }
 
 .SongItemList-text {
@@ -89,5 +89,51 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding-left: 10px 0 10px 10px;
+  padding: 10px 0px 10px 10px;
+}
+
+.FavoriteIcon {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+  cursor: pointer;
+}
+
+.FavoriteIcon::before,
+.FavoriteIcon::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.FavoriteIcon::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.FavoriteIcon:hover::before {
+  background: white;
+}
+
+.FavoriteIcon:hover::after {
+  background: #f9b807;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
 }

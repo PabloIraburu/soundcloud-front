@@ -1,5 +1,5 @@
 .searchBar {
-  color: black;
+  color: white;
   /*width: 100%;*/
   flex-direction: column;
   border: none;
@@ -17,7 +17,7 @@
 .searchBar li {
   display: flex;
   padding-left: 2rem;
-  color: black;
+  color: white;
   margin-top: 2rem;
 }
 

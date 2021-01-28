@@ -1,22 +1,26 @@
-import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext/contextProvider";
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import React, {useContext, useState, useEffect} from "react";
+import {UserContext} from "../../contexts/UserContext/contextProvider";
+import {PlayerContext} from "../../contexts/PlayerContext/playerContext";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import styles from './SongItemList.module.css';
-import { withStyles } from "@material-ui/styles";
+import {withStyles} from "@material-ui/styles";
 import Tooltip from '@material-ui/core/Tooltip';
-import { ServerRequest } from "../../helpers/ServerRequest";
-import { playerActions } from "../../reducers/playerReducer";
+import {ServerRequest} from "../../helpers/ServerRequest";
+import {playerActions} from "../../reducers/playerReducer";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
+export const SongItemList = ({
+                                 song,
+                                 handleRemoveSongFromPlaylist,
+                                 handleAddToFavourites,
+                                 handleRemoveFromFavourites
+                             }) => {
 
-export const SongItemList = ({ song, handleRemoveSongFromPlaylist, handleAddToFavourites, handleRemoveFromFavourites }) => {
-
-    const { userId } = useContext(UserContext);
-    const { dispatchPlayer } = useContext(PlayerContext);
+    const {userId} = useContext(UserContext);
+    const {dispatchPlayer} = useContext(PlayerContext);
     const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
@@ -41,13 +45,13 @@ export const SongItemList = ({ song, handleRemoveSongFromPlaylist, handleAddToFa
 
     return (
         <div className={styles["SongItemList-card"]}>
-            <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItemList-img"]}>
+            <div style={{backgroundImage: `url(${song.image})`}} className={styles["SongItemList-img"]}>
                 <div className={styles["SongItemList-icon-wrapper"]}>
                     <HtmlTooltip title="Play Song" placement="rigth">
                         <PlayCircleFilledIcon
                             fontSize="small"
                             // style={{ color: "white" }}
-                            onClick={() => dispatchPlayer({ type: playerActions.PLAY_THIS_SONG, song: song })}
+                            onClick={() => dispatchPlayer({type: playerActions.PLAY_THIS_SONG, song: song})}
                         />
                     </HtmlTooltip>
 
@@ -63,7 +67,7 @@ export const SongItemList = ({ song, handleRemoveSongFromPlaylist, handleAddToFa
                     <HtmlTooltip title="Delete From Playlist" placement="top">
                         <LibraryMusicIcon
                             fontSize="inherit"
-                            style={{ color: "white" }}
+                            style={{color: "white"}}
                             onClick={() => handleRemoveSongFromPlaylist(song._id)}
                         />
                     </HtmlTooltip>
@@ -71,25 +75,29 @@ export const SongItemList = ({ song, handleRemoveSongFromPlaylist, handleAddToFa
                     {
                         !isFav &&
                         <HtmlTooltip title="Add Favorite" placement="top">
-                            <FavoriteBorderOutlinedIcon
-                                fontSize="inherit"
-                                style={{ color: '#f9b807' }}
-                                onClick={() => handleAddToFavourites(song._id)}
-                            />
+                            <div className={styles["FavoriteIcon"]}>
+                                <FavoriteBorderOutlinedIcon
+                                    fontSize="inherit"
+                                    style={{color: '#f9b807'}}
+                                    onClick={() => handleAddToFavourites(song._id)}
+                                />
+                            </div>
                         </HtmlTooltip>
                     }
                     {
                         isFav &&
                         <HtmlTooltip title="Remove Favorite" placement="top">
-                            <FavoriteIcon
-                                fontSize="inherit"
-                                style={{ color: '#f9b807' }}
-                                onClick={() => handleRemoveFromFavourites(song._id)}
-                            />
+                            <div className={styles["FavoriteIcon"]}>
+                                <FavoriteIcon
+                                    fontSize="inherit"
+                                    style={{color: '#f9b807'}}
+                                    onClick={() => handleRemoveFromFavourites(song._id)}
+                                />
+                            </div>
                         </HtmlTooltip>
                     }
                 </div>
             </div>
-        </div >
+        </div>
     );
 };

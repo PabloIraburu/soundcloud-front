@@ -181,7 +181,10 @@ export default function Discover() {
 
                 <div className="headMid">
                     <div className="search">
-                        <Search />
+                        <Search
+                            handleAddToFavourites={AddSongToFavourites}
+                            handleRemoveFromFavourite={RemoveSongFromFavourites}
+                            handleAddToPlaylist={handleOpenAddToPlaylist}/>
                     </div>
                     {/*<div className="notif">*/}
                     {/*    <span><i className="fas fa-ambulance"></i></span>*/}
