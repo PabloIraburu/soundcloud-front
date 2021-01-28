@@ -5,10 +5,11 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+// import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { UserContext } from "../../contexts/UserContext/contextProvider";
-
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from "@material-ui/styles";
 
 export const CoverMd = (
     {
@@ -28,8 +29,16 @@ export const CoverMd = (
     }) => {
 
     const { userId } = useContext(UserContext);
-    const { player, dispatchPlayer } = useContext(PlayerContext);
+    // const { player, dispatchPlayer } = useContext(PlayerContext);
     const [isFav, setIsFav] = useState(false);
+    const HtmlTooltip = withStyles((theme) => ({
+        tooltip: {
+            backgroundColor: '#f5f5f9',
+            color: 'rgba(0, 0, 0, 0.87)',
+            maxWidth: 220,
+            border: '1px solid #dadde9',
+        },
+    }))(Tooltip);
 
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
@@ -50,26 +59,41 @@ export const CoverMd = (
                 className={styles["CoverMd-img"]}
             >
                 <div className={styles["icon-wrapper"]}>
-                    <MoreHorizRoundedIcon
-                        fontSize="small"
-                        onClick={() => handleOpenOptions(entity)}
-                    />
-                    <div className={styles["PlayButton"]}>
-                        <PlayCircleFilledIcon
-                            fontSize="large"
-                            onClick={() => handlePlay(entity._id)}
+                    <HtmlTooltip title="Options" placement="top">
+                        <MoreHorizRoundedIcon
+                            fontSize="small"
+                            onClick={() => handleOpenOptions(entity)}
                         />
+                    </HtmlTooltip>
+
+                    <div className={styles["PlayButton"]}>
+                        <HtmlTooltip title="Play" placement="top">
+                            <PlayCircleFilledIcon
+                                fontSize="large"
+                                onClick={() => handlePlay(entity._id)}
+                            />
+                        </HtmlTooltip>
+
                     </div>
 
-                    {!isFav && <FavoriteBorderOutlinedIcon
-                        fontSize="small"
-                        onClick={() => handleAddToFavourites(id)}
-                    />}
-                    {isFav && <FavoriteIcon
-                        fontSize="small"
-                        style={{ color: '#f9b807' }}
-                        onClick={() => handleRemoveFromFavourites(id)}
-                    />}
+                    {!isFav &&
+                        <HtmlTooltip title="Add Favourites" placement="top">
+                            <FavoriteBorderOutlinedIcon
+                                fontSize="small"
+                                onClick={() => handleAddToFavourites(id)}
+                            />
+                        </HtmlTooltip>
+
+                    }
+                    {isFav &&
+                        <HtmlTooltip title="Remove Favourite" placement="top">
+                            <FavoriteIcon
+                                fontSize="small"
+                                style={{ color: '#f9b807' }}
+                                onClick={() => handleRemoveFromFavourites(id)}
+                            />
+                        </HtmlTooltip>
+                    }
 
                 </div>
             </div>

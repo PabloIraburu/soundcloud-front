@@ -76,6 +76,12 @@
   text-decoration: none;
   color: white;
 }
+
+.CoverSm-title:hover {
+  text-decoration: none;
+  color: var(--sky);
+}
+
 .CoverSm-author {
   color: rgb(250, 250, 250);
   font-size: 0.8rem;

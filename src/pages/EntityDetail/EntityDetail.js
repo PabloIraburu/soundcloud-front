@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext/contextProvider";
 import { CoverBg } from '../../components/CoverBg/CoverBg'
 import { SongItemList } from '../../components/SongItemList/SongItemList'
 import styles from "./EntityDetail.module.css";
@@ -9,37 +10,17 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 export const EntityDetail = () => {
 
-  // const { songs } = useContext(SongsContext);
+  const { userId } = useContext(UserContext);
   const location = useLocation();
-  // const entityId = useParams();
-  // const entityType = ((location.pathname).split("/", 2))[1];
   const entityId = ((location.pathname).split("/", 3))[2];
   const [entity, setEntity] = useState({});
   const [entitySongs, setEntitySongs] = useState([]);
-  const [songs, setSongs] = useState([]);
+  const [favSongs, setFavSongs] = useState([]);
   const [owner, setOwner] = useState({});
   const [forceReload, setForceReload] = useState(false);
 
-
   console.log("entity id", entityId);
-  // console.log("entity type", entityType);
 
-  // useEffect(() => {
-  //   setEntity(location.state.entity)
-  // }, []);
-
-  // console.log("request to data/entity", `data/${entityType}/${entityId}`);
-  // console.log("request to data/songsinentity", `data/songsin${entityType}/?id_${entityType}=${entityId}`);
-
-
-  //GET SONGS
-  useEffect(() => {
-    ServerRequest(`data/song`, "GET")
-      .then((payload) => {
-        setSongs(payload)
-      })
-      .catch(console.log)
-  }, [forceReload])
 
   //GET ENTITY INFORMATION
   useEffect(() => {
@@ -52,7 +33,10 @@ export const EntityDetail = () => {
 
   useEffect(() => {
     ServerRequest(`data/user/?_id=${entity.id_owner}`, "GET")
-      .then(response => setOwner(response))
+      .then(response => {
+        console.log(response);
+        setOwner(response)
+      })
       .catch(console.log)
   }, [entity]);
 
@@ -60,10 +44,41 @@ export const EntityDetail = () => {
   useEffect(() => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}`, "GET")
       .then(response => setEntitySongs(response))
-      // .then(response => console.log('ESTE', entityId))
       .catch(console.log)
-  }, [])
+  }, [forceReload]);
 
+  //REMOVE SONG FROM PLAYLIST
+  const handleRemoveSongFromPlaylist = (songId) => {
+    ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}&&id_song=${songId}`, "GET")
+      .then((res) => {
+        const resId = res;
+        ServerRequest(`data/songsinplaylist/${resId[0]._id}`, "DELETE")
+          .then(console.log)
+          .catch(() => {
+            setForceReload(!forceReload)
+          })
+      })
+      .catch(console.log)
+  }
+
+  //ADD SONG TO FAVOURITES
+  const handleAddSongToFavourites = (songId) => {
+    const favSong = {
+      id_song: songId,
+      id_user: userId,
+      isFav: true
+    }
+    ServerRequest("data/favouritesongs", "POST", favSong)
+      .then((response) => setFavSongs([...favSongs, response]))
+      .catch(console.log);
+  }
+
+  //REMOVE SONG FROM FAVOURITES
+  const handleRemoveSongFromFavourites = (songId) => {
+    ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
+      .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
+      .catch(console.log)
+  }
   console.log("entity song properties:", entitySongs);
 
   return (
@@ -107,8 +122,9 @@ export const EntityDetail = () => {
           : <div className={styles["PlaylistDetail-list"]}>
             {entitySongs.map((song) => (
               <SongItemList
-                // handleAddRemove={handleRemoveSongFromPlaylist}
-                // handleAddFavSong={handleAddSongToFav}
+                handleRemoveSongFromPlaylist={handleRemoveSongFromPlaylist}
+                handleAddToFavourites={handleAddSongToFavourites}
+                handleRemoveFromFavourites={handleRemoveSongFromFavourites}
                 song={song.id_song}
               />
             ))}

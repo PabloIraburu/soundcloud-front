@@ -243,7 +243,7 @@ export default function LateralBar() {
 
                 {/* BOTTOM ICONS */}
                 <li className="nav-item" >
-                    <Link className="nav-link">
+                    <Link className="nav-link" to="/">
                         {/* ICONO 1 LOGOUT */}
                         <svg
                             id="lightIcon"

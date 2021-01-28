@@ -12,8 +12,6 @@ export const playerActions = {
     ADD_TO_QUEUE: 'ADD_TO_QUEUE',
     //iniciar reproducción playlist, album, favoritos
     START_PLAY: 'START_PLAY',
-    //reproducción ordenada
-    PLAY_LOOP: 'PLAY_LOOP',
     //reproducción random
     PLAY_RANDOM: 'PLAY_RANDOM',
     //reproducir una canción (de otra playlist o de sugerencias)
@@ -40,10 +38,8 @@ const playerReducer = (state, action) => {
             return newState;
 
         case playerActions.START_PLAY:
+            newState.reproduceSongList = action.songs;
             newState.currentPlay = 0;
-            return newState;
-
-        case playerActions.PLAY_LOOP:
             return newState;
 
         case playerActions.PLAY_RANDOM:
