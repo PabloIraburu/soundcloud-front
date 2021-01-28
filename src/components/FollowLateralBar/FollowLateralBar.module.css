@@ -5,8 +5,11 @@
   position: fixed;
   right: 0px;
   width: 18%;
-  z-index: 100;
+  z-index: 90;
   padding: 3% 3%;
+  padding-bottom: 120px;
+  overflow: scroll;
+  /* scroll-behavior: inherit; */
   /* padding: 30px 50px; */
 }
 

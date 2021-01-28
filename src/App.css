@@ -49,11 +49,21 @@ body {
   overflow: auto;
   padding: 80px 150px 60px 140px;
   padding-right: 21%;
+  margin-bottom: 110px;
   width: auto;
+}
+
+.Mainrouter-player {
+  padding-left: 80px;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 svg{
   cursor: pointer;
   transition: ease-out;
+
 }
 
 button{

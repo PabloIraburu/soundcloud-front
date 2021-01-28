@@ -33,22 +33,26 @@ export const MainRouter = () => {
       <UserContextProvider>
         <PlayerContextProvider>
 
-          <Player />
-          <LateralBar />
-          <FollowLateralBar />
-          <div className="MainRouter-wrap">
-            <Switch>
-              <PrivateRoute exact path={route.DISCOVER} component={Discover} />
-              <PrivateRoute exact path={route.MYSONGS} component={MySongs} />
-              <PrivateRoute exact path={route.ALBUMS} component={Albums} />
-              <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
-              <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
-              <PrivateRoute exact path={route.PROFILE} component={Profile} />
-              <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
-              <PrivateRoute exact path={route.ALBUMDETAIL} component={EntityDetail} />
-              <PrivateRoute exact path={route.PLAYLISTDETAIL} component={EntityDetail} />
-              {/* <Redirect to="/discover" /> */}
-            </Switch>
+          <div className="Mainrouter-player">
+            <Player />
+          </div>
+          <div>
+            <LateralBar />
+            <FollowLateralBar />
+            <div className="MainRouter-wrap">
+              <Switch>
+                <PrivateRoute exact path={route.DISCOVER} component={Discover} />
+                <PrivateRoute exact path={route.MYSONGS} component={MySongs} />
+                <PrivateRoute exact path={route.ALBUMS} component={Albums} />
+                <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
+                <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
+                <PrivateRoute exact path={route.PROFILE} component={Profile} />
+                <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
+                <PrivateRoute exact path={route.ALBUMDETAIL} component={EntityDetail} />
+                <PrivateRoute exact path={route.PLAYLISTDETAIL} component={EntityDetail} />
+                {/* <Redirect to="/discover" /> */}
+              </Switch>
+            </div>
           </div>
 
         </PlayerContextProvider>
