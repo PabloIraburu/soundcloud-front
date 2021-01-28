@@ -181,6 +181,7 @@ h2 {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-bottom: 150px;
 }
 
 .Discover-AddToPlaylistList {

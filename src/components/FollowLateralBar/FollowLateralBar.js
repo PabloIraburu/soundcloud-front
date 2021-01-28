@@ -142,8 +142,6 @@ export const FollowLateralBar = () => {
                                     entity={s}
                                     id={s._id}
                                     title={s.title}
-                                    author={s.artist}
-                                    categories={s.category}
                                     img={s.image}
                                 />
                                 )}
