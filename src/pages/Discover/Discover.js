@@ -79,8 +79,15 @@ export default function Discover() {
 
     //REMOVE SONG FROM FAVOURITES
     const RemoveSongFromFavourites = (songId) => {
-        ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
-            .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
+        ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "GET")
+            .then((res) => {
+                const resId = res;
+                ServerRequest(`data/favouritesongs/${resId[0]._id}`, "DELETE")
+                    .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
+                    .catch(() => {
+                        setForceReload(!forceReload)
+                    })
+            })
             .catch(console.log)
     }
 
@@ -98,8 +105,15 @@ export default function Discover() {
 
     //REMOVE PLAYLIST FROM FAVOURITES
     const RemovePlaylistFromFavourites = (playlistId) => {
-        ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
-            .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
+        ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "GET")
+            .then((res) => {
+                const resId = res;
+                ServerRequest(`data/favouriteplaylists/${resId[0]._id}`, "DELETE")
+                    .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
+                    .catch(() => {
+                        setForceReload(!forceReload)
+                    })
+            })
             .catch(console.log)
     }
 
