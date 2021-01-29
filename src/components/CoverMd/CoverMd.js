@@ -28,6 +28,7 @@ export const CoverMd = (
         handleRemoveFromFavourites,
         handlePlay,
         handleOpenOptions,
+        handleAddToQueue
 
     }) => {
 
@@ -66,7 +67,7 @@ export const CoverMd = (
                     <HtmlTooltip title="Add To Queue" placement="left">
                         <PlaylistAddIcon
                             fontSize="small"
-                            onClick={() => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })}
+                            onClick={() => handleAddToQueue(id)}
                         />
                     </HtmlTooltip>
 

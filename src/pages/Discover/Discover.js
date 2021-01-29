@@ -128,7 +128,10 @@ export default function Discover() {
     //ADD PLAYLIST TO QUEUE
     const handleAddToQueue = (playlistId) => {
         ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
-            .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+            .then(payload => {
+                console.log(payload)
+                payload.map(payload => dispatchPlayer({type: playerActions.ADD_TO_QUEUE, song: payload.id_song}))
+            })
             .catch(console.log)
     };
 
@@ -280,6 +283,7 @@ export default function Discover() {
                                     handleAddToFavourites={AddPlaylistToFavourites}
                                     handleRemoveFromFavourites={RemovePlaylistFromFavourites}
                                     handlePlay={handlePlayPlaylist}
+                                    handleAddToQueue={handleAddToQueue}
                                 />
                             ))}
                         </div>
