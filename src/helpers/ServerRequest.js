@@ -18,9 +18,9 @@ export const ServerRequest = (routes, method, body) => {
 
     let response;
 
-    const url = `${API_URL}/${routes}`;
+    const reqUrl = `${API_URL}/${routes}`;
 
-    return fetch(url, options)
+    return fetch(reqUrl, options)
         .catch(error => (error))
         .then(res => {
             if (res.status >= 400) {
