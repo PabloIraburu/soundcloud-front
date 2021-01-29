@@ -45,7 +45,7 @@ export const Player = () => {
           showSkipControls
           showJumpControls={false}
           autoPlayAfterSrcChange={true}
-          onEnded={handleClickPrev}
+          onEnded={handleClickNext}
 
           // { player.reproduceSongList.map((song) => {
 
@@ -58,7 +58,6 @@ export const Player = () => {
           layout={'stacked'}
           customAdditionalControls={
             [
-              RHAP_UI.LOOP,
               <button>button 2 </button>,
               <button>button 3 </button>,
               <button>button 4 </button>,
