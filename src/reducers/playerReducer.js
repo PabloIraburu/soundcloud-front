@@ -56,7 +56,9 @@ const playerReducer = (state, action) => {
             return newState;
 
         case playerActions.NEXT_SONG:
-            if (state.currentPlay < state.reproduceSongList.length) {
+            if (state.currentPlay < (state.reproduceSongList.length - 1)) {
+                console.log(state.currentPlay)
+                console.log(state.reproduceSongList.length)
                 newState.currentPlay = state.currentPlay + 1;
             }
             return newState;
