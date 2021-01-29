@@ -34,6 +34,7 @@ export const CoverMd = (
 
     const { userId } = useContext(UserContext);
     const { player, dispatchPlayer } = useContext(PlayerContext);
+    const [favPlaylists, setFavPlaylists] = useState([]);
     const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
@@ -48,14 +49,18 @@ export const CoverMd = (
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
-            .then(response => (
-                response.find((fplaylist) => {
-                    if (fplaylist.id_playlist === id) {
-                        setIsFav(!isFav)
-                    }
-                })))
+            .then(response => setFavPlaylists(response))
             .catch(console.log)
     }, [id])
+
+    // GET FAVOURITE PLAYLISTS
+    useEffect(() => {
+        favPlaylists.find((fplaylist) => {
+            if (fplaylist.id_playlist._id === id) {
+                setIsFav(!isFav)
+            }
+        })
+    }, [id, favPlaylists])
 
     return (
         <div className={styles["CoverMd-wrap"]}>
