@@ -1,125 +1,154 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { ServerRequest } from '../../helpers/ServerRequest';
-import { UserCardFollowMenu } from '../UserCardFollowMenu/UserCardFollowMenu';
+import { DecodeToken } from '../../utils/DecodeToken';
+import { getToken } from '../../utils/LocalStorage.utils';
+import { UserContext } from '../../contexts/UserContext/contextProvider';
+import { UserCardFollowMenu } from './UserCardFollowMenu/UserCardFollowMenu';
 import styles from './FollowLateralBar.module.css';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import { playerActions } from "../../reducers/playerReducer";
+import { CoverSm } from "../CoverSm/CoverSm";
+import { NowPlayingItem } from "./NowPlayingItem/NowPlayingItem";
 
 export const FollowLateralBar = () => {
 
-  const { allUsers, user, user: { following } } = useContext(UserContext);
-  console.log("Followed users", following);
-  const [followedUsers, setFollowedUsers] = useState([])
-  const [editedUserLogged, setEditedUserLogged] = useState(user);
-  const [editedUserFollowed, setEditedUserFollowed] = useState();
+    const { user } = useContext(UserContext);
+    const { player, dispatchPlayer } = useContext(PlayerContext)
+    const loggedUserId = DecodeToken(getToken()).id;
+    const [following, setFollowing] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
+    const [nonFollowing, setNonFollowing] = useState([]);
+    const followButton = false;
+    const [reload, setReload] = useState(false);
 
+    //Todos los usuarios que no sigue el usuario logueado, menos el logueado
+    useEffect(() => {
+        ServerRequest(`data/user`, "GET")
+            .then((response) => {
+                const res = (response.filter(r => r._id !== loggedUserId));
+                setAllUsers(res)
+                ServerRequest(`data/follower/?follower=${loggedUserId}`, "GET") //Devuelve array de los usuarios que sigo
+                    .then(response => {
+                        let followedPeeps = response.map(u => u.followed)
+                        setFollowing(response.map(f => res.find(u => u._id === f.followed)));
+                        setNonFollowing(res.filter(u => !followedPeeps.includes(u._id)))
+                    })
+                    .catch(console.log);
+            })
+            .catch(console.log);
+    }, [reload]);
 
-  //   useEffect(() => {
-  //     // if (following.length !== 0) {
-  //     setFollowedUsers((prevValue) => ({
-  //       ...prevValue,
-  //       allUsers.filter((user) => {
-  //         if (user._id === following[0]) {
-  //           return true
-  //         }
-  //       })
+    const handleFollow = (userId) => {
+        const userFollowedId = userId;
+        const newFollow = {
+            //Perfil seguido
+            followed: userFollowedId,
+            //Perfil seguidor, usuario logueado
+            follower: user._id
+        }
+        ServerRequest(`data/follower`, "POST", newFollow)
+            .then(() => {
+                setReload(!reload)
+            })
+    }
 
-  //     })
-  //   // }
-  // }, [following])
-  //   console.log("filtered Users 25", followedUsers);
+    const handleUnfollow = (userId) => {
+        console.log(userId)
+        console.log(loggedUserId)
+        ServerRequest(`data/follower/?followed=${userId}&follower=${loggedUserId}`, "GET")
+            .then((response) => {
+                setReload(!reload)
+                console.log(response)
+                ServerRequest(`data/follower/${response[0]._id}`, "DELETE")
+                    .then(() => setReload(!reload)
+                    )
+            })
+    }
 
-  //   useEffect(() => {
-  //     if (following.length !== 0) {
-  //       for (let i = 0; i > following.length; i++) {
-  //         setFollowedUsers(allUsers.filter((user) => {
-  //           if (user._id === following[i]) {
-  //             return true
-  //           }
-  //         }))
-  //       }
-  //     }
-  //   }, [following])
-  //   console.log("filtered Users 38", followedUsers);
+    return (
+        <nav className={styles["FollowLateralBar-nav"]}>
+            <div className={styles["Follows"]}>
+                <h1>Your SoundFriends</h1>
+                {
+                    (following.length === 0)
+                        ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest
+                        some people you may know 🤩</p>
+                        : <div className={styles["FollowLateralBar-userItems"]}>
+                            {following.map((user) => (
+                                <UserCardFollowMenu
+                                    key={user._id}
+                                    userId={user._id}
+                                    name={user.name}
+                                    img={user.image}
+                                    // followers={}
+                                    handleUnfollow={handleUnfollow}
+                                    // userFollowed={user}
+                                    followButton={followButton}
+                                />
+                            ))}
+                        </div>
+                }
 
-  // console.log("folloedUsers", followedUsers);
-  // console.log(following[0]);
-  // console.log(allUsers.find((user) => user._id === following[0])._id);
-  // console.log(following[0] === allUsers.find((user) => user._id === following[0])._id);
-
-
-  //userId = id usuario a seguir (followed)
-  const handleFollow = (userId) => {
-
-    console.log("Id usuario loguead", user._id);
-    console.log("Id soundFriend", userId);
-
-    // if (user.following.find((id) => userId !== id)) {  
-    //Añadir el id del usuario seguido al array de seguidos del usuario logueado
-    setEditedUserLogged((prevValue) => ({
-      following: [...prevValue.following, userId]
-    }));
-
-    //Following
-    ServerRequest(`data/user/${user._id}`, 'PUT', editedUserLogged)
-      .then(console.log)
-      .catch(console.log);
-    console.log("User Logged", editedUserLogged);
-
-    /* -------------------------------- */
-
-    //Añadir el id del usuario logeado al array followers del usuario seguido
-    setEditedUserFollowed(allUsers.find((user) => user._id === userId));
-    setEditedUserFollowed((prevValue) => ({
-      // ...prevValue,
-      followers: [...prevValue.followers, user._id]
-    }));
-    console.log("User Followed", editedUserFollowed);
-
-    //Followed
-    ServerRequest(`data/user/${userId}`, 'PUT', editedUserFollowed)
-      .then(console.log)
-      .catch(console.log);
-    console.log("User Followed", editedUserFollowed);
-    // }
-  }
-
-  return (
-    <nav className={styles["FollowLateralBar-nav"]}>
-      <h1>Your SoundFriends</h1>
-      {
-        (followedUsers.length === 0)
-          ? <p className={styles["FollowLateralBar-nav-p"]}>You don't follow any profile yet... Let us suggest some people you may know 🤩</p>
-          : <div className={styles["FollowLateralBar-userItems"]}>
-            {followedUsers.map((user) => (
-              <UserCardFollowMenu
-                key={user._id}
-                userId={user._id}
-                name={user.name}
-                img={user.image}
-                followers={user.followers.length}
-                handleFollow={handleFollow}
-              />
-            ))}
-          </div>
-      }
-
-      <h3>Find new SoundFrieds</h3>
-      {
-        (allUsers.lenght === 0)
-          ? <p>loading...</p>
-          : <div className={styles["FollowLateralBar-userItems"]}>
-            {allUsers.map((user) => (
-              <UserCardFollowMenu
-                key={user._id}
-                userId={user._id}
-                name={user.name}
-                img={user.image}
-                followers={user.followers.length}
-                handleFollow={handleFollow}
-              />
-            ))}
-          </div>
-      }
-    </nav>
-  )
+                <h3>Find new SoundFriends</h3>
+                {
+                    (nonFollowing.length === 0)
+                        ? <div className={styles["FollowLateralBar-userItems"]}>
+                            {allUsers.map((user) => (
+                                <UserCardFollowMenu
+                                    key={user._id}
+                                    userId={user._id}
+                                    name={user.name}
+                                    img={user.image}
+                                    followButton={!followButton}
+                                    handleFollow={handleFollow}
+                                />
+                            ))}
+                        </div>
+                        : <div className={styles["FollowLateralBar-userItems"]}>
+                            {nonFollowing.map((user) => (
+                                <>
+                                    <UserCardFollowMenu
+                                        key={user._id}
+                                        userId={user._id}
+                                        name={user.name}
+                                        img={user.image}
+                                        followButton={!followButton}
+                                        handleFollow={handleFollow}
+                                    />
+                                </>
+                            ))}
+                            <ToastContainer
+                                position="top-center"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                            />
+                        </div>
+                }
+            </div>
+            <div className={styles["NowPlaying"]}>
+                <h3>Currently playing</h3>
+                <div className={styles["Playlist"]}>
+                    {player.reproduceSongList.map(s =>
+                        <NowPlayingItem
+                            key={s._id}
+                            entity={s}
+                            id={s._id}
+                            title={s.title}
+                            author={s.artist}
+                            categories={s.category}
+                            img={s.image}
+                        />
+                    )}
+                </div>
+            </div>
+        </nav>
+    )
 }

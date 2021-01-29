@@ -5,6 +5,8 @@ export const API_URL = window.location.hostname === 'soundmist.netlify.app' ? "h
 
 export const ServerRequest = (routes, method, body) => {
     const token = getToken();
+    const url = `${API_URL}/${routes}`;
+
     const JSONBody = JSON.stringify(body);
     const options = {
         method: method,

@@ -38,6 +38,7 @@ body {
   font-family: "Raleway", sans-serif;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .MainRouter-wrap {
@@ -47,7 +48,40 @@ body {
   flex-direction: column;
   height: 100vh;
   overflow: auto;
-  padding: 120px 150px 60px 140px;
-  padding-right: 23%;
+  padding: 80px 150px 60px 140px;
+  padding-right: 21%;
+  margin-bottom: 110px;
   width: auto;
+}
+
+.Mainrouter-player {
+  background-color: white;
+  margin-top: 20px;
+  padding-left: 80px;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  width: 82%;
+}
+
+svg{
+  cursor: pointer;
+  transition: ease-out;
+
+}
+
+button{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1300px) {
+
+
+  .MainRouter-wrap {
+    padding-right: 60px;
+  }
+
+  .Mainrouter-player {
+    width: 100%;
+  }
 }

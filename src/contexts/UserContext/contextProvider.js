@@ -5,18 +5,19 @@ import {DecodeToken} from "../../utils/DecodeToken";
 import * as route from "../../routes/routes";
 import {ServerRequest} from "../../helpers/ServerRequest";
 
+
 export const UserContext = createContext();
 
 
 export const UserContextProvider = ({children}) => {
+
+    const userId = DecodeToken(getToken()).id;
 
     const history = useHistory();
     const [user, setUser] = useState({
       _id: "",
       name: "",
       email: "",
-      followers: [],
-      following: [],
       image: "https://previews.123rf.com/images/jemastock/jemastock1701/jemastock170102174/70024333-silhouette-headphones-music-listen-mobile-vector-illustration.jpg"
     });
     // const userId = user._id;
@@ -24,10 +25,6 @@ export const UserContextProvider = ({children}) => {
 
     // Usuario logueado
     useEffect(() => {
-        const token = getToken();
-        const decodedToken = DecodeToken(token);
-        const userId = decodedToken.id;
-
         ServerRequest(`data/user/${userId}`, "GET")
             .then((response) => {
                 setUser(response);
@@ -37,20 +34,12 @@ export const UserContextProvider = ({children}) => {
 
     // Usuarios excepto el logueado
     useEffect(() => {
-        const token = getToken();
-        const decodedToken = DecodeToken(token);
-        const userId = decodedToken.id;
-
         ServerRequest(`data/user`, "GET")
         .then((response) => {
-          setAllUsers(response.filter((user) => {
-            if (user._id !== userId) {
-              return true
-            }
-          }));
+          setAllUsers(response.filter((user) => (user._id !== userId)
+          ));
         })
         .catch(console.log);
-        
       }, []);
 
     //cerrar sesión y redirección a Landing
@@ -59,5 +48,12 @@ export const UserContextProvider = ({children}) => {
       history.replace(route.HOME)
     }
 
-    return <UserContext.Provider value={{user, setUser, allUsers, setAllUsers, signOut}}>{children}</UserContext.Provider>
+    return <UserContext.Provider value={{
+        userId,
+        user, 
+        setUser, 
+        allUsers, 
+        setAllUsers, 
+        signOut, 
+      }}>{children}</UserContext.Provider>
 }

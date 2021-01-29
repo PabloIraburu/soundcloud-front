@@ -1,0 +1,34 @@
+.EditPlaylist-wrap h1 {
+  margin-top: 0;
+}
+
+.EditPlaylist-wrap h4 {
+  margin-bottom: 0;
+}
+
+.EditPlaylist-wrap textarea {
+  margin-top: 20px;
+}
+
+.EditPlaylist-title {
+  text-align: center;
+}
+
+.Playlist-Name {
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.EditPlaylist-textarea {
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  height: 5em;
+}
+
+.EditPlaylist-button {
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+
+}
