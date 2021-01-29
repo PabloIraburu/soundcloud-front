@@ -34,8 +34,10 @@ const playerReducer = (state, action) => {
             return newState;
 
         case playerActions.ADD_TO_QUEUE:
-            newState.reproduceSongList = [...state.reproduceSongList, action.song];
-            return newState;
+                console.log('Else', state.reproduceSongList)
+                newState.reproduceSongList = [...state.reproduceSongList, action.song];
+                newState.currentPlay = 0;
+                return newState;
 
         case playerActions.START_PLAY:
             newState.reproduceSongList = action.songs;
@@ -47,8 +49,13 @@ const playerReducer = (state, action) => {
             return newState;
 
         case playerActions.PLAY_THIS_SONG:
+            console.log('index', action.index)
             newState.currentPlay = action.index;
             return newState;
+        // console.log('index', action.index)
+            // newState.currentPlay = 0;
+            // newState.reproduceSongList= newState.reproduceSongList.slice(action.index)
+            // return newState;
 
         case playerActions.PLAY_SONG:
             newState.reproduceSongList = [action.song];
@@ -57,8 +64,6 @@ const playerReducer = (state, action) => {
 
         case playerActions.NEXT_SONG:
             if (state.currentPlay < (state.reproduceSongList.length - 1)) {
-                console.log(state.currentPlay)
-                console.log(state.reproduceSongList.length)
                 newState.currentPlay = state.currentPlay + 1;
             }
             return newState;
