@@ -79,7 +79,6 @@ export default function Discover() {
                 setForceReload(!forceReload)
             })
             .catch(() => {
-                setForceReload(!forceReload)
             })
     }
 
@@ -94,9 +93,7 @@ export default function Discover() {
                         setForceReload(!forceReload)
                     })
             })
-            .catch(() => {
-                setForceReload(!forceReload)
-            })
+            .catch(console.log)
     }
 
     //ADD PLAYLIST TO FAVOURITES
@@ -128,9 +125,7 @@ export default function Discover() {
                         setForceReload(!forceReload)
                     })
             })
-            .catch(() => {
-                setForceReload(!forceReload)
-            })
+            .catch(console.log)
     }
 
     //PLAY PLAYLIST
@@ -212,9 +207,11 @@ export default function Discover() {
                 <div className="headMid">
                     <div className="search">
                         <Search
-                        // handleAddToFavourites={AddSongToFavourites}
-                        // handleRemoveFromFavourite={RemoveSongFromFavourites}
-                        // handleAddToPlaylistSearch={handleOpenAddToPlaylist}
+                        handleAddToFavourites={(id)=>
+                            AddSongToFavourites(id)
+                        }
+                        handleRemoveFromFavourite={RemoveSongFromFavourites}
+                        handleAddToPlaylistSearch={handleOpenAddToPlaylist}
                         />
                     </div>
                     {/*<div className="notif">*/}
