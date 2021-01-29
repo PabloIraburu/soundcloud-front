@@ -74,7 +74,8 @@ export const CoverMd = (
                     <div /*className={styles["PlayButton"]} */>
                         <HtmlTooltip title="Play" placement="top">
                             <PlayCircleFilledIcon
-                                fontSize="large"
+                                // fontSize="large"
+                                style={{ fontSize: 50 }}
                                 onClick={() => handlePlay(id)}
                             />
                         </HtmlTooltip>
