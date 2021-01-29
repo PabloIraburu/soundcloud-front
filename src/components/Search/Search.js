@@ -5,7 +5,7 @@ import {ServerRequest} from "../../helpers/ServerRequest";
 import {CoverSm} from "../CoverSm/CoverSm";
 
 
-function Search( handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylistSearch ) {
+function Search({handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylistSearch} ) {
     const [songs, setSongs] = useState([])
     useEffect(() => {
         ServerRequest('data/song', 'GET')
@@ -15,7 +15,6 @@ function Search( handleAddToFavourites, handleRemoveFromFavourites, handleAddToP
             })
     }, [])
 
-    const mockSearch = songs.map(s => s.title)
     const [searchItem, setSearchItem] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const handleChange = (e) => {
@@ -26,7 +25,7 @@ function Search( handleAddToFavourites, handleRemoveFromFavourites, handleAddToP
         const results = songs.filter(art => art.title.toLowerCase().includes(searchItem));
         setSearchResults(results);
     }, [searchItem]);
-
+    console.log(handleAddToFavourites)
     return (
         <div className='searchBar'>
             <TextField id="outlined-basic" label="Search" variant="outlined" type='text'
