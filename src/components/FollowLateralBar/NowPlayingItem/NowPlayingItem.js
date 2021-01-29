@@ -1,5 +1,5 @@
 import React from "react";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 import styles from './NowPlayingItem.module.css';
 
@@ -15,7 +15,8 @@ export const NowPlayingItem = ({ entity, title, categories, author, img, descrip
                     <p className={styles["NowPlayingItemFollowMenu-author"]}>{author}</p>
                 </div>
             </div>
-            <MoreVertIcon fontSize="inherit" />
+
+            <HighlightOffIcon fontSize="inherit" />
         </div >
     );
 };
