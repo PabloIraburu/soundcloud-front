@@ -56,7 +56,7 @@
   border-radius: 14px;
 }
 
-.header h2 {
+.header h1 {
   margin-left: 1.5rem;
   color: var(--clr-lightText);
 }
@@ -100,7 +100,6 @@
 span {
   display: inline-flex;
   margin-right: 10px;
-  color: var(--clr-lightText);
 }
 
 i {
@@ -134,11 +133,10 @@ h2 {
 }
 
 .search MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
-  display: none;
 }
 
 .search ul {
-  display: none;
+
 }
 
 .notif {
@@ -171,9 +169,28 @@ h2 {
   }
 }
 
-.Discover-albums {
+.Discover-topSongs {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.Discover-playlists {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 150px;
+}
+
+.Discover-AddToPlaylistList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Discover-AddToPlaylistList p:hover{
+  color: var(--or);
 }

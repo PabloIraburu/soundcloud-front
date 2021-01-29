@@ -1,0 +1,139 @@
+.SongItemList-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.SongItemList-wrap {
+  width: 40px;
+  height: auto;
+  border-radius: 1px;
+  box-shadow: 2px 2px 6px rgba(128, 128, 128, 0.5);
+  display: flex;
+  /* flex-direction: row; */
+  margin: 50px;
+  /* margin-bottom: 30px; */
+  overflow: hidden;
+  position: relative;
+}
+
+.SongItemList-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  transition: all 250ms ease;
+}
+
+.SongItemList-icon-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* border-radius: 10px; */
+  /* position: absolute; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  color: transparent;
+  transition: all 250ms ease;
+}
+
+.play-icon {
+  transform: translateX(2px) scale(1.3);
+}
+.icon-mini {
+  transform: scale(0.8);
+}
+
+.SongItemList-icon-wrapper:hover {
+  color: #fff;
+  background-color: #23232390;
+  backdrop-filter: blur(4px);
+  border-radius: 1px;
+}
+
+.SongItemList-text {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0 10px 10px;
+  background-color: transparent;
+  z-index: 1;
+  line-height: 1.4rem;
+}
+
+.SongItemList-text p {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: white;
+  font-size: 0.7rem;
+  min-width: 15%;
+}
+
+.SongItemList-text .SongItemList-title {
+  font-size: 0.9rem;
+  min-width: 25%;
+}
+
+.SongItemList-icons {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px 0px 10px 10px;
+}
+
+.FavoriteIcon {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+  cursor: pointer;
+}
+
+.FavoriteIcon::before,
+.FavoriteIcon::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.FavoriteIcon::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.FavoriteIcon:hover::before {
+  background: white;
+}
+
+.FavoriteIcon:hover::after {
+  background: #f9b807;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}

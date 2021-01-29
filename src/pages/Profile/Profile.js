@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Profile.css";
 import { MyButton } from "../../components/MyButton/MyButton";
 import { UserContext } from "../../contexts/UserContext/contextProvider"
-import { MySongs } from "../MySongs/MySongs";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
@@ -54,8 +53,6 @@ export const Profile = () => {
         />
 
       </div>
-
-      <MySongs />
 
     </>
 

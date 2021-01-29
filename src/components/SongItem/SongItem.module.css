@@ -76,18 +76,25 @@
   text-decoration: none;
   color: white;
   font-size: 0.7rem;
-  min-width: 25%;
+  min-width: 15%;
 }
 
 .SongItem-text .SongItem-title {
   font-size: 0.9rem;
-  min-width: 30%;
+  min-width: 25%;
 }
 
 .SongItem-icons {
-  width: 100px;
+  width: 60px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding-left: 10px 0 10px 10px;
+}
+
+.SongItem-hr {
+  border-top: 0;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.33);
+  border-radius: 0;
+  width: 100%;
 }

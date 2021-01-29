@@ -1,5 +1,5 @@
 .searchBar {
-  color: black;
+  color: white;
   /*width: 100%;*/
   flex-direction: column;
   border: none;
@@ -12,13 +12,16 @@
 
 .searchBar ul{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .searchBar li {
   display: flex;
   padding-left: 2rem;
-  color: black;
+  color: white;
   margin-top: 2rem;
+
 }
 
 .searchBar input {

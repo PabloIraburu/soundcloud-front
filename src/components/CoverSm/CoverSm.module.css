@@ -3,12 +3,13 @@
   flex-direction: row;
   min-width: 280px;
   margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .CoverSm-wrap {
   width: 80px;
   height: auto;
-  border-radius: 1px solid rgb(187, 187, 187);
+  border: 1px solid rgb(187, 187, 187);
   box-shadow: 2px 2px 6px rgba(128, 128, 128, 0.5);
   display: flex;
   flex-direction: column;
@@ -59,6 +60,7 @@
 }
 
 .CoverSm-text {
+  min-width: 200px;
   padding: 10px;
   background-color: transparent;
   z-index: 1;
@@ -74,6 +76,12 @@
   text-decoration: none;
   color: white;
 }
+
+.CoverSm-title:hover {
+  text-decoration: none;
+  color: var(--sky);
+}
+
 .CoverSm-author {
   color: rgb(250, 250, 250);
   font-size: 0.8rem;
@@ -83,3 +91,143 @@
   color: rgb(250, 250, 250);
   font-size: 0.7rem;
 }
+
+.CoverSm-button-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: space-around;
+  padding: 5px 0;
+}
+
+.FavoriteIcon {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+}
+
+.FavoriteIcon::before,
+.FavoriteIcon::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.FavoriteIcon::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.FavoriteIcon:hover::before {
+  background: white;
+}
+
+.FavoriteIcon:hover::after {
+  background: #f9b807;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+
+.FavoriteIcon {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+}
+
+.FavoriteIcon::before,
+.FavoriteIcon::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.FavoriteIcon::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.FavoriteIcon:hover::before {
+  background: white;
+}
+
+.FavoriteIcon:hover::after {
+  background: #f9b807;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+
+.FavoriteIcon {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+}
+
+.FavoriteIcon::before,
+.FavoriteIcon::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.FavoriteIcon::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.FavoriteIcon:hover::before {
+  background: white;
+}
+
+.FavoriteIcon:hover::after {
+  background: #f9b807;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+

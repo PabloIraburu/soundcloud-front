@@ -1,0 +1,57 @@
+.EntityDetail-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 5px 0;
+    width: 100%;
+  }
+
+.EntityDetail-list p {
+    color: rgba(255, 255, 255, 0.424);
+}
+  
+.EntityDetail-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  transition: all 250ms ease;
+}
+
+.EntityDetail-text {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0 5px 10px;
+  background-color: transparent;
+  z-index: 1;
+  line-height: 1.4rem;
+}
+
+.EntityDetail-text p {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  min-width: 20%;
+}
+
+.EntityDetail-text .EntityDetail-title {
+  min-width: 30%;
+}
+
+.EntityDetail-icons {
+  width: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px 0 10px 10px;
+}
+
+.EntityDetail-hr {
+  width: 100%;
+}

@@ -2,12 +2,13 @@
   background-color: var(--clr-lightBackground);
   color: white;
   height: 100%;
-  overflow: scroll;
   position: fixed;
   right: 0px;
-  width: 15%;
-  z-index: 100;
-  padding: 30px 50px;
+  width: 18%;
+  z-index: 90;
+  padding: 2% 0% 2% 3%;
+  /* scroll-behavior: inherit; */
+  /* padding: 30px 50px; */
 }
 
 .FollowLateralBar-nav h1 {
@@ -22,4 +23,35 @@
 
 .FollowLateralBar-userItems {
   margin-top: 30px;
+}
+
+.NowPlaying{
+  height: 50%;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+
+.NowPlaying h3{
+  position: fixed;
+  background-color: var(--clr-lightBackground);
+  width: 16%;
+  z-index: 99;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.Playlist{
+  margin-top: 4.5rem;
+}
+
+.Follows{
+  height: 50%;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+
+@media screen and (max-width: 1300px) {
+  .FollowLateralBar-nav {
+    visibility: hidden;
+  }
 }

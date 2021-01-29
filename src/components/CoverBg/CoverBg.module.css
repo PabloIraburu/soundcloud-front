@@ -1,27 +1,30 @@
 .CoverBg-wrap {
-  width: 400px;
+  min-width: 300px;
   height: auto;
   display: flex;
-  flex-direction: column;
-  margin: 30px;
+  flex-direction: row;
+  /* margin: 30px; */
+  margin-bottom: 50px;
   overflow: hidden;
   position: relative;
+  align-items: flex-end;
 }
 
 .CoverBg-img {
-  width: 400px;
-  height: 400px;
+  min-width: 300px;
+  height: 300px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   background-position: center;
   background-size: cover;
   transition: all 250ms ease;
+  margin-right: 30px;
 }
 
 .icon-wrapper {
   width: 100%;
-  height: 400px;
+  height: 300px;
   top: 0;
   border-radius: 20px;
   position: absolute;
@@ -62,13 +65,19 @@
 .CoverBg-title {
   text-decoration: none;
   color: white;
+  font-size: 2rem;
 }
 .CoverBg-author {
   color: rgb(250, 250, 250);
-  font-size: 0.8rem;
+  font-size: 2rem;
 }
 
 .CoverBg-category {
   color: rgb(250, 250, 250);
-  font-size: 0.7rem;
+  padding-top: 10px;
+  font-size: 0.8rem;
+}
+
+.CoverBg-reproduceButton {
+  margin-top: 20px;
 }

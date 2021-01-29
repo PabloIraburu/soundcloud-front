@@ -1,0 +1,41 @@
+.mensaje {
+    font-size: 0.9rem;
+    padding: 12px;
+    border-radius: 3px;
+    animation: fadein 0.2s linear;
+    margin-top: 15px;
+  }
+  .error {
+    color: rgb(163, 0, 0);
+    border: solid 1px rgb(119, 0, 0);
+    background-color: rgb(255, 231, 231);
+  }
+  
+  .success {
+    color: rgb(132, 212, 27);
+    border: solid 1px rgb(13, 172, 40);
+    background-color: rgb(230, 250, 220);
+  }
+  
+  .warning {
+    color: rgb(255, 196, 0);
+    border: solid 1px rgb(253, 145, 3);
+    background-color: rgb(255, 247, 204);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  @keyframes fadein {
+    0% {
+      transform: scale(0.8);
+    }
+    77% {
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  

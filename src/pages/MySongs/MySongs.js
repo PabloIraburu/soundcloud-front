@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ServerRequest } from "../../helpers/ServerRequest";
 import { MyButton } from "../../components/MyButton/MyButton";
-import styles from "./MySongs.module.css";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { Modal } from '../../components/Modal/Modal';
 import { SongItem } from '../../components/SongItem/SongItem';
 import { Input } from '../../components/Input/Input';
 import { Selector } from "../../components/Selector/Selector";
 import { categories } from "../../data/categories";
+import { Upload } from '../../components/Upload/Upload';
+import EventIcon from '@material-ui/icons/Event';
+import styles from "./MySongs.module.css";
+import {toast} from "react-toastify";
 
 
 export const MySongs = () => {
-
-    const { user } = useContext(UserContext);
-    const userId = user._id;
+    const { userId } = useContext(UserContext);
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
+    const [forceReload, setForceReload] = useState(false);
+    const notify = (e) => toast(`${e}`);
 
 
     //Canciones subidas por el usuario
@@ -25,11 +28,7 @@ export const MySongs = () => {
                 setUserSongs(response);
             })
             .catch(console.log);
-
-    }, [userId]);
-
-    console.log('userSongs', userSongs);
-    console.log('user id', userSongs._id);
+    }, [userId, forceReload]);
 
     //Introduce los datos de los inputs en el objeto song
     const handleInput = (event) => {
@@ -40,10 +39,22 @@ export const MySongs = () => {
         }));
     };
 
+
+    //Gestión modal upload
+    const [openModalUpload, setOpenModalUpload] = useState(false);
+    const handleOpenUpload = (e) => {
+        setOpenModalUpload(!openModalUpload)
+        setForceReload(!forceReload)
+    };
+    const handleCloseUpload = (e) => {
+        const { className: el } = e.target;
+        if (el !== "backdrop" && el !== "fas fa-times") return;
+        setOpenModalUpload(!openModalUpload);
+    };
+
     // Gestiona el modal editar song
     const [openModalEditSong, setOpenModalEditSong] = useState(false);
     const handleOpenModalEditSong = (s) => {
-        debugger;
         setEditedSong(s)
         setOpenModalEditSong(!openModalEditSong);
     };
@@ -55,65 +66,68 @@ export const MySongs = () => {
 
     //Añadir canción a playlist
     const handleAddToPlaylist = (songId, playlistId) => {
-        ServerRequest(`data/playlist/${playlistId}/${songId}`, 'PUT', songId)
+        ServerRequest(`data/playlist/${playlistId}`, 'PUT', songId)
             .then(console.log)
             .catch(console.log);
     }
 
     //Edición información canciones
-    const handleEditSong = (id) => {
-        ServerRequest(`data/song/${id}`, "PUT", editedSong)
+    const handleEditSong = () => {
+        ServerRequest(`data/song/${editedSong._id}`, "PUT", editedSong)
             .then((response) => {
                 setEditedSong(response);
+                setForceReload(!forceReload)
             })
             .catch((response) => console.log);
-        setUserSongs(userSongs.filter((song) => {
-            if (song._id !== id) {
-                return true
-            }
-        }));
+
+        setOpenModalEditSong(!openModalEditSong);
     }
 
     //Eliminación canción
-    const handleDeleteSong = (id) => {
-        ServerRequest(`data/song/${id}`, "DELETE")
-            .then(console.log)
-            .catch(console.log);
-        setUserSongs(userSongs.filter((song) => {
-            if (song._id !== id) {
-                return true
+    const handleDeleteSong = (song) => {
+        ServerRequest(`data/song/${song._id}`, "DELETE")
+            .then((res) => {
+            })
+            .catch(()=> {
+                setForceReload(!forceReload)
             }
-        }));
+        );
     }
 
     return (
 
         <>
-            <div className={styles["Profile-mySongs-section"]}>
-                <h1>My songs</h1>
-                {
-                    userSongs.length === 0
-                        ? <p>You haven't upload any song yet...</p>
-                        : userSongs.map(song => (
-                            <div key={song._id} >
-                                <SongItem
-                                    handleAddToPlaylist={handleAddToPlaylist}
-                                    handleDeleteSong={handleDeleteSong}
-                                    handleEditSong={handleEditSong}
-                                    handleOpenModalEditSong={handleOpenModalEditSong}
-                                    key={song._id}
-                                    id={song._id}
-                                    title={song.title}
-                                    category={song.category}
-                                    author={song.artist}
-                                    img={song.image}
-                                    song={song}
-                                />
-                            </div>
-                        ))
-                }
-
+            <div className={styles["mysongs-header"]}>
+                <h1>My Songs</h1>
+                <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">Upload Song</MyButton>
+                
             </div>
+            <div className={styles["mysongs-list"]}>
+                <div className={styles["mysongs-img"]}></div>
+                <div className={styles["mysongs-text"]}>
+                    <p className={styles["mysongs-title"]}>Song Title</p>
+                    <p>Artist</p>
+                    <p>Album</p>
+                    <p>Category</p>
+                    <p><EventIcon fontSize="small" style={{ color: "white" }} /></p>
+                    <div className={styles["mysongs-icons"]}></div>
+                </div>
+            </div >
+            <hr className={styles["mysong-hr"]}/>
+            
+            {
+                userSongs.length === 0
+                    ? <p>You haven't upload any songs yet...</p>
+                    : userSongs.map(song => (
+                        <SongItem
+                            key={song._id}
+                            handleAddToPlaylist={handleAddToPlaylist}
+                            handleDeleteSong={() => handleDeleteSong(song)}
+                            handleOpenModalEditSong={() => handleOpenModalEditSong(song)}
+                            song={song}
+                        />
+                    ))
+            }
 
             {openModalEditSong &&
                 <Modal handleClose={handleCloseEditSong}>
@@ -129,9 +143,17 @@ export const MySongs = () => {
                         />
                         <Input
                             type="text"
+                            name="Album"
+                            onChange={handleInput}
+                            placeholder={"Insert album name"}
+                            value={editedSong.album}
+                        />
+                        <Input
+                            type="text"
                             name="artist"
                             onChange={handleInput}
                             placeholder={"Artist name"}
+                            value={editedSong.artist}
                             required
                         />
                         <Input
@@ -139,6 +161,7 @@ export const MySongs = () => {
                             name="image"
                             onChange={handleInput}
                             placeholder={"Url song image"}
+                            value={editedSong.image}
                             required
                         />
                         <Selector name="category" id="category" onChange={handleInput} required>
@@ -148,22 +171,35 @@ export const MySongs = () => {
                                 </option>
                             ))}
                         </Selector>
-
-                        <MyButton
-                            onClick={handleEditSong}
-                            // onClick={() => handleSubmit(fileInputEl.current.files)}
-                            variant="pink-or"
-                            size="50%"
-                            className="button-custom"
-                        >
-                            Update file
-                        </MyButton>
+                        <div className={styles["mysongs-buttons"]}>
+                            {/* <MyButton
+                                onClick={handleDeleteSong}
+                                variant="darkBlue"
+                                size="50%"
+                                className="button-custom"
+                            >
+                                Delete file
+                            </MyButton> */}
+                            <MyButton
+                                onClick={handleEditSong}
+                                variant="pink-or"
+                                size="50%"
+                                className="button-custom"
+                            >
+                                Update file
+                            </MyButton>
+                        </div>
                     </div>
 
                     <br />
                     {/* {(newPass !== editedUser.password) ? <p className="flag-pass">*Passwords doesn't match</p> : <MyButton onClick={handleSubmitPassword} variant="pink-or" size="50%">Submit</MyButton>} */}
                 </Modal>
             }
+            {openModalUpload && (
+                <Modal handleClose={handleCloseUpload}>
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify}/>
+                </Modal>
+            )}
         </>
     )
 }
