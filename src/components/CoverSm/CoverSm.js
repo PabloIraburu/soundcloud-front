@@ -13,10 +13,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/styles";
 
 
-export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist }) => {
+export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourite, handleAddToPlaylist }) => {
 
     const { userId } = useContext(UserContext);
     const { dispatchPlayer } = useContext(PlayerContext);
+    const [favSongs, setFavSongs] = useState([]);
     const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
@@ -30,14 +31,17 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
     // GET FAVOURITE SONGS
     useEffect(() => {
         ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
-            .then(response => (
-                response.find((fsong) => {
-                    if (fsong.id_song === id) {
-                        setIsFav(!isFav);
-                    }
-                })))
+            .then(response => setFavSongs(response))
             .catch(console.log)
     }, [id]);
+
+    useEffect(() => {
+        favSongs.filter((fsong) => {
+            if (fsong.id_song._id === id) {
+                setIsFav(!isFav);
+            }
+        })
+    }, [id, favSongs]);
 
     return (
         <div className={styles["CoverSm-card"]}>
@@ -78,25 +82,25 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                 {
                     !isFav &&
                     <HtmlTooltip title="Add Favorite" placement="left">
-                        <div className={styles["FavoriteIcon"]}>
-                            <FavoriteBorderOutlinedIcon
-                                fontSize="inherit"
-                                // style={{ color: '#f9b807' }}
-                                onClick={() => handleAddToFavourites(id)}
-                            />
-                        </div>
+                        {/* <div className={styles["FavoriteIcon"]}> */}
+                        <FavoriteBorderOutlinedIcon
+                            fontSize="inherit"
+                            // style={{ color: '#f9b807' }}
+                            onClick={() => handleAddToFavourites(id)}
+                        />
+                        {/* </div> */}
                     </HtmlTooltip>
                 }
                 {
                     isFav &&
                     <HtmlTooltip title="Remove Favorite" placement="left">
-                        <div className={styles["FavoriteIcon"]}>
-                            <FavoriteIcon
-                                fontSize="inherit"
-                                // style={{ color: '#f9b807' }}
-                                onClick={() => handleRemoveFromFavourites(id)}
-                            />
-                        </div>
+                        {/* <div className={styles["FavoriteIcon"]}> */}
+                        <FavoriteIcon
+                            fontSize="inherit"
+                            // style={{ color: '#f9b807' }}
+                            onClick={() => handleRemoveFromFavourite(id)}
+                        />
+                        {/* </div> */}
                     </HtmlTooltip>
                 }
             </div>

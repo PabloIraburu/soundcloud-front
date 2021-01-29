@@ -74,8 +74,13 @@ export default function Discover() {
             isFav: true
         }
         ServerRequest("data/favouritesongs", "POST", favSong)
-            .then((response) => setFavSongs([...favSongs, response]))
-            .catch(console.log);
+            .then((response) => {
+                setFavSongs([...favSongs, response])
+                setForceReload(!forceReload)
+            })
+            .catch(() => {
+                setForceReload(!forceReload)
+            })
     }
 
     //REMOVE SONG FROM FAVOURITES
@@ -84,12 +89,14 @@ export default function Discover() {
             .then((res) => {
                 const resId = res;
                 ServerRequest(`data/favouritesongs/${resId[0]._id}`, "DELETE")
-                    .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
+                    .then(() => favSongs.filter((favSong) => favSong.id_song._id !== songId))
                     .catch(() => {
                         setForceReload(!forceReload)
                     })
             })
-            .catch(console.log)
+            .catch(() => {
+                setForceReload(!forceReload)
+            })
     }
 
     //ADD PLAYLIST TO FAVOURITES
@@ -100,7 +107,10 @@ export default function Discover() {
             isFav: true
         }
         ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
-            .then((response) => setFavPlaylists([...favPlaylists, response]))
+            .then((response) => {
+                setFavPlaylists([...favPlaylists, response])
+                setForceReload(!forceReload)
+            })
             .catch(console.log)
     }
 
@@ -110,12 +120,17 @@ export default function Discover() {
             .then((res) => {
                 const resId = res;
                 ServerRequest(`data/favouriteplaylists/${resId[0]._id}`, "DELETE")
-                    .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
+                    .then(() => {
+                        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist._id !== playlistId)
+                        setForceReload(!forceReload)
+                    })
                     .catch(() => {
                         setForceReload(!forceReload)
                     })
             })
-            .catch(console.log)
+            .catch(() => {
+                setForceReload(!forceReload)
+            })
     }
 
     //PLAY PLAYLIST
@@ -130,7 +145,7 @@ export default function Discover() {
         ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
             .then(payload => {
                 console.log(payload)
-                payload.map(payload => dispatchPlayer({type: playerActions.ADD_TO_QUEUE, song: payload.id_song}))
+                payload.map(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
             })
             .catch(console.log)
     };
