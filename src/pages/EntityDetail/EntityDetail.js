@@ -123,12 +123,13 @@ export const EntityDetail = () => {
         (entitySongs.length === 0)
           ? <p>This Playlist is empty.</p>
           : <div className={styles["PlaylistDetail-list"]}>
-            {entitySongs.map((song) => (
+            {entitySongs.map((song, index) => (
               <SongItemList
                 handleRemoveSongFromPlaylist={handleRemoveSongFromPlaylist}
                 handleAddToFavourites={handleAddSongToFavourites}
                 handleRemoveFromFavourites={handleRemoveSongFromFavourites}
                 song={song.id_song}
+                index={index}
               />
             ))}
           </div>

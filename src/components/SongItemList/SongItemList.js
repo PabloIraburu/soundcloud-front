@@ -14,6 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export const SongItemList = ({
                                  song,
+                                 index,
                                  handleRemoveSongFromPlaylist,
                                  handleAddToFavourites,
                                  handleRemoveFromFavourites
@@ -53,7 +54,7 @@ export const SongItemList = ({
                         <PlayCircleFilledIcon
                             fontSize="small"
                             // style={{ color: "white" }}
-                            onClick={() => dispatchPlayer({type: playerActions.PLAY_THIS_SONG, song: song})}
+                            onClick={() => dispatchPlayer({type: playerActions.PLAY_THIS_SONG, index: index})}
                         />
                     </HtmlTooltip>
 
