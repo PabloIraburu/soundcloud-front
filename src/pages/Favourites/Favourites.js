@@ -47,6 +47,7 @@ export const Favourites = () => {
         ServerRequest(`data/favouritesongs/${resId[0]._id}`, "DELETE")
           .then(() => favSongs.filter((favSong) => favSong.id_song._id !== songId))
           .catch(() => {
+            notify('Song removed from favourites correctly')
             setForceReload(!forceReload)
           })
       })
@@ -61,6 +62,7 @@ export const Favourites = () => {
         ServerRequest(`data/favouriteplaylists/${resId[0]._id}`, "DELETE")
           .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist._id !== playlistId))
           .catch(() => {
+            notify('Playlist removed from favourites correctly')
             setForceReload(!forceReload)
           })
       })
@@ -90,10 +92,11 @@ export const Favourites = () => {
     }
     ServerRequest(`data/songsinplaylist`, "POST", newSongInPlaylist)
       .then(() => {
+        notify('Song added to playlist correctly')
         setOpenModalAddToPlaylist(!openModalAddToPlaylist);
         setForceReload(!forceReload);
       })
-      .catch(console.log)
+      .catch((response) => notify(response.error))
   }
 
   //PLAY PLAYLIST

@@ -10,11 +10,13 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Tooltip from '@material-ui/core/Tooltip';
+import { ToastContainer, toast } from 'react-toastify';
 import { withStyles } from "@material-ui/styles";
 
 
 export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourite, handleAddToPlaylist }) => {
 
+    const notify = (e) => toast(`${e}`);
     const { userId } = useContext(UserContext);
     const { dispatchPlayer } = useContext(PlayerContext);
     const [favSongs, setFavSongs] = useState([]);
@@ -75,7 +77,10 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                 <HtmlTooltip title="Add To Queue" placement="left">
                     <PlaylistAddIcon
                         fontSize="inherit"
-                        onClick={() => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })}
+                        onClick={() => {
+                            dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })
+                            notify('Song added to queue correctly')
+                        }}
                     />
                 </HtmlTooltip>
 
@@ -104,6 +109,18 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                     </HtmlTooltip>
                 }
             </div>
+
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 };

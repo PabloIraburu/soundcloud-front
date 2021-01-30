@@ -5,6 +5,15 @@ export const existNumber = (string) => {
     }
 };
 
+export const existSpecial = (string) => {
+    const regex = RegExp("[@]");
+    if (!regex.test(string)) {
+        return ("@");
+    }
+};
+
+// ^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$
+
 export const existUppercase = (string) => {
     const regex = new RegExp("[A-Z]");
     if (!regex.test(string)) {
@@ -14,13 +23,13 @@ export const existUppercase = (string) => {
 
 export const validateMaxLength = (string, maxLength) => {
     if (string.length > maxLength) {
-        return (`max ${maxLength} characters`);
+        return (`a max of ${maxLength} characters`);
     }
 };
 
 export const validateMinLength = (string, minLength) => {
     if (string.length < minLength) {
-        return (`min ${minLength} characters`);
+        return (`a min of ${minLength} characters`);
     }
 };
 

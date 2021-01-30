@@ -57,11 +57,14 @@ export default function Discover() {
     useEffect(() => {
         ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
             .then((response) => {
-                setFavSongs(response)
-
+                const initialFavSongs = response.id_song
+                setFavSongs(initialFavSongs)
+                console.log(favSongs);
             })
             .catch(console.log)
     }, [forceReload]);
+
+    console.log("initialfavsongs", favSongs);
 
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
@@ -90,6 +93,8 @@ export default function Discover() {
                     }
                     return song;
                 }))
+                notify('Song added to favourites correctly')
+                setForceReload(!forceReload)
                 console.log("Array songs modificado", songs);
             })
             .catch(console.log)
@@ -107,6 +112,8 @@ export default function Discover() {
                         console.log(songId);
                         console.log(favSongs.filter((favSong) => favSong.id_song._id !== songId));
                         setFavSongs(favSongs.filter((favSong) => favSong.id_song._id !== songId))
+                        notify('Song removed from favourites correctly')
+
                         setForceReload(!forceReload)
                     })
             })
@@ -122,6 +129,7 @@ export default function Discover() {
         }
         ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
             .then((response) => {
+                notify('Playlist added to favourites correctly')
                 setFavPlaylists([...favPlaylists, response])
                 setForceReload(!forceReload)
             })
@@ -136,6 +144,7 @@ export default function Discover() {
                 ServerRequest(`data/favouriteplaylists/${resId[0]._id}`, "DELETE")
                     .then(() => {
                         favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId)
+                        notify('Playlist removed from favourites correctly')
                         setForceReload(!forceReload)
                     })
                     .catch(console.log)
@@ -156,8 +165,9 @@ export default function Discover() {
             .then(payload => {
                 console.log(payload)
                 payload.map(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+                notify('Playlist added to queue correctly')
             })
-            .catch(console.log)
+            .catch((response) => notify(response.error))
     };
 
     //GESTIÓN ADD SONG TO PLAYLISTT
@@ -182,10 +192,11 @@ export default function Discover() {
         }
         ServerRequest(`data/songsinplaylist`, "POST", newSongInPlaylist)
             .then(() => {
+                notify('Song added to playlist correctly')
                 setOpenModalAddToPlaylist(!openModalAddToPlaylist);
                 setForceReload(!forceReload);
             })
-            .catch(console.log)
+            .catch((response) => notify(response.error))
     }
 
     //Gestión modal upload

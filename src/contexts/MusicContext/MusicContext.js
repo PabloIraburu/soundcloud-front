@@ -21,35 +21,21 @@ export const MusicContextProvider = ({ children }) => {
                     .then((res) => {
                         setFavSongs(res)
                         songs.map((song) => {
-                            if (res.id_song === song._id) {
-                                song.isFav = true
+                            if (song._id === favSongs.map((favSong) => favSong.id_song)) {
+                                setSongs([{ ...song, isFav: true }])
                             }
-                            console.log("songs", songs);
                         })
+                        console.log("Context edited songs", songs);
                     })
                     .catch(console.log)
             })
             .catch(console.log)
     }, [])
 
-    console.log("songs", songs);
-
-
     //GET PLAYLISTS
     useEffect(() => {
         ServerRequest(``, "GET")
     }, [])
-
-    //GET FAVOURITE SONGS
-    useEffect(() => {
-        ServerRequest(``, "GET")
-    }, [])
-
-    //GET FAVOURTIE PLAYLISTS
-    useEffect(() => {
-        ServerRequest(``, "GET")
-    }, [])
-
 
     return <MusicContext.Provider value={{
         songs,
