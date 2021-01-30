@@ -10,6 +10,8 @@ export const playerActions = {
     LOAD_SONG: 'LOAD_SONG',
     //añadir canción a la cola de reproducción
     ADD_TO_QUEUE: 'ADD_TO_QUEUE',
+    //eliminar canción a la cola de reproducción
+    REMOVE_FROM_QUEUE: 'REMOVE_FROM_QUEUE',
     //iniciar reproducción playlist, album, favoritos
     START_PLAY: 'START_PLAY',
     //reproducción random
@@ -35,6 +37,10 @@ const playerReducer = (state, action) => {
 
         case playerActions.ADD_TO_QUEUE:
             newState.reproduceSongList = [...state.reproduceSongList, action.song];
+            return newState;
+
+        case playerActions.REMOVE_FROM_QUEUE:
+            newState.reproduceSongList = state.filter(song => song._id !== action.songId);
             return newState;
 
         case playerActions.START_PLAY:
