@@ -1,3 +1,13 @@
+.grey {
+  width: 50%;
+  height: 40px;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  background: var(--lightGrey);
+  border-radius: 40px;
+  color: white;
+}
+
 .pink-or {
   width: 50%;
   height: 40px;

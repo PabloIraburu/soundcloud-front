@@ -3,6 +3,8 @@ import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext'
 import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
 // import './Player.scss';
 
 
@@ -58,9 +60,35 @@ export const Player = () => {
           layout={'stacked'}
           customAdditionalControls={
             [
-              <button>button 2 </button>,
-              <button>button 3 </button>,
-              <button>button 4 </button>,
+              <FavoriteIcon
+                fontSize="small"
+                style={{ color: '#0b1e45' }}
+              // onClick={() => handleRemoveFromFavourite(id)}
+              />
+              //     {
+              //       !isFav &&
+              //     <HtmlTooltip title="Add Favorite" placement="left">
+              //       {/* <div className={styles["FavoriteIcon"]}> */}
+              //       <FavoriteBorderOutlinedIcon
+              //         fontSize="inherit"
+              //         // style={{ color: '#f9b807' }}
+              //         onClick={() => handleAddToFavourites(id)}
+              //       />
+              //       {/* </div> */}
+              //     </HtmlTooltip>
+              //   }
+              // {
+              //       isFav &&
+              // <HtmlTooltip title="Remove Favorite" placement="left">
+              //   {/* <div className={styles["FavoriteIcon"]}> */}
+              //   <FavoriteIcon
+              //     fontSize="inherit"
+              //     // style={{ color: '#f9b807' }}
+              //     onClick={() => handleRemoveFromFavourite(id)}
+              //   />
+              //   {/* </div> */}
+              // </HtmlTooltip>
+              // }
             ]
           }
         />

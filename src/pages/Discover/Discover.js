@@ -15,11 +15,13 @@ import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import { MusicContext } from "../../contexts/MusicContext/MusicContext";
 
 export default function Discover() {
 
     const notify = (e) => toast(`${e}`);
     const { userId } = useContext(UserContext);
+    // const { songss } = useContext(MusicContext)
     const { dispatchPlayer } = useContext(PlayerContext);
     const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
@@ -39,7 +41,6 @@ export default function Discover() {
             .catch(console.log)
     }, [forceReload])
 
-
     //GET PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/playlist`, "GET")
@@ -50,36 +51,53 @@ export default function Discover() {
                 ));
             })
             .catch(console.log)
-    }, [])
+    }, [forceReload])
 
     // GET FAVOURITE SONGS
     useEffect(() => {
         ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
-            .then((response) => setFavSongs(response))
+            .then((response) => {
+                const initialFavSongs = response.id_song
+                setFavSongs(initialFavSongs)
+                console.log(favSongs);
+            })
             .catch(console.log)
-    }, []);
+    }, [forceReload]);
+
+    console.log("initialfavsongs", favSongs);
 
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
             .then((response) => setFavPlaylists(response))
             .catch(console.log)
-    }, []);
+    }, [forceReload]);
+
+
+    useEffect(() => {
+        console.log("cambio lista fav");
+    }, [favSongs])
 
     //ADD SONG TO FAVOURITES
     const AddSongToFavourites = (songId) => {
         const favSong = {
             id_song: songId,
             id_user: userId,
-            isFav: true
         }
         ServerRequest("data/favouritesongs", "POST", favSong)
-            .then((response) => {
-                setFavSongs([...favSongs, response])
+            .then(() => {
+                console.log(songs)
+                setSongs(songs.filter((song) => {
+                    if (song._id === songId) {
+                        (song.isFav = true)
+                    }
+                    return song;
+                }))
+                notify('Song added to favourites correctly')
                 setForceReload(!forceReload)
+                console.log("Array songs modificado", songs);
             })
-            .catch(() => {
-            })
+            .catch(console.log)
     }
 
     //REMOVE SONG FROM FAVOURITES
@@ -88,8 +106,14 @@ export default function Discover() {
             .then((res) => {
                 const resId = res;
                 ServerRequest(`data/favouritesongs/${resId[0]._id}`, "DELETE")
-                    .then(() => favSongs.filter((favSong) => favSong.id_song._id !== songId))
+                    .then(console.log)
                     .catch(() => {
+                        console.log(favSongs);
+                        console.log(songId);
+                        console.log(favSongs.filter((favSong) => favSong.id_song._id !== songId));
+                        setFavSongs(favSongs.filter((favSong) => favSong.id_song._id !== songId))
+                        notify('Song removed from favourites correctly')
+
                         setForceReload(!forceReload)
                     })
             })
@@ -105,6 +129,7 @@ export default function Discover() {
         }
         ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
             .then((response) => {
+                notify('Playlist added to favourites correctly')
                 setFavPlaylists([...favPlaylists, response])
                 setForceReload(!forceReload)
             })
@@ -118,12 +143,11 @@ export default function Discover() {
                 const resId = res;
                 ServerRequest(`data/favouriteplaylists/${resId[0]._id}`, "DELETE")
                     .then(() => {
-                        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist._id !== playlistId)
+                        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId)
+                        notify('Playlist removed from favourites correctly')
                         setForceReload(!forceReload)
                     })
-                    .catch(() => {
-                        setForceReload(!forceReload)
-                    })
+                    .catch(console.log)
             })
             .catch(console.log)
     }
@@ -141,8 +165,9 @@ export default function Discover() {
             .then(payload => {
                 console.log(payload)
                 payload.map(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+                notify('Playlist added to queue correctly')
             })
-            .catch(console.log)
+            .catch((response) => notify(response.error))
     };
 
     //GESTIÓN ADD SONG TO PLAYLISTT
@@ -167,10 +192,11 @@ export default function Discover() {
         }
         ServerRequest(`data/songsinplaylist`, "POST", newSongInPlaylist)
             .then(() => {
+                notify('Song added to playlist correctly')
                 setOpenModalAddToPlaylist(!openModalAddToPlaylist);
                 setForceReload(!forceReload);
             })
-            .catch(console.log)
+            .catch((response) => notify(response.error))
     }
 
     //Gestión modal upload
@@ -267,6 +293,7 @@ export default function Discover() {
                                     author={song.artist}
                                     categories={song.category}
                                     img={song.image}
+                                    isFav={song.isFav}
                                     handleAddToFavourites={AddSongToFavourites}
                                     handleRemoveFromFavourite={RemoveSongFromFavourites}
                                     handleAddToPlaylist={handleOpenAddToPlaylist}
@@ -291,6 +318,7 @@ export default function Discover() {
                                     description={playlist.description}
                                     categories={playlist.category}
                                     img={playlist.image}
+                                    isFav={playlist.isFav}
                                     handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                                     handleAddToFavourites={AddPlaylistToFavourites}
                                     handleRemoveFromFavourites={RemovePlaylistFromFavourites}

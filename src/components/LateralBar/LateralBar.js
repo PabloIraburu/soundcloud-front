@@ -8,16 +8,13 @@ import { MyButton } from "../MyButton/MyButton";
 import { Upload } from "../Upload/Upload";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
 import { UserContext } from "../../contexts/UserContext/contextProvider";
-
-import "./LateralBar.css"
 import { toast } from "react-toastify";
+import "./LateralBar.css"
 
 
 export default function LateralBar() {
 
-
     const { signOut } = useContext(UserContext);
-
 
     //Gestión modal NewPlaylist
     const [openModalNewPlaylist, setOpenModalNewPlaylist] = useState(false);
@@ -39,8 +36,6 @@ export default function LateralBar() {
     };
     const [forceReload, setForceReload] = useState(false);
     const notify = (e) => toast(`${e}`);
-
-
 
 
     return (
@@ -280,7 +275,7 @@ export default function LateralBar() {
             </ul>
             {openModalNewPlaylist &&
                 <Modal handleClose={handleCloseNewPlaylist}>
-                    <CreatePlaylist handleClose={handleOpenNewPlaylist} />
+                    <CreatePlaylist handleClose={handleOpenNewPlaylist} setForceReload={setForceReload} forceReload={forceReload} notify={notify} />
                 </Modal>}
 
             {openModalUpload && (

@@ -23,6 +23,7 @@ export const CoverMd = (
         categories,
         author,
         description,
+        isFav,
         entityType,
         handleAddToFavourites,
         handleRemoveFromFavourites,
@@ -35,7 +36,7 @@ export const CoverMd = (
     const { userId } = useContext(UserContext);
     const { player, dispatchPlayer } = useContext(PlayerContext);
     const [favPlaylists, setFavPlaylists] = useState([]);
-    const [isFav, setIsFav] = useState(false);
+    // const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
             backgroundColor: '#f5f5f9',
@@ -46,21 +47,21 @@ export const CoverMd = (
     }))(Tooltip);
 
 
-    // GET FAVOURITE PLAYLISTS
-    useEffect(() => {
-        ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
-            .then(response => setFavPlaylists(response))
-            .catch(console.log)
-    }, [id])
+    // // GET FAVOURITE PLAYLISTS
+    // useEffect(() => {
+    //     ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+    //         .then(response => setFavPlaylists(response))
+    //         .catch(console.log)
+    // }, [id])
 
-    // GET FAVOURITE PLAYLISTS
-    useEffect(() => {
-        favPlaylists.find((fplaylist) => {
-            if (fplaylist.id_playlist._id === id) {
-                setIsFav(!isFav)
-            }
-        })
-    }, [id, favPlaylists])
+    // // GET FAVOURITE PLAYLISTS
+    // useEffect(() => {
+    //     favPlaylists.find((fplaylist) => {
+    //         if (fplaylist.id_playlist._id === id) {
+    //             setIsFav(!isFav)
+    //         }
+    //     })
+    // }, [id, favPlaylists])
 
     return (
         <div className={styles["CoverMd-wrap"]}>

@@ -8,11 +8,13 @@ import CreatePlaylist from "../../components/CreatePlaylist/CreatePlaylist";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
 import { playerActions } from '../../reducers/playerReducer';
+import { ToastContainer, toast } from 'react-toastify';
 import styles from './Playlists.module.css';
 
 
 export const Playlists = () => {
 
+  const notify = (e) => toast(`${e}`);
   const { userId } = useContext(UserContext);
   const { dispatchPlayer } = useContext(PlayerContext);
   const [userPlaylists, setUserPlaylists] = useState([]);
@@ -48,21 +50,32 @@ export const Playlists = () => {
       isFav: true
     }
     ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
-      .then((response) => setFavPlaylists([...favPlaylists, response]))
+      .then((response) => {
+        notify('Playlist added to favourites correctly')
+        setFavPlaylists([...favPlaylists, response])
+        setForceReload(!forceReload)
+      })
       .catch(console.log)
   }
 
   //REMOVE PLAYLIST FROM FAVOURITES
   const RemovePlaylistFromFavourites = (playlistId) => {
     ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
-      .then(() => favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId))
+      .then(() => {
+        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId)
+        notify('Playlist removed from favourites correctly')
+        setForceReload(!forceReload)
+      })
       .catch(console.log)
   }
 
   //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
   const handleAddToQueue = (playlistId) => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
-      .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+      .then(payload => {
+        dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song })
+        notify('Playlist added to queue correctly')
+      })
       .catch(console.log)
     console.log('playlists', playlists)
   };
@@ -119,6 +132,8 @@ export const Playlists = () => {
               handleAddToFavourites={AddPlaylistToFavourites}
               handleRemoveFromFavourites={RemovePlaylistFromFavourites}
               handlePlay={handlePlayPlaylist}
+              handleAddToQueue={handleAddToQueue}
+
             />
           ))}
         </div>
@@ -141,19 +156,33 @@ export const Playlists = () => {
               handleAddToFavourites={AddPlaylistToFavourites}
               handleRemoveFromFavourites={RemovePlaylistFromFavourites}
               handlePlay={handlePlayPlaylist}
+              handleAddToQueue={handleAddToQueue}
+
             />
           ))}
         </div>
       }
       {openModalNewPlaylist &&
         <Modal handleClose={handleCloseNewPlaylist}>
-          <CreatePlaylist handleClose={handleOpenNewPlaylist} />
+          <CreatePlaylist handleClose={handleOpenNewPlaylist} setForceReload={setForceReload} forceReload={forceReload} notify={notify} />
         </Modal>}
 
       {openModalEditPlaylist &&
         <Modal handleClose={handleCloseEditPlaylist}>
-          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} />
+          <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} notify={notify} />
         </Modal>}
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   )
 }
