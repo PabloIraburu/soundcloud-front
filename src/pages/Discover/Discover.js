@@ -83,9 +83,10 @@ export default function Discover() {
         }
         ServerRequest("data/favouritesongs", "POST", favSong)
             .then(() => {
-                setSongs(songs.map((song) => {
+                console.log(songs)
+                setSongs(songs.filter((song) => {
                     if (song._id === songId) {
-                        return [...songs, { ...song, isFav: true }]
+                        (song.isFav = true)
                     }
                     return song;
                 }))

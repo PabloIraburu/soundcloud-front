@@ -7,7 +7,7 @@ export const MusicContext = createContext();
 export const MusicContextProvider = ({ children }) => {
 
     const { userId } = useContext(UserContext);
-    const [songss, setSongs] = useState([]);
+    const [songs, setSongs] = useState([]);
     const [favSongs, setFavSongs] = useState([]);
     const [playlists, setPlaylists] = useState([]);
     const [favPlaylist, setFavPlaylist] = useState([]);
@@ -20,7 +20,7 @@ export const MusicContextProvider = ({ children }) => {
                 ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
                     .then((res) => {
                         setFavSongs(res)
-                        songss.map((song) => {
+                        songs.map((song) => {
                             if (res.id_song === song._id) {
                                 song.isFav = true
                             }
@@ -32,7 +32,7 @@ export const MusicContextProvider = ({ children }) => {
             .catch(console.log)
     }, [])
 
-    console.log("songs", songss);
+    console.log("songs", songs);
 
 
     //GET PLAYLISTS
@@ -52,7 +52,7 @@ export const MusicContextProvider = ({ children }) => {
 
 
     return <MusicContext.Provider value={{
-        songss,
+        songs,
         setSongs
     }}>{children}</MusicContext.Provider>
 
