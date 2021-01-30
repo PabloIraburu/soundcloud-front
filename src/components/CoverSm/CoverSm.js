@@ -28,20 +28,20 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
         },
     }))(Tooltip);
 
-    // GET FAVOURITE SONGS
-    useEffect(() => {
-        ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
-            .then(response => setFavSongs(response))
-            .catch(console.log)
-    }, [id]);
+    // // GET FAVOURITE SONGS
+    // useEffect(() => {
+    //     ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+    //         .then(response => setFavSongs(response))
+    //         .catch(console.log)
+    // }, [id]);
 
-    useEffect(() => {
-        favSongs.filter((fsong) => {
-            if (fsong.id_song._id === id) {
-                setIsFav(!isFav);
-            }
-        })
-    }, [id, favSongs]);
+    // useEffect(() => {
+    //     favSongs.filter((fsong) => {
+    //         if (fsong.id_song._id === id) {
+    //             setIsFav(!isFav);
+    //         }
+    //     })
+    // }, [id, favSongs]);
 
     return (
         <div className={styles["CoverSm-card"]}>

@@ -15,11 +15,13 @@ import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import { MusicContext } from "../../contexts/MusicContext/MusicContext";
 
 export default function Discover() {
 
     const notify = (e) => toast(`${e}`);
     const { userId } = useContext(UserContext);
+    // const { songss } = useContext(MusicContext)
     const { dispatchPlayer } = useContext(PlayerContext);
     const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
@@ -39,7 +41,6 @@ export default function Discover() {
             .catch(console.log)
     }, [forceReload])
 
-
     //GET PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/playlist`, "GET")
@@ -50,37 +51,47 @@ export default function Discover() {
                 ));
             })
             .catch(console.log)
-    }, [])
+    }, [forceReload])
 
     // GET FAVOURITE SONGS
     useEffect(() => {
         ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
-            .then((response) => setFavSongs(response))
+            .then((response) => {
+                setFavSongs(response)
+
+            })
             .catch(console.log)
-    }, []);
+    }, [forceReload]);
 
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
         ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
             .then((response) => setFavPlaylists(response))
             .catch(console.log)
-    }, []);
+    }, [forceReload]);
+
+
+    useEffect(() => {
+        console.log("cambio lista fav");
+    }, [favSongs])
 
     //ADD SONG TO FAVOURITES
     const AddSongToFavourites = (songId) => {
         const favSong = {
             id_song: songId,
             id_user: userId,
-            isFav: true
         }
         ServerRequest("data/favouritesongs", "POST", favSong)
-            .then((response) => {
-                setFavSongs([...favSongs, response])
-                setForceReload(!forceReload)
+            .then(() => {
+                setSongs(songs.map((song) => {
+                    if (song._id === songId) {
+                        return [...songs, { ...song, isFav: true }]
+                    }
+                    return song;
+                }))
+                console.log("Array songs modificado", songs);
             })
-            .catch(() => {
-                setForceReload(!forceReload)
-            })
+            .catch(console.log)
     }
 
     //REMOVE SONG FROM FAVOURITES
@@ -89,14 +100,16 @@ export default function Discover() {
             .then((res) => {
                 const resId = res;
                 ServerRequest(`data/favouritesongs/${resId[0]._id}`, "DELETE")
-                    .then(() => favSongs.filter((favSong) => favSong.id_song._id !== songId))
+                    .then(console.log)
                     .catch(() => {
+                        console.log(favSongs);
+                        console.log(songId);
+                        console.log(favSongs.filter((favSong) => favSong.id_song._id !== songId));
+                        setFavSongs(favSongs.filter((favSong) => favSong.id_song._id !== songId))
                         setForceReload(!forceReload)
                     })
             })
-            .catch(() => {
-                setForceReload(!forceReload)
-            })
+            .catch(console.log)
     }
 
     //ADD PLAYLIST TO FAVOURITES
@@ -121,16 +134,12 @@ export default function Discover() {
                 const resId = res;
                 ServerRequest(`data/favouriteplaylists/${resId[0]._id}`, "DELETE")
                     .then(() => {
-                        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist._id !== playlistId)
+                        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId)
                         setForceReload(!forceReload)
                     })
-                    .catch(() => {
-                        setForceReload(!forceReload)
-                    })
+                    .catch(console.log)
             })
-            .catch(() => {
-                setForceReload(!forceReload)
-            })
+            .catch(console.log)
     }
 
     //PLAY PLAYLIST
@@ -270,6 +279,7 @@ export default function Discover() {
                                     author={song.artist}
                                     categories={song.category}
                                     img={song.image}
+                                    isFav={song.isFav}
                                     handleAddToFavourites={AddSongToFavourites}
                                     handleRemoveFromFavourite={RemoveSongFromFavourites}
                                     handleAddToPlaylist={handleOpenAddToPlaylist}
@@ -294,6 +304,7 @@ export default function Discover() {
                                     description={playlist.description}
                                     categories={playlist.category}
                                     img={playlist.image}
+                                    isFav={playlist.isFav}
                                     handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                                     handleAddToFavourites={AddPlaylistToFavourites}
                                     handleRemoveFromFavourites={RemovePlaylistFromFavourites}
