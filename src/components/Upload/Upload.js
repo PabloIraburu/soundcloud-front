@@ -1,17 +1,20 @@
 
-import React, {useState, useRef, useContext} from "react";
-import {Input} from "../Input/Input";
-import {MyButton} from "../MyButton/MyButton";
-import {Selector} from "../Selector/Selector";
-import {getToken} from "../../utils/LocalStorage.utils";
-import {UserContext} from "../../contexts/UserContext/contextProvider";
-import {categories} from "../../data/categories";
+import React, { useState, useRef, useContext } from "react";
+import { Input } from "../Input/Input";
+import { MyButton } from "../MyButton/MyButton";
+import { Selector } from "../Selector/Selector";
+import { getToken } from "../../utils/LocalStorage.utils";
+import { UserContext } from "../../contexts/UserContext/contextProvider";
+import { categories } from "../../data/categories";
 import "./Upload.css";
-import {API_URL} from "../../helpers/ServerRequest";
+import { API_URL } from "../../helpers/ServerRequest";
+import logo from "../../img/logo.png";
 
-
-export const Upload = ({setForceReload, forceReload, handleClose, notify}) => {
-    const [song, setSong] = useState({});
+export const Upload = ({ setForceReload, forceReload, handleClose, notify }) => {
+    const [song, setSong] = useState({
+        // "image": "https://previews.123rf.com/images/jemastock/jemastock1701/jemastock170102174/70024333-silhouette-headphones-music-listen-mobile-vector-illustration.jpg"
+        "image": logo
+    });
     const fileInputEl = useRef(null);
     const { userId } = useContext(UserContext);
 

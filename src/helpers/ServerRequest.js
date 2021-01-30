@@ -20,7 +20,6 @@ export const ServerRequest = (routes, method, body) => {
 
     let response;
 
-
     return fetch(url, options)
         .catch(error => (error))
         .then(res => {

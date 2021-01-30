@@ -5,6 +5,7 @@ import { ServerRequest } from "../../helpers/ServerRequest";
 import { useHistory } from "react-router-dom";
 import * as route from '../../routes/routes';
 import styles from "./EditPlaylist.module.css";
+import { toast } from 'react-toastify';
 import { UserContext } from "../../contexts/UserContext/contextProvider";
 
 export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReload }) => {
@@ -12,6 +13,7 @@ export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReloa
   const { userId } = useContext(UserContext);
   const history = useHistory();
   const [editedPlaylist, setEditedPlaylist] = useState({});
+  const notify = (e) => toast(`${e}`);
 
   //Introduce los datos de los inputs en el objeto newPlaylist
   const handleInput = (event) => {
@@ -26,20 +28,22 @@ export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReloa
 
   const handleEditPlaylist = (event) => {
     console.log("handleEditplaylist event", event);
-    // Petición al servidor de tipo POST - fetch localhost:3300/data/playlist/:id
     ServerRequest(`data/playlist/${playlist._id}`, "PUT", editedPlaylist)
-      .then(console.log)
-      .catch((response) => console.log(response.error))
+      .then(() => {
+        notify('Playlist edited correctly')
+        setForceReload(!forceReload)
+      })
+      .catch((response) => notify(response.error))
     handleClose(event);
-    history.push(route.PLAYLISTS)
+    // history.push(route.PLAYLISTS)
   }
 
   const handleDeletePlaylist = (event) => {
     console.log("handleDeleteplaylist event", event);
     ServerRequest(`data/playlist/${playlist._id}`, "DELETE", editedPlaylist)
       .then(console.log)
-      .catch((response) => {
-        console.log(response.error)
+      .catch(() => {
+        notify('Playlist deleted correctly')
         setForceReload(!forceReload)
       })
     handleClose(event);
@@ -57,7 +61,6 @@ export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReloa
             name="title"
             placeholder={playlist.title}
             onChange={handleInput}
-            value={playlist.title}
             required
           />
           <h4>Description</h4>
@@ -79,8 +82,6 @@ export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReloa
           />
           <div className={styles["EditPlaylist-button"]}>
             {
-              (editedPlaylist.title === undefined || editedPlaylist.title === "" || editedPlaylist.title === " ")
-              &&
               <>
                 <MyButton variant="darkBlue" size="40%" onClick={handleDeletePlaylist} >
                   Delete

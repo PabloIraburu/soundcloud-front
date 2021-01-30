@@ -8,16 +8,18 @@ import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
 import * as route from '../../routes/routes';
 import { UserContext } from "../../contexts/UserContext/contextProvider"
+import { ToastContainer, toast } from "react-toastify";
 
 
 export const EditProfile = (props) => {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser, signOut } = useContext(UserContext);
   const history = useHistory();
-
   const [editedUser, setEditedUser] = useState({});
   const [newPass, setNewPass] = useState({});
   const [openModalPass, setOpenModalPass] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const notify = (e) => toast(`${e}`);
+
 
   // Gestiona el modal editar password
   const handleOpenPass = () => setOpenModalPass(!openModalPass);
@@ -52,6 +54,7 @@ export const EditProfile = (props) => {
     ServerRequest(`data/user/${user._id}`, "PUT", editedUser)
       .then((response) => {
         setUser(response);
+        notify('Profile edited correctly')
         //Manda al usuario a la home tras el registro completado
         history.push(route.PROFILE);
       })
@@ -62,17 +65,20 @@ export const EditProfile = (props) => {
   const handleSubmitPassword = (e) => {
     ServerRequest(`data/user/${user._id}`, "PATCH", { password: newPass })
       .then((response) => {
+        console.log(response.token);
         setJWT(response.token)
+        notify('Password edited correctly')
         setOpenModalPass(!openModalPass)
+        signOut();
       })
-      .catch((response) => console.log);
+      .catch((response) => notify(response.error));
   };
 
   // Eliminar cuenta
   const handleDelete = (e) => {
     ServerRequest(`data/user/${user._id}`, "DELETE")
-      .then(response => console.log)
-      .catch((response) => console.log);
+      .then(console.log)
+      .catch(notify('Account deleted correctly'));
     history.replace(route.HOME);
   };
 
@@ -131,7 +137,18 @@ export const EditProfile = (props) => {
           </span>
         </Modal>
       }
-    </ >
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </>
   )
 }
 

@@ -10,16 +10,16 @@ import { categories } from "../../data/categories";
 import { Upload } from '../../components/Upload/Upload';
 import EventIcon from '@material-ui/icons/Event';
 import styles from "./MySongs.module.css";
-import {toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 
 export const MySongs = () => {
+
     const { userId } = useContext(UserContext);
     const [userSongs, setUserSongs] = useState([]);
     const [editedSong, setEditedSong] = useState({});
     const [forceReload, setForceReload] = useState(false);
     const notify = (e) => toast(`${e}`);
-
 
     //Canciones subidas por el usuario
     useEffect(() => {
@@ -38,7 +38,6 @@ export const MySongs = () => {
             [name]: value,
         }));
     };
-
 
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
@@ -67,8 +66,8 @@ export const MySongs = () => {
     //Añadir canción a playlist
     const handleAddToPlaylist = (songId, playlistId) => {
         ServerRequest(`data/playlist/${playlistId}`, 'PUT', songId)
-            .then(console.log)
-            .catch(console.log);
+            .then(notify('Song added to playlist correctly'))
+            .catch((response) => notify(response.error));
     }
 
     //Edición información canciones
@@ -76,22 +75,21 @@ export const MySongs = () => {
         ServerRequest(`data/song/${editedSong._id}`, "PUT", editedSong)
             .then((response) => {
                 setEditedSong(response);
+                notify('Song edited correctly')
                 setForceReload(!forceReload)
             })
-            .catch((response) => console.log);
-
+            .catch((response) => notify(response.error));
         setOpenModalEditSong(!openModalEditSong);
     }
 
     //Eliminación canción
     const handleDeleteSong = (song) => {
         ServerRequest(`data/song/${song._id}`, "DELETE")
-            .then((res) => {
-            })
-            .catch(()=> {
+            .then(console.log)
+            .catch(() => {
+                notify('Song deleted correctly')
                 setForceReload(!forceReload)
-            }
-        );
+            });
     }
 
     return (
@@ -100,7 +98,7 @@ export const MySongs = () => {
             <div className={styles["mysongs-header"]}>
                 <h1>My Songs</h1>
                 <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">Upload Song</MyButton>
-                
+
             </div>
             <div className={styles["mysongs-list"]}>
                 <div className={styles["mysongs-img"]}></div>
@@ -113,8 +111,8 @@ export const MySongs = () => {
                     <div className={styles["mysongs-icons"]}></div>
                 </div>
             </div >
-            <hr className={styles["mysong-hr"]}/>
-            
+            <hr className={styles["mysong-hr"]} />
+
             {
                 userSongs.length === 0
                     ? <p>You haven't upload any songs yet...</p>
@@ -137,31 +135,27 @@ export const MySongs = () => {
                             type="text"
                             name={"title"}
                             onChange={handleInput}
-                            placeholder={"Song title"}
-                            value={editedSong.title}
+                            placeholder={editedSong.title}
                             required
                         />
                         <Input
                             type="text"
                             name="Album"
                             onChange={handleInput}
-                            placeholder={"Insert album name"}
-                            value={editedSong.album}
+                            placeholder={editedSong.album}
                         />
                         <Input
                             type="text"
                             name="artist"
                             onChange={handleInput}
-                            placeholder={"Artist name"}
-                            value={editedSong.artist}
+                            placeholder={editedSong.artist}
                             required
                         />
                         <Input
                             type="text"
                             name="image"
                             onChange={handleInput}
-                            placeholder={"Url song image"}
-                            value={editedSong.image}
+                            placeholder={editedSong.image}
                             required
                         />
                         <Selector name="category" id="category" onChange={handleInput} required>
@@ -172,14 +166,6 @@ export const MySongs = () => {
                             ))}
                         </Selector>
                         <div className={styles["mysongs-buttons"]}>
-                            {/* <MyButton
-                                onClick={handleDeleteSong}
-                                variant="darkBlue"
-                                size="50%"
-                                className="button-custom"
-                            >
-                                Delete file
-                            </MyButton> */}
                             <MyButton
                                 onClick={handleEditSong}
                                 variant="pink-or"
@@ -197,9 +183,20 @@ export const MySongs = () => {
             }
             {openModalUpload && (
                 <Modal handleClose={handleCloseUpload}>
-                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify}/>
+                    <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify} />
                 </Modal>
             )}
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     )
 }
