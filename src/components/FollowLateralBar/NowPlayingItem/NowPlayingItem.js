@@ -1,10 +1,13 @@
-import React from "react";
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import React, { useContext } from "react";
+import { PlayerContext } from "../../../contexts/PlayerContext/playerContext";
+import { playerActions } from "../../../reducers/playerReducer";
 
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import styles from './NowPlayingItem.module.css';
 
 export const NowPlayingItem = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylist }) => {
 
+    const { dispatchPlayer } = useContext(PlayerContext);
 
     return (
         <div className={styles["NowPlayingItemFollowMenu-wrap"]}>
@@ -16,7 +19,10 @@ export const NowPlayingItem = ({ entity, title, categories, author, img, descrip
                 </div>
             </div>
 
-            <HighlightOffIcon fontSize="inherit" />
+            <HighlightOffIcon
+                fontSize="inherit"
+                onClick={() => dispatchPlayer({ type: playerActions.REMOVE_FROM_QUEU, songId: id })}
+            />
         </div >
     );
 };

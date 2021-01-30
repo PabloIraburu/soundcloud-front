@@ -20,8 +20,6 @@ export const ServerRequest = (routes, method, body) => {
 
     let response;
 
-    const url = `${API_URL}/${routes}`;
-
     return fetch(url, options)
         .catch(error => (error))
         .then(res => {
