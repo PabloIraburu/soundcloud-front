@@ -11,7 +11,6 @@ function Search({handleAddToFavourites, handleRemoveFromFavourites, handleAddToP
         ServerRequest('data/song', 'GET')
             .then((response) => {
                 setSongs(response)
-                console.log(response)
             })
     }, [])
 
@@ -25,7 +24,7 @@ function Search({handleAddToFavourites, handleRemoveFromFavourites, handleAddToP
         const results = songs.filter(art => art.title.toLowerCase().includes(searchItem));
         setSearchResults(results);
     }, [searchItem]);
-    console.log(handleAddToFavourites)
+
     return (
         <div className='searchBar'>
             <TextField id="outlined-basic" label="Search" variant="outlined" type='text'

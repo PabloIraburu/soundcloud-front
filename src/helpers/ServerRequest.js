@@ -2,9 +2,11 @@ import { getToken } from "../utils/LocalStorage.utils";
 
 export const API_URL = window.location.hostname === 'soundmist.netlify.app' ? "https://sound-mist.herokuapp.com" : `http://localhost:3300`;
 
+
 export const ServerRequest = (routes, method, body) => {
     const token = getToken();
     const url = `${API_URL}/${routes}`;
+
     const JSONBody = JSON.stringify(body);
     const options = {
         method: method,
@@ -17,6 +19,8 @@ export const ServerRequest = (routes, method, body) => {
     }
 
     let response;
+
+    const url = `${API_URL}/${routes}`;
 
     return fetch(url, options)
         .catch(error => (error))
