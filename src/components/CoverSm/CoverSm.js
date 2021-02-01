@@ -14,13 +14,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { withStyles } from "@material-ui/styles";
 
 
-export const CoverSm = ({ entity, title, categories, author, img, description, id, index, handleAddToFavourites, handleRemoveFromFavourite, handleAddToPlaylist }) => {
+export const CoverSm = ({ entity, title, categories, author, img, description, id, isFav, index, handleAddToFavourites, handleRemoveFromFavourite, handleAddToPlaylist }) => {
 
     const notify = (e) => toast(`${e}`);
     const { userId } = useContext(UserContext);
     const { dispatchPlayer } = useContext(PlayerContext);
     const [favSongs, setFavSongs] = useState([]);
-    const [isFav, setIsFav] = useState(false);
+    // const [isFav, setIsFav] = useState(false);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
             backgroundColor: '#f5f5f9',

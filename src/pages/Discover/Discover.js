@@ -15,13 +15,11 @@ import 'react-h5-audio-player/lib/styles.css';
 import './Discover.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { MusicContext } from "../../contexts/MusicContext/MusicContext";
 
 export default function Discover() {
 
     const notify = (e) => toast(`${e}`);
-    const { userId } = useContext(UserContext);
-    // const { songss } = useContext(MusicContext)
+    const { userId, favs, setFavs } = useContext(UserContext);
     const { dispatchPlayer } = useContext(PlayerContext);
     const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
@@ -40,6 +38,7 @@ export default function Discover() {
             })
             .catch(console.log)
     }, [forceReload])
+
 
     //GET PLAYLISTS
     useEffect(() => {
@@ -65,6 +64,7 @@ export default function Discover() {
     }, [forceReload]);
 
     console.log("initialfavsongs", favSongs);
+    // favs.favSongs
 
     // GET FAVOURITE PLAYLISTS
     useEffect(() => {
@@ -77,6 +77,7 @@ export default function Discover() {
     useEffect(() => {
         console.log("cambio lista fav");
     }, [favSongs])
+    // from context favs.favPlaylists
 
     //ADD SONG TO FAVOURITES
     const AddSongToFavourites = (songId) => {
@@ -91,13 +92,16 @@ export default function Discover() {
                     if (song._id === songId) {
                         (song.isFav = true)
                     }
+                    notify('Song added to favourites correctly')
                     return song;
                 }))
-                notify('Song added to favourites correctly')
-                setForceReload(!forceReload)
-                console.log("Array songs modificado", songs);
-            })
+            // .then((response) => {
+            //     setFavs([...favs.favSongs, response])
+            //     setForceReload(!forceReload)
+            //     console.log("Array songs modificado", songs);
+            // })
             .catch(console.log)
+    })
     }
 
     //REMOVE SONG FROM FAVOURITES
@@ -116,6 +120,11 @@ export default function Discover() {
 
                         setForceReload(!forceReload)
                     })
+            })
+
+        ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
+            .then(() => {
+               setFavs.favSongs(favs.favSongs.filter(favSong => favSong._id !== songId))
             })
             .catch(console.log)
     }
