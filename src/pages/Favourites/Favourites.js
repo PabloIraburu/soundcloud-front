@@ -9,8 +9,11 @@ import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { playerActions } from '../../reducers/playerReducer';
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
+import {toast} from "react-toastify";
 
 export const Favourites = () => {
+
+  const notify = (e) => toast(`${e}`);
 
   const { userId } = useContext(UserContext);
   const { dispatchPlayer } = useContext(PlayerContext);
