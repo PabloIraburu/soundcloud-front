@@ -4,6 +4,8 @@ import { PlayerContext } from '../../contexts/PlayerContext/playerContext'
 import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { API_URL } from "../../helpers/ServerRequest";
+
 
 // import './Player.scss';
 
@@ -52,7 +54,7 @@ export const Player = () => {
           // { player.reproduceSongList.map((song) => {
 
           // })}
-          src={`http://localhost:3300/track/${
+          src={`${API_URL}/track/${
             player.reproduceSongList.length !== 0 &&
             player.currentPlay !== undefined &&
             player.reproduceSongList[player.currentPlay].trackId
