@@ -16,7 +16,6 @@ import { UserContextProvider } from "../contexts/UserContext/contextProvider";
 import { Player } from "../components/Player/Player";
 import { MySongs } from "../pages/MySongs/MySongs";
 import '../App.css';
-import { MusicContextProvider } from "../contexts/MusicContext/MusicContext";
 
 
 export const MainRouter = () => {
@@ -32,33 +31,31 @@ export const MainRouter = () => {
     <>
 
       <UserContextProvider>
-        <MusicContextProvider>
-          <PlayerContextProvider>
+        <PlayerContextProvider>
 
-            <div className="Mainrouter-player">
-              <Player />
+          <div className="Mainrouter-player">
+            <Player />
+          </div>
+          <div>
+            <LateralBar />
+            <FollowLateralBar />
+            <div className="MainRouter-wrap">
+              <Switch>
+                <PrivateRoute exact path={route.DISCOVER} component={Discover} />
+                <PrivateRoute exact path={route.MYSONGS} component={MySongs} />
+                <PrivateRoute exact path={route.ALBUMS} component={Albums} />
+                <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
+                <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
+                <PrivateRoute exact path={route.PROFILE} component={Profile} />
+                <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
+                <PrivateRoute exact path={route.ALBUMDETAIL} component={EntityDetail} />
+                <PrivateRoute exact path={route.PLAYLISTDETAIL} component={EntityDetail} />
+                {/* <Redirect to="/discover" /> */}
+              </Switch>
             </div>
-            <div>
-              <LateralBar />
-              <FollowLateralBar />
-              <div className="MainRouter-wrap">
-                <Switch>
-                  <PrivateRoute exact path={route.DISCOVER} component={Discover} />
-                  <PrivateRoute exact path={route.MYSONGS} component={MySongs} />
-                  <PrivateRoute exact path={route.ALBUMS} component={Albums} />
-                  <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
-                  <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
-                  <PrivateRoute exact path={route.PROFILE} component={Profile} />
-                  <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
-                  <PrivateRoute exact path={route.ALBUMDETAIL} component={EntityDetail} />
-                  <PrivateRoute exact path={route.PLAYLISTDETAIL} component={EntityDetail} />
-                  {/* <Redirect to="/discover" /> */}
-                </Switch>
-              </div>
-            </div>
+          </div>
 
-          </PlayerContextProvider>
-        </MusicContextProvider>
+        </PlayerContextProvider>
       </UserContextProvider>
     </>
   );
