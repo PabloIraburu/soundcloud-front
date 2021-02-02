@@ -139,7 +139,7 @@ export const EditProfile = (props) => {
       }
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={2250}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
