@@ -110,17 +110,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                 }
             </div>
 
-            <ToastContainer
-                position="top-center"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
         </div>
     );
 };

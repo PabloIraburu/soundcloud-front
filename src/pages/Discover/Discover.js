@@ -215,11 +215,9 @@ export default function Discover() {
                 <div className="headMid">
                     <div className="search">
                         <Search
-                            handleAddToFavourites={(id) =>
-                                AddSongToFavourites(id)
-                            }
+                            handleAddToFavourites={AddSongToFavourites}
                             handleRemoveFromFavourite={RemoveSongFromFavourites}
-                            handleAddToPlaylistSearch={handleOpenAddToPlaylist}
+                            handleAddToPlaylist={handleOpenAddToPlaylist}
                         />
                     </div>
                     {/*<div className="notif">*/}
@@ -340,7 +338,7 @@ export default function Discover() {
                 </Modal>}
             <ToastContainer
                 position="top-center"
-                autoClose={1500}
+                autoClose={2250}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

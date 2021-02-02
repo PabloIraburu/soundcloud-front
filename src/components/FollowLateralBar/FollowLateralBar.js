@@ -121,7 +121,7 @@ export const FollowLateralBar = () => {
                             ))}
                             <ToastContainer
                                 position="top-center"
-                                autoClose={5000}
+                                autoClose={2250}
                                 hideProgressBar={false}
                                 newestOnTop={false}
                                 closeOnClick
