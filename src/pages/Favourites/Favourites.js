@@ -148,6 +148,7 @@ export const Favourites = () => {
                 categories={song.id_song.category}
                 img={song.id_song.image}
                 id={song.id_song._id}
+                isFav={true}
                 entityType="song"
                 handleRemoveFromFavourite={RemoveSongFromFavourites}
                 handleAddToPlaylist={handleOpenAddToPlaylist}
@@ -172,6 +173,7 @@ export const Favourites = () => {
                 img={playlist.id_playlist.image}
                 id={playlist.id_playlist._id}
                 entityType="playlist"
+                isFav={true}
                 handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                 handleRemoveFromFavourites={RemovePlaylistFromFavourites}
                 handlePlay={handlePlayPlaylist}
