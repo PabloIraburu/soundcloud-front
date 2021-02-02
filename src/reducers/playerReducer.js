@@ -42,7 +42,7 @@ const playerReducer = (state, action) => {
                 return newState;
 
         case playerActions.REMOVE_FROM_QUEUE:
-            newState.reproduceSongList = state.filter(song => song._id !== action.songId);
+            newState.reproduceSongList = state.reproduceSongList.filter(song => song._id !== action.songId);
             return newState;
 
         case playerActions.START_PLAY:

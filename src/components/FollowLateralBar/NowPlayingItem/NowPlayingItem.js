@@ -21,7 +21,7 @@ export const NowPlayingItem = ({ entity, title, categories, author, img, descrip
 
             <HighlightOffIcon
                 fontSize="inherit"
-                onClick={() => dispatchPlayer({ type: playerActions.REMOVE_FROM_QUEU, songId: id })}
+                onClick={() => dispatchPlayer({ type: playerActions.REMOVE_FROM_QUEUE, songId: id })}
             />
         </div >
     );
