@@ -12,7 +12,6 @@ export const UserContextProvider = ({ children }) => {
     const userId = DecodeToken(getToken()).id;
 
     const history = useHistory();
-  const [favs, setFavs] = useState({favSongs: [], favPlaylists: []})
   const [user, setUser] = useState({
       _id: "",
       name: "",
@@ -45,16 +44,6 @@ export const UserContextProvider = ({ children }) => {
     history.replace(route.HOME)
   }
 
-  // Fav songs to the user
-  useEffect(() => {
-    ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
-        .then((response) => {
-          console.log('favSongs', response)
-          setFavs({favSongs: response})
-        })
-        .catch(console.log);
-  }, []);
-
 
     return <UserContext.Provider value={{
         userId,
@@ -62,8 +51,6 @@ export const UserContextProvider = ({ children }) => {
         setUser,
         allUsers,
         setAllUsers,
-        favs,
-        setFavs,
         signOut,
       }}>{children}</UserContext.Provider>
 }
