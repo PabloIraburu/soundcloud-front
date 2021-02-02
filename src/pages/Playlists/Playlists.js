@@ -20,53 +20,83 @@ export const Playlists = () => {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState();
-  const [favPlaylists, setFavPlaylists] = useState([]);
   const [forceReload, setForceReload] = useState(false);
 
-  console.log("Playlist id", playlists._id);
-
-  //GET USER PLAYLISTS
+  //GET USER PLAYLISTS & FAVOURITE PLAYLISTS
   useEffect(() => {
     ServerRequest(`data/playlist/?id_owner=${userId}`, "GET")
-      .then(response => setUserPlaylists(response))
+      .then((response) => {
+        ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+          .then((res) => {
+            let favs = (res.map(fav => fav.id_playlist._id))
+            setUserPlaylists(response.map((playlist) => {
+              if (favs.includes(playlist._id)) {
+                playlist.isFav = true
+              }
+              return playlist;
+            }))
+          })
+          .catch(console.log)
+      })
       .catch(console.log)
-    console.log('user playlists', userPlaylists);
   }, [forceReload])
 
-  //GET ALL PLAYLISTS
+  //GET PLAYLISTS & FAVOURITE PLAYLISTS
   useEffect(() => {
     ServerRequest(`data/playlist`, "GET")
-      .then(response => setPlaylists(response))
+      .then((response) => {
+        ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
+          .then((res) => {
+            let favs = (res.map(fav => fav.id_playlist._id))
+            setPlaylists(response.map((playlist) => {
+              if (favs.includes(playlist._id)) {
+                playlist.isFav = true
+              }
+              return playlist;
+            }))
+          })
+          .catch(console.log)
+      })
       .catch(console.log)
-    console.log('playlists', playlists)
   }, [forceReload])
-
 
   //ADD PLAYLIST TO FAVOURITES
   const AddPlaylistToFavourites = (playlistId) => {
     const favPlaylist = {
       id_playlist: playlistId,
       id_user: userId,
-      isFav: true
     }
     ServerRequest("data/favouriteplaylists", "POST", favPlaylist)
-      .then((response) => {
+      .then(() => {
+        setPlaylists(playlists.filter((playlist) => {
+          if (playlist._id === playlistId) {
+            (playlist.isFav = true)
+          }
+          return playlist;
+        }))
+        if (userPlaylists._id.includes(playlistId)) {
+          setUserPlaylists(userPlaylists.map((playlist) => {
+            if (playlist._id === playlistId) {
+              (playlist.isFav = true)
+            }
+            return playlist;
+          }))
+        }
         notify('Playlist added to favourites correctly')
-        setFavPlaylists([...favPlaylists, response])
-        setForceReload(!forceReload)
       })
       .catch(console.log)
   }
 
   //REMOVE PLAYLIST FROM FAVOURITES
   const RemovePlaylistFromFavourites = (playlistId) => {
-    ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "DELETE")
-      .then(() => {
-        favPlaylists.filter((favPlaylist) => favPlaylist.id_playlist !== playlistId)
-        notify('Playlist removed from favourites correctly')
-        setForceReload(!forceReload)
+    ServerRequest(`data/favouriteplaylists/?id_playlist=${playlistId}&&id_user=${userId}`, "GET")
+      .then((res) => {
+        ServerRequest(`data/favouriteplaylists/${res[0]._id}`, "DELETE")
+          .catch(() => {
+            setForceReload(!forceReload)
+            notify('Playlist removed from favourites correctly')
+          })
       })
-      .catch(console.log)
   }
 
   //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
@@ -127,6 +157,7 @@ export const Playlists = () => {
               description={playlist.description}
               img={playlist.image}
               id={playlist._id}
+              isFav={playlist.isFav}
               entityType="playlist"
               handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
               handleAddToFavourites={AddPlaylistToFavourites}
@@ -151,6 +182,7 @@ export const Playlists = () => {
               description={playlist.description}
               img={playlist.image}
               id={playlist._id}
+              isFav={playlist.isFav}
               entityType="playlist"
               handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
               handleAddToFavourites={AddPlaylistToFavourites}
@@ -172,7 +204,7 @@ export const Playlists = () => {
           <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} notify={notify} />
         </Modal>}
 
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         autoClose={2000}
         hideProgressBar={false}
@@ -182,7 +214,7 @@ export const Playlists = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
     </>
   )
 }

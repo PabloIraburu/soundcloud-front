@@ -186,9 +186,9 @@ export const MySongs = () => {
                     <Upload setForceReload={setForceReload} forceReload={forceReload} handleClose={handleOpenUpload} notify={notify} />
                 </Modal>
             )}
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-center"
-                autoClose={5000}
+                autoClose={2000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -196,7 +196,7 @@ export const MySongs = () => {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-            />
+            /> */}
         </>
     )
 }
