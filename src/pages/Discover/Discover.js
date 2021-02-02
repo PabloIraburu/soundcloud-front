@@ -34,12 +34,9 @@ export default function Discover() {
             .then((response) => {
                 ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
                     .then((res) => {
-                        console.log(response)
                         let favs = (res.map(fav => fav.id_song._id))
-                        // setFavSongs(favs)
                         setSongs(response.map((song) => {
                             if (favs.includes(song._id)) {
-                                console.log('Tes')
                                 song.isFav = true
                             }
                             return song;
@@ -60,7 +57,6 @@ export default function Discover() {
                 ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
                     .then((res) => {
                         let favs = (res.map(fav => fav.id_playlist._id))
-                        // setFavPlaylists(favs)
                         setPlaylists(response.map((playlist) => {
                             if (favs.includes(playlist._id)) {
                                 playlist.isFav = true
@@ -107,7 +103,6 @@ export default function Discover() {
             })
     }
 
-
     //ADD PLAYLIST TO FAVOURITES
     const AddPlaylistToFavourites = (playlistId) => {
         const favPlaylist = {
@@ -139,7 +134,6 @@ export default function Discover() {
             })
     }
 
-
     //GESTIÓN PLAY & ADD TO QUEUE OF SONGS/PLAYLIST
     //PLAY PLAYLIST
     const handlePlayPlaylist = (playlistId) => {
@@ -158,7 +152,6 @@ export default function Discover() {
             })
             .catch((response) => notify(response.error))
     };
-
 
     //GESTIÓN ADD SONG TO PLAYLISTT
     //GESTIÓN MODAL ADD SONG TO PLAYLIST
@@ -200,7 +193,6 @@ export default function Discover() {
         if (el !== "backdrop" && el !== "fas fa-times") return;
         setOpenModalUpload(!openModalUpload);
     };
-
 
     //Gestión modal EditPlaylist
     const [openModalEditPlaylist, setOpenModalEditPlaylist] = useState(false);

@@ -3,24 +3,21 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext/contextProvider";
 import { CoverBg } from '../../components/CoverBg/CoverBg'
 import { SongItemList } from '../../components/SongItemList/SongItemList'
-import styles from "./EntityDetail.module.css";
 import { ServerRequest } from '../../helpers/ServerRequest';
+import { toast } from 'react-toastify';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import styles from "./EntityDetail.module.css";
 
 
 export const EntityDetail = () => {
 
+  const notify = (e) => toast(`${e}`);
   const { userId } = useContext(UserContext);
   const location = useLocation();
   const entityId = ((location.pathname).split("/", 3))[2];
   const [entity, setEntity] = useState({});
   const [entitySongs, setEntitySongs] = useState([]);
-  const [favSongs, setFavSongs] = useState([]);
-  const [owner, setOwner] = useState({});
   const [forceReload, setForceReload] = useState(false);
-
-  console.log("entity id", entityId);
-
 
   //GET ENTITY INFORMATION
   useEffect(() => {
@@ -31,24 +28,26 @@ export const EntityDetail = () => {
       .catch(console.log)
   }, []);
 
-  useEffect(() => {
-    ServerRequest(`data/user/?_id=${entity.id_owner}`, "GET")
-      .then(response => {
-        console.log(response);
-        setOwner(response)
-      })
-      .catch(console.log)
-  }, [entity]);
-
-  //GET ENTITY SONGS  
+  //GET SONGS & FAVOURITE SONGS
   useEffect(() => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${entityId}`, "GET")
-      .then(response => {
-        setEntitySongs(response)
-        console.log('these are the songs', response)
+      .then((response) => {
+        console.log("songs in playlist", response);
+        ServerRequest(`data/favouritesongs/?id_user=${userId}`, "GET")
+          .then((res) => {
+            let favs = (res.map(fav => fav.id_song._id))
+            setEntitySongs(response.map((song) => {
+              if (favs.includes(song.id_song._id)) {
+                console.log("song.id_song.isFav", song.id_song.isFav);
+                song.id_song.isFav = true
+              }
+              return song;
+            }))
+          })
+          .catch(console.log)
       })
       .catch(console.log)
-  }, [forceReload]);
+  }, [forceReload])
 
   //REMOVE SONG FROM PLAYLIST
   const handleRemoveSongFromPlaylist = (songId) => {
@@ -65,36 +64,47 @@ export const EntityDetail = () => {
   }
 
   //ADD SONG TO FAVOURITES
-  const handleAddSongToFavourites = (songId) => {
+  const AddSongToFavourites = (songId) => {
     const favSong = {
       id_song: songId,
       id_user: userId,
-      isFav: true
     }
     ServerRequest("data/favouritesongs", "POST", favSong)
-      .then((response) => setFavSongs([...favSongs, response]))
-      .catch(console.log);
+      .then(() => {
+        setEntitySongs(entitySongs.filter((song) => {
+          if (song.id_song._id === songId) {
+            (song.id_song.isFav = true)
+          }
+          return song;
+        }))
+        notify('Song added to favourites correctly')
+      })
+      .catch(console.log)
   }
 
   //REMOVE SONG FROM FAVOURITES
-  const handleRemoveSongFromFavourites = (songId) => {
-    ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "DELETE")
-      .then(() => favSongs.filter((favSong) => favSong.id_song !== songId))
-      .catch(console.log)
+  const RemoveSongFromFavourites = (songId) => {
+    ServerRequest(`data/favouritesongs/?id_song=${songId}&&id_user=${userId}`, "GET")
+      .then((res) => {
+        ServerRequest(`data/favouritesongs/${res[0]._id}`, "DELETE")
+          .catch(() => {
+            setForceReload(!forceReload)
+            notify('Song removed from favourites correctly')
+          })
+      })
   }
-  console.log("entity song properties:", entitySongs);
+
 
   return (
     <>
       {
-        (entity === {} || owner === {})
+        (entity === {})
           ? <p>Loading...</p>
           : <div className={styles["PlaylistDetail-header"]}>
             <CoverBg
               key={entity._id}
               id={entity._id}
               title={entity.title}
-              author={owner.name}
               img={entity.image}
               description={entity.description}
               categories={entity.category}
@@ -118,7 +128,6 @@ export const EntityDetail = () => {
       </div >
       <hr className={styles["EntityDetail-hr"]} />
 
-
       {
         (entitySongs.length === 0)
           ? <p>This Playlist is empty.</p>
@@ -126,9 +135,10 @@ export const EntityDetail = () => {
             {entitySongs.map((song, index) => (
               <SongItemList
                 handleRemoveSongFromPlaylist={handleRemoveSongFromPlaylist}
-                handleAddToFavourites={handleAddSongToFavourites}
-                handleRemoveFromFavourites={handleRemoveSongFromFavourites}
+                handleAddToFavourites={AddSongToFavourites}
+                handleRemoveFromFavourites={RemoveSongFromFavourites}
                 song={song.id_song}
+                isFav={song.id_song.isFav}
                 index={index}
               />
             ))}

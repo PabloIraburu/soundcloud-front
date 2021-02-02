@@ -137,7 +137,7 @@ export const EditProfile = (props) => {
           </span>
         </Modal>
       }
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         autoClose={2250}
         hideProgressBar={false}
@@ -147,7 +147,7 @@ export const EditProfile = (props) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
     </>
   )
 }
