@@ -8,7 +8,7 @@ import { MyButton } from '../../components/MyButton/MyButton';
 import { Modal } from '../../components/Modal/Modal';
 import * as route from '../../routes/routes';
 import { UserContext } from "../../contexts/UserContext/contextProvider"
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 
 export const EditProfile = (props) => {

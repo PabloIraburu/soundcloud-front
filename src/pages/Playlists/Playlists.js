@@ -8,7 +8,7 @@ import CreatePlaylist from "../../components/CreatePlaylist/CreatePlaylist";
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
 import { playerActions } from '../../reducers/playerReducer';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import styles from './Playlists.module.css';
 
 
@@ -99,15 +99,15 @@ export const Playlists = () => {
       })
   }
 
-  //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
+  //ADD PLAYLIST TO QUEUE
   const handleAddToQueue = (playlistId) => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
       .then(payload => {
-        dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song })
+        console.log(payload)
+        payload.map(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
         notify('Playlist added to queue correctly')
       })
-      .catch(console.log)
-    console.log('playlists', playlists)
+      .catch((response) => notify(response.error))
   };
 
   //PLAY PLAYLIST

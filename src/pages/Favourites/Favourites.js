@@ -9,7 +9,7 @@ import { EditPlaylist } from "../../components/EditPlaylist/EditPlaylist";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { playerActions } from '../../reducers/playerReducer';
 import { PlayerContext } from '../../contexts/PlayerContext/playerContext';
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 export const Favourites = () => {
 
@@ -38,7 +38,10 @@ export const Favourites = () => {
   //GET FAVOURITE PLAYLISTS
   useEffect(() => {
     ServerRequest(`data/favouriteplaylists/?id_user=${userId}`, "GET")
-      .then(response => setFavPlaylists(response))
+      .then(response => {
+        setFavPlaylists(response)
+        setUserPlaylists(response.filter((playlist) => playlist.id_owner === userId));
+      })
       .catch(console.log)
   }, [forceReload])
 
@@ -109,11 +112,15 @@ export const Favourites = () => {
       .catch(console.log)
   };
 
-  //GET SONGS IN PLAYLIST TO HANDLE ADD TO QUEUE
+  //ADD PLAYLIST TO QUEUE
   const handleAddToQueue = (playlistId) => {
     ServerRequest(`data/songsinplaylist/?id_playlist=${playlistId}`, "GET")
-      .then(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
-      .catch(console.log)
+      .then(payload => {
+        console.log(payload)
+        payload.map(payload => dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: payload.id_song }))
+        notify('Playlist added to queue correctly')
+      })
+      .catch((response) => notify(response.error))
   };
 
   //Gestión modal EditPlaylist
@@ -177,6 +184,7 @@ export const Favourites = () => {
                 handleOpenOptions={() => handleOpenEditPlaylist(playlist)}
                 handleRemoveFromFavourites={RemovePlaylistFromFavourites}
                 handlePlay={handlePlayPlaylist}
+                handleAddToQueue={handleAddToQueue}
               />
             ))}
           </div>
