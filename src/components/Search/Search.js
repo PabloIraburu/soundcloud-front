@@ -143,7 +143,7 @@ function Search({ forceReload, setForceReload }) {
                         index={index}
                         entityType="song"
                         handleAddToFavourites={AddSongToFavourites}
-                        handleRemoveFromFavourites={RemoveSongFromFavourites}
+                        handleRemoveFromFavourite={RemoveSongFromFavourites}
                         handleAddToPlaylist={handleOpenAddToPlaylist}
 
                     />
