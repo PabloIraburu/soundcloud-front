@@ -51,7 +51,7 @@ export const CoverMd = (
                         />
                     </HtmlTooltip>
 
-                    <div /*className={styles["PlayButton"]} */>
+                    <div className={styles["PlayButton"]} onClick={() => handlePlay(id)}>
                         <HtmlTooltip title="Play" placement="top">
                             <PlayCircleFilledIcon
                                 // fontSize="large"
@@ -59,25 +59,27 @@ export const CoverMd = (
                                 onClick={() => handlePlay(id)}
                             />
                         </HtmlTooltip>
-
                     </div>
 
                     {!isFav &&
                         <HtmlTooltip title="Add Favourites" placement="right">
-                            <FavoriteBorderOutlinedIcon
-                                fontSize="small"
-                                onClick={() => handleAddToFavourites(id)}
-                            />
+                            <div className={styles["FavoriteIcon"]} onClick={() => handleAddToFavourites(id)}>
+                                <FavoriteBorderOutlinedIcon
+                                    fontSize="small"
+                                    onClick={() => handleAddToFavourites(id)}
+                                />
+                            </div>
                         </HtmlTooltip>
 
                     }
                     {isFav &&
                         <HtmlTooltip title="Remove Favourite" placement="right">
-                            <FavoriteIcon
-                                fontSize="small"
-                                // style={{ color: '#f9b807' }}
-                                onClick={() => handleRemoveFromFavourites(id)}
-                            />
+                            <div className={styles["FavoriteIcon"]} onClick={() => handleRemoveFromFavourites(id)}>
+                                <FavoriteIcon
+                                    fontSize="small"
+                                    onClick={() => handleRemoveFromFavourites(id)}
+                                />
+                            </div>
                         </HtmlTooltip>
                     }
 

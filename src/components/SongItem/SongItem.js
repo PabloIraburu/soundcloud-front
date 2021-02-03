@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
-
+import { withStyles } from "@material-ui/styles";
+import { playerActions } from "../../reducers/playerReducer";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import EditIcon from "@material-ui/icons/Edit";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from "@material-ui/styles";
 import styles from './SongItem.module.css';
-import { playerActions } from "../../reducers/playerReducer";
 
 export const SongItem = ({ song, handleDeleteSong, handleOpenModalEditSong }) => {
 

@@ -45,6 +45,39 @@
   transition: all 250ms ease;
 }
 
+.PlayButton {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+  cursor: pointer;
+}
+
+.PlayButton::before,
+.PlayButton::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.PlayButton::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.PlayButton:hover::before {
+  background: white;
+}
+
+.PlayButton:hover::after {
+  background: white;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
+}
+
 .play-icon {
   transform: translateX(2px) scale(1.3);
 }

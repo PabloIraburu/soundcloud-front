@@ -12,9 +12,7 @@
   border-radius: 1px;
   box-shadow: 2px 2px 6px rgba(128, 128, 128, 0.5);
   display: flex;
-  /* flex-direction: row; */
   margin: 50px;
-  /* margin-bottom: 30px; */
   overflow: hidden;
   position: relative;
 }
@@ -35,8 +33,6 @@
   height: 100%;
   margin: 0;
   padding: 0;
-  /* border-radius: 10px; */
-  /* position: absolute; */
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -64,7 +60,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0 5px 10px;
   background-color: transparent;
   z-index: 1;
   line-height: 1.4rem;
@@ -89,7 +85,41 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding: 10px 0px 10px 10px;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.PlayButton {
+  position: relative;
+  transition: transform ease-in-out 190ms;
+  cursor: pointer;
+}
+
+.PlayButton::before,
+.PlayButton::after {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.PlayButton::before {
+  z-index: 10;
+  transition: opacity 75ms linear, background-color 100ms linear;
+}
+
+.PlayButton:hover::before {
+  background: white;
+}
+
+.PlayButton:hover::after {
+  background: white;
+  z-index: 1;
+  animation: pulse 1250ms infinite;
 }
 
 .FavoriteIcon {
@@ -125,8 +155,6 @@
   animation: pulse 1250ms infinite;
 }
 
-
-
 @keyframes pulse {
   0% {
     transform: scale(0.85);
@@ -136,4 +164,10 @@
     transform: scale(1.25);
     opacity: 0;
   }
+}
+
+.SongItemList-hr {
+  border: 0;
+  border-bottom: 0.05rem solid rgba(255, 255, 255, 0.33);
+  width: 100%;
 }

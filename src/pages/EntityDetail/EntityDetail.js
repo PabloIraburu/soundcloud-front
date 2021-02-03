@@ -145,6 +145,7 @@ export const EntityDetail = () => {
           </div>
       }
 
+
     </div>
   )
 }

@@ -30,60 +30,64 @@ export const SongItemList = ({
     }))(Tooltip);
 
     return (
-        <div className={styles["SongItemList-card"]}>
-            <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItemList-img"]}>
-                <div className={styles["SongItemList-icon-wrapper"]}>
-                    <HtmlTooltip title="Play Song" placement="rigth">
-                        <PlayCircleFilledIcon
-                            fontSize="small"
-                            // style={{ color: "white" }}
-                            onClick={() => dispatchPlayer({ type: playerActions.PLAY_THIS_SONG, index: index })}
-                        />
-                    </HtmlTooltip>
+        <>
+            <div className={styles["SongItemList-card"]}>
+                <div style={{ backgroundImage: `url(${song.image})` }} className={styles["SongItemList-img"]}>
+                    <div className={styles["SongItemList-icon-wrapper"]}>
+                        <HtmlTooltip title="Play Song" placement="rigth">
+                            <div className={styles["PlayButton"]} onClick={() => dispatchPlayer({ type: playerActions.PLAY_THIS_SONG, index: index })}>
+                                <PlayCircleFilledIcon
+                                    fontSize="small"
+                                    onClick={() => dispatchPlayer({ type: playerActions.PLAY_THIS_SONG, index: index })}
+                                />
+                            </div>
+                        </HtmlTooltip>
 
+                    </div>
+                </div>
+                <div className={styles["SongItemList-text"]}>
+                    <p className={styles["SongItemList-title"]}>{song.title}</p>
+                    <p>{song.artist}</p>
+                    <p>{song.album}</p>
+                    <p>{song.category}</p>
+                    <div className={styles["SongItemList-icons"]}>
+
+                        <HtmlTooltip title="Delete From Playlist" placement="top">
+                            <div className={styles["FavoriteIcon"]} onClick={() => handleRemoveSongFromPlaylist(song._id)}>
+                                <LibraryMusicIcon
+                                    fontSize="inherit"
+                                    style={{ color: "white" }}
+                                    onClick={() => handleRemoveSongFromPlaylist(song._id)}
+                                />
+                            </div>
+                        </HtmlTooltip>
+
+                        {
+                            !isFav &&
+                            <HtmlTooltip title="Add Favorite" placement="top">
+                                <div className={styles["FavoriteIcon"]} onClick={() => handleAddToFavourites(song._id)}>
+                                    <FavoriteBorderOutlinedIcon
+                                        fontSize="inherit"
+                                        onClick={() => handleAddToFavourites(song._id)}
+                                    />
+                                </div>
+                            </HtmlTooltip>
+                        }
+                        {
+                            isFav &&
+                            <HtmlTooltip title="Remove Favorite" placement="top">
+                                <div className={styles["FavoriteIcon"]} onClick={() => handleRemoveFromFavourites(song._id)}>
+                                    <FavoriteIcon
+                                        fontSize="inherit"
+                                        onClick={() => handleRemoveFromFavourites(song._id)}
+                                    />
+                                </div>
+                            </HtmlTooltip>
+                        }
+                    </div>
                 </div>
             </div>
-            <div className={styles["SongItemList-text"]}>
-                <p className={styles["SongItemList-title"]}>{song.title}</p>
-                <p>{song.artist}</p>
-                <p>{song.album}</p>
-                <p>{song.category}</p>
-                <div className={styles["SongItemList-icons"]}>
-
-                    <HtmlTooltip title="Delete From Playlist" placement="top">
-                        <LibraryMusicIcon
-                            fontSize="inherit"
-                            style={{ color: "white" }}
-                            onClick={() => handleRemoveSongFromPlaylist(song._id)}
-                        />
-                    </HtmlTooltip>
-
-                    {
-                        !isFav &&
-                        <HtmlTooltip title="Add Favorite" placement="top">
-                            {/* <div className={styles["FavoriteIcon"]}> */}
-                            <FavoriteBorderOutlinedIcon
-                                fontSize="inherit"
-                                // style={{ color: '#f9b807' }}
-                                onClick={() => handleAddToFavourites(song._id)}
-                            />
-                            {/* </div> */}
-                        </HtmlTooltip>
-                    }
-                    {
-                        isFav &&
-                        <HtmlTooltip title="Remove Favorite" placement="top">
-                            {/* <div className={styles["FavoriteIcon"]}> */}
-                            <FavoriteIcon
-                                fontSize="inherit"
-                                // style={{ color: '#f9b807' }}
-                                onClick={() => handleRemoveFromFavourites(song._id)}
-                            />
-                            {/* </div> */}
-                        </HtmlTooltip>
-                    }
-                </div>
-            </div>
-        </div>
+            <hr className={styles["SongItemList-hr"]} />
+        </>
     );
 };
