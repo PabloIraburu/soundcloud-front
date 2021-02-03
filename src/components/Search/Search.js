@@ -92,10 +92,6 @@ function Search({ forceReload, setForceReload }) {
                             }
                             return song;
                         }))
-                        // console.log(res[0].id_song.isFav)
-                        // if (res[0].id_song._id === songId) {
-                        //     (res[0].id_song.isFav = false)
-                        // }
                         setForceReload(!forceReload)
                         notify('Song removed from favourites correctly')
                     })
