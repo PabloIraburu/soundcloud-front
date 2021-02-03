@@ -86,6 +86,16 @@ function Search({ forceReload, setForceReload }) {
                 console.log(res)
                 ServerRequest(`data/favouritesongs/${res[0]._id}`, "DELETE")
                     .catch(() => {
+                        setSongs(songs.filter((song) => {
+                            if (song._id === songId) {
+                                (song.isFav = false)
+                            }
+                            return song;
+                        }))
+                        // console.log(res[0].id_song.isFav)
+                        // if (res[0].id_song._id === songId) {
+                        //     (res[0].id_song.isFav = false)
+                        // }
                         setForceReload(!forceReload)
                         notify('Song removed from favourites correctly')
                     })
@@ -145,7 +155,6 @@ function Search({ forceReload, setForceReload }) {
                         handleAddToFavourites={AddSongToFavourites}
                         handleRemoveFromFavourite={RemoveSongFromFavourites}
                         handleAddToPlaylist={handleOpenAddToPlaylist}
-
                     />
                 ))}
             </ul>
