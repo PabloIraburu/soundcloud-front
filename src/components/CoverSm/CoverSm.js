@@ -29,13 +29,12 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
         <div className={styles["CoverSm-card"]}>
             <div style={{ backgroundImage: `url(${img})` }} className={styles["CoverSm-img"]}>
                 <div className={styles["CoverSm-icon-wrapper"]}>
-                    <PlayCircleFilledIcon
-                        fontSize="large"
-                        onClick={() => {
-                            console.log("play icon", entity);
-                            dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })
-                        }}
-                    />
+                    <div className={styles["PlayButton"]} onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}>
+                        <PlayCircleFilledIcon
+                            fontSize="large"
+                            onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}
+                        />
+                    </div>
                 </div>
             </div>
             <div className={styles["CoverSm-text"]}>
@@ -76,32 +75,24 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
 
                 {
                     !isFav &&
-                    <HtmlTooltip title="Add Favorite" placement="left">
-                        {/* <div className={styles["FavoriteIcon"]}> */}
-                        <FavoriteBorderOutlinedIcon
-                            fontSize="inherit"
-                            // style={{ color: '#f9b807' }}
-                            onClick={() => {
-                                console.log("Add to fav icon", id);
-                                handleAddToFavourites(id)
-                            }}
-                        />
-                        {/* </div> */}
+                    <HtmlTooltip title="Add Favorite" placement="left" >
+                        <div className={styles["FavoriteIcon"]} onClick={() => handleAddToFavourites(id)}>
+                            <FavoriteBorderOutlinedIcon
+                                fontSize="inherit"
+                                onClick={() => handleAddToFavourites(id)}
+                            />
+                        </div>
                     </HtmlTooltip>
                 }
                 {
                     isFav &&
                     <HtmlTooltip title="Remove Favorite" placement="left">
-                        {/* <div className={styles["FavoriteIcon"]}> */}
-                        <FavoriteIcon
-                            fontSize="inherit"
-                            // style={{ color: '#f9b807' }}
-                            onClick={() => {
-                                console.log("Remove from fav icon", id);
-                                handleRemoveFromFavourite(id)
-                            }}
-                        />
-                        {/* </div> */}
+                        <div className={styles["FavoriteIcon"]} onClick={() => handleRemoveFromFavourite(id)}>
+                            <FavoriteIcon
+                                fontSize="inherit"
+                                onClick={() => handleRemoveFromFavourite(id)}
+                            />
+                        </div>
                     </HtmlTooltip>
                 }
             </div>
