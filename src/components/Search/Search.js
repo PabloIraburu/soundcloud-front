@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import TextField from '@material-ui/core/TextField';
-import { ServerRequest } from "../../helpers/ServerRequest";
-import { Modal } from "../../components/Modal/Modal";
-import { CoverSm } from "../CoverSm/CoverSm";
-import { UserContext } from "../../contexts/UserContext/contextProvider";
+import {ServerRequest} from "../../helpers/ServerRequest";
+import {Modal} from "../../components/Modal/Modal";
+import {CoverSm} from "../CoverSm/CoverSm";
+import {UserContext} from "../../contexts/UserContext/contextProvider";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import "./search.css"
 
-function Search({ forceReload, setForceReload }) {
-    const { userId } = useContext(UserContext);
+function Search({forceReload, setForceReload}) {
+    const {userId} = useContext(UserContext);
     const [songs, setSongs] = useState([]);
     const [songId, setSongId] = useState([]);
     const [userPlaylists, setUserPlaylists] = useState([]);
@@ -56,6 +56,7 @@ function Search({ forceReload, setForceReload }) {
     useEffect(() => {
         const results = songs.filter(art => art.title.toLowerCase().includes(searchItem));
         setSearchResults(results);
+        console.log('results', results)
     }, [searchItem]);
 
 
@@ -107,7 +108,7 @@ function Search({ forceReload, setForceReload }) {
         setForceReload(!forceReload);
     };
     const handleCloseAddToPlaylist = (e) => {
-        const { className: el } = e.target;
+        const {className: el} = e.target;
         if (el !== "backdrop" && el !== "fas fa-times") return;
         setOpenModalAddToPlaylist(!openModalAddToPlaylist);
     };
@@ -130,14 +131,14 @@ function Search({ forceReload, setForceReload }) {
     return (
         <div className='searchBar'>
             <TextField id="outlined-basic" label="Search" variant="outlined" type='text'
-                className='input'
-                placeholder='Search'
-                value={searchItem}
-                onChange={handleChange} />
+                       className='input'
+                       placeholder='Search'
+                       value={searchItem}
+                       onChange={handleChange}/>
             <ul>
                 {searchItem !== "" && searchResults.map((res, index) => (
                     <CoverSm
-                        entity={res.id_song}
+                        entity={res}
                         key={res._id}
                         title={res.title}
                         author={res.artist}
@@ -165,7 +166,7 @@ function Search({ forceReload, setForceReload }) {
                                 <p onClick={() => handleAddToPlaylist(playlist._id)}>{playlist.title}</p>
                                 <AddCircleIcon
                                     fontSize="inherit"
-                                    style={{ color: "#333" }}
+                                    style={{color: "#333"}}
                                     onClick={() => handleAddToPlaylist(playlist._id)}
                                 />
                             </div>

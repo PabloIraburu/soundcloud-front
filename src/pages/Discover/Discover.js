@@ -222,10 +222,6 @@ export default function Discover() {
                             setForceReload={setForceReload}
                         />
                     </div>
-                    {/*<div className="notif">*/}
-                    {/*    <span><i className="fas fa-ambulance"></i></span>*/}
-                    {/*    <span><i className="far fa-dot-circle"></i></span>*/}
-                    {/*</div>*/}
                 </div>
                 <div className="mainFrame">
                     <div className="header">
@@ -251,12 +247,7 @@ export default function Discover() {
                         <div className="listComp">
                             {/* <List /> */}
                         </div>
-                        {/* <div className="title"></div>
-                        <div className="gallery"> 
-                        </div>*/}
                     </div>
-                    {/* <div className="player"></div>
-                    <div className="playlist"></div> */}
                 </div>
 
 

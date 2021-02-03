@@ -1,21 +1,34 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import styles from './CoverSm.module.css';
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
-import { playerActions } from "../../reducers/playerReducer";
+import {PlayerContext} from "../../contexts/PlayerContext/playerContext";
+import {playerActions} from "../../reducers/playerReducer";
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import LibraryMusicOutlinedIcon from '@material-ui/icons/LibraryMusicOutlined';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Tooltip from '@material-ui/core/Tooltip';
-import { toast } from 'react-toastify';
-import { withStyles } from "@material-ui/styles";
+import {toast} from 'react-toastify';
+import {withStyles} from "@material-ui/styles";
 
 
-export const CoverSm = ({ entity, title, categories, author, img, description, id, isFav, index, handleAddToFavourites, handleRemoveFromFavourite, handleAddToPlaylist }) => {
+export const CoverSm = ({
+                            entity,
+                            title,
+                            categories,
+                            author,
+                            img,
+                            description,
+                            id,
+                            isFav,
+                            index,
+                            handleAddToFavourites,
+                            handleRemoveFromFavourite,
+                            handleAddToPlaylist
+                        }) => {
 
     const notify = (e) => toast(`${e}`);
-    const { dispatchPlayer } = useContext(PlayerContext);
+    const {dispatchPlayer} = useContext(PlayerContext);
     const HtmlTooltip = withStyles((theme) => ({
         tooltip: {
             backgroundColor: '#f5f5f9',
@@ -23,16 +36,17 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
             maxWidth: 220,
             border: '1px solid #dadde9',
         },
-    }))(Tooltip);
+    }))(Tooltip)
 
     return (
         <div className={styles["CoverSm-card"]}>
-            <div style={{ backgroundImage: `url(${img})` }} className={styles["CoverSm-img"]}>
+            <div style={{backgroundImage: `url(${img})`}} className={styles["CoverSm-img"]}>
                 <div className={styles["CoverSm-icon-wrapper"]}>
-                    <div className={styles["PlayButton"]} onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}>
+                    <div className={styles["PlayButton"]}
+                         onClick={() => dispatchPlayer({type: playerActions.PLAY_SONG, song: entity})}>
                         <PlayCircleFilledIcon
                             fontSize="large"
-                            onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}
+                            onClick={() => dispatchPlayer({type: playerActions.PLAY_SONG, song: entity})}
                         />
                     </div>
                 </div>
@@ -42,7 +56,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                     className={styles["CoverSm-title"]}
                     onClick={() => {
                         console.log("Song title", entity);
-                        dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })
+                        dispatchPlayer({type: playerActions.PLAY_SONG, song: entity})
                     }}
                 >
                     {title}
@@ -67,7 +81,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                         fontSize="inherit"
                         onClick={() => {
                             console.log("Add to queue icon", entity);
-                            dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })
+                            dispatchPlayer({type: playerActions.ADD_TO_QUEUE, song: entity})
                             notify('Song added to queue correctly')
                         }}
                     />
@@ -75,7 +89,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
 
                 {
                     !isFav &&
-                    <HtmlTooltip title="Add Favorite" placement="left" >
+                    <HtmlTooltip title="Add Favorite" placement="left">
                         <div className={styles["FavoriteIcon"]} onClick={() => handleAddToFavourites(id)}>
                             <FavoriteBorderOutlinedIcon
                                 fontSize="inherit"
