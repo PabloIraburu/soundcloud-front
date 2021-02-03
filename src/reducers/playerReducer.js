@@ -2,7 +2,9 @@ import { useReducer } from "react";
 
 const initialState = {
     reproduceSongList: [],
-    currentPlay: undefined
+    currentPlay: undefined,
+    playlistPlaceholder: [],
+    indexPlaceholder: 0
 }
 
 export const playerActions = {
@@ -55,13 +57,18 @@ const playerReducer = (state, action) => {
             return newState;
 
         case playerActions.PLAY_THIS_SONG:
-            console.log('index', action.index)
-            newState.currentPlay = action.index;
-            return newState;
-        // console.log('index', action.index)
-            // newState.currentPlay = 0;
-            // newState.reproduceSongList= newState.reproduceSongList.slice(action.index)
-            // return newState;
+            if(newState.indexPlaceholder<action.index){
+                newState.playlistPlaceholder=newState.reproduceSongList;
+                newState.indexPlaceholder=action.index+1;
+                newState.currentPlay = 0;
+                newState.reproduceSongList= newState.reproduceSongList.slice(action.index);
+                return newState;
+            } else{
+                newState.reproduceSongList=newState.playlistPlaceholder
+                newState.currentPlay = 0;
+                newState.reproduceSongList= newState.reproduceSongList.slice(action.index);
+                return newState;
+            }
 
         case playerActions.PLAY_SONG:
             newState.reproduceSongList = [action.song];
