@@ -218,6 +218,8 @@ export default function Discover() {
                             handleAddToFavourites={AddSongToFavourites}
                             handleRemoveFromFavourite={RemoveSongFromFavourites}
                             handleAddToPlaylist={handleOpenAddToPlaylist}
+                            forceReload={forceReload}
+                            setForceReload={setForceReload}
                         />
                     </div>
                     {/*<div className="notif">*/}
