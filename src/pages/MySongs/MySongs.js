@@ -94,7 +94,7 @@ export const MySongs = () => {
 
     return (
 
-        <>
+        <div className={styles["mysongs-wrap"]}>
             <div className={styles["mysongs-header"]}>
                 <h1>My Songs</h1>
                 <MyButton onClick={handleOpenUpload} variant="pink-or" size="150px">Upload Song</MyButton>
@@ -197,6 +197,6 @@ export const MySongs = () => {
                 draggable
                 pauseOnHover
             /> */}
-        </>
+        </div>
     )
 }

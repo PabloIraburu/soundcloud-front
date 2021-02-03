@@ -6,3 +6,11 @@
 .rhap-header{
     background-color: #79f7ff;
 }
+
+.player-image {
+        width: 50px;
+        min-height: 50px;
+        border-radius: 10px;
+        background-position: center;
+        background-size: cover;  
+}
