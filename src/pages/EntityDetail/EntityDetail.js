@@ -96,7 +96,7 @@ export const EntityDetail = () => {
 
 
   return (
-    <>
+    <div className={styles["PlaylistDetail-wrap"]}>
       {
         (entity === {})
           ? <p>Loading...</p>
@@ -145,6 +145,6 @@ export const EntityDetail = () => {
           </div>
       }
 
-    </>
+    </div>
   )
 }

@@ -137,7 +137,7 @@ export const Favourites = () => {
   };
 
   return (
-    <>
+    <div className={styles["Favourites-wrap"]}>
       <h1>Favourites</h1>
 
       <h3>Favourite songs</h3>
@@ -211,6 +211,6 @@ export const Favourites = () => {
         <Modal handleClose={handleCloseEditPlaylist}>
           <EditPlaylist handleClose={handleOpenEditPlaylist} playlist={editPlaylist} setForceReload={setForceReload} forceReload={forceReload} />
         </Modal>}
-    </>
+    </div>
   )
 }

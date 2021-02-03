@@ -5,7 +5,7 @@ import { playerActions } from "../../reducers/playerReducer";
 import 'react-h5-audio-player/lib/styles.css';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { API_URL } from "../../helpers/ServerRequest";
-
+import './Player.css';
 
 export const Player = () => {
 
@@ -46,7 +46,8 @@ export const Player = () => {
               <FavoriteIcon
                 fontSize="small"
                 style={{ color: '#0b1e45' }}
-              />
+              />,
+              <div style={{ backgroundImage: `url(${player.reproduceSongList[player.currentPlay].image})` }} className="Player-image"></div>
             ]
           }
         />

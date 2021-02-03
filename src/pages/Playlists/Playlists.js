@@ -141,7 +141,7 @@ export const Playlists = () => {
   };
 
   return (
-    <>
+    <div className={styles["Playlists-wrap"]}>
       <div className={styles["Playlists-header"]}>
         <h1>My Playlists</h1>
         <MyButton onClick={handleOpenNewPlaylist} variant="pink-or" size="150px">New Playlist</MyButton>
@@ -215,6 +215,6 @@ export const Playlists = () => {
         draggable
         pauseOnHover
       /> */}
-    </>
+    </div>
   )
 }
