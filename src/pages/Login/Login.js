@@ -6,7 +6,7 @@ import { Input } from '../../components/Input/Input';
 import { MyButton } from '../../components/MyButton/MyButton';
 import { DISCOVER } from '../../routes/routes';
 import { inputValidation } from "../../controllers/inputValidation";
-import { existNumber, existUppercase, validateMinLength, existSpecial } from "../../utils/FormValidation";
+import { validateMinLength, existSpecial } from "../../utils/FormValidation";
 
 import { Avisos } from '../../components/Avisos/Avisos';
 

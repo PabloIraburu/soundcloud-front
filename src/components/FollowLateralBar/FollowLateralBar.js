@@ -4,18 +4,16 @@ import { DecodeToken } from '../../utils/DecodeToken';
 import { getToken } from '../../utils/LocalStorage.utils';
 import { UserContext } from '../../contexts/UserContext/contextProvider';
 import { UserCardFollowMenu } from './UserCardFollowMenu/UserCardFollowMenu';
-import styles from './FollowLateralBar.module.css';
+import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
+import { NowPlayingItem } from "./NowPlayingItem/NowPlayingItem";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { PlayerContext } from "../../contexts/PlayerContext/playerContext";
-import { playerActions } from "../../reducers/playerReducer";
-import { CoverSm } from "../CoverSm/CoverSm";
-import { NowPlayingItem } from "./NowPlayingItem/NowPlayingItem";
+import styles from './FollowLateralBar.module.css';
 
 export const FollowLateralBar = () => {
 
     const { user } = useContext(UserContext);
-    const { player, dispatchPlayer } = useContext(PlayerContext)
+    const { player } = useContext(PlayerContext)
     const loggedUserId = DecodeToken(getToken()).id;
     const [following, setFollowing] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
@@ -82,9 +80,7 @@ export const FollowLateralBar = () => {
                                     userId={user._id}
                                     name={user.name}
                                     img={user.image}
-                                    // followers={}
                                     handleUnfollow={handleUnfollow}
-                                    // userFollowed={user}
                                     followButton={followButton}
                                 />
                             ))}

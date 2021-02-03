@@ -10,7 +10,7 @@ import { categories } from "../../data/categories";
 import { Upload } from '../../components/Upload/Upload';
 import EventIcon from '@material-ui/icons/Event';
 import styles from "./MySongs.module.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 
 export const MySongs = () => {

@@ -2,16 +2,13 @@ import React, { useState, useContext } from "react";
 import { Input } from "../Input/Input";
 import { MyButton } from "../MyButton/MyButton";
 import { ServerRequest } from "../../helpers/ServerRequest";
-import { useHistory } from "react-router-dom";
-import * as route from '../../routes/routes';
-import styles from "./EditPlaylist.module.css";
 import { toast } from 'react-toastify';
 import { UserContext } from "../../contexts/UserContext/contextProvider";
+import styles from "./EditPlaylist.module.css";
 
 export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReload }) => {
 
   const { userId } = useContext(UserContext);
-  const history = useHistory();
   const [editedPlaylist, setEditedPlaylist] = useState({});
   const notify = (e) => toast(`${e}`);
 
@@ -35,7 +32,6 @@ export const EditPlaylist = ({ handleClose, playlist, setForceReload, forceReloa
       })
       .catch((response) => notify(response.error))
     handleClose(event);
-    // history.push(route.PLAYLISTS)
   }
 
   const handleDeletePlaylist = (event) => {

@@ -9,17 +9,17 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
 
-    const userId = DecodeToken(getToken()).id;
+  const userId = DecodeToken(getToken()).id;
 
-    const history = useHistory();
+  const history = useHistory();
   const [user, setUser] = useState({
-      _id: "",
-      name: "",
-      email: "",
-      image: "https://previews.123rf.com/images/jemastock/jemastock1701/jemastock170102174/70024333-silhouette-headphones-music-listen-mobile-vector-illustration.jpg"
-    });
-    // const userId = user._id;
-    const [allUsers, setAllUsers] = useState([]);
+    _id: "",
+    name: "",
+    email: "",
+    image: "https://previews.123rf.com/images/jemastock/jemastock1701/jemastock170102174/70024333-silhouette-headphones-music-listen-mobile-vector-illustration.jpg"
+  });
+  // const userId = user._id;
+  const [allUsers, setAllUsers] = useState([]);
 
   // Usuario logueado
   useEffect(() => {
@@ -28,15 +28,15 @@ export const UserContextProvider = ({ children }) => {
       .catch(console.log);
   }, []);
 
-    // Usuarios excepto el logueado
-    useEffect(() => {
-        ServerRequest(`data/user`, "GET")
-        .then((response) => {
-          setAllUsers(response.filter((user) => (user._id !== userId)
-          ));
-        })
-        .catch(console.log);
-      }, []);
+  // Usuarios excepto el logueado
+  useEffect(() => {
+    ServerRequest(`data/user`, "GET")
+      .then((response) => {
+        setAllUsers(response.filter((user) => (user._id !== userId)
+        ));
+      })
+      .catch(console.log);
+  }, []);
 
   //cerrar sesión y redirección a Landing
   const signOut = () => {
@@ -45,12 +45,12 @@ export const UserContextProvider = ({ children }) => {
   }
 
 
-    return <UserContext.Provider value={{
-        userId,
-        user,
-        setUser,
-        allUsers,
-        setAllUsers,
-        signOut,
-      }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{
+    userId,
+    user,
+    setUser,
+    allUsers,
+    setAllUsers,
+    signOut,
+  }}>{children}</UserContext.Provider>
 }

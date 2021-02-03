@@ -25,7 +25,6 @@ export default function LateralBar() {
         setOpenModalNewPlaylist(!openModalNewPlaylist);
     };
 
-
     //Gestión modal upload
     const [openModalUpload, setOpenModalUpload] = useState(false);
     const handleOpenUpload = () => setOpenModalUpload(!openModalUpload);

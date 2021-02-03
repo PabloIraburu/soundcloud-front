@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
+import { ServerRequest } from "../../helpers/ServerRequest";
+import { CoverSm } from "../CoverSm/CoverSm";
 import "./search.css"
-import {ServerRequest} from "../../helpers/ServerRequest";
-import {CoverSm} from "../CoverSm/CoverSm";
 
 
-function Search({handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylistSearch} ) {
+function Search({ handleAddToFavourites, handleRemoveFromFavourites, handleAddToPlaylistSearch }) {
     const [songs, setSongs] = useState([])
     useEffect(() => {
         ServerRequest('data/song', 'GET')
@@ -28,26 +28,26 @@ function Search({handleAddToFavourites, handleRemoveFromFavourites, handleAddToP
     return (
         <div className='searchBar'>
             <TextField id="outlined-basic" label="Search" variant="outlined" type='text'
-                       className='input'
-                       placeholder='Search'
-                       value={searchItem}
-                       onChange={handleChange}/>
+                className='input'
+                placeholder='Search'
+                value={searchItem}
+                onChange={handleChange} />
             <ul>
                 {searchItem !== "" && searchResults.map((res, index) => (
-                        <CoverSm
-                            entity={res.id_song}
-                            key={res._id}
-                            title={res.title}
-                            author={res.artist}
-                            description={res.description}
-                            categories={res.category}
-                            img={res.image}
-                            id={res._id}
-                            entityType="song"
-                            handleAddToFavourites={handleAddToFavourites}
-                            handleRemoveFromFavourites={handleRemoveFromFavourites}
-                            handleAddToPlaylist={handleAddToPlaylistSearch}
-                        />
+                    <CoverSm
+                        entity={res.id_song}
+                        key={res._id}
+                        title={res.title}
+                        author={res.artist}
+                        description={res.description}
+                        categories={res.category}
+                        img={res.image}
+                        id={res._id}
+                        entityType="song"
+                        handleAddToFavourites={handleAddToFavourites}
+                        handleRemoveFromFavourites={handleRemoveFromFavourites}
+                        handleAddToPlaylist={handleAddToPlaylistSearch}
+                    />
                 ))}
             </ul>
         </div>
