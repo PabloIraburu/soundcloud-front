@@ -31,14 +31,20 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                 <div className={styles["CoverSm-icon-wrapper"]}>
                     <PlayCircleFilledIcon
                         fontSize="large"
-                        onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}
+                        onClick={() => {
+                            console.log("play icon", entity);
+                            dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })
+                        }}
                     />
                 </div>
             </div>
             <div className={styles["CoverSm-text"]}>
                 <p
                     className={styles["CoverSm-title"]}
-                    onClick={() => dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })}
+                    onClick={() => {
+                        console.log("Song title", entity);
+                        dispatchPlayer({ type: playerActions.PLAY_SONG, song: entity })
+                    }}
                 >
                     {title}
                 </p>
@@ -50,7 +56,10 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                 <HtmlTooltip title="Add To Playlist" placement="left">
                     <LibraryMusicOutlinedIcon
                         fontSize="inherit"
-                        onClick={() => handleAddToPlaylist(id)}
+                        onClick={() => {
+                            console.log("Add to playlist icon", id);
+                            handleAddToPlaylist(id)
+                        }}
                     />
                 </HtmlTooltip>
 
@@ -58,6 +67,7 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                     <PlaylistAddIcon
                         fontSize="inherit"
                         onClick={() => {
+                            console.log("Add to queue icon", entity);
                             dispatchPlayer({ type: playerActions.ADD_TO_QUEUE, song: entity })
                             notify('Song added to queue correctly')
                         }}
@@ -71,7 +81,10 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                         <FavoriteBorderOutlinedIcon
                             fontSize="inherit"
                             // style={{ color: '#f9b807' }}
-                            onClick={() => handleAddToFavourites(id)}
+                            onClick={() => {
+                                console.log("Add to fav icon", id);
+                                handleAddToFavourites(id)
+                            }}
                         />
                         {/* </div> */}
                     </HtmlTooltip>
@@ -83,7 +96,10 @@ export const CoverSm = ({ entity, title, categories, author, img, description, i
                         <FavoriteIcon
                             fontSize="inherit"
                             // style={{ color: '#f9b807' }}
-                            onClick={() => handleRemoveFromFavourite(id)}
+                            onClick={() => {
+                                console.log("Remove from fav icon", id);
+                                handleRemoveFromFavourite(id)
+                            }}
                         />
                         {/* </div> */}
                     </HtmlTooltip>
