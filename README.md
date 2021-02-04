@@ -46,6 +46,15 @@ Take a look at our music App, you will love it 😜!
 ### OTHER PLATFORMS
 
 
+## PRESENTATION
+
+* UseReduce del player + UseContext player
+* UserContext (tras el login)
+* Search + Portada + Songs + Playlists
+* Player
+* Nav Followers & Playing
+* Nav Irz - Router + Animación
+* Landing + Login + Register
 
 
 
