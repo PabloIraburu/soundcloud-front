@@ -1,4 +1,8 @@
-sprint-4
+# SOUNDMIST
+
+FULL STACK FINAL PROJECT
+------
+
 # Comandos de Github
 
 # Para localizar el repo en nuestro proyecto:
