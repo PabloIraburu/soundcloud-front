@@ -1,6 +1,9 @@
+# SOUNDMIST
+
 ## FULL STACK MASTER FINAL PROJECT
 
 We are glad to share with you our final project of the Master Full Stack Developer.
+
 We would like to speally thank our teachers, for their patience and motivation in those last 3 months of hardworking, learning and enjoying creating this app, and to Nuclio Digital School.
 
 ### DESCRIPTION
