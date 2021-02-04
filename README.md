@@ -12,11 +12,12 @@ We would like to speally thank our teachers, for their patience and motivation i
 
 Soundmist is a new and authentic app where you can find and play the best music from known, as well as alternative artists.  
 
-## LIVE DEMO
+## LIVE DEMO <code><img alt="Soundmist" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/src/img/logo.png?raw=true"></code>
 
 Take a look at our music App, you will love it 😜!
 
-<https://soundmist.netlify.app/>
+<https://soundmist.netlify.app>
+
 
 ## LANGUAGES, FRAMEWORKS AND LIBRARIES
 
@@ -34,7 +35,6 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Mongodb" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png"></code>
 
 ### TECHNOLOGIES
-
 <code><img alt="Github" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/github.png?raw=true"></code>
 <code><img alt="Git" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/git.png?raw=true"></code>
 <code><img alt="Heroku" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/heroku.png?raw=true"></code>
@@ -62,38 +62,42 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Color Hunt" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/colorhunt.png?raw=true"></code>
 <code><img alt="Emojipedia" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/emojipedia.png?raw=true"></code>
 
+
 ## PRESENTATION
 
-* UseReduce del player + UseContext player
-* UserContext (tras el login)
-* Search + Portada + Songs + Playlists
-* Player
-* Nav Followers & Playing
-* Nav Irz - Router + Animación
+* Data Architecture (back + front)
 * Landing + Login + Register
+* UserContext
+* Nav Irz - Router + Animación
+* Portada + Songs + Playlists
+* PlayerReducer + PlayerContext + Player
+* Nav Followers & Playing
+* Search
+* Profile + Edit Profile Pages
+* My Songs Page
+* Playlists Page
+* Playlist Detail Page
+* Favourites Page
 
 
+## AUTHORS
 
-# Comandos de Github
-
-# Para localizar el repo en nuestro proyecto:
-git add .
-
-## Hacer un commit de nuestra propria rama:
-
-git commit -m "put the message here"
-
-git push origin sprint-3-gabriela#14 -> poner el nº de la issue que hiciemos
-
- ----> hacer merge en github
+* [Pablo Iraburu](https://github.com/PabloIraburu)
+* [Cristina Picatoste](https://github.com/cristinapicatoste)
+* [Gabriela Viana](https://github.com/gabviana)
+* [Isa Almena](https://github.com/saintAlmond)
+* [Julián Villada](https://github.com/julianvillada)
 
 
-# Volver a Visual Studio Code:
+#### COLLABORATORS
 
-git pull origin Sprint-3
+* [Pep Nieto](https://github.com/PepNieto)
+* [Lluis Bòria](https://github.com/lluisbo)
+* [Zhiting Lu](https://github.com/ZhitingLu)
 
+## SPECIAL THANKS
 
-# comandos para crear ramas o cambiar de rama:
-git branch + nombre (crear nueva rama)
-
-git checkout nombre de la rama (cambiar de rama)
+* [Guillermo Blasco](https://github.com/GuillermoBlasco)
+* [Carlos Arenas](https://github.com/carlosarenasf)
+* [Jose Manuel Cano](https://github.com/jmcano94)
+* [Patricia Mateos](https://github.com/pattirock)
