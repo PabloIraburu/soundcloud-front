@@ -18,6 +18,8 @@ Take a look at our music App, you will love it 😜!
 
 <https://soundmist.netlify.app>
 
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/livedemo.png "Soundmist Livedemo")
+
 
 ## LANGUAGES, FRAMEWORKS AND LIBRARIES
 
