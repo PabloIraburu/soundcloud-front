@@ -1,4 +1,4 @@
-# SOUNDMIST
+# SOUNDMIST <code><img alt="Soundmist" height="44" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/favicon.png"></code>
 
 ## FULL STACK MASTER FINAL PROJECT
 
@@ -12,7 +12,7 @@ We would like to speally thank our teachers, for their patience and motivation i
 
 Soundmist is a new and authentic app where you can find and play the best music from known, as well as alternative artists.  
 
-## LIVE DEMO <code><img alt="Soundmist" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/src/img/logo.png?raw=true"></code>
+## LIVE DEMO
 
 Take a look at our music App, you will love it 😜!
 
@@ -61,6 +61,7 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Gradient" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/gradient.png?raw=true"></code>
 <code><img alt="Color Hunt" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/colorhunt.png?raw=true"></code>
 <code><img alt="Emojipedia" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/emojipedia.png?raw=true"></code>
+
 
 
 ## PRESENTATION
