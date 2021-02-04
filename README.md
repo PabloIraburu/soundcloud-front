@@ -8,7 +8,7 @@ We would like to speally thank our teachers, for their patience and motivation i
 
 <code><img alt="javascript" height="88" src="https://nuclio.school/shorts/wp-content/uploads/2020/03/NuclioSchoollogo-black.png"></code>
 
-### DESCRIPTION
+## DESCRIPTION
 
 Soundmist is a new and authentic app where you can find and play the best music from known, as well as alternative artists.  
 
@@ -41,7 +41,14 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Netlify" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/netlify.png?raw=true"></code>
 
 ### SOFTWARE
-
+<code><img height="33" alt="Visual Studio Code" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/visualstudiocode.png"></code>
+<code><img height="33" alt="Webstorm" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/webstorm.png"></code>
+<code><img height="33" alt="Postman" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/postman.png"></code>
+<code><img height="33" alt="Insomnia" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/insomnia.png"></code>
+<code><img height="33" alt="Slack" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/slack.png"></code>
+<code><img height="33" alt="Trello" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/trello.png"></code>
+<code><img height="33" alt="Google" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/google.png"></code>
+<code><img height="33" alt="Illustrator" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/illustrator.png"></code>
 
 ### OTHER PLATFORMS
 <code><img alt="Google Fonts" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/googlefonts.png?raw=true"></code>
@@ -49,12 +56,22 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Soundcloud" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/soundcloud.png?raw=true"></code>
 <code><img alt="Spotify" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/spotify.png?raw=true"></code>
 <code><img alt="Dribble" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/dribble.png?raw=true"></code>
-
 <code><img alt="Unsplash" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/unsplash.png?raw=true"></code>
 <code><img alt="Freepik" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/freepik.png?raw=true"></code>
 <code><img alt="Gradient" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/gradient.png?raw=true"></code>
 <code><img alt="Color Hunt" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/colorhunt.png?raw=true"></code>
 <code><img alt="Emojipedia" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/emojipedia.png?raw=true"></code>
+
+## PRESENTATION
+
+* UseReduce del player + UseContext player
+* UserContext (tras el login)
+* Search + Portada + Songs + Playlists
+* Player
+* Nav Followers & Playing
+* Nav Irz - Router + Animación
+* Landing + Login + Register
+
 
 
 # Comandos de Github
