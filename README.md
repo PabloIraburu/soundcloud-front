@@ -34,7 +34,14 @@ Take a look at our music App, you will love it 😜!
 ![Technologies](https://github.com/PabloIraburu/soundcloud-front/tree/Master/public/readme_img/iconos_readme-03.png "Technologies")
 
 ### SOFTWARE
-
+<code><img height="33" alt="visualstudiocode" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/visualstudiocode.png"></code>
+<code><img height="33" alt="webstorm" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/webstorm.png"></code>
+<code><img height="33" alt="postman" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/postman.png"></code>
+<code><img height="33" alt="insomnia" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/insomnia.png"></code>
+<code><img height="33" alt="slack" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/slack.png"></code>
+<code><img height="33" alt="trello" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/trello.png"></code>
+<code><img height="33" alt="googlechrome" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/google.png"></code>
+<code><img height="33" alt="illustrator" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/illustrator.png"></code>
 
 ### OTHER PLATFORMS
 
