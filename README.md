@@ -63,6 +63,9 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Emojipedia" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/emojipedia.png?raw=true"></code>
 
 
+## DATA ARCHITECTURE
+
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/Arquitectura_datos.png "Data Architecture")
 
 ## PRESENTATION
 
