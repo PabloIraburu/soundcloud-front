@@ -69,12 +69,109 @@ Take a look at our music App, you will love it 😜!
 
 ![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/Arquitectura_datos.png "Data Architecture")
 
-## PRESENTATION
+## TAKE A LOOK AT...
 
 * Data Architecture (back + front)
+* Server Request Code
+
+```javascript
+export const ServerRequest = (routes, method, body) => {
+    const token = getToken();
+    const url = `${API_URL}/${routes}`;
+
+    const JSONBody = JSON.stringify(body);
+    const options = {
+        method: method,
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + JSON.parse(token)
+        },
+        body: JSONBody
+    }
+
+    let response;
+
+    return fetch(url, options)
+        .catch(error => (error))
+        .then(res => {
+            if (res.status >= 400) {
+                response = res;
+            }
+            return res.json();
+        })
+        .then(resJson => {
+            return new Promise((resolve, reject) => {
+                if (response) {
+                    reject(resJson);
+                } else {
+                    resolve(resJson)
+                }
+            });
+        });
+}
+```
 * Landing + Login + Register
 * UserContext
+
+```javascript
+export const UserContextProvider = ({ children }) => {
+
+  const userId = DecodeToken(getToken()).id;
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    ServerRequest(`data/user/${userId}`, "GET")
+      .then((response) => setUser(response))
+      .catch(console.log);
+  }, []);
+
+  return <UserContext.Provider value={{ userId, user, setUser }}>{children}</UserContext.Provider>
+}
+```
 * Nav Irz - Router + Animación
+
+```javascript
+export const MainRouter = () => {
+
+  const PrivateRoute = ({ component: Component, path }) => (
+    <Route
+      path={path}
+      render={() => getToken() ? <Component /> : <Redirect to={route.HOME} />}
+    />
+  )
+
+  return (
+    <>
+      <UserContextProvider>
+        <PlayerContextProvider>
+          <div className="Mainrouter-player">
+            <Player />
+          </div>
+          <div>
+            <LateralBar />
+            <FollowLateralBar />
+            <div className="MainRouter-wrap">
+              <Switch>
+                <PrivateRoute exact path={route.DISCOVER} component={Discover} />
+                <PrivateRoute exact path={route.MYSONGS} component={MySongs} />
+                <PrivateRoute exact path={route.ALBUMS} component={Albums} />
+                <PrivateRoute exact path={route.PLAYLISTS} component={Playlists} />
+                <PrivateRoute exact path={route.FAVOURITES} component={Favourites} />
+                <PrivateRoute exact path={route.PROFILE} component={Profile} />
+                <PrivateRoute exact path={route.EDITPROFILE} component={EditProfile} />
+                <PrivateRoute exact path={route.ALBUMDETAIL} component={EntityDetail} />
+                <PrivateRoute exact path={route.PLAYLISTDETAIL} component={EntityDetail} />
+                {/* <Redirect to="/discover" /> */}
+              </Switch>
+            </div>
+          </div>
+        </PlayerContextProvider>
+      </UserContextProvider>
+    </>
+  );
+};
+```
 * Portada + Songs + Playlists
 * PlayerReducer + PlayerContext + Player
 * Nav Followers & Playing
