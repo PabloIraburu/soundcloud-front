@@ -48,7 +48,7 @@ export const Landing = () => {
           </div>
 
           <div className={styles["Landing-buttons"]}>
-            <MyButton onClick={handleOpenRegister} variant="white" size="150px">
+            <MyButton onClick={handleOpenRegister} variant="pink-or" size="150px">
               Create Account
             </MyButton>
           </div>
