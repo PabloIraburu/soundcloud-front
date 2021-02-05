@@ -495,6 +495,27 @@ module.exports = {
 
 * General Controller + Populate()
 
+```javascript
+    if (req.params.entity === 'favouritesongs') {
+      return Entity.find(req.query)
+        .populate('id_song')
+        .then((result) => {
+          if (result) {
+            res.status(200).send(result);
+          } else {
+            res.status(404).send();
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({ error: err });
+        });
+    }
+```
+
+* Animations
+
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/animations.png "Animations")
+
 
 ## AUTHORS
 
