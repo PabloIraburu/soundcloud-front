@@ -281,6 +281,40 @@ export const usePlayerReducer = () => useReducer(playerReducer, initialState);
 
 * Upload Track
 
+```javascript
+const handleSubmit = (file, e) => {
+        const data = new FormData();
+        data.append("file", file[0]);
+        data.append("filename", file[0].name);
+        data.append("title", song.title);
+        data.append("album", song.album);
+        data.append("artist", song.artist);
+        data.append("image", song.image);
+        data.append("category", song.category);
+        data.append("id_author", userId)
+
+        const options = {
+            method: "POST",
+            body: data,
+            headers: new Headers({
+                Authorization: "Bearer " + JSON.parse(getToken()),
+            }),
+            mode: "cors",
+        };
+        fetch(`${API_URL}/track`, options)
+            .then((response) => {
+                if (response.status === 201) {
+                    return response;
+                }
+            })
+            .then((response) => {
+                setForceReload(!forceReload)
+                handleClose(e)
+                notify('Song Uploaded Correctly')
+            })
+            .catch((error) => console.log(error));
+    };
+```
 
 * Nav Followers & Currently Playing
 ```javascript
@@ -319,7 +353,20 @@ export const usePlayerReducer = () => useReducer(playerReducer, initialState);
 </div>
 ```
 * Search
+
+```javascript
+    const handleChange = (e) => {
+        setSearchItem(e.target.value);
+    };
+
+    useEffect(() => {
+        const results = songs.filter(art => art.title.toLowerCase().includes(searchItem));
+        setSearchResults(results);
+    }, [searchItem]);
+```
+
 * Profile + Edit Profile Pages
+
 * My Songs Page
 * Playlists Page
 * Playlist Detail Page
