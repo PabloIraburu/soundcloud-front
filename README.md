@@ -317,6 +317,7 @@ const handleSubmit = (file, e) => {
 ```
 
 * Nav Followers & Currently Playing
+
 ```javascript
     useEffect(() => {
         ServerRequest(`data/user`, "GET")
@@ -352,6 +353,7 @@ const handleSubmit = (file, e) => {
     </div>
 </div>
 ```
+
 * Search
 
 ```javascript
@@ -366,11 +368,22 @@ const handleSubmit = (file, e) => {
 ```
 
 * Profile + Edit Profile Pages
+
 ![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/perfil.png "Profile and Edit Profile Pages")
+
 * My Songs Page
+
+
 * Playlists Page
+
+
 * Playlist Detail Page
+
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/entitydetail.png "Entity Detail Page")
+
 * Favourites Page
+
+
 
 
 ## AUTHORS
