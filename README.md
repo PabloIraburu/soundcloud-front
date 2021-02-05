@@ -21,10 +21,11 @@ Take a look at our music App, you will love it 😜!
 
 ![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/livedemo.png "Soundmist Livedemo")
 
-
 ## LANGUAGES, FRAMEWORKS AND LIBRARIES
 
 #### MAIN LANGUAGES AND LIBRARIES
+
+##### FRONTEND
 <code><img alt="Javascript" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"></code>
 <code><img alt="Html" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png"></code>
 <code><img alt="Css" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png"></code>
@@ -32,6 +33,9 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="React" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"></code>
 <code><img alt="Material UI" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/materialui.png?raw=true"></code>
 <code><img alt="React H5 Player" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/player.png?raw=true"></code>
+
+##### BACKEND
+
 <code><img alt="Nodejs" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/nodejs/nodejs.png"></code>
 <code><img alt="Express" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/express/express.png"></code>
 <code><img alt="Mongoose" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongoose/mongoose.png"></code>
@@ -64,6 +68,10 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Gradient" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/gradient.png?raw=true"></code>
 <code><img alt="Color Hunt" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/colorhunt.png?raw=true"></code>
 <code><img alt="Emojipedia" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/emojipedia.png?raw=true"></code>
+
+##### DESIGN INSPIRATION
+
+Inspired in the [Music WebApp Concept | darkmusic](https://dribbble.com/shots/14554312-Music-WebApp-Concept-darkmusic "Music WebApp Concept by Dany Arkan") by [Dany Arkan](https://dribbble.com/danyarkan "Dany Arkan Dribble Profile")
 
 
 ## TAKE A LOOK AT...
@@ -190,8 +198,83 @@ export const MainRouter = () => {
 };
 ```
 * Portada + Songs + Playlists
+
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/discover.png "Discover Page")
+
 * PlayerReducer + PlayerContext + Player
-* Nav Followers & Playing
+
+```javascript
+import { useReducer } from "react";
+
+const initialState = {
+    reproduceSongList: [],
+    currentPlay: undefined,
+}
+
+export const playerActions = {
+    PLAY_SONG: 'PLAY_SONG',
+    NEXT_SONG: 'NEXT_SONG',
+}
+
+const playerReducer = (state, action) => {
+
+    const newState = { ...state }
+
+    switch (action.type) {
+        case playerActions.PLAY_SONG:
+            newState.reproduceSongList = [action.song];
+            newState.currentPlay = 0;
+            return newState;
+
+        case playerActions.NEXT_SONG:
+            if (state.currentPlay < (state.reproduceSongList.length - 1)) {
+                newState.currentPlay = state.currentPlay + 1;
+            }
+            return newState;
+
+        default:
+            return state;
+    }
+}
+
+export const usePlayerReducer = () => useReducer(playerReducer, initialState);
+```
+* Nav Followers & Currently Playing
+```javascript
+    useEffect(() => {
+        ServerRequest(`data/user`, "GET")
+            .then((response) => {
+                const res = (response.filter(r => r._id !== loggedUserId));
+                setAllUsers(res)
+                ServerRequest(`data/follower/?follower=${loggedUserId}`, "GET") //Devuelve array de los usuarios que sigo
+                    .then(response => {
+                        let followedPeeps = response.map(u => u.followed)
+                        setFollowing(response.map(f => res.find(u => u._id === f.followed)));
+                        setNonFollowing(res.filter(u => !followedPeeps.includes(u._id)))
+                    })
+                    .catch(console.log);
+            })
+            .catch(console.log);
+    }, [reload]);
+```
+```javascript
+<div className={styles["NowPlaying"]}>
+    <h3>Currently playing</h3>
+    <div className={styles["Playlist"]}>
+        {player.reproduceSongList.map(s =>
+            <NowPlayingItem
+               key={s._id}
+               entity={s}
+               id={s._id}
+               title={s.title}
+               author={s.artist}
+               categories={s.category}
+               img={s.image}
+            />
+        )}
+    </div>
+</div>
+```
 * Search
 * Profile + Edit Profile Pages
 * My Songs Page
