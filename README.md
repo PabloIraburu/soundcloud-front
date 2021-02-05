@@ -23,7 +23,7 @@ Take a look at our music App, you will love it 😜!
 
 ## LANGUAGES, FRAMEWORKS AND LIBRARIES
 
-### MAIN LANGUAGES AND LIBRARIES
+#### MAIN LANGUAGES AND LIBRARIES
 <code><img alt="Javascript" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png"></code>
 <code><img alt="Html" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png"></code>
 <code><img alt="Css" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png"></code>
@@ -36,13 +36,13 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Mongoose" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongoose/mongoose.png"></code>
 <code><img alt="Mongodb" height="33" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png"></code>
 
-### TECHNOLOGIES
+#### TECHNOLOGIES
 <code><img alt="Github" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/github.png?raw=true"></code>
 <code><img alt="Git" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/git.png?raw=true"></code>
 <code><img alt="Heroku" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/heroku.png?raw=true"></code>
 <code><img alt="Netlify" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/netlify.png?raw=true"></code>
 
-### SOFTWARE
+#### SOFTWARE
 <code><img height="33" alt="Visual Studio Code" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/visualstudiocode.png"></code>
 <code><img height="33" alt="Webstorm" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/webstorm.png"></code>
 <code><img height="33" alt="Postman" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/postman.png"></code>
@@ -52,7 +52,7 @@ Take a look at our music App, you will love it 😜!
 <code><img height="33" alt="Google" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/google.png"></code>
 <code><img height="33" alt="Illustrator" src="https://raw.githubusercontent.com/PabloIraburu/soundcloud-front/Master/public/readme_img/illustrator.png"></code>
 
-### OTHER PLATFORMS
+#### OTHER PLATFORMS
 <code><img alt="Google Fonts" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/googlefonts.png?raw=true"></code>
 <code><img alt="Stackoverflow" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/stackoverflow.png?raw=true"></code>
 <code><img alt="Soundcloud" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/soundcloud.png?raw=true"></code>
@@ -65,13 +65,12 @@ Take a look at our music App, you will love it 😜!
 <code><img alt="Emojipedia" height="33" src="https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/emojipedia.png?raw=true"></code>
 
 
-## DATA ARCHITECTURE
-
-![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/Arquitectura_datos.png "Data Architecture")
-
 ## TAKE A LOOK AT...
 
 * Data Architecture (back + front)
+
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/Arquitectura_datos.png "Data Architecture")
+
 * Server Request Code
 
 ```javascript
