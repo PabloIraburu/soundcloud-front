@@ -97,6 +97,7 @@ Take a look at our music App, you will love it 😜!
 
 #### COLLABORATORS
 
+* [Aitor Tusell](https://github.com/aitortg)
 * [Pep Nieto](https://github.com/PepNieto)
 * [Lluis Bòria](https://github.com/lluisbo)
 * [Zhiting Lu](https://github.com/ZhitingLu)
