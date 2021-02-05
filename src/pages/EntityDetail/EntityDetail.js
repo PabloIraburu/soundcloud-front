@@ -113,8 +113,6 @@ export const EntityDetail = () => {
           </div>
       }
 
-      <h1>REAL SONGS OF PLAYLIST</h1>
-
       <div className={styles["EntityDetail-list"]}>
         <div className={styles["EntityDetail-img"]}></div>
         <div className={styles["EntityDetail-text"]}>
