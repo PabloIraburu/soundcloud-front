@@ -366,7 +366,7 @@ const handleSubmit = (file, e) => {
 ```
 
 * Profile + Edit Profile Pages
-
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/perfil.png "Profile and Edit Profile Pages")
 * My Songs Page
 * Playlists Page
 * Playlist Detail Page
