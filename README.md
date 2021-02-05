@@ -8,6 +8,7 @@ We would like to speally thank our teachers, for their patience and motivation i
 
 <code><img alt="javascript" height="88" src="https://nuclio.school/shorts/wp-content/uploads/2020/03/NuclioSchoollogo-black.png"></code>
 
+
 ## DESCRIPTION
 
 Soundmist is a new and authentic app where you can find and play the best music from known, as well as alternative artists.  
@@ -111,6 +112,23 @@ export const ServerRequest = (routes, method, body) => {
 }
 ```
 * Landing + Login + Register
+```javascript
+  app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const users = await User.find({ email });
+
+    if (
+      users.length === 1 &&
+      passwordHash.verify(password, users[0].password)
+    ) {
+      const user = users[0];
+      const token = jwt.sign({ id: user._id }, jwtSecret);
+      res.status(200).send({ token });
+    } else {
+      res.status(401).send({ message: "Username or password incorrect" });
+    }
+  });
+```
 * UserContext
 
 ```javascript
@@ -180,6 +198,8 @@ export const MainRouter = () => {
 * Playlists Page
 * Playlist Detail Page
 * Favourites Page
+
+
 
 
 ## AUTHORS
