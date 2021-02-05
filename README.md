@@ -373,9 +373,11 @@ const handleSubmit = (file, e) => {
 
 * My Songs Page
 
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/mysongs.png "My Songs Page")
 
 * Playlists Page
 
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/playlists.png "Playlists Page")
 
 * Playlist Detail Page
 
@@ -383,7 +385,7 @@ const handleSubmit = (file, e) => {
 
 * Favourites Page
 
-
+![alt text](https://github.com/PabloIraburu/soundcloud-front/blob/Master/public/readme_img/favourites.png "Favourites Page")
 
 
 ## AUTHORS
